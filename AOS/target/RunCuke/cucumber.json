@@ -1,0 +1,149 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2024-06-29T11:11:03.696Z",
+        "before": [
+          {
+            "result": {
+              "duration": 5446439700,
+              "status": "passed"
+            },
+            "match": {
+              "location": "com.aos.specification.AosSpecification.setup(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
+        "line": 5,
+        "name": "Book ticket for Abudhabi to London",
+        "description": "",
+        "id": "book-ticket;book-ticket-for-abudhabi-to-london",
+        "after": [
+          {
+            "result": {
+              "duration": 1900959000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "com.aos.specification.AosSpecification.afterScenario()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 10744202500,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I want to open the application",
+            "match": {
+              "location": "com.aos.specification.AosSpecification.openWebsite()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 292290726100,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "book a flight ticket for \"abudhabi_to_london\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "abudhabi_to_london",
+                  "offset": 26
+                }
+              ],
+              "location": "com.aos.specification.AosSpecification.bookTicket(java.lang.String)"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Test"
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2024-06-29T11:16:14.215Z",
+        "before": [
+          {
+            "result": {
+              "duration": 1290204400,
+              "status": "passed"
+            },
+            "match": {
+              "location": "com.aos.specification.AosSpecification.setup(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
+        "line": 10,
+        "name": "Book ticket for Dubai to Doha",
+        "description": "",
+        "id": "book-ticket;book-ticket-for-dubai-to-doha",
+        "after": [
+          {
+            "result": {
+              "duration": 1260611700,
+              "status": "passed"
+            },
+            "match": {
+              "location": "com.aos.specification.AosSpecification.afterScenario()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 8592453000,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "I want to open the application",
+            "match": {
+              "location": "com.aos.specification.AosSpecification.openWebsite()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 147842406600,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "book a flight ticket for \"dubai_to_doha\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "dubai_to_doha",
+                  "offset": 26
+                }
+              ],
+              "location": "com.aos.specification.AosSpecification.bookTicket(java.lang.String)"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Test"
+          }
+        ]
+      }
+    ],
+    "name": "Book Ticket",
+    "description": "  I want to use this feature file to test ticket booking scenarios",
+    "id": "book-ticket",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/BookTicket.feature",
+    "tags": []
+  }
+]

@@ -1,0 +1,24 @@
+[
+	{
+		"title": "Mstr",
+		"first_name":"prabin",
+		"last_name":"AV",
+		"dob_date":"06",
+		"dob_month":"May",
+		"dob_year":"2016",
+		"passport_no":"664655",
+		"issuing_country":"India",
+		"nationality":"India",
+		"pid_day":"06",
+		"pid_month":"September",
+		"pid_year":"2020",
+		"ped_day":"07",
+		"ped_month":"September",
+		"ped_year":"2030",
+		"meal_preference":"Baby meal",
+		"seat_preference":"Aisle",
+		"special_requst":"Wheelchair",
+		"airline":"Azerbijan airlines",
+		"frequent_flying_number":"4"
+	}
+]

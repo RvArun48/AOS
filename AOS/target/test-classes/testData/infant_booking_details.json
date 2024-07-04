@@ -1,0 +1,24 @@
+[
+	{
+		"title": "Mstr",
+		"first_name":"Riithul",
+		"last_name":"AL",
+		"dob_date":"12",
+		"dob_month":"January",
+		"dob_year":"2024",
+		"passport_no":"6646646",
+		"issuing_country":"India",
+		"nationality":"India",
+		"pid_day":"06",
+		"pid_month":"April",
+		"pid_year":"2024",
+		"ped_day":"07",
+		"ped_month":"August",
+		"ped_year":"2030",
+		"meal_preference":"Baby meal",
+		"seat_preference":"Aisle",
+		"special_requst":"Wheelchair",
+		"airline":"Azerbijan airlines",
+		"frequent_flying_number":"4"
+	}
+]
