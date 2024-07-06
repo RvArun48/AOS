@@ -33,9 +33,8 @@ public class TestRunner {
 			if (ReadProperty.getPropValues("HEADLESS_MODE", "config").equalsIgnoreCase("true")) {
 				options.addArguments("--headless");
 				options.addArguments("--disable-gpu");
-
-				
-				
+				options.addArguments("--no-sandbox");
+		        options.addArguments("--disable-dev-shm-usage");
 			}
 			
 			
