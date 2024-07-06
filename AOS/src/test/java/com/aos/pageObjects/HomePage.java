@@ -67,7 +67,7 @@ public class HomePage {
 
 	// ----- add apply bytton later
 
-	@FindBy(xpath = "(//*[@aria-label='search'])[1]")
+	@FindBy(xpath = "//*[@class='empireF_btnWrapper']")
 	public WebElement searcFlightButton;
 
 	@FindBy(xpath = "(//*[@id='dropdownAirlines'])")
