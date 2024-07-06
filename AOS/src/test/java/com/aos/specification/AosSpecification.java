@@ -170,12 +170,13 @@ public class AosSpecification extends TestRunner {
 
 //passenger count
 			AosImplementation.addPassengersCount(bookTicketDTO, executor, wait);
-
+			js.executeScript("window.scrollTo(0, 0);");
 			Thread.sleep(10000);
 
 			logger.info("Waiting for search Flight Button to be clickable");
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
 					homePage.searcFlightButton);
+			//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("your-obstructing-element-selector")));
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.searcFlightButton));
 			homePage.searcFlightButton.click();
 			wait.until(ExpectedConditions.elementToBeClickable(searchResultsPage.searchResultCard));
