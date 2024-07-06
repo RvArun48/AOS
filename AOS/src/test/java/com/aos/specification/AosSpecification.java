@@ -143,12 +143,11 @@ public class AosSpecification extends TestRunner {
 					"(//span[@draggable='false' and  not(contains(@class,'disabled'))]/span[text()='${token}'])[1]",
 					DateUtil.addDaysToCurrentDate(Integer.parseInt(bookTicketDTO.getDate()), "d"));
 
-			
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.passengerCountDropDown));
-			
-	        // Scroll to the top of the page
-	        js.executeScript("window.scrollTo(0, 0);");
-	        Thread.sleep(5000);
+
+			// Scroll to the top of the page
+			js.executeScript("window.scrollTo(0, 0);");
+			Thread.sleep(5000);
 
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the passenger count", driver,
 					scenarioName);
@@ -175,6 +174,8 @@ public class AosSpecification extends TestRunner {
 			Thread.sleep(10000);
 
 			logger.info("Waiting for search Flight Button to be clickable");
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
+					homePage.searcFlightButton);
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.searcFlightButton));
 			homePage.searcFlightButton.click();
 			wait.until(ExpectedConditions.elementToBeClickable(searchResultsPage.searchResultCard));
@@ -248,9 +249,10 @@ public class AosSpecification extends TestRunner {
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.selectAirlinesbooking));
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Select the Flight", driver, scenarioName);
 			homePage.selectAirlinesbooking.click();
+			Thread.sleep(10000);
 
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(homePage.continueBooking));
+				ExpectedConditions.elementToBeClickable(homePage.continueBooking);
 				homePage.continueBooking.click();
 				LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Pop up found", driver, scenarioName);
 			} catch (Exception e) {
