@@ -99,7 +99,7 @@
 						<include>**/TestRunner.java</include>
 					</includes>
 					<systemPropertyVariables>
-						<cucumber.filter.tags>@Test</cucumber.filter.tags>
+						<cucumber.filter.tags>${cucumber.filter.tags}</cucumber.filter.tags>
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
