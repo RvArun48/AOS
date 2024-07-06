@@ -16,7 +16,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/features", glue = { "com.aos.specification" }, plugin = {
-		"json:target/RunCuke/cucumber.json", "pretty" }, tags = "@Test")
+		"json:target/RunCuke/cucumber.json", "pretty" }, tags = "")
 
 public class TestRunner {
 
@@ -33,7 +33,13 @@ public class TestRunner {
 			if (ReadProperty.getPropValues("HEADLESS_MODE", "config").equalsIgnoreCase("true")) {
 				options.addArguments("--headless");
 				options.addArguments("--disable-gpu");
+
+				
+				
 			}
+			
+			
+
 			options.addArguments("--window-size=1920,1080");
 			DesiredCapabilities capabilities = new DesiredCapabilities();
 			capabilities.merge(options);
