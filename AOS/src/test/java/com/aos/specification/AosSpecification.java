@@ -170,7 +170,7 @@ public class AosSpecification extends TestRunner {
 
 //passenger count
 			AosImplementation.addPassengersCount(bookTicketDTO, executor, wait);
-			js.executeScript("window.scrollTo(0, 0);");
+			js.executeScript("window.scrollTo(0, 300);");
 			Thread.sleep(10000);
 
 			logger.info("Waiting for search Flight Button to be clickable");
