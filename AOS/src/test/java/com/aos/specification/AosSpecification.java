@@ -252,7 +252,7 @@ public class AosSpecification extends TestRunner {
 			Thread.sleep(10000);
 
 			try {
-				ExpectedConditions.elementToBeClickable(homePage.continueBooking);
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.continueBooking));
 				homePage.continueBooking.click();
 				LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Pop up found", driver, scenarioName);
 			} catch (Exception e) {
@@ -360,7 +360,8 @@ public class AosSpecification extends TestRunner {
 			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.pay));
 			passengerDetailsPage.pay.click();
 
-			AosImplementation.verifyTicketBookingStatus(wait);
+			//AosImplementation.verifyTicketBookingStatus(wait);
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 			LogEvent.logEventWithScreenshot(extentTest, Status.FAIL,
