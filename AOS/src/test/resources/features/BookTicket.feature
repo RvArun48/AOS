@@ -1,15 +1,19 @@
 Feature: Book Ticket
   I want to use this feature file to test ticket booking scenarios
 
-  @Test
-  Scenario: Book ticket for Abudhabi to London
+  @Smoke
+  Scenario: Book ticket for Abudhabi to London using Smoke
   Given I want to open the application
   And book a flight ticket for "abudhabi_to_london"
   
-  @Test1
-  Scenario: Book ticket for Dubai to Doha
+  @Regeression
+  Scenario: Book ticket for Dubai to Doha using Regression
   Given I want to open the application
   And book a flight ticket for "dubai_to_doha"
   
+  @Sanity
+  Scenario: Book ticket for Dubai to Doha using Sanity
+  Given I want to open the application
+  And book a flight ticket for "dubai_to_doha"
   
    
