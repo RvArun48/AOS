@@ -23,7 +23,7 @@ public class ScreenshotUtils {
 				screenshotDir.mkdir();
 			}
 
-			String screenshotPath = "../Screenshots/" + screenshotName + ".png";
+			String screenshotPath = "./Screenshots/" + screenshotName + ".png";
 			System.out.println("Screenshot path->" + screenshotPath);
 
 			// Save the screenshot
