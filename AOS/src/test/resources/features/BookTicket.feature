@@ -6,7 +6,7 @@ Feature: Book Ticket
   Given I want to open the application
   And book a flight ticket for "abudhabi_to_london"
   
-  @Regeression
+  @Regression
   Scenario: Book ticket for Dubai to Doha using Regression
   Given I want to open the application
   And book a flight ticket for "dubai_to_doha"
