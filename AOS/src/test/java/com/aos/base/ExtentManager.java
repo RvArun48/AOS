@@ -12,7 +12,7 @@ public class ExtentManager {
     // Method to initialize ExtentReports
     public static ExtentReports getInstance() {
         if (extent == null) {
-            sparkReporter = new ExtentSparkReporter("target/extent-reports.html");
+            sparkReporter = new ExtentSparkReporter("extent-reports.html");
             sparkReporter.config().setDocumentTitle("Automation Report");
             sparkReporter.config().setReportName("Test Report");
 
