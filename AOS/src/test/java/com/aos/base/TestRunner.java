@@ -1,5 +1,8 @@
 package com.aos.base;
 
+import java.io.IOException;
+
+import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.aos.utils.ReadProperty;
+import com.aos.utils.ZipUtil;
 import com.aventstack.extentreports.ExtentReports;
 
 import io.cucumber.java.Scenario;
@@ -51,6 +55,20 @@ public class TestRunner {
 	public static void tearDown() {
 		ExtentManager.getInstance().flush();
 		driver.quit();
+	}
+	
+	@AfterClass
+	public static void zipReport() {
+		String zipFileName = "test-report.zip";
+        try {
+            ZipUtil.zipFiles(zipFileName, "./Screenshots", "./extent-reports.html");
+//            EmailUtil.sendEmailWithAttachment(
+//                "smtp.example.com", "587", "your-email@example.com", "your-email-password",
+//                "recipient-email@example.com", "Test Report", "Please find the attached test report.", zipFileName
+//            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 }
