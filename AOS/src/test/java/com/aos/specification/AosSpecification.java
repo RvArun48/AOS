@@ -65,15 +65,17 @@ public class AosSpecification extends TestRunner {
 		String baseUrl = ReadProperty.getPropValues("BASE_URL", "config");
 		try {
 
-			extentTest = report.createTest(this.scenarioName);
-
+			extentTest = report.createTest(scenarioName);
+			setExtentTest(extentTest);
+			setScenarioName(scenarioName);
+			logger.info("Opening application url:" + baseUrl);
 			driver.get(baseUrl);
 			Thread.sleep(2000);
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Home Page verification", driver,
-					this.scenarioName);
+					AosSpecification.scenarioName);
 
 		} catch (Exception e) {
-			System.out.println("Exception occured at openWebsite()" + e.getLocalizedMessage());
+			logger.info("Exception occured at openWebsite()" + e.getLocalizedMessage());
 		}
 
 	}
@@ -174,8 +176,8 @@ public class AosSpecification extends TestRunner {
 			Thread.sleep(10000);
 
 			logger.info("Waiting for search Flight Button to be clickable");
-			
-			//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("your-obstructing-element-selector")));
+
+			// wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("your-obstructing-element-selector")));
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.searcFlightButton));
 			homePage.searcFlightButton.click();
 			wait.until(ExpectedConditions.elementToBeClickable(searchResultsPage.searchResultCard));
@@ -360,8 +362,8 @@ public class AosSpecification extends TestRunner {
 			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.pay));
 			passengerDetailsPage.pay.click();
 
-			//AosImplementation.verifyTicketBookingStatus(wait);
-		
+			// AosImplementation.verifyTicketBookingStatus(wait);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			LogEvent.logEventWithScreenshot(extentTest, Status.FAIL,

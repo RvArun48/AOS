@@ -108,7 +108,92 @@ public class HomePage {
 	@FindBy(xpath = "//*[@id='dropdownAirlines']")
 	public WebElement filterAirlines;
 	
+	@FindBy(xpath = "//a[contains(text(),'Home')]")
+	public WebElement homeElementGroup;
+	
+	@FindBy(xpath = "//a[contains(text(),'Holiday Packages')]")
+	public WebElement holidayPackagesElementGroup;
+	
+	@FindBy(xpath = "//a[contains(text(),'Events ')]")
+	public WebElement eventsElementGroup;
+	
+	@FindBy(xpath = "//a[contains(text(),'Hotels')]")
+	public WebElement hotelsElementGroup;
+	
+	@FindBy(xpath = "//a[contains(text(),'Flights')]")
+	public WebElement flightsElementGroup;
+	
+	@FindBy(xpath = "//*[@id='countryNgb']")
+	public WebElement countryFlagElementGroup;
+	
+	
+	@FindBy(xpath = "//*[@id='currencyId']")
+	public WebElement currencyIdElementGroup;
+	
+	@FindBy(xpath = "//*[@id='langId']")
+	public WebElement languageElementGroup;
+	
+	@FindBy(xpath = "//*[contains(text(),'+961 1760555')]")
+	public WebElement numberElementGroup;
+	
+	@FindBy(xpath = "//button[normalize-space()='Sign In']")
+	public WebElement SigninElementGroup;
+	
+	@FindBy(xpath = "//*[@id='round-trip']")
+	public WebElement roundTripElementGroup;
+	
+	@FindBy(xpath = "//*[@id='one-way']")
+	public WebElement oneWayElementGroup;
+	
+	@FindBy(xpath = "//*[@id='multicity']")
+	public WebElement multiCityElementGroup;
+	
+	@FindBy(xpath = "//*[@class='checkboxWrap checkboxDefault']/child::*[contains(text(),'Flexible dates ± 3 days')]")
+	public WebElement flxiableDateElementGroup;
+	
+	@FindBy(xpath = "//*[contains(text(),' Advanced search options ')]")
+	public WebElement advanceSearchElementGroup;
+	
+	@FindBy(xpath = "//*[@class='checkboxWrap checkboxDefault']/child::*[contains(text(),'Baggage only')]")
+	public WebElement baggageOnlyElementGroup;
+	
 
+	@FindBy(xpath = "//*[@class='checkboxWrap checkboxDefault']/child::*[contains(text(),'Flights')]")
+	public WebElement directFlightsElementGroup;
+	
+	@FindBy(xpath = "//*[@class='checkboxWrap checkboxDefault']/child::*[contains(text(),'Refundable')]")
+	public WebElement refundableElementGroup;
+	
+	@FindBy(xpath = "//*[@class='ng-value-container']/child::*[contains(text(),'Preferred Airline')]")
+	public WebElement preferredAirlineElementGroup;
+	
+	@FindBy(xpath = "//*[@class='active ng-star-inserted']/child::*[contains(text(),'Flights')]")
+	public WebElement flightSelectAirlineElementGroup;
+	
+	@FindBy(xpath = "//*[@class='ng-star-inserted']/child::*[contains(text(),'Hotels')]")
+	public WebElement hotelselectAirlineElementGroup;
+	
+	@FindBy(xpath = "//*[@class='ng-star-inserted']/child::*[contains(text(),'Events')]")
+	public WebElement eventsselectAirlineElementGroup;
+	
+	@FindBy(xpath = "//*[@class='ng-star-inserted']/child::*[contains(text(),'Holidays')]")
+	public WebElement holidaysselectAirlineElementGroup;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -35,7 +35,7 @@ public class AosImplementation extends AosSpecification {
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Home Page verification", driver, scenario);
 
 		} catch (Exception e) {
-			System.out.println("Exception occured at openWebsite()" + e.getLocalizedMessage());
+			logger.info("Exception occured at openWebsite()" + e.getLocalizedMessage());
 		}
 		return extentTest;
 	}

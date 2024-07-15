@@ -12,6 +12,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import com.aos.utils.ReadProperty;
 import com.aos.utils.ZipUtil;
 import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 
 import io.cucumber.java.Scenario;
 import io.cucumber.junit.Cucumber;
@@ -26,6 +27,24 @@ public class TestRunner {
 
 	public static WebDriver driver = null;
 	private static ExtentReports test = null;
+	private static ExtentTest extentTest = null;
+	private static String scenarioName = null;
+
+	public static String getScenarioName() {
+		return scenarioName;
+	}
+
+	public static void setScenarioName(String scenarioName) {
+		TestRunner.scenarioName = scenarioName;
+	}
+
+	public static ExtentTest getExtentTest() {
+		return extentTest;
+	}
+
+	public static void setExtentTest(ExtentTest extentTest) {
+		TestRunner.extentTest = extentTest;
+	}
 
 	public ExtentReports setUp(Scenario scenario) {
 		// ExtentManager.createInstance("extent-report-" + scenarioName + ".html");
@@ -38,10 +57,8 @@ public class TestRunner {
 				options.addArguments("--headless");
 				options.addArguments("--disable-gpu");
 				options.addArguments("--no-sandbox");
-		        options.addArguments("--disable-dev-shm-usage");
+				options.addArguments("--disable-dev-shm-usage");
 			}
-			
-			
 
 			options.addArguments("--window-size=1920,1080");
 			DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -52,23 +69,27 @@ public class TestRunner {
 		return test;
 	}
 
+	public WebDriver getDriver() {
+		return driver;
+	}
+
 	public static void tearDown() {
 		ExtentManager.getInstance().flush();
 		driver.quit();
 	}
-	
+
 	@AfterClass
 	public static void zipReport() {
 		String zipFileName = "test-report.zip";
-        try {
-            ZipUtil.zipFiles(zipFileName, "./Screenshots", "./extent-reports.html");
+		try {
+			ZipUtil.zipFiles(zipFileName, "./Screenshots", "./extent-reports.html");
 //            EmailUtil.sendEmailWithAttachment(
 //                "smtp.example.com", "587", "your-email@example.com", "your-email-password",
 //                "recipient-email@example.com", "Test Report", "Please find the attached test report.", zipFileName
 //            );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
