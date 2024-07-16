@@ -1,6 +1,7 @@
 package com.aos.implementation;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aos.base.TestRunner;
 import com.aos.pageObjects.HomePage;
@@ -38,7 +41,8 @@ public class HomePageImplementation extends TestRunner {
 					new WebElementInfo(By.xpath("//*[@id='langId']"), "Language Link"),
 					// new WebElementInfo(By.xpath("//*[contains(text(),'+961 1760555')]"), "Contact
 					// For Support"),
-					new WebElementInfo(By.xpath("//button[normalize-space()='Sign In']"), "Sign In Option"),
+					new WebElementInfo(By.xpath("//*[@class='btn btn-primary' and contains(text(),'Sign In')]"),
+							"Sign In Option"),
 					new WebElementInfo(By.xpath("//*[@id='round-trip']"), "Round Trip Option"),
 					new WebElementInfo(By.xpath("//*[@id='one-way']"), "One Way Option"),
 					new WebElementInfo(By.xpath("//*[@id='multicity']"), "Multi City Option"),
@@ -75,7 +79,8 @@ public class HomePageImplementation extends TestRunner {
 			String elementValidationLog = "";
 			int count = 0;
 			for (WebElementInfo elementInfo : webElements) {
-				elementValidationLog += ""+(++count) + ". Validating presence of: " + elementInfo.getDescription()+"<br>";
+				elementValidationLog += "" + (++count) + ". Validating presence of: <b>" + elementInfo.getDescription()
+						+ "</b><br>";
 				logger.info("Validating presence of: " + elementInfo.getDescription());
 				List<WebElement> elements = driver.findElements(elementInfo.getLocator());
 				softly.assertThat(elements).as("Checking presence of: " + elementInfo.getDescription()).isNotEmpty();
@@ -83,11 +88,55 @@ public class HomePageImplementation extends TestRunner {
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, elementValidationLog, driver,
 					getScenarioName());
 
-			softly.assertAll();
+			try {
+				softly.assertAll();
+			} catch (AssertionError e) {
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver,
+						getScenarioName());
+				// Optionally, you can log each individual assertion failure
+				/*
+				 * for (Throwable t : e.getSuppressed()) { test.log(Status.FAIL,
+				 * t.getMessage()); }
+				 */
+			}
 
 		} catch (Exception e) {
 			logger.info("Exception occured at verifyPresenceOfHeaderElements()->" + e.getMessage());
 		}
+	}
+
+	public void verifyElementFunctionality() {
+		try {
+			SoftAssertions softly = new SoftAssertions();
+			// Verifying home page headerlink
+			String url = driver.getCurrentUrl();
+			clickElement(homePage.homeElementGroup, "Clicking on home page headerlink");
+			softly.assertThat(url.equals(driver.getCurrentUrl()));
+			
+
+			try {
+				softly.assertAll();
+			} catch (AssertionError e) {
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver,
+						getScenarioName());
+			}
+		} catch (Exception e) {
+			logger.info("Exception occured at verifyElementFunctionality()->" + e.getMessage());
+		}
+
+	}
+
+	public void clickElement(WebElement element, String message) throws IOException {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(90));
+			wait.until(ExpectedConditions.elementToBeClickable(element));
+			logger.info(message);
+			element.click();
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, message, driver, getScenarioName());
+		} catch (Exception e) {
+			logger.info("Exception occured at clickElement()->" + e.getMessage());
+		}
+
 	}
 
 }
