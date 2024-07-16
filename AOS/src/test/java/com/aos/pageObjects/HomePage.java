@@ -136,7 +136,7 @@ public class HomePage {
 	@FindBy(xpath = "//*[contains(text(),'+961 1760555')]")
 	public WebElement numberElementGroup;
 	
-	@FindBy(xpath = "//button[normalize-space()='Sign In']")
+	@FindBy(xpath = "//*[@class='btn btn-primary'][contains(text(),'Sign in')]")
 	public WebElement SigninElementGroup;
 	
 	@FindBy(xpath = "//*[@id='round-trip']")
@@ -178,6 +178,23 @@ public class HomePage {
 	
 	@FindBy(xpath = "//*[@class='ng-star-inserted']/child::*[contains(text(),'Holidays')]")
 	public WebElement holidaysselectAirlineElementGroup;
+	
+	@FindBy(xpath = " //div[normalize-space()='USD']")
+	public WebElement selectCurrencyElementGroup;
+	
+	@FindBy(xpath = "//*[@class='ng-star-inserted']/child::*[contains(text(),'Georgian')]")
+	public WebElement selectLanguageElementGroup;
+	
+	@FindBy(xpath = "//*[@class='empire_productName']/child::*[contains(text(),'ჯავშნის აღდგენა?')]")
+	public WebElement retrieveBookingElementGroup;
+	
+	@FindBy(xpath = "//*[@formcontrolname='email']")
+	public WebElement signUpValidationElementGroup;
+	
+	@FindBy(xpath = "//*[@class='empire_logo']")
+	public WebElement logoElementGroup;
+	
+	
 	
 	
 	

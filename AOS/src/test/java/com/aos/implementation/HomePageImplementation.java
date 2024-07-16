@@ -24,6 +24,7 @@ import com.aventstack.extentreports.Status;
 public class HomePageImplementation extends TestRunner {
 
 	public WebDriver driver = getDriver();
+
 	public static final Logger logger = LogManager.getLogger(HomePageImplementation.class);
 	HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 
@@ -32,49 +33,17 @@ public class HomePageImplementation extends TestRunner {
 		try {
 			List<WebElementInfo> webElements = Arrays.asList(
 					new WebElementInfo(By.xpath("//a[contains(text(),'Home')]"), "Header Home Link"),
-					new WebElementInfo(By.xpath("//a[contains(text(),'Holiday Package')]"), "Holiday Packages Link"),
-					new WebElementInfo(By.xpath("//a[contains(text(),'Events ')]"), "Events Link"),
-					new WebElementInfo(By.xpath("//a[contains(text(),'Hotels')]"), "Hotels Link"),
-					new WebElementInfo(By.xpath("//a[contains(text(),'Flights')]"), "Flights Link"),
-					new WebElementInfo(By.xpath("//*[@id='countryNgb']"), "Country Flag Link"),
 					new WebElementInfo(By.xpath("//*[@id='currencyId']"), "Currency Link"),
 					new WebElementInfo(By.xpath("//*[@id='langId']"), "Language Link"),
-					// new WebElementInfo(By.xpath("//*[contains(text(),'+961 1760555')]"), "Contact
-					// For Support"),
-					new WebElementInfo(By.xpath("//*[@class='btn btn-primary' and contains(text(),'Sign In')]"),
+					new WebElementInfo(By.xpath("//*[contains(text(),'+971 50423989')]"), "Contact For Support"),
+
+					new WebElementInfo(By.xpath("//*[@class='btn btn-primary'][contains(text(),'Sign in')]"),
 							"Sign In Option"),
-					new WebElementInfo(By.xpath("//*[@id='round-trip']"), "Round Trip Option"),
-					new WebElementInfo(By.xpath("//*[@id='one-way']"), "One Way Option"),
-					new WebElementInfo(By.xpath("//*[@id='multicity']"), "Multi City Option"),
-					new WebElementInfo(By.xpath(
-							"//*[@class='checkboxWrap checkboxDefault']/child::*[contains(text(),'Flexible dates ± 3 days')]"),
-							"Flexible dates Option"),
-					new WebElementInfo(By.xpath("//*[contains(text(),' Advanced search options ')]"),
-							"Advanced search options"),
-					new WebElementInfo(By.xpath(
-							"//*[@class='checkboxWrap checkboxDefault']/child::*[contains(text(),'Baggage only')]"),
-							"Baggage only Option"),
 					new WebElementInfo(
-							By.xpath("//*[@class='checkboxWrap checkboxDefault']/child::*[contains(text(),'Flights')]"),
-							"Direct Flights options"),
-					new WebElementInfo(By.xpath(
-							"//*[@class='checkboxWrap checkboxDefault']/child::*[contains(text(),'Refundable')]"),
-							"Refundable Option"),
-					new WebElementInfo(
-							By.xpath("//*[@class='ng-value-container']/child::*[contains(text(),'Preferred Airline')]"),
-							"Preferred Airline Option"),
-					new WebElementInfo(
-							By.xpath("//*[@class='active ng-star-inserted']/child::*[contains(text(),'Flights')]"),
-							"Flights Option"),
-					new WebElementInfo(By.xpath("//*[@class='ng-star-inserted']/child::*[contains(text(),'Holidays')]"),
-							"Holidays Option"),
-					new WebElementInfo(By.xpath("//*[@class='ng-star-inserted']/child::*[contains(text(),'Hotels')]"),
-							"Hotels Option"),
-					new WebElementInfo(By.xpath("//*[@class='ng-star-inserted']/child::*[contains(text(),'Events')]"),
-							"Events Option")
+							By.xpath("//*[@class='empire_productName']/child::*[contains(text(),'Retrieve Booking')]"),
+							"Retrieve Booking Link"));
 
-			);
-
+					
 			SoftAssertions softly = new SoftAssertions();
 			String elementValidationLog = "";
 			int count = 0;
@@ -108,11 +77,57 @@ public class HomePageImplementation extends TestRunner {
 	public void verifyElementFunctionality() {
 		try {
 			SoftAssertions softly = new SoftAssertions();
-			// Verifying home page headerlink
-			String url = driver.getCurrentUrl();
-			clickElement(homePage.homeElementGroup, "Clicking on home page headerlink");
-			softly.assertThat(url.equals(driver.getCurrentUrl()));
 			
+			
+			
+			String url = driver.getCurrentUrl();
+			logger.info("Current url is: " + url);
+			clickElement(homePage.logoElementGroup, "Clicking on logo");
+			logger.info("After click  url is: " + url);
+			softly.assertThat(url).isEqualTo(driver.getCurrentUrl());
+			
+			// Verifying home page headerlink
+			url = driver.getCurrentUrl();
+			logger.info("Current url is: " + url);
+			clickElement(homePage.homeElementGroup, "Clicking on home page headerlink");
+			logger.info("Current url is: " + url);
+			softly.assertThat(url).isEqualTo(driver.getCurrentUrl());
+			//////////////////////////////////////////////////////////////////////////////////////////////////
+
+			String currency = homePage.currencyIdElementGroup.getText();
+			logger.info("Current Currency Value is: " + currency);
+			clickElement(homePage.currencyIdElementGroup, "Clicking on Currency");
+			clickElement(homePage.selectCurrencyElementGroup, "Selecting the Currency");
+			logger.info("Updated Currency Value is: " + homePage.currencyIdElementGroup.getText());
+
+			softly.assertThat("USD").isEqualTo(homePage.currencyIdElementGroup.getText());
+
+			String language = homePage.languageElementGroup.getText();
+			logger.info("Current language is: " + language);
+			clickElement(homePage.languageElementGroup, "Clicking on Language");
+			clickElement(homePage.selectLanguageElementGroup, "Selecting the Language");
+			logger.info("Updated language is: " + homePage.languageElementGroup.getText());
+			
+			
+			softly.assertThat("Georgian").isEqualTo(homePage.languageElementGroup.getText());
+			
+
+			url = driver.getCurrentUrl();
+			logger.info("Current url is: " + url);
+			clickElement(homePage.retrieveBookingElementGroup, "Clicking the Retrieve Booking");
+			logger.info("updated url is: " + driver.getCurrentUrl());
+			
+			softly.assertThat(url).contains("retrievebooking/login");
+
+			clickElement(homePage.SigninElementGroup, "Clicking the SignIn");
+			logger.info("attribute value is: " + homePage.signUpValidationElementGroup.getAttribute("type"));
+			
+			softly.assertThat(homePage.signUpValidationElementGroup.getAttribute("type")).isEqualTo("email");
+			
+
+			
+
+			//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			try {
 				softly.assertAll();
@@ -128,10 +143,11 @@ public class HomePageImplementation extends TestRunner {
 
 	public void clickElement(WebElement element, String message) throws IOException {
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(90));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			wait.until(ExpectedConditions.elementToBeClickable(element));
 			logger.info(message);
 			element.click();
+			Thread.sleep(1500);
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, message, driver, getScenarioName());
 		} catch (Exception e) {
 			logger.info("Exception occured at clickElement()->" + e.getMessage());
