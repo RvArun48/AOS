@@ -1,0 +1,26 @@
+{
+	"user_b2c": {
+		"signin_email": "arunrv48@gmail.com",
+		"signin_password": "Arun@123"
+	},
+	"no_username_no_password": {
+		"signin_email": "",
+		"signin_password": ""
+	},
+	"valid_username_no_password": {
+		"signin_email": "arunrv4@gmail.com",
+		"signin_password": ""
+	},
+	"no_username_Valid_password": {
+		"signin_email": "",
+		"signin_password": "Arun@123"
+	},
+	"valid_username_invalid_password": {
+		"signin_email": "arunrv48@gmail.com",
+		"signin_password": "Arun@12333"
+	},
+	"invalid_username_Valid_password": {
+		"signin_email": "arunrv477@gmail.com",
+		"signin_password": "Arun@123"
+	}
+}

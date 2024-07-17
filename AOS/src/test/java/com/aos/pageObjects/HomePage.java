@@ -185,7 +185,7 @@ public class HomePage {
 	@FindBy(xpath = "//*[@class='ng-star-inserted']/child::*[contains(text(),'Georgian')]")
 	public WebElement selectLanguageElementGroup;
 	
-	@FindBy(xpath = "//*[@class='empire_productName']/child::*[contains(text(),'ჯავშნის აღდგენა?')]")
+	@FindBy(xpath = "//*[@class='empire_productName']/child::*[contains(text(),'Retrieve Booking')]")
 	public WebElement retrieveBookingElementGroup;
 	
 	@FindBy(xpath = "//*[@formcontrolname='email']")
@@ -193,6 +193,74 @@ public class HomePage {
 	
 	@FindBy(xpath = "//*[@class='empire_logo']")
 	public WebElement logoElementGroup;
+	
+	@FindBy(xpath = "//*[@class='ng-star-inserted']/child::*[contains(text(),'English')]")
+	public WebElement selectEnglishLanguageElementGroup;
+	
+	@FindBy(xpath = "//*[text()='Create an account']")    
+	public WebElement createAccountSignup;
+	
+	@FindBy(xpath = "//*[text()='Create Account']")    
+	public WebElement createAccount;
+	
+	@FindBy(xpath = "//*[text()=' Email is required ']")    
+	public WebElement warningAlertEmail;
+	
+	@FindBy(xpath = "//*[text()=' Password is required ']")    
+	public WebElement warningAlertPassword;
+	
+	@FindBy(xpath = "//*[@formcontrolname='email']")
+	public WebElement createAccountSignUpUserName;
+	
+	@FindBy(xpath = "//*[@formcontrolname='password']")
+	public WebElement createAccountSignUpPassword;
+	
+	
+	@FindBy(xpath = "//*[@class='signIn_forgotPassLink']/child::*[contains(text(),'Forgot password?')]")
+	public WebElement forgotPassword;
+	
+	@FindBy(xpath = "//*[@formcontrolname='email']")
+	public WebElement forgotPasswordEmail;
+	
+	@FindBy(xpath = "//*[text()='Continue']")
+	public WebElement forgotPasswordContinue;
+	
+	@FindBy(xpath = "//*[@formcontrolname='email']")
+	public WebElement signInUserName;
+	
+	@FindBy(xpath = "//input[@type='password']")
+	public WebElement signInPassword;
+	
+	@FindBy(xpath = "(//button[text()='Sign in'])[2]")
+	public WebElement popupsigninButton;
+	
+	@FindBy(xpath = "//span[text()='My Account']")
+	public WebElement loginSuccessValidation;
+	
+	@FindBy(xpath = "//*[text()=' Email Sent ']")
+	public WebElement forgotPasswordValidation;
+	
+	@FindBy(xpath = "//small[text()=' Please enter a valid password ']")
+	public WebElement paswValidation;
+	
+	@FindBy(xpath = "//form[@class='ng-dirty ng-touched ng-submitted ng-invalid']//div[@class='ng-star-inserted']")
+	public WebElement emailValidation;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -8,14 +8,6 @@ Feature: Home Page Validation
   And I verify the functionality of the header elements
   
   
-  @Regression
-  Scenario: I validate all the elements in the mid region of the home page
-  Given I want to open the application
-  
-  
-  @Sanity
-  Scenario: I validate all the elements in the footer of the home page
-  Given I want to open the application
-  
+
   
    

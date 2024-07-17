@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aos.base.TestRunner;
 import com.aos.pageObjects.HomePage;
+import com.aos.utils.GenericActions;
 import com.aos.utils.LogEvent;
 import com.aos.utils.WebElementInfo;
 import com.aventstack.extentreports.Status;
@@ -82,46 +83,47 @@ public class HomePageImplementation extends TestRunner {
 			
 			String url = driver.getCurrentUrl();
 			logger.info("Current url is: " + url);
-			clickElement(homePage.logoElementGroup, "Clicking on logo");
+			GenericActions.clickElement(homePage.logoElementGroup, "Clicking on logo", logger);
 			logger.info("After click  url is: " + url);
 			softly.assertThat(url).isEqualTo(driver.getCurrentUrl());
 			
 			// Verifying home page headerlink
 			url = driver.getCurrentUrl();
 			logger.info("Current url is: " + url);
-			clickElement(homePage.homeElementGroup, "Clicking on home page headerlink");
+			GenericActions.clickElement(homePage.homeElementGroup, "Clicking on home page headerlink",logger);
 			logger.info("Current url is: " + url);
 			softly.assertThat(url).isEqualTo(driver.getCurrentUrl());
 			//////////////////////////////////////////////////////////////////////////////////////////////////
 
 			String currency = homePage.currencyIdElementGroup.getText();
 			logger.info("Current Currency Value is: " + currency);
-			clickElement(homePage.currencyIdElementGroup, "Clicking on Currency");
-			clickElement(homePage.selectCurrencyElementGroup, "Selecting the Currency");
+			GenericActions.clickElement(homePage.currencyIdElementGroup, "Clicking on Currency",logger);
+			GenericActions.clickElement(homePage.selectCurrencyElementGroup, "Selecting the Currency",logger);
 			logger.info("Updated Currency Value is: " + homePage.currencyIdElementGroup.getText());
 
 			softly.assertThat("USD").isEqualTo(homePage.currencyIdElementGroup.getText());
 
 			String language = homePage.languageElementGroup.getText();
 			logger.info("Current language is: " + language);
-			clickElement(homePage.languageElementGroup, "Clicking on Language");
-			clickElement(homePage.selectLanguageElementGroup, "Selecting the Language");
+			GenericActions.clickElement(homePage.languageElementGroup, "Clicking on Language",logger);
+			GenericActions.clickElement(homePage.selectLanguageElementGroup, "Selecting the Language",logger);
 			logger.info("Updated language is: " + homePage.languageElementGroup.getText());
-			
-			
 			softly.assertThat("Georgian").isEqualTo(homePage.languageElementGroup.getText());
+			GenericActions.clickElement(homePage.languageElementGroup, "Clicking on Language",logger);
+			GenericActions.clickElement(homePage.selectEnglishLanguageElementGroup, "Selecting the Language",logger);
 			
 
 			url = driver.getCurrentUrl();
 			logger.info("Current url is: " + url);
-			clickElement(homePage.retrieveBookingElementGroup, "Clicking the Retrieve Booking");
+			GenericActions.clickElement(homePage.retrieveBookingElementGroup, "Clicking the Retrieve Booking",logger);
 			logger.info("updated url is: " + driver.getCurrentUrl());
 			
-			softly.assertThat(url).contains("retrievebooking/login");
-
-			clickElement(homePage.SigninElementGroup, "Clicking the SignIn");
-			logger.info("attribute value is: " + homePage.signUpValidationElementGroup.getAttribute("type"));
+			softly.assertThat(driver.getCurrentUrl()).contains("retrievebooking/login")
+	            .withFailMessage("Expected string to contain '%s', but it did not.", "retrievebooking/login");
 			
+			
+			GenericActions.clickElement(homePage.SigninElementGroup, "Clicking the SignIn",logger);
+			logger.info("attribute value is: " + homePage.signUpValidationElementGroup.getAttribute("type"));
 			softly.assertThat(homePage.signUpValidationElementGroup.getAttribute("type")).isEqualTo("email");
 			
 
@@ -141,18 +143,6 @@ public class HomePageImplementation extends TestRunner {
 
 	}
 
-	public void clickElement(WebElement element, String message) throws IOException {
-		try {
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			wait.until(ExpectedConditions.elementToBeClickable(element));
-			logger.info(message);
-			element.click();
-			Thread.sleep(1500);
-			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, message, driver, getScenarioName());
-		} catch (Exception e) {
-			logger.info("Exception occured at clickElement()->" + e.getMessage());
-		}
-
-	}
+	
 
 }

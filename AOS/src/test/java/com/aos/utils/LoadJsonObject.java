@@ -4,43 +4,49 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.logging.log4j.EventLogger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 public class LoadJsonObject {
 
+	public static final Logger logger = LogManager.getLogger(LoadJsonObject.class);
+	
 	public static JSONObject getJsonObject(String fileName, String object)
 			throws FileNotFoundException, IOException, ParseException {
-		JsonReader jr = new JsonReader();
-		JSONObject obj = jr.getDataJsonObject(fileName, object);
+		JsonReader jr = null;
+		JSONObject obj = null;
 		try {
-
+			jr = new JsonReader();
+			obj = jr.getDataJsonObject(fileName, object);
 			if (obj != null) {
-				System.out.println("Object is not null");
+				//logger.info("Object is not null");
 
 			} else {
-				System.out.println("Object is null");
+				//logger.info("Object is null");
 			}
 		} catch (Exception e) {
-			System.out.println("Exception occured in getJSONObject()" + e.getLocalizedMessage());
+			logger.info("Exception occured in getJSONObject()" + e.getLocalizedMessage());
 		}
 		return obj;
 	}
 
 	public static JSONObject getJsonObject(String fileName, int dataIndex)
 			throws FileNotFoundException, IOException, ParseException {
-		JsonReader jr = new JsonReader();
-		JSONObject obj = jr.getDataJsonObjectFromArray(fileName, dataIndex);
+		JsonReader jr = null;
+		JSONObject obj = null;
 		try {
-
+			jr = new JsonReader();
+			obj = jr.getDataJsonObjectFromArray(fileName, dataIndex);
 			if (obj != null) {
-				System.out.println("Object is not null");
+				//logger.info("Object is not null");
 			} else {
-				System.out.println("Object is null");
+				//logger.info("Object is null");
 			}
 		} catch (Exception e) {
-			System.out.println("Exception occured in getJSONObject()" + e.getLocalizedMessage());
+			logger.info("Exception occured in getJSONObject()" + e.getLocalizedMessage());
 		}
 		return obj;
 	}
