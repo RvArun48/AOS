@@ -37,4 +37,17 @@ public class HomePageSpecification {
 
 	}
 
+	@Then("I verify the images present in homepage")
+	public void verifyImageLoad() {
+
+		try {
+
+			new HomePageImplementation().verifyImageLoad();
+
+		} catch (Exception e) {
+
+		}
+
+	}
+	
 }

@@ -5,7 +5,6 @@ import java.lang.reflect.Type;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,32 +14,30 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aos.base.TestRunner;
 import com.aos.implementation.AosImplementation;
 import com.aos.model.BookTicketDTO;
 import com.aos.model.PassengerDetailsDTO;
-import com.aos.pageObjects.*;
+import com.aos.pageObjects.HomePage;
+import com.aos.pageObjects.PassengerDetailsPage;
+import com.aos.pageObjects.SearchResultsPage;
 import com.aos.utils.DateUtil;
 import com.aos.utils.JsonToGson;
 import com.aos.utils.LogEvent;
 import com.aos.utils.ReadProperty;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.google.common.reflect.TypeToken;
-
 import com.aventstack.extentreports.Status;
+import com.google.common.reflect.TypeToken;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 
 public class AosSpecification extends TestRunner {
 
@@ -63,6 +60,7 @@ public class AosSpecification extends TestRunner {
 	@Given("I want to open the application")
 	public void openWebsite() {
 		String baseUrl = ReadProperty.getPropValues("BASE_URL", "config");
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
 
 			extentTest = report.createTest(scenarioName);
@@ -70,8 +68,17 @@ public class AosSpecification extends TestRunner {
 			setScenarioName(scenarioName);
 			logger.info("Opening application url:" + baseUrl);
 			driver.get(baseUrl);
+			
+			
+	        long loadEventEnd = (Long) js.executeScript("return window.performance.timing.loadEventEnd;");
+	        long navigationStart = (Long) js.executeScript("return window.performance.timing.navigationStart;");
+
+	        long loadTime = loadEventEnd - navigationStart;
+	        logger.info("Page Load Time is " + loadTime + " milliseconds.");
+			
+			driver.get(baseUrl);
 			Thread.sleep(2000);
-			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Home Page verification", driver,
+			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Home Page verification<b>(App load time: "+loadTime+ " ms)</b>", driver,
 					AosSpecification.scenarioName);
 
 		} catch (Exception e) {

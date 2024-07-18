@@ -14,6 +14,8 @@ import com.aos.model.LoginDTO;
 import com.aos.pageObjects.HomePage;
 import com.aos.utils.GenericActions;
 import com.aos.utils.JsonToGson;
+import com.aos.utils.LogEvent;
+import com.aventstack.extentreports.Status;
 import com.google.common.reflect.TypeToken;
 
 public class LoginImplementation extends TestRunner {
@@ -48,6 +50,9 @@ public class LoginImplementation extends TestRunner {
 			GenericActions.sendKeys(homePage.signInPassword, loginDTO.getSigninPassword(),
 					"Entering password:" + loginDTO.getSigninPassword(), logger);
 			GenericActions.clickElement(homePage.popupsigninButton, "Clicking the SignIn", logger);
+			logger.info("attribute value is: " + homePage.loginSuccessValidation.getText());
+			softly.assertThat(homePage.loginSuccessValidation.getText()).isEqualTo("My Account");
+			
 
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -120,8 +125,12 @@ public class LoginImplementation extends TestRunner {
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			logger.info("attribute value is: " + homePage.loginSuccessValidation.getAttribute("type"));
-			softly.assertThat(homePage.loginSuccessValidation.getText()).isEqualTo("My Account");
+			try {
+				softly.assertAll();
+			} catch (AssertionError e) {
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver,
+						getScenarioName());
+			}
 
 			Thread.sleep(3000);
 
