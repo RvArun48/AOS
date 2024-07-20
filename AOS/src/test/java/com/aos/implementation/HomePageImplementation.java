@@ -49,13 +49,23 @@ public class HomePageImplementation extends TestRunner {
 //					new WebElementInfo(By.xpath("//*[@alt='Keep It Simple']"), "Image for Keep It Simple "),
 					new WebElementInfo(By.xpath("//*[contains(text(),'Keep It Simple')]"), "Keep It Simple "),
 
-					new WebElementInfo(By.xpath("//*[@alt='Plan With Confidence']"), "Image for Plan With Confidence "),
+					
 					new WebElementInfo(By.xpath("//*[contains(text(),'Plan With Confidence')]"),
 							"Plan With Confidence "),
 
-					new WebElementInfo(By.xpath("//*[@alt='Ready When You Are']"), "Image for Ready When You Are "),
+					
 					new WebElementInfo(By.xpath("//*[contains(text(),'Ready When You Are')]"), "Ready When You Are ")
-
+					
+//					 (//h1[text()="What's new"])[1]
+//					//*[contains(text(),'City Break')]
+//					(//*[contains(text(),'Top Destination For You')])[1]
+//							(//*[contains(text(),'Popular Hotels ')])[1]
+//									(//*[contains(text(),'Hot Deals this Week')])[1]
+//											(//*[contains(text(),'Popular hotel offering')])[1]
+//													(//*[contains(text(),'We will always help you to find your dream vacation come true')])[1]
+//															(//*[contains(text(),'Book Your Vacation')])[1]
+//																	(//*[@class='empire_homeHeader']/child::*[contains(text(),'Trending Packages')])[1]
+//																			(//*[@class='empire_homeHeader']/child::*[contains(text(),'Eco Tourism Packages')])[1]			
 			);
 
 			SoftAssertions softly = new SoftAssertions();
@@ -104,8 +114,7 @@ public class HomePageImplementation extends TestRunner {
 			GenericActions.clickElement(homePage.homeElementGroup, "Clicking on home page headerlink", logger);
 			logger.info("Current url is: " + url);
 			softly.assertThat(url).isEqualTo(driver.getCurrentUrl());
-			//////////////////////////////////////////////////////////////////////////////////////////////////
-
+			
 			String currency = homePage.currencyIdElementGroup.getText();
 			logger.info("Current Currency Value is: " + currency);
 			GenericActions.clickElement(homePage.currencyIdElementGroup, "Clicking on Currency", logger);
@@ -120,6 +129,11 @@ public class HomePageImplementation extends TestRunner {
 			GenericActions.clickElement(homePage.selectLanguageElementGroup, "Selecting the Language", logger);
 			logger.info("Updated language is: " + homePage.languageElementGroup.getText());
 			softly.assertThat("Georgian").isEqualTo(homePage.languageElementGroup.getText());
+			logger.info("updated url is: " + driver.getCurrentUrl());
+			
+			softly.assertThat(driver.getCurrentUrl()).contains("lc=GE")
+			.withFailMessage("Expected string to contain '%s', but it did not.", "lc=GE");
+			
 			GenericActions.clickElement(homePage.languageElementGroup, "Clicking on Language", logger);
 			GenericActions.clickElement(homePage.selectEnglishLanguageElementGroup, "Selecting the Language", logger);
 
@@ -135,8 +149,6 @@ public class HomePageImplementation extends TestRunner {
 			logger.info("attribute value is: " + homePage.signUpValidationElementGroup.getAttribute("type"));
 			softly.assertThat(homePage.signUpValidationElementGroup.getAttribute("type")).isEqualTo("email");
 
-			//////////////////////////////////////////////////////////////////////////////////////////////////////
-
 			try {
 				softly.assertAll();
 			} catch (AssertionError e) {
@@ -149,7 +161,7 @@ public class HomePageImplementation extends TestRunner {
 
 	}
 
-	public void verifyImageLoad() {
+	public void verifyImageLoad() throws IOException {
 		try {
 			SoftAssertions softly = new SoftAssertions();
 
@@ -170,6 +182,8 @@ public class HomePageImplementation extends TestRunner {
 
 		} catch (Exception e) {
 			logger.info("Exception occured at verifyImageLoad()->" + e.getMessage());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver,
+					getScenarioName());
 		}
 	}
 
