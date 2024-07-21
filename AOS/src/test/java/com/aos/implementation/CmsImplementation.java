@@ -92,12 +92,7 @@ public class CmsImplementation extends TestRunner {
 				softly.assertThat(perPersonInfo.length()).isGreaterThan(0).as("Per person info validation");
 			}
 
-			try {
-				softly.assertAll();
-			} catch (AssertionError e) {
-				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver,
-						getScenarioName());
-			}
+			assertAll(softly);
 		} catch (Exception e) {
 			logger.info("Exception occurred at validatePackage() -> " + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
@@ -157,15 +152,10 @@ public class CmsImplementation extends TestRunner {
 
 			}
 
-			try {
-				softly.assertAll();
-			} catch (AssertionError e) {
-				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver,
-						getScenarioName());
-			}
+			assertAll(softly);
 
-		} catch (AssertionError e) {
-			logger.info("Exception occured at validateTopDestination()->" + e.getMessage());
+		} catch (Exception e) {
+			logger.info("Exception occured at validatePopularHotels()->" + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
 
@@ -229,15 +219,67 @@ public class CmsImplementation extends TestRunner {
 						getScenarioName());
 			}
 
-			try {
-				softly.assertAll();
-			} catch (AssertionError e) {
-				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver,
-						getScenarioName());
+			assertAll(softly);
+
+		} catch (Exception e) {
+			logger.info("Exception occurred at validateTopDestination()->" + e.getMessage());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+		}
+	}
+
+	public void validateHotDeals() throws InterruptedException {
+		try {
+			SoftAssertions softly = new SoftAssertions();
+
+			// Locate the hot deals container element using JavaScript
+			WebElement hotDealsContainer = (WebElement) ((JavascriptExecutor) driver)
+					.executeScript("return document.querySelector('hot-deals')");
+
+			// Locate the hot deal elements inside the container using JavaScript
+			List<WebElement> hotDealElements = (List<WebElement>) ((JavascriptExecutor) driver).executeScript(
+					"return arguments[0].querySelectorAll('.hotDeal3_card.ng-star-inserted')", hotDealsContainer);
+
+			// Loop through each hot deal element and validate
+			for (int i = 0; i < hotDealElements.size(); i++) {
+				WebElement currentHotDeal = hotDealElements.get(i);
+				// Create an Actions object
+				Actions actions = new Actions(driver);
+
+				// Perform the hover action
+				actions.moveToElement(currentHotDeal).perform();
+
+				if (i % 4 == 0) {
+					Thread.sleep(1000);
+				}
+
+				// Validate the text length of the <p> element inside .hotDeal3_content
+				String contentParagraphText = (String) ((JavascriptExecutor) driver).executeScript(
+						"return arguments[0].querySelector('.hotDeal3_content > p').innerText", currentHotDeal);
+				softly.assertThat(contentParagraphText.length()).isGreaterThan(0)
+						.as("Validating if there's text in the paragraph element inside hot deal");
+
+				// Validate the text length of the <h4> element inside .hotDeal3_content
+				String contentHeadingText = (String) ((JavascriptExecutor) driver).executeScript(
+						"return arguments[0].querySelector('.hotDeal3_content > h4').innerText", currentHotDeal);
+				softly.assertThat(contentHeadingText.length()).isGreaterThan(0)
+						.as("Validating if there's text in the heading element inside hot deal");
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO,
+						"Validating hot deals - " + contentHeadingText, driver, getScenarioName());
 			}
 
+			assertAll(softly);
+
+		} catch (Exception e) {
+			logger.info("Exception occurred at validateHotDeals() -> " + e.getMessage());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+		}
+
+	}
+
+	private void assertAll(SoftAssertions softly) {
+		try {
+			softly.assertAll();
 		} catch (AssertionError e) {
-			logger.info("Exception occurred at validateTopDestination()->" + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
 	}

@@ -6,4 +6,5 @@ I want to use this feature file to validate package feature
   Then I validate the package
   Then I validate Popular Hotels
   Then I validate Top Destination
+  Then I validate Hot Deals
   

@@ -57,4 +57,17 @@ public class CmsSpecification {
 
 	}
 	
+	@Then("I validate Hot Deals")
+	public void validateHotDeals() {
+
+		try {
+
+			new CmsImplementation().validateHotDeals();
+
+		} catch (Exception e) {
+			logger.info("Exception occured at validateHotDeals()->" + e.getMessage());
+		}
+
+	}
+	
 }
