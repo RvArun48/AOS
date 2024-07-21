@@ -24,45 +24,72 @@ public class CmsImplementation extends TestRunner {
 	public void validatePackage() {
 		try {
 			SoftAssertions softly = new SoftAssertions();
-			List<WebElement> packageContainer = driver.findElements(By.xpath("//*[@class='hybridContent']"));
-			WebElement durationContainer = driver.findElement(By.xpath("//*[@class='hybridDuration']"));
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+
+			// Locate the package container elements using JavaScript
+			List<WebElement> packageContainer = (List<WebElement>) js
+					.executeScript("return document.querySelectorAll('.hybridContent');");
+			WebElement durationContainer = (WebElement) js
+					.executeScript("return document.querySelector('.hybridDuration');");
 
 			for (WebElement card : packageContainer) {
-
-				logger.info("Package title: " + card.findElement(By.tagName("h4")).getText());
+				// Log package title
+				String packageTitle = (String) js.executeScript("return arguments[0].querySelector('h4').innerText;",
+						card);
+				logger.info("Package title: " + packageTitle);
 
 				// Create an Actions object
 				Actions actions = new Actions(driver);
 
 				// Perform the hover action
-				actions.moveToElement(card.findElement(By.xpath("//h3[contains(text(),'AED')]"))).perform();
+				WebElement priceElement = (WebElement) js
+						.executeScript("return document.evaluate(\"//*[contains(text(), 'AED')]\","
+								+ " document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;");
+				actions.moveToElement(priceElement).perform();
 				Thread.sleep(1000);
 
 				LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Validating cards for Package", driver,
 						getScenarioName());
-				softly.assertThat(card.findElement(By.tagName("h4")).getText().length()).isGreaterThan(0)
-						.as("Validating if there's description");
 
-				softly.assertThat(durationContainer.findElements(By.tagName("svg")).size()).isEqualTo(2)
-						.as("Checking Day and Night icons are there");
-				softly.assertThat(card.findElement(By.xpath("//*[@class='hybridDesc ng-star-inserted']/child::span[2]"))
-						.getText().length()).isGreaterThan(0);
-				softly.assertThat(card.findElements(By.xpath("//*[@class='hybridHotAdd']")).size()).isGreaterThan(0);
+				// Validating description
+				softly.assertThat(packageTitle.length()).isGreaterThan(0).as("Validating if there's description");
 
-				for (WebElement element : card.findElement(By.xpath("//*[@class='hybridList ng-star-inserted']"))
-						.findElements(By.tagName("li"))) {
-					softly.assertThat(element.getText().length()).isGreaterThan(1)
-							.as("Validating Amenities - " + element.getText());
+				// Checking Day and Night icons
+				Long svgCount = (Long) js.executeScript("return arguments[0].querySelectorAll('svg').length;",
+						durationContainer);
+				softly.assertThat(svgCount).isEqualTo(2).as("Checking Day and Night icons are there");
+
+				// Validating hybridDesc element
+				String hybridDescText = (String) js.executeScript(
+						"return arguments[0].querySelector('.hybridDesc.ng-star-inserted span:nth-child(2)').innerText;",
+						card);
+				softly.assertThat(hybridDescText.length()).isGreaterThan(0);
+
+				// Validating hybridHotAdd elements
+				Long hotAddCount = (Long) js
+						.executeScript("return arguments[0].querySelectorAll('.hybridHotAdd').length;", card);
+				softly.assertThat(hotAddCount).isGreaterThan(0);
+
+				// Validating Amenities
+				List<WebElement> amenities = (List<WebElement>) js.executeScript(
+						"return arguments[0].querySelector('.hybridList.ng-star-inserted').querySelectorAll('li');",
+						card);
+				for (WebElement element : amenities) {
+					String amenityText = (String) js.executeScript("return arguments[0].innerText;", element);
+					softly.assertThat(amenityText.length()).isGreaterThan(1)
+							.as("Validating Amenities - " + amenityText);
 				}
 
-				softly.assertThat(StringUtils.ConvertStringToDouble(card
-						.findElement(By.xpath("//*[@class='hybridCardFoot']")).findElement(By.tagName("h3")).getText()))
-						.isGreaterThan(0).as("Checking price is greater than 0");
+				// Checking price
+				String priceText = (String) js
+						.executeScript("return arguments[0].querySelector('.hybridCardFoot h3').innerText;", card);
+				softly.assertThat(StringUtils.ConvertStringToDouble(priceText)).isGreaterThan(0)
+						.as("Checking price is greater than 0");
 
-				softly.assertThat(card.findElement(By.xpath("//*[@class='hybridCardFoot']"))
-						.findElement(By.tagName("p")).getText().length()).isGreaterThan(0)
-						.as("Per person info validation");
-
+				// Per person info validation
+				String perPersonInfo = (String) js
+						.executeScript("return arguments[0].querySelector('.hybridCardFoot p').innerText;", card);
+				softly.assertThat(perPersonInfo.length()).isGreaterThan(0).as("Per person info validation");
 			}
 
 			try {
@@ -71,12 +98,10 @@ public class CmsImplementation extends TestRunner {
 				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver,
 						getScenarioName());
 			}
-
 		} catch (Exception e) {
-			logger.info("Exception occured at validatePackage()->" + e.getMessage());
+			logger.info("Exception occurred at validatePackage() -> " + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
 		}
-
 	}
 
 	public void validatePopularHotels() throws InterruptedException {
@@ -124,11 +149,9 @@ public class CmsImplementation extends TestRunner {
 				softly.assertThat(svgCount).isGreaterThan(0)
 						.as("Validating if there is at least 1 star in package " + (i + 1));
 
-				softly.assertThat(StringUtils
-						.ConvertStringToDouble(price.getText()))
-						.isGreaterThan(0).as("Checking price is greater than 0");
-				softly.assertThat(stay.getText().length())
-						.isGreaterThan(0).as("Per person info validation");
+				softly.assertThat(StringUtils.ConvertStringToDouble(price.getText())).isGreaterThan(0)
+						.as("Checking price is greater than 0");
+				softly.assertThat(stay.getText().length()).isGreaterThan(0).as("Per person info validation");
 
 			}
 
@@ -168,9 +191,12 @@ public class CmsImplementation extends TestRunner {
 				if (i % 4 == 0) {
 					Thread.sleep(1000);
 				}
+				softly.assertThat(currentPackage.findElement(By.xpath(".//*[@class='tripIdea2_cardTripType']"))
+						.getText().length()).isGreaterThan(0).as("Validating if there's trip type in package");
 				softly.assertThat(
 						currentPackage.findElement(By.xpath(".//*[@class='tripIdea2_cardLoc']")).getText().length())
 						.isGreaterThan(0).as("Validating if there's location in package " + (i + 1));
+				
 
 				LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO,
 						"Validating cards for Location - " + currentPackage
