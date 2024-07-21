@@ -140,10 +140,6 @@ public class CmsImplementation extends TestRunner {
 					Thread.sleep(1000);
 				}
 
-				LogEvent.logEventWithScreenshot(
-						getExtentTest(), Status.INFO, "Validating cards for Destination - " + location.getText()
-								+ " and Price - " + StringUtils.ConvertStringToDouble(price.getText()),
-						driver, getScenarioName());
 				softly.assertThat(hotelName.getText().length()).isGreaterThan(0).as("Validating if there's Hotel Name");
 
 				softly.assertThat(svgCount).isGreaterThan(0)
@@ -152,6 +148,12 @@ public class CmsImplementation extends TestRunner {
 				softly.assertThat(StringUtils.ConvertStringToDouble(price.getText())).isGreaterThan(0)
 						.as("Checking price is greater than 0");
 				softly.assertThat(stay.getText().length()).isGreaterThan(0).as("Per person info validation");
+
+				LogEvent.logEventWithScreenshot(getExtentTest(),
+						(StringUtils.ConvertStringToDouble(price.getText()).longValue() > 0 ? Status.INFO
+								: Status.FAIL),
+						"Validating cards for Destination - " + location.getText() + " and Price - " + price.getText(),
+						driver, getScenarioName());
 
 			}
 
@@ -172,37 +174,59 @@ public class CmsImplementation extends TestRunner {
 
 	public void validateTopDestination() throws InterruptedException {
 		try {
-
 			SoftAssertions softly = new SoftAssertions();
-			// Locate the package container elements
-			List<WebElement> packageContainer = driver
-					.findElements(By.xpath(".//*[@class='tripIdea2_card ng-star-inserted']"));
+
+			// Locate the package container elements using JavaScript
+			List<WebElement> packageContainer = (List<WebElement>) ((JavascriptExecutor) driver)
+					.executeScript("return document.querySelectorAll('.tripIdea2_card.ng-star-inserted')");
 
 			// Loop through each package container and validate
 			for (int i = 0; i < packageContainer.size(); i++) {
-
 				WebElement currentPackage = packageContainer.get(i);
 				// Create an Actions object
 				Actions actions = new Actions(driver);
 
-				// Perform the hover action
-				actions.moveToElement(currentPackage.findElement(By.xpath(".//*[@class='tripIdea2_cardLoc']")))
-						.perform();
+				// Perform the hover action using JavaScript
+				WebElement cardLocElement = (WebElement) ((JavascriptExecutor) driver)
+						.executeScript("return arguments[0].querySelector('.tripIdea2_cardLoc')", currentPackage);
+				actions.moveToElement(cardLocElement).perform();
+
 				if (i % 4 == 0) {
 					Thread.sleep(1000);
 				}
-				softly.assertThat(currentPackage.findElement(By.xpath(".//*[@class='tripIdea2_cardTripType']"))
-						.getText().length()).isGreaterThan(0).as("Validating if there's trip type in package");
-				softly.assertThat(
-						currentPackage.findElement(By.xpath(".//*[@class='tripIdea2_cardLoc']")).getText().length())
-						.isGreaterThan(0).as("Validating if there's location in package " + (i + 1));
-				
 
-				LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO,
-						"Validating cards for Location - " + currentPackage
-								.findElement(By.xpath("//*[@class='tripIdea2_locationText']")).getText(),
-						driver, getScenarioName());
+				// Get location text using JavaScript
+				String locationText = (String) ((JavascriptExecutor) driver).executeScript(
+						"return arguments[0].querySelector('.tripIdea2_locationText').innerText", currentPackage);
 
+				// Validate trip type using JavaScript
+				String tripTypeText = (String) ((JavascriptExecutor) driver).executeScript(
+						"return arguments[0].querySelector('.tripIdea2_cardTripType').innerText", currentPackage);
+				softly.assertThat(tripTypeText.length()).isGreaterThan(0)
+						.as("Validating if there's trip type in package");
+
+				// Validate location using JavaScript
+				String cardLocText = (String) ((JavascriptExecutor) driver).executeScript(
+						"return arguments[0].querySelector('.tripIdea2_cardLoc').innerText", currentPackage);
+				softly.assertThat(cardLocText.length()).isGreaterThan(0)
+						.as("Validating if there's location in package");
+
+				// Validate map icon and location using JavaScript
+				String mapIconText = (String) ((JavascriptExecutor) driver).executeScript(
+						"return arguments[0].querySelector('.material-icons + h4').innerText", currentPackage);
+				softly.assertThat(mapIconText.length()).isGreaterThan(0)
+						.as("Validating if there's map icon and location in package");
+
+				// Validate price using JavaScript
+				String priceText = (String) ((JavascriptExecutor) driver).executeScript(
+						"return arguments[0].querySelector('.tripIdea2_cardPrice').innerText", currentPackage);
+				softly.assertThat(StringUtils.ConvertStringToDouble(priceText)).isGreaterThan(0)
+						.as("Validating if there's price in package");
+
+				LogEvent.logEventWithScreenshot(getExtentTest(),
+						(StringUtils.ConvertStringToDouble(priceText).longValue() > 0 ? Status.INFO : Status.FAIL),
+						"Validating cards for Location - " + locationText + " with price - " + priceText, driver,
+						getScenarioName());
 			}
 
 			try {
@@ -213,10 +237,9 @@ public class CmsImplementation extends TestRunner {
 			}
 
 		} catch (AssertionError e) {
-			logger.info("Exception occured at validateTopDestination()->" + e.getMessage());
+			logger.info("Exception occurred at validateTopDestination()->" + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
-
 	}
 
 }
