@@ -1,5 +1,8 @@
 package com.aos.specification;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.aos.implementation.HomePageImplementation;
 import com.aos.utils.LogEvent;
 import com.aos.utils.ReadProperty;
@@ -11,6 +14,8 @@ import io.cucumber.java.en.Then;
 
 public class HomePageSpecification {
 
+	public static final Logger logger = LogManager.getLogger(HomePageSpecification.class);
+
 	@Then("I verify header elements present in the home page")
 	public void verifyElement() {
 
@@ -19,7 +24,7 @@ public class HomePageSpecification {
 			new HomePageImplementation().verifyPresenceOfHeaderElements();
 
 		} catch (Exception e) {
-
+			logger.info("Exception occurred at verifyElement()->" + e.toString());
 		}
 
 	}
@@ -32,7 +37,7 @@ public class HomePageSpecification {
 			new HomePageImplementation().verifyElementFunctionality();
 
 		} catch (Exception e) {
-
+			logger.info("Exception occurred at verifyElementFunctionality()->" + e.toString());
 		}
 
 	}
@@ -45,9 +50,22 @@ public class HomePageSpecification {
 			new HomePageImplementation().verifyImageLoad();
 
 		} catch (Exception e) {
-
+			logger.info("Exception occurred at verifyImageLoad()->" + e.toString());
 		}
 
 	}
-	
+
+	@Then("I verify whatsapp link functionality")
+	public void verifyWhatsappLink() {
+
+		try {
+
+			new HomePageImplementation().verifyWhatsappLink();
+
+		} catch (Exception e) {
+			logger.info("Exception occurred at verifyWhatsappLink()->" + e.toString());
+		}
+
+	}
+
 }

@@ -2,15 +2,19 @@ package com.aos.implementation;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,6 +24,8 @@ import com.aos.pageObjects.HomePage;
 import com.aos.utils.CommonUtils;
 import com.aos.utils.GenericActions;
 import com.aos.utils.LogEvent;
+import com.aos.utils.RequestUtils;
+import com.aos.utils.StringUtils;
 import com.aos.utils.WebElementInfo;
 import com.aventstack.extentreports.Status;
 
@@ -49,13 +55,11 @@ public class HomePageImplementation extends TestRunner {
 //					new WebElementInfo(By.xpath("//*[@alt='Keep It Simple']"), "Image for Keep It Simple "),
 					new WebElementInfo(By.xpath("//*[contains(text(),'Keep It Simple')]"), "Keep It Simple "),
 
-					
 					new WebElementInfo(By.xpath("//*[contains(text(),'Plan With Confidence')]"),
 							"Plan With Confidence "),
 
-					
 					new WebElementInfo(By.xpath("//*[contains(text(),'Ready When You Are')]"), "Ready When You Are ")
-					
+
 //					 (//h1[text()="What's new"])[1]
 //					//*[contains(text(),'City Break')]
 //					(//*[contains(text(),'Top Destination For You')])[1]
@@ -114,7 +118,7 @@ public class HomePageImplementation extends TestRunner {
 			GenericActions.clickElement(homePage.homeElementGroup, "Clicking on home page headerlink", logger);
 			logger.info("Current url is: " + url);
 			softly.assertThat(url).isEqualTo(driver.getCurrentUrl());
-			
+
 			String currency = homePage.currencyIdElementGroup.getText();
 			logger.info("Current Currency Value is: " + currency);
 			GenericActions.clickElement(homePage.currencyIdElementGroup, "Clicking on Currency", logger);
@@ -130,10 +134,10 @@ public class HomePageImplementation extends TestRunner {
 			logger.info("Updated language is: " + homePage.languageElementGroup.getText());
 			softly.assertThat("Georgian").isEqualTo(homePage.languageElementGroup.getText());
 			logger.info("updated url is: " + driver.getCurrentUrl());
-			
+
 			softly.assertThat(driver.getCurrentUrl()).contains("lc=GE")
-			.withFailMessage("Expected string to contain '%s', but it did not.", "lc=GE");
-			
+					.withFailMessage("Expected string to contain '%s', but it did not.", "lc=GE");
+
 			GenericActions.clickElement(homePage.languageElementGroup, "Clicking on Language", logger);
 			GenericActions.clickElement(homePage.selectEnglishLanguageElementGroup, "Selecting the Language", logger);
 
@@ -168,11 +172,10 @@ public class HomePageImplementation extends TestRunner {
 			softly.assertThat(
 					new CommonUtils().checkImageLoad(driver.findElement(By.cssSelector("img[alt='Keep It Simple']"))))
 					.as("Checking the image is loaded - Keep It Simple").isTrue();
-			softly.assertThat(
-					new CommonUtils().checkImageLoad(driver.findElement(By.cssSelector("div[aria-label='2'] img[alt='Slider Image']"))))
+			softly.assertThat(new CommonUtils()
+					.checkImageLoad(driver.findElement(By.cssSelector("div[aria-label='2'] img[alt='Slider Image']"))))
 					.as("Checking the image is loaded - Slider Image").isFalse();
-			
-			
+
 			try {
 				softly.assertAll();
 			} catch (AssertionError e) {
@@ -182,8 +185,65 @@ public class HomePageImplementation extends TestRunner {
 
 		} catch (Exception e) {
 			logger.info("Exception occured at verifyImageLoad()->" + e.getMessage());
-			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver,
-					getScenarioName());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+		}
+	}
+
+	public void verifyWhatsappLink() {
+		try {
+			SoftAssertions softly = new SoftAssertions();
+
+			WebElement element = driver.findElement(By.xpath("//*[@class='mobHeading']"));
+			element.click();
+
+			// Get the current window handle
+			String mainWindowHandle = driver.getWindowHandle();
+
+			// Wait for the new tab to open (a brief sleep may be necessary)
+			Thread.sleep(3000);
+
+			// Get all window handles
+			Set<String> allWindowHandles = driver.getWindowHandles();
+			ArrayList<String> tabs = new ArrayList<>(allWindowHandles);
+
+			// Switch to the new tab (the last one in the list)
+			for (String handle : tabs) {
+				if (!handle.equals(mainWindowHandle)) {
+					driver.switchTo().window(handle);
+					break;
+				}
+			}
+
+			// Capture the URL of the new tab
+			String newTabUrl = driver.getCurrentUrl();
+
+			int responseCode = RequestUtils.getResponseCode(newTabUrl);
+
+			softly.assertThat(responseCode).isEqualTo(200).as("Validating if whatsapp url is up or not");
+
+			// Print the URL in the console
+			logger.info("Whatsapp URL: " + newTabUrl + " with Response code:" + responseCode);
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO,
+					"Whatsapp URL: " + newTabUrl + " with Response code:" + responseCode, driver, getScenarioName());
+
+			// Close the new tab and switch back to the main window
+			driver.close();
+			driver.switchTo().window(mainWindowHandle);
+
+			assertAll(softly);
+
+		} catch (Exception e) {
+			logger.info("Exception occurred at validateTopDestination()->" + e.getMessage());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+		}
+
+	}
+
+	private void assertAll(SoftAssertions softly) {
+		try {
+			softly.assertAll();
+		} catch (AssertionError e) {
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
 	}
 
