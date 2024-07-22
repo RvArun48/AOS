@@ -1,7 +1,10 @@
 package com.aos.implementation;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 import javax.xml.xpath.XPath;
 
 import org.apache.logging.log4j.LogManager;
@@ -274,6 +277,18 @@ public class CmsImplementation extends TestRunner {
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
 
+	}
+
+	public void validateWhatsNew() throws InterruptedException {
+
+		try {
+			
+			
+			
+		} catch (Exception e) {
+			logger.info("Exception occurred at validateTrendingPackages()->" + e.getMessage());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+		}
 	}
 
 	private void assertAll(SoftAssertions softly) {

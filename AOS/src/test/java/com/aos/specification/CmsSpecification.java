@@ -70,4 +70,17 @@ public class CmsSpecification {
 
 	}
 	
+	@Then("I validate Whats new")
+	public void validateWhatsNew() {
+
+		try {
+
+			new CmsImplementation().validateWhatsNew();
+
+		} catch (Exception e) {
+			logger.info("Exception occured at validateWhatsNew()->" + e.getMessage());
+		}
+
+	}
+	
 }
