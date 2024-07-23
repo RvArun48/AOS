@@ -55,17 +55,30 @@ public class HomePageSpecification {
 
 	}
 
-	@Then("I verify whatsapp link functionality")
-	public void verifyWhatsappLink() {
+	@Then("^I verify whatsapp link functionality$")
+	public void verifyAppLink() {
 
 		try {
 
 			new HomePageImplementation().verifyWhatsappLink();
 
 		} catch (Exception e) {
-			logger.info("Exception occurred at verifyWhatsappLink()->" + e.toString());
+			logger.info("Exception occurred at verifyAppLink()->" + e.toString());
 		}
 
 	}
 
+	@And("I verify the functionality of the footer elements")
+	public void verifyIFooterFunctionality() {
+
+		try {
+
+			new HomePageImplementation().verifyIFooterFunctionality();
+
+		} catch (Exception e) {
+
+		}
+
+	}
+	
 }

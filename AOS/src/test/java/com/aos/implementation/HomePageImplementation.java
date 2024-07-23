@@ -58,7 +58,13 @@ public class HomePageImplementation extends TestRunner {
 					new WebElementInfo(By.xpath("//*[contains(text(),'Plan With Confidence')]"),
 							"Plan With Confidence "),
 
-					new WebElementInfo(By.xpath("//*[contains(text(),'Ready When You Are')]"), "Ready When You Are ")
+					new WebElementInfo(By.xpath("//*[contains(text(),'Ready When You Are')]"), "Ready When You Are "),
+
+					new WebElementInfo(By.xpath("//*[contains(text(),'Terms and conditions')]"),
+							"Terms and conditions "),
+					new WebElementInfo(By.xpath("(//*[contains(text(),'Career')])[1]"), "Career "),
+					new WebElementInfo(By.xpath("(//*[contains(text(),'Contact')])[1]"), "Contact "),
+					new WebElementInfo(By.xpath("(//*[contains(text(),'Follow Us')])[1]"), "Follow us ")
 
 //					 (//h1[text()="What's new"])[1]
 //					//*[contains(text(),'City Break')]
@@ -174,7 +180,7 @@ public class HomePageImplementation extends TestRunner {
 					.as("Checking the image is loaded - Keep It Simple").isTrue();
 			softly.assertThat(new CommonUtils()
 					.checkImageLoad(driver.findElement(By.cssSelector("div[aria-label='2'] img[alt='Slider Image']"))))
-					.as("Checking the image is loaded - Slider Image").isFalse();
+					.as("Checking the image is loaded - Slider Image").isTrue();
 
 			try {
 				softly.assertAll();
@@ -243,6 +249,68 @@ public class HomePageImplementation extends TestRunner {
 		try {
 			softly.assertAll();
 		} catch (AssertionError e) {
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+		}
+	}
+
+	public void verifyIFooterFunctionality() throws IOException {
+		try {
+			SoftAssertions softly = new SoftAssertions();
+			String url = driver.getCurrentUrl();
+
+			softly.assertThat(driver.findElement(By.cssSelector("img[class='temp3-logo-img']")).isDisplayed())
+					.as("Checking the logo is loaded - Company logo").isTrue();
+			softly.assertThat(new CommonUtils().checkImageLoad(driver.findElement(By.cssSelector(
+					"img[src='https://aosedge.b-cdn.net/prod/ThemeImages/2105311837100000031/2202081436563699070/Icons/2312231116374533428.png']"))))
+					.as("Checking the logo is loaded - ssl").isTrue();
+			softly.assertThat(new CommonUtils().checkImageLoad(driver.findElement(By.cssSelector(
+					"img[src='https://aosedge.b-cdn.net/prod/ThemeImages/2105311837100000031/2202081436563699070/Icons/2312231116374532466.png']"))))
+					.as("Checking the logo is loaded - Paypal").isTrue();
+			softly.assertThat(new CommonUtils().checkImageLoad(driver.findElement(By.cssSelector(
+					"img[src='https://aosedge.b-cdn.net/prod/ThemeImages/2105311837100000031/2202081436563699070/Icons/2312231116374532466.png']"))))
+					.as("Checking the logo is loaded - Secure").isTrue();
+			softly.assertThat(new CommonUtils().checkImageLoad(driver.findElement(By.cssSelector(
+					"img[src='https://edge.amadeusonlinesuite.com/prod/ThemeImages/2105311837100000031/2202081436563699070/sm/1721635050451.jpg']"))))
+					.as("Checking the logo is loaded - X").isTrue();
+
+			softly.assertThat(new CommonUtils().checkImageLoad(driver.findElement(By.cssSelector(
+					"img[src='https://edge.amadeusonlinesuite.com/prod/ThemeImages/2105311837100000031/2202081436563699070/sm/1721634755269.png']"))))
+					.as("Checking the logo is loaded - Facebook").isTrue();
+
+			softly.assertThat(new CommonUtils().checkImageLoad(driver.findElement(By.cssSelector(
+					"img[src='https://edge.amadeusonlinesuite.com/prod/ThemeImages/2105311837100000031/2202081436563699070/sm/1721635573027.png']"))))
+					.as("Checking the logo is loaded - Instagram").isTrue();
+
+			logger.info("Current url is: " + url);
+			GenericActions.clickElement(homePage.termsCondition, "Clicking the Terms and condition", logger);
+			logger.info("updated url is: " + driver.getCurrentUrl());
+			softly.assertThat(driver.getCurrentUrl()).contains("Content/termsandconditions")
+					.withFailMessage("Expected string to contain '%s', but it did not.", "Content/termsandconditions");
+			driver.navigate().back();
+
+			logger.info("Current url is: " + url);
+			GenericActions.clickElement(homePage.instagram, "Clicking the instagram", logger);
+			logger.info("updated url is: " + driver.getCurrentUrl());
+			driver.navigate().back();
+
+			logger.info("Current url is: " + url);
+			GenericActions.clickElement(homePage.facebook, "Clicking the Facebook", logger);
+			logger.info("updated url is: " + driver.getCurrentUrl());
+			driver.navigate().back();
+
+			logger.info("Current url is: " + url);
+			GenericActions.clickElement(homePage.x, "Clicking the x", logger);
+			logger.info("updated url is: " + driver.getCurrentUrl());
+
+			try {
+				softly.assertAll();
+			} catch (AssertionError e) {
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver,
+						getScenarioName());
+			}
+
+		} catch (Exception e) {
+			logger.info("Exception occured at verifyIFooterFunctionality()->" + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
 	}

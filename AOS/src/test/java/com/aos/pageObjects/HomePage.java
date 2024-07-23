@@ -246,6 +246,34 @@ public class HomePage {
 	@FindBy(xpath = "//form[@class='ng-dirty ng-touched ng-submitted ng-invalid']//div[@class='ng-star-inserted']")
 	public WebElement emailValidation;
 	
+	@FindBy(xpath = "//*[@class='footerlinks_head ng-star-inserted']/child::*[contains(text(),'Terms and conditions')]")
+	public WebElement termsCondition;
+	
+	@FindBy(xpath = "//*[@class='footerlinks_text ng-star-inserted']/child::*[contains(text(),'Career')]")
+	public WebElement career;
+	
+	@FindBy(xpath = "//a[contains(@href,'https://www.instagram.com')]")
+	public WebElement instagram;
+	
+	@FindBy(xpath = "//a[contains(@href,'https://x.com/?lang=en')]")
+	public WebElement x;
+	
+	
+	@FindBy(xpath = "//a[contains(@href,'https://www.facebook.com')]")
+	public WebElement facebook;
+	
+	@FindBy(xpath = "//*[@class='mobHeading']")	
+	public WebElement whatsapp;
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
 	
 	
 	
