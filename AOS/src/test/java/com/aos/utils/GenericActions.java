@@ -18,11 +18,12 @@ public class GenericActions extends TestRunner {
 
 	public static void clickElement(WebElement element, String message, Logger logger) throws IOException {
 		try {
-
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			wait.until(ExpectedConditions.elementToBeClickable(element));
 			logger.info(message);
-			element.click();
+			executor.executeScript("arguments[0].click();", element);
+			//element.click();
 			Thread.sleep(1500);
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, message, driver, getScenarioName());
 		} catch (Exception e) {
@@ -36,7 +37,7 @@ public class GenericActions extends TestRunner {
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			wait.until(ExpectedConditions.elementToBeClickable(element));
-			executor.executeScript("arguments[0].click();", element);
+//			executor.executeScript("arguments[0].click();", element);
 
 			logger.info(message);
 			element.sendKeys(data);

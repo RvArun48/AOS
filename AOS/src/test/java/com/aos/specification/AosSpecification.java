@@ -147,9 +147,9 @@ public class AosSpecification extends TestRunner {
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Choosing travel date", driver, scenarioName);
 			logger.info("Selecting the Departure date: "
 					+ DateUtil.addDaysToCurrentDate(Integer.parseInt(bookTicketDTO.getDate()), "dd MMM yyyy"));
-
+			// (//span[@draggable='false' and not(contains(@class, 'disabled'))]/span[text()='31'])[1]
 			homePage.getElementByXpath(driver,
-					"(//span[@draggable='false' and  not(contains(@class,'disabled'))]/span[text()='${token}'])[1]",
+					"(//span[@draggable='false' and not(contains(@class, 'disabled'))]/span[text()='${token}'])[1]",
 					DateUtil.addDaysToCurrentDate(Integer.parseInt(bookTicketDTO.getDate()), "d"));
 
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.passengerCountDropDown));
@@ -166,16 +166,20 @@ public class AosSpecification extends TestRunner {
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Select the departure date", driver, scenarioName);
 
 			logger.info("Selecting the class: " + bookTicketDTO.getPassengerClass());
+			
+			
+			wait.until(ExpectedConditions.elementToBeClickable(homePage.passengerClass_FirstClass));
+			homePage.passengerClass_FirstClass.click();
 
-			if (bookTicketDTO.getPassengerClass().equalsIgnoreCase("Economy")) {
-				homePage.passengerClass_Economy.click();
-			} else if (bookTicketDTO.getPassengerClass().equalsIgnoreCase("Premimum Economy")) {
-				homePage.passengerClass_PremiumEconomy.click();
-			} else if (bookTicketDTO.getPassengerClass().equalsIgnoreCase("Business Class")) {
-				homePage.passengerClass_BusinessClass.click();
-			} else if (bookTicketDTO.getPassengerClass().equalsIgnoreCase("First class")) {
-				homePage.passengerClass_FirstClass.click();
-			}
+//			if (bookTicketDTO.getPassengerClass().equalsIgnoreCase("Economy")) {
+//				homePage.passengerClass_Economy.click();
+//			} else if (bookTicketDTO.getPassengerClass().equalsIgnoreCase("Premimum Economy")) {
+//				homePage.passengerClass_PremiumEconomy.click();
+//			} else if (bookTicketDTO.getPassengerClass().equalsIgnoreCase("Business Class")) {
+//				homePage.passengerClass_BusinessClass.click();
+//			} else if (bookTicketDTO.getPassengerClass().equalsIgnoreCase("First class")) {
+//				homePage.passengerClass_FirstClass.click();
+//			}
 
 //passenger count
 			AosImplementation.addPassengersCount(bookTicketDTO, executor, wait);

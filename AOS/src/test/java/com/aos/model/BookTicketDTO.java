@@ -151,13 +151,6 @@ public class BookTicketDTO {
 
 	}
 
-	@SerializedName("is_refundable")
-	@Expose
-	private boolean isRefundable;
-
-	public boolean getIsRefundable() {
-		return isRefundable;
-	}
 	
 	
 	@SerializedName("filter_airlines_select")
@@ -173,18 +166,7 @@ public class BookTicketDTO {
 
 	}
 
-	@SerializedName("is_direct_flight")
-	@Expose
-	private boolean isDirectFlight;
-
-	public boolean getIsDirectFlight() {
-		return isDirectFlight;
-	}
-
-	public void setIsDirectFlight(boolean isDirectFlight) {
-		this.isDirectFlight = isDirectFlight;
-
-	}
+	
 
 //////////////////////////////////////////////
 
@@ -252,5 +234,69 @@ public class BookTicketDTO {
 	public void setPassengerClass(String passengerClass) {
 		this.passengerClass = passengerClass;
 	}
+	
+	@SerializedName("trip_select")
+	@Expose
+	private String tripSelect;
+
+	public String getTripSelect() {
+		return tripSelect;
+	}
+
+	public void setTripSelect(String tripSelect) {
+		this.tripSelect = tripSelect;
+	}
+	
+	@SerializedName("baggage_only")
+	@Expose
+	private boolean baggageOnly;
+
+	public boolean getBaggageOnly() {
+		return baggageOnly;
+	}
+
+	public void setBaggageOnly(boolean baggageOnly) {
+		this.baggageOnly = baggageOnly;
+
+	}
+	
+	@SerializedName("is_refundable")
+	@Expose
+	private boolean isRefundable;
+
+	public boolean getIsRefundable() {
+		return isRefundable;
+	}
+
+	public void setIsRefundable(boolean isRefundable) {
+		this.isRefundable = isRefundable;
+
+	}
+	@SerializedName("is_direct_flight")
+	@Expose
+	private boolean isDirectFlight;
+
+	public boolean getIsDirectFlight() {
+		return isDirectFlight;
+	}
+
+	public void setIsDirectFlight(boolean isDirectFlight) {
+		this.isDirectFlight = isDirectFlight;
+
+	}
+	
+	@SerializedName("preferred_airlines")
+	@Expose
+	private String preferredAirlines;
+
+	public String getPreferredAirlines() {
+		return preferredAirlines;
+	}
+
+	public void setPreferredAirlines(String preferredAirlines) {
+		this.preferredAirlines = preferredAirlines;
+	}
+	
+	
 
 }

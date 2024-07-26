@@ -5,6 +5,7 @@ public class CommonDTO {
 	private static CommonDTO instance;
 	private String userName;
 	private String password;
+	private BookTicketDTO bookTicketDTO;
 
 	// Private constructor to prevent instantiation
 	private CommonDTO() {
@@ -40,5 +41,13 @@ public class CommonDTO {
 	// Setter for password
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public void setBookTicketDTO(BookTicketDTO bookTicketDTO) {
+		this.bookTicketDTO = bookTicketDTO;
+		
+	}
+	public BookTicketDTO getBookTicketDTO() {
+		return bookTicketDTO;
 	}
 }

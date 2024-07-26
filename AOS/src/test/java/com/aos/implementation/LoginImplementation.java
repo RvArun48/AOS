@@ -52,6 +52,7 @@ public class LoginImplementation extends TestRunner {
 
 			GenericActions.sendKeys(homePage.signInPassword, loginDTO.getSigninPassword(),
 					"Entering password:" + loginDTO.getSigninPassword(), logger);
+			
 			GenericActions.clickElement(homePage.popupsigninButton, "Clicking the SignIn", logger);
 			logger.info("attribute value is: " + homePage.loginSuccessValidation.getText());
 			softly.assertThat(homePage.loginSuccessValidation.getText()).isEqualTo("My Account");
