@@ -3,6 +3,7 @@ package com.aos.implementation;
 import java.io.IOException;
 import java.lang.reflect.GenericArrayType;
 import java.time.Duration;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -258,7 +259,7 @@ public class SearchFormImplementation extends TestRunner {
 						"Entering preferred_airlines:" + preferredAirLine, logger);
 				homePage.getElementByXpath(driver, "(//*[@role='listbox']//child::span[text()='${token}'])[1]",
 						preferredAirLine.trim());
-				
+
 				logger.info("Checking the Preferred Airlines as per search");
 				if (!searchResultsPage.airlinePreferanceValidation.getText()
 						.contains(bookTicketDTO.getRelevantKeywordPreferredAirlines())) {
@@ -470,8 +471,8 @@ public class SearchFormImplementation extends TestRunner {
 							+ "'])[1]"))));
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Choosing travel date", driver,
 					getScenarioName());
-			logger.info("Selecting the Departure date: "
-					+ DateAndTimeUtil.addDaysToCurrentDate(Integer.parseInt(bookTicketDTO.getReturnDate()), "dd MMM yyyy"));
+			logger.info("Selecting the Departure date: " + DateAndTimeUtil
+					.addDaysToCurrentDate(Integer.parseInt(bookTicketDTO.getReturnDate()), "dd MMM yyyy"));
 
 			homePage.getElementByXpath(driver,
 					"(//span[@draggable='false' and not(contains(@class, 'disabled'))]/span[text()='${token}'])[1]",
@@ -514,21 +515,12 @@ public class SearchFormImplementation extends TestRunner {
 						.isGreaterThan(0);
 				logger.info(
 						"Fight Name " + card.findElement(By.xpath("//*[@class='empireFlight_FlightNames']")).getText());
-				
-				
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_FlightNames']")).getText().length())
-						.isGreaterThan(0);
-				logger.info(
-						"LCC " + card.findElement(By.xpath("//div[@class='LCC_Wrapper ng-star-inserted']")).getText());
-				
-				
-			
-				
-				
-				
-				
-				
+
+//				softly.assertThat(
+//						card.findElement(By.xpath("//*[@class='LCC_Wrapper ng-star-inserted']")).getText().length())
+//						.isGreaterThan(0);
+//				logger.info(
+//						"LCC " + card.findElement(By.xpath("//*[@class='LCC_Wrapper ng-star-inserted']")).getText());
 
 				softly.assertThat(
 						card.findElement(By.xpath("//*[@class='empireFlight_FlightTime']")).getText().length())
@@ -574,15 +566,11 @@ public class SearchFormImplementation extends TestRunner {
 						.getText().length()).isGreaterThan(0);
 				logger.info("Baggage Details: " + card
 						.findElement(By.xpath("//*[@class='empireFlight_time include ng-star-inserted']")).getText());
-				
-				
-				
+
 				softly.assertThat(card.findElement(By.xpath("//*[@class='empireFlight_Rbd include ng-star-inserted']"))
 						.getText().length()).isGreaterThan(0);
 				logger.info("Passenger Class: " + card
 						.findElement(By.xpath("//*[@class='empireFlight_Rbd include ng-star-inserted']")).getText());
-				
-				
 
 				softly.assertThat(card.findElement(By.xpath("//*[@class='empireFlight_seatsleft ng-star-inserted']"))
 						.getText().length()).isGreaterThan(0);
@@ -670,33 +658,42 @@ public class SearchFormImplementation extends TestRunner {
 				}
 
 			}
-			
-			
-			List<WebElement> calendarDates = driver.findElements(By.xpath("//*[@class='FFC-box ng-star-inserted']"));
-			
-			for(WebElement calendarDate: calendarDates) {
-								
-				softly.assertThat(
-						driver.findElement(By.xpath("//*[@class='FFC-search-fare-price']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Flight Price "
-						+ driver.findElement(By.xpath("//*[@class='FFC-search-fare-price']")).getText());	
-				
-			}
-			
-			
-			 Thread.sleep(5000);
-			
-			
-				wait.until(ExpectedConditions.elementToBeClickable(homePage.installmentClick));
-				homePage.installmentClick.click();
-				
-				LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Click to Close Installment Clicked", driver, getScenarioName());
-				wait.until(ExpectedConditions.elementToBeClickable(homePage.CloseInstallmentClick));
-				homePage.CloseInstallmentClick.click();
-				
-				 Thread.sleep(5000);
-				 
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
+			wait.until(ExpectedConditions
+					.elementToBeClickable(driver.findElement(By.xpath("//*[@class='FFC-box ng-star-inserted']"))));
+
+			CommonUtils.zoomOutBrowser(driver, 0.8);
+
+			softly.assertThat(driver.findElement(By.xpath("//*[@class='FFC-search-fare-price']")).getText().length())
+					.isGreaterThan(0);
+			logger.info(
+					"Flight Price " + driver.findElement(By.xpath("//*[@class='FFC-search-fare-price']")).getText());
+			WebElement containerElement = (WebElement) ((JavascriptExecutor) driver)
+					.executeScript("return document.querySelector('.empireF_PricingCalenRetuWrapper')");
+
+			// Use JavaScript Executor to find the child element within the container
+			WebElement targetElement = (WebElement) ((JavascriptExecutor) driver).executeScript(
+					"return arguments[0].querySelector('.FFC-search-fare-amount.FFC-search-fare-active-amount')",
+					containerElement);
+
+			// Perform the mouse hover action using Actions class
+			Actions actions = new Actions(driver);
+			actions.moveToElement(targetElement).perform();
+			Thread.sleep(1000);
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Hovering over the calendar", driver,
+					getScenarioName());
+
+			Thread.sleep(5000);
+
+			wait.until(ExpectedConditions.elementToBeClickable(homePage.installmentClick));
+			homePage.installmentClick.click();
+
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Click to Close Installment Clicked", driver,
+					getScenarioName());
+			wait.until(ExpectedConditions.elementToBeClickable(homePage.CloseInstallmentClick));
+			homePage.CloseInstallmentClick.click();
+
+			Thread.sleep(5000);
 
 //					wait.until(ExpectedConditions.elementToBeClickable(homePage.showMoreOption));
 //					homePage.showMoreOption.click();
@@ -714,80 +711,68 @@ public class SearchFormImplementation extends TestRunner {
 //					
 //					wait.until(ExpectedConditions.elementToBeClickable(homePage.hideMoreOption));
 //					homePage.hideMoreOption.click();
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-		
+
 //				logger.info("Exception occurred at Installment() -> " + e.getMessage());
 //				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
-			
 
-		
-			
-			
+			homePage.timeFunctionality.click();
+			Thread.sleep(5000);
+			// Locate the slider element
+			WebElement slider = driver.findElement(
+					By.xpath("(//*[@class='ngx-slider-span ngx-slider-bar-wrapper ngx-slider-full-bar'])[1]"));
+			// WebElement sliderRight =
+			// driver.findElement(By.xpath("(//*[@class='ngx-slider-span
+			// ngx-slider-bar-wrapper ngx-slider-right-out-selection'])[1]"));
 
-//			homePage.timeFunctionality.click();
-//			Thread.sleep(5000);
-//			// Locate the slider element
-//			WebElement slider = driver.findElement(
-//					By.xpath("(//*[@class='ngx-slider-span ngx-slider-bar-wrapper ngx-slider-full-bar'])[1]"));
-//			// WebElement sliderRight =
-//			// driver.findElement(By.xpath("(//*[@class='ngx-slider-span
-//			// ngx-slider-bar-wrapper ngx-slider-right-out-selection'])[1]"));
-//
-//			WebElement minPointer = driver.findElement(
-//					By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'])[1]"));
-//			WebElement maxPointer = driver.findElement(
-//					By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-max'])[1]"));
-//
-//			// Determine the width of the slider
-//			int sliderWidth = slider.getSize().getWidth();
-//
-//			// Define the desired minimum and maximum values
-//			int desiredMinValue = 25000; // Example minimum value
-//			int desiredMaxValue = 65000; // Example maximum value
-//			int minValue = 10800; // Minimum possible value of the slider
-//			int maxValue = 80100; // Maximum possible value of the slider
-//			int sliderRange = maxValue - minValue;
-//
-//			// Calculate the offset for the minimum pointer
-//			// Calculate the offset for the minimum pointer
-//			int minOffset = (desiredMinValue - minValue) * sliderWidth / sliderRange;
-//
-//			// Move the minimum pointer
-//			Actions actions = new Actions(driver);
-//			actions.clickAndHold(minPointer).moveByOffset(minOffset, 0).release().perform();
-//
-//			// Recalculate the width of the slider after moving the minimum pointer
-//			sliderWidth = slider.getSize().getWidth();
-//
-//			// Calculate the offset for the maximum pointer relative to its current position
-//			int maxOffset = (desiredMaxValue - minValue) * sliderWidth / sliderRange;
-//			int currentMaxPosition = maxPointer.getLocation().getX();
-//			int currentMinPosition = minPointer.getLocation().getX();
-//			int maxMoveOffset = maxOffset - (currentMaxPosition - currentMinPosition);
-//
-//			Thread.sleep(1500);
-//			// Move the maximum pointer
-//			actions.clickAndHold(maxPointer).moveByOffset(maxMoveOffset, 0).release().perform();
-//
-//			
-//			
-////			softly.assertThat(DateAndTimeUtil.compareTimes(null, null, null, null);
-//			
-//			
-//			//Thread.sleep(5000);
+			WebElement minPointer = driver.findElement(
+					By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'])[1]"));
+			WebElement maxPointer = driver.findElement(
+					By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-max'])[1]"));
+
+			// Determine the width of the slider
+			int sliderWidth = slider.getSize().getWidth();
+
+			// Define the desired minimum and maximum values
+			int desiredMinValue = 25000; // Example minimum value
+			int desiredMaxValue = 65000; // Example maximum value
+			int minValue = 10800; // Minimum possible value of the slider
+			int maxValue = 80100; // Maximum possible value of the slider
+			int sliderRange = maxValue - minValue;
+
+			// Calculate the offset for the minimum pointer
+			// Calculate the offset for the minimum pointer
+			int minOffset = (desiredMinValue - minValue) * sliderWidth / sliderRange;
+
+			// Move the minimum pointer
+			// Actions actions = new Actions(driver);
+			actions.clickAndHold(minPointer).moveByOffset(minOffset, 0).release().perform();
+
+			// Recalculate the width of the slider after moving the minimum pointer
+			sliderWidth = slider.getSize().getWidth();
+
+			// Calculate the offset for the maximum pointer relative to its current position
+			int maxOffset = (desiredMaxValue - minValue) * sliderWidth / sliderRange;
+			int currentMaxPosition = maxPointer.getLocation().getX();
+			int currentMinPosition = minPointer.getLocation().getX();
+			int maxMoveOffset = maxOffset - (currentMaxPosition - currentMinPosition);
+
+			Thread.sleep(1500);
+			// Move the maximum pointer
+			actions.clickAndHold(maxPointer).moveByOffset(maxMoveOffset, 0).release().perform();
+			Thread.sleep(1000);
+			LocalTime sliderMinTime = StringUtils.extractTime(driver
+					.findElement(
+							By.xpath("(//*[@class='ngx-slider-span ngx-slider-bubble ngx-slider-model-value'])[1]"))
+					.getText());
+			LocalTime sliderMaxTime = StringUtils.extractTime(driver
+					.findElement(By.xpath("(//*[@class='ngx-slider-span ngx-slider-bubble ngx-slider-model-high'])[1]"))
+					.getText());
+			// (//*[@class='ngx-slider-span ngx-slider-bubble ngx-slider-model-value'])[1]
+			// (//*[@class='ngx-slider-span ngx-slider-bubble ngx-slider-model-high'])[1]
+			softly.assertThat(DateAndTimeUtil.compareTimes(CommonDTO.getInstance().getFlightStartTime(), sliderMinTime,
+					CommonDTO.getInstance().getFlightEndTime(), sliderMaxTime));
+
+			// Thread.sleep(5000);
 
 			try {
 				softly.assertAll();

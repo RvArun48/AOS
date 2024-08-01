@@ -69,7 +69,7 @@ Feature: Flight Booking
     Given I want to open the application
      #Then I change the currency type
      #Then I change the language
-     #Then I click the flexible data
+     Then I click the flexible data
      #Then I click the umrah fare
     Then I select the trip type
     Then I enter the source
