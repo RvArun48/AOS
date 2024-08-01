@@ -26,7 +26,7 @@ import com.aos.model.PassengerDetailsDTO;
 import com.aos.pageObjects.HomePage;
 import com.aos.pageObjects.PassengerDetailsPage;
 import com.aos.pageObjects.SearchResultsPage;
-import com.aos.utils.DateUtil;
+import com.aos.utils.DateAndTimeUtil;
 import com.aos.utils.JsonToGson;
 import com.aos.utils.LogEvent;
 import com.aos.utils.ReadProperty;
@@ -62,6 +62,19 @@ public class SearchFormSpecification extends TestRunner {
 
 	@Given("^I setup the test data with \"(.*?)\"$")
 	public void testDataSetup(String keyData) {
+		Type bt = new TypeToken<BookTicketDTO>() {
+			private static final long serialVersionUID = 1L;
+		}.getType();
+		BookTicketDTO bookTicketDTO = (BookTicketDTO) JsonToGson.convertToObj("book_ticket", keyData, bt);
+		Type pd = new TypeToken<PassengerDetailsDTO>() {
+			private static final long serialVersionUID = -7767108171943612798L;
+
+		}.getType();
+
+		CommonDTO.getInstance().setBookTicketDTO(bookTicketDTO);
+	}
+	@Given("^I setup the edit data with \"(.*?)\"$")
+	public void testDataSetup1(String keyData) {
 		Type bt = new TypeToken<BookTicketDTO>() {
 			private static final long serialVersionUID = 1L;
 		}.getType();
@@ -183,9 +196,142 @@ public class SearchFormSpecification extends TestRunner {
 	}
 
 	}
+	@Then("I change the currency type")
+	public void I_change_the_currency_type() {
+		try {
+			new SearchFormImplementation().I_change_the_currency_type();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
+	}
+	@Then("I change the language")
+	public void I_change_the_language() {
+		try {
+			new SearchFormImplementation().I_change_the_language();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I enter the segment two")
+	public void I_enter_the_segment_two() {
+		try {
+			new SearchFormImplementation().I_enter_the_segment_two();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I enter the segment three")
+	public void I_enter_the_segment_three() {
+		try {
+			new SearchFormImplementation().I_enter_the_segment_three();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I enter the segment four")
+	public void I_enter_the_segment_four() {
+		try {
+			new SearchFormImplementation().I_enter_the_segment_four();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I enter the segment five")
+	public void I_enter_the_segment_five() {
+		try {
+			new SearchFormImplementation().I_enter_the_segment_five();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I enter the segment six")
+	public void I_enter_the_segment_six() {
+		try {
+			new SearchFormImplementation().I_enter_the_segment_six();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I click the add another city")
+	public void I_click_the_add_another_city() {
+		try {
+			new SearchFormImplementation().I_click_the_add_another_city();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	
+	@Then("I click the flexible data")
+	public void I_click_the_flexible_data() {
+		try {
+			new SearchFormImplementation().I_click_the_flexible_data();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+
+	@Then("I click the umrah fare")
+	public void I_click_the_umrah_fare() {
+		try {
+			new SearchFormImplementation().I_click_the_umrah_fare();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I enter the return date")
+	public void I_enter_the_return_date() {
+		try {
+			new SearchFormImplementation().I_enter_the_return_date();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I click on the edit search")
+	public void I_click_on_the_edit_search() {
+		try {
+			new SearchFormImplementation().I_click_on_the_edit_search();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I need to validate advance search")
+	public void I_need_to_validate_advance_search() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_advance_search();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
+
+
+	
 	@After
 	public void afterScenario() {
 		tearDown();
 	}
 }
+
+

@@ -14,4 +14,7 @@ public class SearchResultsPage {
 	@FindBy(xpath = "(//*[@class='empireFlight_airline-nameWrapper'])[1]")
 	public WebElement sourceDestinationResultTitle;
 	
+	@FindBy(xpath = "//*[@class='empireFlight_FlightNames']")
+	public WebElement airlinePreferanceValidation;
+	
 }

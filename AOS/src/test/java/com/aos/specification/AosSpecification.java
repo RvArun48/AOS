@@ -24,7 +24,7 @@ import com.aos.model.PassengerDetailsDTO;
 import com.aos.pageObjects.HomePage;
 import com.aos.pageObjects.PassengerDetailsPage;
 import com.aos.pageObjects.SearchResultsPage;
-import com.aos.utils.DateUtil;
+import com.aos.utils.DateAndTimeUtil;
 import com.aos.utils.JsonToGson;
 import com.aos.utils.LogEvent;
 import com.aos.utils.ReadProperty;
@@ -112,14 +112,19 @@ public class AosSpecification extends TestRunner {
 			logger.info("Waiting for one way tab to be clickable");
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.oneWayTab));
 			homePage.oneWayTab.click();
+			
+			
 
 			logger.info("Enter the origin input: " + bookTicketDTO.getFrom());
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.from));
 			homePage.from.click();
+			
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.fromInput));
 			homePage.fromInput.sendKeys(bookTicketDTO.getFrom());
 			homePage.getElementByXpath(driver, "(//*[@class='fs_menuBadge' and contains(text(),'${token}')])[1]",
 					bookTicketDTO.getFrom());
+			
+			
 
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.to));
 			homePage.to.click();
@@ -142,15 +147,15 @@ public class AosSpecification extends TestRunner {
 
 			wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(
 					By.xpath("(//span[@draggable='false' and  not(contains(@class,'disabled'))]/span[text()='"
-							+ DateUtil.addDaysToCurrentDate(Integer.parseInt(bookTicketDTO.getDate()), "d")
+							+ DateAndTimeUtil.addDaysToCurrentDate(Integer.parseInt(bookTicketDTO.getDate()), "d")
 							+ "'])[1]"))));
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Choosing travel date", driver, scenarioName);
 			logger.info("Selecting the Departure date: "
-					+ DateUtil.addDaysToCurrentDate(Integer.parseInt(bookTicketDTO.getDate()), "dd MMM yyyy"));
-			// (//span[@draggable='false' and not(contains(@class, 'disabled'))]/span[text()='31'])[1]
+					+ DateAndTimeUtil.addDaysToCurrentDate(Integer.parseInt(bookTicketDTO.getDate()), "dd MMM yyyy"));
+			
 			homePage.getElementByXpath(driver,
 					"(//span[@draggable='false' and not(contains(@class, 'disabled'))]/span[text()='${token}'])[1]",
-					DateUtil.addDaysToCurrentDate(Integer.parseInt(bookTicketDTO.getDate()), "d"));
+					DateAndTimeUtil.addDaysToCurrentDate(Integer.parseInt(bookTicketDTO.getDate()), "d"));
 
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.passengerCountDropDown));
 
