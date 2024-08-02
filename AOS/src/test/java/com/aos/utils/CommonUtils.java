@@ -204,4 +204,30 @@ public class CommonUtils extends TestRunner {
 			}
 		}
 	}
+
+	public static boolean isAscendingOrder(List<Double> priceList) {
+		if (priceList == null || priceList.size() <= 1) {
+			return true; // An empty list or a single-element list is trivially sorted
+		}
+
+		for (int i = 0; i < priceList.size() - 1; i++) {
+			if (priceList.get(i) > priceList.get(i + 1)) {
+				return false; // Found an element that is greater than the next element
+			}
+		}
+		return true; // No elements are out of order
+	}
+
+	public static boolean isDescendingOrder(List<Double> priceList) {
+		if (priceList == null || priceList.size() <= 1) {
+			return true; // An empty list or a single-element list is trivially sorted
+		}
+
+		for (int i = 0; i < priceList.size() - 1; i++) {
+			if (priceList.get(i) < priceList.get(i + 1)) {
+				return false; // Found an element that is less than the next element
+			}
+		}
+		return true; // No elements are out of order
+	}
 }
