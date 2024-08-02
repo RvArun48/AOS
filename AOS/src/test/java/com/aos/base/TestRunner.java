@@ -84,8 +84,8 @@ public class TestRunner {
 		String zipFileName = "test-report.zip";
 		try {
 			ZipUtil.zipFiles(zipFileName, "./Screenshots", "./extent-reports.html");
-			CommonUtils.killChromeDiverInstances();
-			CommonUtils.clearFolder();
+//			CommonUtils.killChromeDiverInstances();
+//			CommonUtils.clearFolder();
 //            EmailUtil.sendEmailWithAttachment(
 //                "smtp.example.com", "587", "your-email@example.com", "your-email-password",
 //                "recipient-email@example.com", "Test Report", "Please find the attached test report.", zipFileName

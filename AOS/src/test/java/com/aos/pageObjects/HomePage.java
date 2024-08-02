@@ -390,6 +390,9 @@ public class HomePage {
 	
 
 	
+	@FindBy(xpath = "//input[@type='checkbox' and @class='mdc-checkbox__native-control' and @id='mat-mdc-checkbox-31-input']")
+	public WebElement nonStop;
+	
 	@FindBy(xpath = "//input[@id='mat-mdc-checkbox-34-input']")
 	public WebElement twoStop;
 	
@@ -402,24 +405,64 @@ public class HomePage {
 	@FindBy(xpath = "//input[@id='mat-mdc-checkbox-4-input']")
 	public WebElement selectNotRefundable;
 	
+	@FindBy(xpath = "(//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted' and contains(text(),'Direct')])[1]")
+	public WebElement stopValidation;
+	
+
+	@FindBy(xpath = "(//*[@class='empireFlight_refund-text ref' and contains(text(),'Refundable')])[1]")
+	public WebElement refundableValidationOne;
+	
+	@FindBy(xpath = "(//span[@class='empireF_PCsvgIcon'])[1]")
+	public WebElement rightFlixibleCalander;
+	
+	@FindBy(xpath = "(//span[@class='empireF_PCsvgIconLeft'])[1]")
+	public WebElement leftFlixibleCalander;
+	
+	@FindBy(xpath = "(//button[@class='btn-primary btn'])[2]")
+	public WebElement applyMoreFilter;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Cheapest')]")
+	public WebElement cheapestFare;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Fastest')]")
+	public WebElement fastestFare;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Best Value')]")
+	public WebElement bestValueFare;
+	
+
+	@FindBy(xpath = "(//*[@class='empireFlight_amount ng-star-inserted'])[1]")
+	public WebElement currencyPriceValidation;
+	
+	@FindBy(xpath = "(//*[@class='empireFlight_SortByOption'])[1]/h4[2]")
+	public WebElement cheapestFareAmount;
+	
+	
+	
+	@FindBy(xpath = "(//*[@class='empireFlight_SortByOption'])[2]/h4[2]")
+	public WebElement fastestFareAmount;
+	
+	@FindBy(xpath = "(//*[@class='empireFlight_SortByOption'])[3]/h4[2]")
+	public WebElement bestValueFareAmount;
+	
+	
+	
+			
+	
+	
+	
+	
+					
+
+					
+					
+	
 	
 	
 	
 	
 			
 			
-					
-					
-					
-					
-	
-	
-	
-	
-	
-	
-			
-			
 	
 	
 	
@@ -430,7 +473,7 @@ public class HomePage {
 	
 	
 	
-	;
+	
 	
 	
 	

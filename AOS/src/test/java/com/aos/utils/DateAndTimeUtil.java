@@ -1,10 +1,17 @@
 package com.aos.utils;
 
 import java.time.LocalDate;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.aos.specification.AosSpecification;
+
 public class DateAndTimeUtil {
+	public static final Logger logger = LogManager.getLogger(DateAndTimeUtil.class);
 
 	/**
 	 * Adds the specified number of days to the current date and returns the result
@@ -40,14 +47,14 @@ public class DateAndTimeUtil {
 	public static boolean compareTimes(LocalTime otherStartTime, LocalTime extractedStartTime, LocalTime otherEndTime, LocalTime extractedEndTime) {
 		if (extractedStartTime != null && extractedEndTime != null && otherStartTime != null && otherEndTime != null) {
             if (otherStartTime.isAfter(extractedStartTime) && otherEndTime.isBefore(extractedEndTime)) {
-                System.out.println("The other time range is within the extracted time range.");
+                logger.info("The other time range is within the extracted time range.");
                 return true;
             } else {
-                System.out.println("The other time range is not within the extracted time range.");
+            	logger.info("The other time range is not within the extracted time range.");
                 return false;
             }
         } else {
-            System.out.println("Failed to extract times correctly.");
+        	logger.info("Failed to extract times correctly.");
         }
 		return false;
 	}

@@ -577,13 +577,13 @@ public class BookTicketDTO {
 		
 		@SerializedName("select_refundable")
 		@Expose
-		private boolean selectRefundable;
+		private String selectRefundable;
 
-		public boolean getSelectRefundable() {
+		public String getSelectRefundable() {
 			return selectRefundable;
 		}
 
-		public void setSelectRefundable(boolean selectRefundable) {
+		public void setSelectRefundable(String selectRefundable) {
 			this.selectRefundable = selectRefundable;
 
 		}	
@@ -645,10 +645,70 @@ public class BookTicketDTO {
 		
 		
 		
+		@SerializedName("aircraft_types")
+		@Expose
+		private String aircraftTypes;
+
+		public String getAircraftTypes() {
+			return aircraftTypes;
+		}
+
+		public void setAircraftTypes(String aircraftTypes) {
+			this.date = aircraftTypes;
+		}
 		
 		
+		@SerializedName("deprture_stop")
+		@Expose
+		private String deprtureStop;
+
+		public String getDeprtureStop() {
+			return deprtureStop;
+		}
+
+		public void setDeprtureStop(String deprtureStop) {
+			this.date = deprtureStop;
+			
+		}
 		
+		@SerializedName("departure_airport")
+		@Expose
+		private String departureAirport;
+
+		public String getDepartureAirport() {
+			return departureAirport;
+		}
+
+		public void setDepartureAirport(String departureAirport) {
+			this.date = departureAirport;
+			
+		}
 		
+		@SerializedName("arrival_iming")
+		@Expose
+		private String arrivalTiming;
+
+		public String getarrivalTiming() {
+			return arrivalTiming;
+		}
+
+		public void setarrivalTiming(String arrivalTiming) {
+			this.date = arrivalTiming;
+			
+		}
+		
+		@SerializedName("stop")
+		@Expose
+		private String stop;
+
+		public String getStop() {
+			return stop;
+		}
+
+		public void setStop(String stop) {
+			this.date = stop;
+			
+		}
 		
 		
 		

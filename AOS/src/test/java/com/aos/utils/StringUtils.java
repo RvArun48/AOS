@@ -4,9 +4,13 @@ import java.time.LocalTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringUtils {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+public class StringUtils {
+	public static final Logger logger = LogManager.getLogger(StringUtils.class);
 	public static Double ConvertStringToDouble(String input) {
+		
 
 		String numericalString = input.replaceAll("[^\\d.,]", ""); // Remove all non-digit characters except '.', ','
 		double value = 0;
@@ -14,9 +18,9 @@ public class StringUtils {
 
 		try {
 			value = Double.parseDouble(numericalString);
-			System.out.println("Parsed double value: " + value);
+			logger.info("Parsed double value: " + value);
 		} catch (NumberFormatException e) {
-			System.err.println("Unable to parse the number");
+			logger.info("Unable to parse the number");
 		}
 		return value;
 	}
@@ -36,9 +40,9 @@ public class StringUtils {
 		if (matcher.find()) {
 			// Extract the matched time
 			time = matcher.group();
-			System.out.println("Extracted Time: " + time);
+			logger.info("Extracted Time: " + time);
 		} else {
-			System.out.println("No time found in the string.");
+			logger.info("No time found in the string.");
 		}
 		return LocalTime.parse(time);
 	}

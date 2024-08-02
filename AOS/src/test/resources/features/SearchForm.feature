@@ -75,9 +75,10 @@ Feature: Flight Booking
     Then I enter the source
     Then I enter the destination
     Then I enter the departure date
+    
     #Then I select the flight category
   #	Then I add passengers
-    Then I add advance search options 
+    #Then I add advance search options 
     #Then I enter the  preferred airlines 
     Then I click on the search button
     # Then I click on the edit search

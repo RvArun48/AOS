@@ -622,6 +622,14 @@ public class SearchFormImplementation extends TestRunner {
 						.isGreaterThan(0);
 				logger.info("Flight Details: "
 						+ card.findElement(By.xpath("//*[@class='empireFlight_details-text']")).getText());
+				
+				
+				softly.assertThat(
+						card.findElement(By.xpath("(//span[contains(text(),'Departure')])[1]")).getText().length())
+						.isGreaterThan(0);
+				logger.info("Departure Calander: "
+						+ card.findElement(By.xpath("(//span[contains(text(),'Departure')])[1]")).getText());
+
 
 				if (CommonDTO.getInstance().getBookTicketDTO().getIsDirectFlight()) {
 					softly.assertThat(card
@@ -658,11 +666,13 @@ public class SearchFormImplementation extends TestRunner {
 				}
 
 			}
+			
+			
+			
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 			wait.until(ExpectedConditions
 					.elementToBeClickable(driver.findElement(By.xpath("//*[@class='FFC-box ng-star-inserted']"))));
 
-			CommonUtils.zoomOutBrowser(driver, 0.8);
 
 			softly.assertThat(driver.findElement(By.xpath("//*[@class='FFC-search-fare-price']")).getText().length())
 					.isGreaterThan(0);
@@ -672,16 +682,22 @@ public class SearchFormImplementation extends TestRunner {
 					.executeScript("return document.querySelector('.empireF_PricingCalenRetuWrapper')");
 
 			// Use JavaScript Executor to find the child element within the container
-			WebElement targetElement = (WebElement) ((JavascriptExecutor) driver).executeScript(
+			WebElement flexiCalendar = (WebElement) ((JavascriptExecutor) driver).executeScript(
 					"return arguments[0].querySelector('.FFC-search-fare-amount.FFC-search-fare-active-amount')",
 					containerElement);
 
 			// Perform the mouse hover action using Actions class
 			Actions actions = new Actions(driver);
-			actions.moveToElement(targetElement).perform();
+			actions.moveToElement(flexiCalendar).perform();
 			Thread.sleep(1000);
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Hovering over the calendar", driver,
 					getScenarioName());
+			
+			       flexiCalendar.click();
+			
+			
+			
+			
 
 			Thread.sleep(5000);
 
@@ -760,19 +776,144 @@ public class SearchFormImplementation extends TestRunner {
 			// Move the maximum pointer
 			actions.clickAndHold(maxPointer).moveByOffset(maxMoveOffset, 0).release().perform();
 			Thread.sleep(1000);
-			LocalTime sliderMinTime = StringUtils.extractTime(driver
+			LocalTime sliderMinTime = LocalTime.parse(driver
 					.findElement(
 							By.xpath("(//*[@class='ngx-slider-span ngx-slider-bubble ngx-slider-model-value'])[1]"))
 					.getText());
-			LocalTime sliderMaxTime = StringUtils.extractTime(driver
+			LocalTime sliderMaxTime = LocalTime.parse(driver
 					.findElement(By.xpath("(//*[@class='ngx-slider-span ngx-slider-bubble ngx-slider-model-high'])[1]"))
 					.getText());
+
+			logger.info("sliderMinTime->" + sliderMinTime);
+			logger.info("sliderMaxTime->" + sliderMaxTime);
+
 			// (//*[@class='ngx-slider-span ngx-slider-bubble ngx-slider-model-value'])[1]
 			// (//*[@class='ngx-slider-span ngx-slider-bubble ngx-slider-model-high'])[1]
 			softly.assertThat(DateAndTimeUtil.compareTimes(CommonDTO.getInstance().getFlightStartTime(), sliderMinTime,
 					CommonDTO.getInstance().getFlightEndTime(), sliderMaxTime));
 
-			// Thread.sleep(5000);
+			try {
+
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.stopFunctionality));
+				homePage.stopFunctionality.click();
+				
+				
+				homePage.getElementByXpath(driver, "(//*[@class='mdc-label' and contains(text(),'${token}')])[1]",
+						bookTicketDTO.getStop());
+				
+//				softly.assertThat(homePage.stopValidation.getText()).isEqualTo(	bookTicketDTO.getStop());
+
+
+			} catch (Exception e) {
+				logger.info("Stop validation() -> " + e.getMessage());
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
+			}
+
+			try {
+
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.refundableFunctionality));
+				homePage.refundableFunctionality.click();
+				
+				homePage.getElementByXpath(driver, "(//*[@class='mdc-label' and contains(text(),'${token}')])[1]",
+						bookTicketDTO.getSelectRefundable());
+				
+//				softly.assertThat(homePage.stopValidation.getText()).isEqualTo(	bookTicketDTO.getStop());
+				
+
+			} catch (Exception e) {
+				logger.info("i_add_advance_search_options() -> " + e.getMessage());
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
+			}
+			
+//			try {
+//			
+//			logger.info("Selecting the filter for Airlines: " + bookTicketDTO.getFilterAirlines());
+//			wait.until(ExpectedConditions.elementToBeClickable(homePage.filterAirlines));
+//			homePage.filterAirlines.click();
+//
+//			wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(
+//					"(//*[@class='mdc-label' and contains(text(),'" + bookTicketDTO.getFilterAirlines() + "')])[1]"))));
+//			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO,
+//					"Select the airline filter" + bookTicketDTO.getFilterAirlines() + "", driver, getScenarioName());
+//
+//			executor.executeScript("arguments[0].click();", driver.findElement(By.xpath(
+//					"(//*[@class='mdc-label' and contains(text(),'" + bookTicketDTO.getFilterAirlines() + "')])[1]")));
+//
+//			} catch (Exception e) {
+//				logger.info("Selecting the filter for Airlines() -> " + e.getMessage());
+//				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
+//			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+//			
+			
+			try {
+				
+				
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.moreFilters));
+				homePage.moreFilters.click();
+				
+				homePage.getElementByXpath(driver, "(//*[@class='mdc-label' and contains(text(),'${token}')])[1]",
+						bookTicketDTO.getAircraftTypes());
+				
+				homePage.getElementByXpath(driver, "(//*[@class='mdc-label' and contains(text(),'${token}')])[1]",
+						bookTicketDTO.getDeprtureStop());
+				
+				homePage.getElementByXpath(driver, "(//*[@class='mdc-label' and contains(text(),'${token}')])[1]",
+						bookTicketDTO.getDepartureAirport());
+			
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.applyMoreFilter));
+				homePage.applyMoreFilter.click();
+				
+				Thread.sleep(2000);
+				} catch (Exception e) {
+					logger.info("Selecting the filter for Airlines() -> " + e.getMessage());
+					LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
+				}
+			
+			try {
+
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.cheapestFare));
+				homePage.cheapestFare.click();
+				softly.assertThat(homePage.cheapestFareAmount.getText().trim()).isEqualTo(	homePage.currencyPriceValidation.getText().trim());
+				Thread.sleep(1500);
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.fastestFare));
+				homePage.fastestFare.click();
+				softly.assertThat(homePage.fastestFareAmount.getText().trim()).isEqualTo(homePage.currencyPriceValidation.getText().trim());
+				Thread.sleep(1500);
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.bestValueFare));
+				homePage.bestValueFare.click();
+				softly.assertThat(homePage.bestValueFareAmount.getText().trim()).isEqualTo(	homePage.currencyPriceValidation.getText().trim());
+				Thread.sleep(1500);
+				
+				
+				
+
+			} catch (Exception e) {
+				logger.info("I checking the fare option() -> " + e.getMessage());
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
+			}
+			
+			
+//			
+//			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(120));
+//			wait.until(ExpectedConditions.elementToBeClickable(homePage.rightFlixibleCalander));
+//			homePage.rightFlixibleCalander.click();
+//			WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(120));
+//			wait.until(ExpectedConditions.elementToBeClickable(homePage.leftFlixibleCalander));
+//			homePage.leftFlixibleCalander.click();
+//			Thread.sleep(20000);
+			
 
 			try {
 				softly.assertAll();
