@@ -101,4 +101,24 @@ Feature: Flight Booking
     #Then I click on the search button
     #Then I need to validate advance search
     
+     @roundtrip_flight_listing
+   Scenario: Book a flight with specified details
+  	Given I setup the test data with "roundtrip_flight_listing"
+    Given I want to open the application
+     #Then I change the currency type
+     #Then I change the language
+     #Then I click the flexible data
+     #Then I click the umrah fare
+    #Then I select the trip type
+    Then I enter the source
+    Then I enter the destination
+    Then I enter the departure date
+    Then I enter the return date
+    #Then I select the flight category
+  #	Then I add passengers
+    Then I add advance search options 
+    #Then I enter the  preferred airlines 
+    Then I click on the search button
+    # Then I click on the edit search
+     Then I need to validate flight listing
     

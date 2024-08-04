@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.SecureRandom;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,6 +16,7 @@ import java.util.Random;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aos.base.TestRunner;
 
@@ -230,4 +232,43 @@ public class CommonUtils extends TestRunner {
 		}
 		return true; // No elements are out of order
 	}
+	
+	 public static void waitForAngularToLoad(WebDriver driver) {
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(180));
+	        JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+
+	        String angularReadyScript = "var callback = arguments[arguments.length - 1];"
+	                + "if (window.getAllAngularTestabilities) {"
+	                + "  var testabilities = window.getAllAngularTestabilities();"
+	                + "  var count = testabilities.length;"
+	                + "  var decrement = function() {"
+	                + "    count--;"
+	                + "    if (count === 0) {"
+	                + "      callback(true);"
+	                + "    }"
+	                + "  };"
+	                + "  testabilities.forEach(function(testability) {"
+	                + "    testability.whenStable(decrement);"
+	                + "  });"
+	                + "} else {"
+	                + "  callback(false);"
+	                + "}";
+
+	        wait.until(driver1 -> jsExec.executeAsyncScript(angularReadyScript));
+	    }
+	 
+	 public static void scrollDownAdnUp(WebDriver driver) throws InterruptedException {
+		 JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+
+         // Scroll down to the bottom slowly
+         String scrollDownScript = "window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });";
+         jsExec.executeScript(scrollDownScript);
+         
+         // Wait for the scroll to complete
+         Thread.sleep(3000); // Adjust the sleep time if needed
+
+         // Scroll up to the top slowly
+         String scrollUpScript = "window.scrollTo({ top: 0, behavior: 'smooth' });";
+         jsExec.executeScript(scrollUpScript);
+	 }
 }

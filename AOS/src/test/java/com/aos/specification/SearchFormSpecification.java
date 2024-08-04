@@ -324,8 +324,16 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+	
+	@Then("I need to validate flight listing")
+	public void I_need_to_validate_flight_listing() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_flight_listing();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
-
+	}
 
 	
 	@After

@@ -177,16 +177,36 @@
 		
 		
 		},
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
+		"roundtrip_flight_listing": {
+	    
+		"base_url": "",
+		"currency": "BHD",
+		"language": "Georgian",
+		"trip_select": "Round Trip",
+		"from": "CAI",
+		"to": "DOH",
+		"date": "3",
+		"return_date": "5",
+		"passenger_class": "Economy",
+		"adult_count": "2",
+		"child_count": "2",
+		"infant_count": "2",
+		"flexible_date": true,
+		"umrah_fare": true,
+		"baggage_only": true,
+		"is_refundable": true,
+		"is_direct_flight": true,
+		"preferred_airlines": "Flydubai",
+		"relevant_keyword_preferred_airlines": "Flydubai",
+		"filter_airlines_select": "Flydubai",
+		"select_refundable": "Refundable",
+		"stop": "Non Stop",
+		"aircraft_types": "Airbus 333",
+		"deprture_stop": "",
+		"departure_airport": "",
+		"arrival_timing": ""		
+		},
 	
 	"dubai_to_doha": {
 		"base_url": "https://demo.amadeusonlinesuite.com/flights",

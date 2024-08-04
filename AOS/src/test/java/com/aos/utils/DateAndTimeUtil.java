@@ -33,29 +33,31 @@ public class DateAndTimeUtil {
 		// Convert the new date to a string using the defined format
 		return newDate.format(formatter);
 	}
-	
-	
-	
+
 	/**
 	 * 
-	 * @param otherStartTime - Start Time extracted from card
+	 * @param otherStartTime     - Start Time extracted from card
 	 * @param extractedStartTime - Start Time extracted from slider
-	 * @param otherEndTime - End Time extracted from card
-	 * @param extractedEndTime - End Time extracted from slider
+	 * @param otherEndTime       - End Time extracted from card
+	 * @param extractedEndTime   - End Time extracted from slider
 	 * @return
 	 */
-	public static boolean compareTimes(LocalTime otherStartTime, LocalTime extractedStartTime, LocalTime otherEndTime, LocalTime extractedEndTime) {
+	public static boolean compareTimes(LocalTime otherStartTime, LocalTime extractedStartTime, LocalTime otherEndTime,
+			LocalTime extractedEndTime) {
+
+		logger.info("otherStartTime:" + otherStartTime + " extractedStartTime:" + extractedStartTime + " otherEndTime:"
+				+ otherEndTime + " extractedEndTime:" + extractedEndTime);
 		if (extractedStartTime != null && extractedEndTime != null && otherStartTime != null && otherEndTime != null) {
-            if (otherStartTime.isAfter(extractedStartTime) && otherEndTime.isBefore(extractedEndTime)) {
-                logger.info("The other time range is within the extracted time range.");
-                return true;
-            } else {
-            	logger.info("The other time range is not within the extracted time range.");
-                return false;
-            }
-        } else {
-        	logger.info("Failed to extract times correctly.");
-        }
+			if (otherStartTime.isAfter(extractedStartTime) && otherEndTime.isBefore(extractedEndTime)) {
+				logger.info("The other time range is within the extracted time range.");
+				return true;
+			} else {
+				logger.info("The other time range is not within the extracted time range.");
+				return false;
+			}
+		} else {
+			logger.info("Failed to extract times correctly.");
+		}
 		return false;
 	}
 
