@@ -257,7 +257,7 @@ public class CommonUtils extends TestRunner {
 	        wait.until(driver1 -> jsExec.executeAsyncScript(angularReadyScript));
 	    }
 	 
-	 public static void scrollDownAdnUp(WebDriver driver) throws InterruptedException {
+	 public static void scrollDownAndUp(WebDriver driver) throws InterruptedException {
 		 JavascriptExecutor jsExec = (JavascriptExecutor) driver;
 
          // Scroll down to the bottom slowly
