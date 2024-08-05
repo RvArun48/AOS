@@ -953,7 +953,7 @@ public class SearchFormImplementation extends TestRunner {
 
 			CommonUtils.scrollDownAndUp(driver);
 			List<WebElement> mainFlightListContainer = driver
-					.findElements(By.xpath("//*[@class='empireFlight-roundTripWrapper']"));
+					.findElements(By.xpath("//*[@class='empireFlight_main-box-listing ng-star-inserted']"));
 			logger.info("mainFlightListContainer ->" + mainFlightListContainer.size());
 			for (WebElement card : mainFlightListContainer) {
 
@@ -962,28 +962,35 @@ public class SearchFormImplementation extends TestRunner {
 				WebElement roundTripHeaderContainer = card
 						.findElement(By.xpath("//*[@class='empireFlight-roundTripsubhead ng-star-inserted']"));
 
-				// This loop validates Round trip details
-				for (int i = 0; i <= 1; i++) {
-					WebElement tripContainer = roundTripDetailsContainer
-							.findElement(By.xpath("(//*[@class='empireFlight_cardbox'])[" + (i + 1) + "]"));
-
-					tripContainer.findElement(By.xpath("//*[@class='empireFlight_FlightNames']"));
-
-					softly.assertThat(tripContainer
-							.findElement(By.xpath("(//*[@class='empireFlight_FlightNames'])[" + (i + 1) + "]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Flight Name Trip " + (i + 1) + " -> "
-							+ tripContainer
-									.findElement(By.xpath("(//*[@class='empireFlight_FlightNames'])[" + (i + 1) + "]"))
-									.getText());
-					/////////////////////////////////////////////////////////////////////////////////////////////////
-					
-					
-					/////////////////////////////////////////////////////////////////////////////////////////////////
-
-				}
-
 				// This loop validates Round trip header
+
+				card.findElement(By.xpath("//*[@class='empireFlight_amount ng-star-inserted']"));
+
+				softly.assertThat(card.findElement(By.xpath("(//*[@class='empireFlight_amount ng-star-inserted'])"))
+						.getText().length()).isGreaterThan(0);
+				logger.info("Currency and Amount "
+						+ card.findElement(By.xpath("//*[@class='empireFlight_amount ng-star-inserted']")).getText());
+
+				card.findElement(By.xpath("//*[@class='empireF_installmentwrap ng-star-inserted']"));
+
+				softly.assertThat(card.findElement(By.xpath("(//*[@class='empireF_installmentwrap ng-star-inserted'])"))
+						.getText().length()).isGreaterThan(0);
+				logger.info("Installments " + " -> " + card
+						.findElement(By.xpath("//*[@class='empireF_installmentwrap ng-star-inserted']")).getText());
+
+				softly.assertThat(
+						card.findElement(By.xpath("//*[@class='empireFlight_refund-text ref ng-star-inserted']"))
+								.getText().length())
+						.isGreaterThan(0);
+				logger.info("Refundable " + " -> "
+						+ card.findElement(By.xpath("//*[@class='empireFlight_refund-text ref ng-star-inserted']"))
+								.getText());
+
+				softly.assertThat(card.findElement(By.xpath("//*[@class='empireFlight_details-text ng-star-inserted']"))
+						.getText().length()).isGreaterThan(0);
+				logger.info("Flight Details: " + card
+						.findElement(By.xpath("//*[@class='empireFlight_details-text ng-star-inserted']")).getText());
+
 				for (int i = 0; i <= 1; i++) {
 					softly.assertThat(roundTripHeaderContainer
 							.findElement(By.xpath("(//*[@class='empireFlight_airline-name'])[" + (i + 1) + "]"))
@@ -1010,21 +1017,145 @@ public class SearchFormImplementation extends TestRunner {
 								.findElement(By.xpath("//*[@class='empireFlight_depart']")).getText());
 					}
 					///////////////////////////////////////////////////////////////////////////////////////////////
-					
-					
-					
+
 					///////////////////////////////////////////////////////////////////////////////////////////////
 
 				}
 
-				softly.assertThat(
-						new CommonUtils().checkImageLoad(driver.findElement(By.cssSelector("img[alt='Airline Logo']"))))
-						.as("Checking the image is loaded - Airline Logo").isTrue();
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_FlightNames']")).getText().length())
-						.isGreaterThan(0);
-				logger.info(
-						"Fight Name " + card.findElement(By.xpath("//*[@class='empireFlight_FlightNames']")).getText());
+				// This loop validates Round trip details
+
+				for (int i = 0; i <= 1; i++) {
+					WebElement tripContainer = roundTripDetailsContainer
+							.findElement(By.xpath("(//*[@class='empireFlight_cardbox'])[" + (i + 1) + "]"));
+
+					tripContainer.findElement(By.xpath("//*[@class='empireFlight_FlightNames']"));
+
+					softly.assertThat(tripContainer
+							.findElement(By.xpath("(//*[@class='empireFlight_FlightNames'])[" + (i + 1) + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Flight Name Trip " + (i + 1) + " -> "
+							+ tripContainer
+									.findElement(By.xpath("(//*[@class='empireFlight_FlightNames'])[" + (i + 1) + "]"))
+									.getText());
+					/////////////////////////////////////////////////////////////////////////////////////////////////
+					softly.assertThat(CommonUtils.checkImageLoad(
+							driver.findElement(By.xpath("(//img[@alt='Airline Logo'])[" + (i + 1) + "]"))))
+							.as("Checking the image is loaded - Airline Logo").isTrue();
+
+					tripContainer.findElement(By.xpath("//*[@class='empireFlight_FlightTime']"));
+					softly.assertThat(tripContainer
+							.findElement(By.xpath("(//*[@class='empireFlight_FlightTime'])[" + (i + 1) + "]")).getText()
+							.length()).isGreaterThan(0);
+					logger.info("Flight Start Time " + (i + 1) + " -> "
+							+ tripContainer.findElement(By.xpath("//*[@class='empireFlight_FlightTime']")).getText());
+
+					CommonDTO.getInstance().setFlightStartTime(StringUtils.extractTime(
+							card.findElement(By.xpath("//*[@class='empireFlight_FlightTime']")).getText()));
+
+					tripContainer.findElement(By.xpath("//*[@class ='empireFlight_CityName']"));
+
+					softly.assertThat(tripContainer
+							.findElement(By.xpath("(//*[@class ='empireFlight_CityName'])[" + (i + 1) + "]")).getText()
+							.length()).isGreaterThan(0);
+					logger.info("From and To " + (i + 1) + " -> "
+							+ tripContainer.findElement(By.xpath("//*[@class ='empireFlight_CityName']")).getText());
+
+					tripContainer.findElement(By.xpath("//*[@class='empireFlight_airline-date']"));
+
+					softly.assertThat(tripContainer
+							.findElement(By.xpath("(//*[@class='empireFlight_airline-date'])[" + (i + 1) + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Date " + (i + 1) + " -> "
+							+ tripContainer.findElement(By.xpath("//*[@class='empireFlight_airline-date']")).getText());
+
+					tripContainer.findElement(
+							By.xpath("//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted']"));
+
+					softly.assertThat(tripContainer.findElement(
+							By.xpath("(//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted'])["
+									+ (i + 1) + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Stop " + (i + 1) + " -> "
+							+ tripContainer
+									.findElement(By.xpath(
+											"//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted']"))
+									.getText());
+
+					tripContainer.findElement(By.xpath("//*[@class='empireFlight_FlightCode']"));
+
+					softly.assertThat(tripContainer
+							.findElement(By.xpath("(//*[@class='empireFlight_FlightCode'])[" + (i + 1) + "]")).getText()
+							.length()).isGreaterThan(0);
+					logger.info("Source " + (i + 1) + " -> "
+							+ tripContainer.findElement(By.xpath("//*[@class='empireFlight_FlightCode']")).getText());
+
+					tripContainer.findElement(By.xpath("//*[@class='empireFlight_time include']"));
+
+					softly.assertThat(tripContainer
+							.findElement(By.xpath("(//*[@class='empireFlight_time include'])[" + (i + 1) + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Time " + (i + 1) + " -> "
+							+ tripContainer.findElement(By.xpath("//*[@class='empireFlight_time include']")).getText());
+
+					tripContainer.findElement(By.xpath("//*[@class='empireFlight_time include ng-star-inserted']"));
+
+					softly.assertThat(tripContainer
+							.findElement(By.xpath(
+									"(//*[@class='empireFlight_time include ng-star-inserted'])[" + (i + 1) + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Baggage Details " + (i + 1) + " -> "
+							+ tripContainer
+									.findElement(By.xpath("//*[@class='empireFlight_time include ng-star-inserted']"))
+									.getText());
+
+					tripContainer.findElement(By.xpath("//*[@class='empireFlight_Rbd include ng-star-inserted']"));
+
+					softly.assertThat(tripContainer
+							.findElement(By.xpath(
+									"(//*[@class='empireFlight_Rbd include ng-star-inserted'])[" + (i + 1) + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Passenger Class " + (i + 1) + " -> "
+							+ tripContainer
+									.findElement(By.xpath("//*[@class='empireFlight_Rbd include ng-star-inserted']"))
+									.getText());
+
+					tripContainer.findElement(
+							By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"));
+
+					softly.assertThat(tripContainer.findElement(By.xpath(
+							"(//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList'])[" + (i + 1) + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("End Time " + (i + 1) + " -> " + tripContainer
+							.findElement(
+									By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
+							.getText());
+					CommonDTO.getInstance().setFlightStartTime(StringUtils.extractTime(card
+							.findElement(
+									By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
+							.getText()));
+
+					tripContainer
+							.findElement(By.xpath("//*[@class='empireFlight_FlightCode empireFlight_DepartCode']"));
+					softly.assertThat(tripContainer
+							.findElement(By.xpath(
+									"(//*[@class='empireFlight_FlightCode empireFlight_DepartCode'])[" + (i + 1) + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Destinaton " + (i + 1) + " -> "
+							+ tripContainer
+									.findElement(
+											By.xpath("//*[@class='empireFlight_FlightCode empireFlight_DepartCode']"))
+									.getText());
+
+					tripContainer.findElement(By.xpath("//*[@class='FareTypeBox ng-star-inserted']"));
+					softly.assertThat(tripContainer
+							.findElement(By.xpath("(//*[@class='FareTypeBox ng-star-inserted'])[" + (i + 1) + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Fare Option " + (i + 1) + " -> " + tripContainer
+							.findElement(By.xpath("//*[@class='FareTypeBox ng-star-inserted']")).getText());
+
+					/////////////////////////////////////////////////////////////////////////////////////////////////
+
+				}
 
 //				softly.assertThat(
 //						card.findElement(By.xpath("//*[@class='LCC_Wrapper ng-star-inserted']")).getText().length())
@@ -1032,107 +1163,12 @@ public class SearchFormImplementation extends TestRunner {
 //				logger.info(
 //						"LCC " + card.findElement(By.xpath("//*[@class='LCC_Wrapper ng-star-inserted']")).getText());
 
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_FlightTime']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Flight Start Time "
-						+ card.findElement(By.xpath("//*[@class='empireFlight_FlightTime']")).getText());
-
-				CommonDTO.getInstance().setFlightStartTime(StringUtils
-						.extractTime(card.findElement(By.xpath("//*[@class='empireFlight_FlightTime']")).getText()));
-
-				softly.assertThat(card.findElement(By.xpath("//*[@class ='empireFlight_CityName']")).getText().length())
-						.isGreaterThan(0);
-				logger.info(
-						"From and To " + card.findElement(By.xpath("//*[@class ='empireFlight_CityName']")).getText());
-
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_airline-date']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Date " + card.findElement(By.xpath("//*[@class='empireFlight_airline-date']")).getText());
-
-				softly.assertThat(card
-						.findElement(
-								By.xpath("//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted']"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Stop " + card
-						.findElement(
-								By.xpath("//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted']"))
-						.getText());
-
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_FlightCode']")).getText().length())
-						.isGreaterThan(0);
-
-				logger.info("Source: " + card.findElement(By.xpath("//*[@class='empireFlight_FlightCode']")).getText());
-
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_time include']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Time: " + card.findElement(By.xpath("//*[@class='empireFlight_time include']")).getText());
-
-				softly.assertThat(card.findElement(By.xpath("//*[@class='empireFlight_time include ng-star-inserted']"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Baggage Details: " + card
-						.findElement(By.xpath("//*[@class='empireFlight_time include ng-star-inserted']")).getText());
-
-				softly.assertThat(card.findElement(By.xpath("//*[@class='empireFlight_Rbd include ng-star-inserted']"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Passenger Class: " + card
-						.findElement(By.xpath("//*[@class='empireFlight_Rbd include ng-star-inserted']")).getText());
-
 //				softly.assertThat(card.findElement(By.xpath("//*[@class='empireFlight_seatsleft ng-star-inserted']"))
 //						.getText().length()).isGreaterThan(0);
 //				logger.info("Available seat: " + card
 //						.findElement(By.xpath("//*[@class='empireFlight_seatsleft ng-star-inserted']")).getText());
 
-				softly.assertThat(card.findElement(By.xpath("//*[@class='empireFlight_amount ng-star-inserted']"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Currency and Amount: "
-						+ card.findElement(By.xpath("//*[@class='empireFlight_amount ng-star-inserted']")).getText());
-
-				softly.assertThat(card.findElement(By.xpath("//*[@class='empireF_installmentwrap ng-star-inserted']"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Installments: " + card
-						.findElement(By.xpath("//*[@class='empireF_installmentwrap ng-star-inserted']")).getText());
-
-				softly.assertThat(card
-						.findElement(By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("End Time: " + card
-						.findElement(By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
-						.getText());
-				CommonDTO.getInstance().setFlightStartTime(StringUtils.extractTime(card
-						.findElement(By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
-						.getText()));
-
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_FlightCode empireFlight_DepartCode']"))
-								.getText().length())
-						.isGreaterThan(0);
-				logger.info("Destinaton: "
-						+ card.findElement(By.xpath("//*[@class='empireFlight_FlightCode empireFlight_DepartCode']"))
-								.getText());
-
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='FareTypeBox ng-star-inserted']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Fare Option: "
-						+ card.findElement(By.xpath("//*[@class='FareTypeBox ng-star-inserted']")).getText());
-
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_refund-text ref ng-star-inserted']"))
-								.getText().length())
-						.isGreaterThan(0);
-				logger.info("Refundable: "
-						+ card.findElement(By.xpath("//*[@class='empireFlight_refund-text ref ng-star-inserted']"))
-								.getText());
 //
-//				softly.assertThat(
-//						card.findElement(By.xpath("//*[@class='empireFlight_details-text']")).getText().length())
-//						.isGreaterThan(0);
-//				logger.info("Flight Details: "
-//						+ card.findElement(By.xpath("//*[@class='empireFlight_details-text']")).getText());
 //				
 
 //				softly.assertThat(

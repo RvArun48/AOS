@@ -45,7 +45,7 @@ public class CommonUtils extends TestRunner {
 		return randomEmail;
 	}
 
-	public boolean checkImageLoad(WebElement image) {
+	public static boolean checkImageLoad(WebElement image) {
 
 		// Check if the image is loaded
 		Boolean imageLoaded = (Boolean) ((JavascriptExecutor) driver).executeScript(
