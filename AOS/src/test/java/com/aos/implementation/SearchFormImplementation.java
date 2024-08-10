@@ -646,7 +646,7 @@ public class SearchFormImplementation extends TestRunner {
 			logger.info("mainFlightListContainer ->" + mainFlightListContainer.size());
 			for (WebElement card : mainFlightListContainer) {
 				softly.assertThat(
-						new CommonUtils().checkImageLoad(driver.findElement(By.cssSelector("img[alt='Airline Logo']"))))
+						CommonUtils.checkImageLoad(driver.findElement(By.cssSelector("img[alt='Airline Logo']"))))
 						.as("Checking the image is loaded - Airline Logo").isTrue();
 				softly.assertThat(
 						card.findElement(By.xpath("//*[@class='empireFlight_FlightNames']")).getText().length())
@@ -840,25 +840,33 @@ public class SearchFormImplementation extends TestRunner {
 
 			Thread.sleep(5000);
 
-//					wait.until(ExpectedConditions.elementToBeClickable(homePage.showMoreOption));
-//					homePage.showMoreOption.click();
-//					Thread.sleep(3000);
-//					
-//					wait.until(ExpectedConditions.elementToBeClickable(homePage.selectButtonOne));
-//					homePage.selectButtonOne.click();
-//					Thread.sleep(3000);
-//					
-//					
-//					
-//					wait.until(ExpectedConditions.elementToBeClickable(homePage.selectButtonTwo));
-//					homePage.selectButtonTwo.click();
-//					Thread.sleep(3000);
-//					
-//					wait.until(ExpectedConditions.elementToBeClickable(homePage.hideMoreOption));
-//					homePage.hideMoreOption.click();
+			if (homePage.showMoreOption.isDisplayed()) {
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.showMoreOption));
+				homePage.showMoreOption.click();
+				Thread.sleep(3000);
+				List<WebElement> flightsList = driver.findElements(By.xpath("//*[@class='empireFlight_cardbox']"));
+				logger.info("card count->" + flightsList.size());
 
-//				logger.info("Exception occurred at Installment() -> " + e.getMessage());
-//				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
+				if (flightsList.size() > 2) {
+					WebElement targetFlightCard = flightsList.get(2);
+					wait.until(ExpectedConditions
+							.elementToBeClickable(targetFlightCard.findElement(By.xpath("//input[@type='radio']"))));
+					targetFlightCard.findElement(By.xpath("//input[@type='radio']")).click();
+					Thread.sleep(1000);
+
+				}
+
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.selectButton));
+				homePage.selectButton.click();
+				Thread.sleep(3000);
+			}
+
+			wait.until(ExpectedConditions.elementToBeClickable(homePage.hideMoreOption));
+			homePage.hideMoreOption.click();
+
+			// logger.info("Exception occurred at Installment() -> " + e.getMessage());
+			// LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(),
+			// driver, getScenarioName());
 
 			homePage.timeFunctionality.click();
 			Thread.sleep(5000);
@@ -2284,7 +2292,7 @@ public class SearchFormImplementation extends TestRunner {
 					logger.info("From and To  " + tripContent);
 
 					String stop = "";
-					
+
 					try {
 //						stop = (String) jsExecutor.executeScript(
 //								"return arguments[0].querySelector('.empireFlight_stopvia.empireF_directionTxt.ng-star-inserted').textContent.trim();",
@@ -2310,7 +2318,7 @@ public class SearchFormImplementation extends TestRunner {
 							tab);
 					softly.assertThat(time.length()).isGreaterThan(0);
 					logger.info("Time: " + time);
-					
+
 //
 //					String amountText = (String) jsExecutor.executeScript(
 //						    "const element = arguments[0].querySelector('.empireFlight_amountWrapper > h2');" +
@@ -2322,8 +2330,7 @@ public class SearchFormImplementation extends TestRunner {
 //						    "}", tab);
 //						softly.assertThat(amountText.length()).isGreaterThan(0);
 //						logger.info("Currency and Amount: " + amountText);
-					
-					
+
 //
 //					String installmentWrap = (String) jsExecutor.executeScript(
 //							"return arguments[0].querySelector('.empireF_installmentwrap.ng-star-inserted').textContent.trim();",
@@ -2553,7 +2560,7 @@ public class SearchFormImplementation extends TestRunner {
 					String text = element.getText().trim();
 					Double time = Double.parseDouble(text);
 					timeList.add(time);
-					//softly.assertThat(true).isEqualTo(CommonUtils.isDepartDuration(durationList));
+					// softly.assertThat(true).isEqualTo(CommonUtils.isDepartDuration(durationList));
 				} catch (NumberFormatException e) {
 					// Handle the case where the text cannot be parsed into a Double
 					System.err.println("Invalid number format: " + element.getText());

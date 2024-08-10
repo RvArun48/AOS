@@ -6,7 +6,7 @@
 		"language": "Georgian",
 		"trip_select": "One Way",
 		"from": "DXB",
-		"to": "LHR",
+		"to": "CAI",
 		"date": "3",
 		"passenger_class": "Economy",
 		"adult_count": "2",
@@ -116,9 +116,6 @@
 		"deprture_stop": "Bahrain International Airport, Bahrain",
 		"departure_airport": "Dubai Bus Station, Dubai",
 		"arrival_timing": ""
-		
-		
-		
 		
 		},
 		

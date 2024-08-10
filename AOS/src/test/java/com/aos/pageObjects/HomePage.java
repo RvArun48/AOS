@@ -329,164 +329,120 @@ public class HomePage {
 
 	@FindBy(xpath = "(//h4[contains(text(),' Return ')])[1]")
 	public WebElement returnCalander;
-	
 
 	@FindBy(xpath = "//button[@class='editBTN comFlexmody']")
 	public WebElement editSearch;
-	
 
 	@FindBy(xpath = "(//span[contains(text(),'Departure')])[1]")
 	public WebElement flexibleDateValidation;
-	
-	
+
 	@FindBy(xpath = "(//span[contains(text(),'Direct')])[2]")
 	public WebElement directFligfhtValidation;
-	
+
 	@FindBy(xpath = "(//div[contains(text(),'Refundable')])[1]")
 	public WebElement refundableValidation;
-	
+
 	@FindBy(xpath = "(//h4[contains(text(),'Emirates ')])[2]")
 	public WebElement preferrAirlinesValidation;
-	
+
 	@FindBy(xpath = "(//span[contains(text(),'Time')])[1]")
 	public WebElement timeFunctionality;
-	
+
 	@FindBy(xpath = "(//span[contains(text(),'Price')])[1]")
 	public WebElement priceFunctionality;
-	
-	@FindBy(xpath = "(//span[contains(text(),'Stop')])[1]")
+
+	@FindBy(xpath = "//*[@id='dropdownStops']")
 	public WebElement stopFunctionality;
-	
+
 	@FindBy(xpath = "(//span[contains(text(),'Duration')])[1]")
 	public WebElement durationFunctionality;
-	
+
 	@FindBy(xpath = "(//span[contains(text(),'Refundable')])[1]")
 	public WebElement refundableFunctionality;
-	
+
 	@FindBy(xpath = "(//a[contains(text(),'More Filters')])[1]")
 	public WebElement moreFilters;
-	
+
 	@FindBy(xpath = "(//button[contains(text(),'Reset')])[1]")
 	public WebElement reset;
-	
-	
+
 	@FindBy(xpath = "//*[@class='empireF_installmentwrap ng-star-inserted']")
 	public WebElement installmentClick;
-	
+
 	@FindBy(xpath = "(//*[@class='btn-primary btn' and contains(text(),' Awesome ')])[1]")
 	public WebElement CloseInstallmentClick;
-	
+
 	@FindBy(xpath = "(//*[@class='showmore' and contains(text(),'more flight options')])[1]")
 	public WebElement showMoreOption;
-	
+
 	@FindBy(xpath = "(//*[@class='hidemore' and contains(text(),'Hide more options')])[1]")
 	public WebElement hideMoreOption;
-	
-	@FindBy(xpath = "//*[@id='mat-radio-3-input']")
-	public WebElement selectButtonOne;
-	
+
+	@FindBy(xpath = "//*[@class='mat-mdc-radio-touch-target']")
+	public WebElement selectButton;
+
 	@FindBy(xpath = "//*[@id='mat-radio-4-input']")
 	public WebElement selectButtonTwo;
-	
 
-	
 	@FindBy(xpath = "//input[@type='checkbox' and @class='mdc-checkbox__native-control' and @id='mat-mdc-checkbox-31-input']")
 	public WebElement nonStop;
-	
+
 	@FindBy(xpath = "//input[@id='mat-mdc-checkbox-34-input']")
 	public WebElement twoStop;
-	
+
 	@FindBy(xpath = "//input[@id='mat-mdc-checkbox-90-input']")
 	public WebElement oneStop;
-	
+
 	@FindBy(xpath = "//input[@id='mat-mdc-checkbox-3-input']")
 	public WebElement selectRefundable;
-	
+
 	@FindBy(xpath = "//input[@id='mat-mdc-checkbox-4-input']")
 	public WebElement selectNotRefundable;
-	
+
 	@FindBy(xpath = "(//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted' and contains(text(),'Direct')])[1]")
 	public WebElement stopValidation;
-	
 
 	@FindBy(xpath = "(//*[@class='empireFlight_refund-text ref' and contains(text(),'Refundable')])[1]")
 	public WebElement refundableValidationOne;
-	
+
 	@FindBy(xpath = "(//span[@class='empireF_PCsvgIcon'])[1]")
 	public WebElement rightFlixibleCalander;
-	
+
 	@FindBy(xpath = "(//span[@class='empireF_PCsvgIconLeft'])[1]")
 	public WebElement leftFlixibleCalander;
-	
+
 	@FindBy(xpath = "(//button[@class='btn-primary btn'])[2]")
 	public WebElement applyMoreFilter;
-	
+
 	@FindBy(xpath = "(//button[@class='btn-primary btn'])")
 	public WebElement applyMoreFilterSix;
-	
+
 	@FindBy(xpath = "//h4[contains(text(),'Cheapest')]")
 	public WebElement cheapestFare;
-	
+
 	@FindBy(xpath = "//h4[contains(text(),'Fastest')]")
 	public WebElement fastestFare;
-	
+
 	@FindBy(xpath = "//h4[contains(text(),'Best Value')]")
 	public WebElement bestValueFare;
-	
 
 	@FindBy(xpath = "(//*[@class='empireFlight_amount ng-star-inserted'])[1]")
 	public WebElement currencyPriceValidation;
-	
 
 	@FindBy(xpath = "//*[@class='empireFlight_amountWrapper']/h2")
 	public WebElement currencyPriceValidationSix;
-	
 
-	
 	@FindBy(xpath = "(//*[@class='empireFlight_SortByOption'])[1]/h4[2]")
 	public WebElement cheapestFareAmount;
-	
-	
-	
+
 	@FindBy(xpath = "(//*[@class='empireFlight_SortByOption'])[2]/h4[2]")
 	public WebElement fastestFareAmount;
-	
+
 	@FindBy(xpath = "(//*[@class='empireFlight_SortByOption'])[3]/h4[2]")
 	public WebElement bestValueFareAmount;
-	
-	@FindBy(xpath = "(//*[@class='empireFlight_amount'])[1]")
-		public WebElement currencyPriceValidationMultiThree;
-	
-	
-	
-	
-	
-					
 
-					
-					
-	
-	
-	
-	
-	
-			
-			
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@FindBy(xpath = "(//*[@class='empireFlight_amount'])[1]")
+	public WebElement currencyPriceValidationMultiThree;
 
 	public WebElement getElementByXpath(WebDriver driver, String locator, String data) throws InterruptedException {
 		return getElementByXpath(driver, locator, data, null);
@@ -495,19 +451,20 @@ public class HomePage {
 	public WebElement getElementByXpath(WebDriver driver, String locator, String data, WebElement containerElement)
 			throws InterruptedException {
 		locator = locator.replace("${token}", data);
-		
+
 		int i = 0;
 		while (i < 10) {
 			try {
 				JavascriptExecutor executor = (JavascriptExecutor) driver;
 				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 				wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(locator))));
-				
+
 				if (containerElement == null) {
 					driver.findElement(By.xpath(locator)).click();
-					//executor.executeScript("arguments[0].click();", driver.findElement(By.xpath(locator)));
+					// executor.executeScript("arguments[0].click();",
+					// driver.findElement(By.xpath(locator)));
 				} else {
-					//containerElement.findElement(By.xpath(locator)).click();
+					// containerElement.findElement(By.xpath(locator)).click();
 					executor.executeScript("arguments[0].click();", containerElement.findElement(By.xpath(locator)));
 				}
 
