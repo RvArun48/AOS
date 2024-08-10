@@ -303,19 +303,19 @@ public class HomePage {
 	@FindBy(xpath = "(//input[@formcontrolname='ArrivalCode'])[6]")
 	public WebElement tosegmentsix;
 
-	@FindBy(xpath = "(//input[@formcontrolname='DepartureDate'])[2]")
+	@FindBy(xpath = "(//*[@class='empireF_searchLabel empireF_departureIcone'])[2]")
 	public WebElement datesegmenttwo;
 
-	@FindBy(xpath = "(//input[@formcontrolname='DepartureDate'])[3]")
+	@FindBy(xpath = "(//*[@class='empireF_searchLabel empireF_departureIcone'])[3]")
 	public WebElement datesegmentthree;
 
-	@FindBy(xpath = "(//input[@formcontrolname='DepartureDate'])[4]")
+	@FindBy(xpath = "(//*[@class='empireF_searchLabel empireF_departureIcone'])[4]")
 	public WebElement datesegmentfour;
 
-	@FindBy(xpath = "(//input[@formcontrolname='DepartureDate'])[5]")
+	@FindBy(xpath = "(//*[@class='empireF_searchLabel empireF_departureIcone'])[5]")
 	public WebElement datesegmentfive;
 
-	@FindBy(xpath = "(//input[@formcontrolname='DepartureDate'])[6]")
+	@FindBy(xpath = "(//*[@class='empireF_searchLabel empireF_departureIcone'])[6]")
 	public WebElement datesegmentsix;
 
 	@FindBy(xpath = "//span[contains(text(),'Add Another City ')]")
@@ -421,6 +421,9 @@ public class HomePage {
 	@FindBy(xpath = "(//button[@class='btn-primary btn'])[2]")
 	public WebElement applyMoreFilter;
 	
+	@FindBy(xpath = "(//button[@class='btn-primary btn'])")
+	public WebElement applyMoreFilterSix;
+	
 	@FindBy(xpath = "//h4[contains(text(),'Cheapest')]")
 	public WebElement cheapestFare;
 	
@@ -434,6 +437,12 @@ public class HomePage {
 	@FindBy(xpath = "(//*[@class='empireFlight_amount ng-star-inserted'])[1]")
 	public WebElement currencyPriceValidation;
 	
+
+	@FindBy(xpath = "//*[@class='empireFlight_amountWrapper']/h2")
+	public WebElement currencyPriceValidationSix;
+	
+
+	
 	@FindBy(xpath = "(//*[@class='empireFlight_SortByOption'])[1]/h4[2]")
 	public WebElement cheapestFareAmount;
 	
@@ -445,9 +454,9 @@ public class HomePage {
 	@FindBy(xpath = "(//*[@class='empireFlight_SortByOption'])[3]/h4[2]")
 	public WebElement bestValueFareAmount;
 	
+	@FindBy(xpath = "(//*[@class='empireFlight_amount'])[1]")
+		public WebElement currencyPriceValidationMultiThree;
 	
-	
-			
 	
 	
 	
@@ -486,6 +495,7 @@ public class HomePage {
 	public WebElement getElementByXpath(WebDriver driver, String locator, String data, WebElement containerElement)
 			throws InterruptedException {
 		locator = locator.replace("${token}", data);
+		
 		int i = 0;
 		while (i < 10) {
 			try {
@@ -494,8 +504,8 @@ public class HomePage {
 				wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(locator))));
 				
 				if (containerElement == null) {
-					//driver.findElement(By.xpath(locator)).click();
-					executor.executeScript("arguments[0].click();", driver.findElement(By.xpath(locator)));
+					driver.findElement(By.xpath(locator)).click();
+					//executor.executeScript("arguments[0].click();", driver.findElement(By.xpath(locator)));
 				} else {
 					//containerElement.findElement(By.xpath(locator)).click();
 					executor.executeScript("arguments[0].click();", containerElement.findElement(By.xpath(locator)));

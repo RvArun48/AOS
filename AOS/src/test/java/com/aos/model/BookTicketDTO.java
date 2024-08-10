@@ -402,7 +402,7 @@ public class BookTicketDTO {
 	private String dateThree;
 
 	public String getDateThree() {
-		return dateTwo;
+		return dateThree;
 	}
 
 	public void setDateThree(String dateThree) {
@@ -439,7 +439,7 @@ public class BookTicketDTO {
 	private String dateFour;
 
 	public String getDateFour() {
-		return dateTwo;
+		return dateFour;
 	}
 
 	public void setDateFour(String dateFour) {
@@ -476,7 +476,7 @@ public class BookTicketDTO {
 	private String dateFive;
 
 	public String getDateFive() {
-		return dateTwo;
+		return dateFive;
 	}
 
 	public void setDateFive(String dateFive) {
@@ -513,7 +513,7 @@ public class BookTicketDTO {
 	private String dateSix;
 
 	public String getDateSix() {
-		return dateTwo;
+		return dateSix;
 	}
 
 	public void setDateSix(String dateSix) {

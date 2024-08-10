@@ -14,8 +14,10 @@ import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aos.base.TestRunner;
@@ -232,43 +234,74 @@ public class CommonUtils extends TestRunner {
 		}
 		return true; // No elements are out of order
 	}
-	
-	 public static void waitForAngularToLoad(WebDriver driver) {
-	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(180));
-	        JavascriptExecutor jsExec = (JavascriptExecutor) driver;
 
-	        String angularReadyScript = "var callback = arguments[arguments.length - 1];"
-	                + "if (window.getAllAngularTestabilities) {"
-	                + "  var testabilities = window.getAllAngularTestabilities();"
-	                + "  var count = testabilities.length;"
-	                + "  var decrement = function() {"
-	                + "    count--;"
-	                + "    if (count === 0) {"
-	                + "      callback(true);"
-	                + "    }"
-	                + "  };"
-	                + "  testabilities.forEach(function(testability) {"
-	                + "    testability.whenStable(decrement);"
-	                + "  });"
-	                + "} else {"
-	                + "  callback(false);"
-	                + "}";
+	public static void waitForAngularToLoad(WebDriver driver) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(180));
+		JavascriptExecutor jsExec = (JavascriptExecutor) driver;
 
-	        wait.until(driver1 -> jsExec.executeAsyncScript(angularReadyScript));
-	    }
-	 
-	 public static void scrollDownAndUp(WebDriver driver) throws InterruptedException {
-		 JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+		String angularReadyScript = "var callback = arguments[arguments.length - 1];"
+				+ "if (window.getAllAngularTestabilities) {"
+				+ "  var testabilities = window.getAllAngularTestabilities();" + "  var count = testabilities.length;"
+				+ "  var decrement = function() {" + "    count--;" + "    if (count === 0) {" + "      callback(true);"
+				+ "    }" + "  };" + "  testabilities.forEach(function(testability) {"
+				+ "    testability.whenStable(decrement);" + "  });" + "} else {" + "  callback(false);" + "}";
 
-         // Scroll down to the bottom slowly
-         String scrollDownScript = "window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });";
-         jsExec.executeScript(scrollDownScript);
-         
-         // Wait for the scroll to complete
-         Thread.sleep(3000); // Adjust the sleep time if needed
+		wait.until(driver1 -> jsExec.executeAsyncScript(angularReadyScript));
+	}
 
-         // Scroll up to the top slowly
-         String scrollUpScript = "window.scrollTo({ top: 0, behavior: 'smooth' });";
-         jsExec.executeScript(scrollUpScript);
-	 }
+	public static void scrollDownAndUp(WebDriver driver) throws InterruptedException {
+		JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+
+		// Scroll down to the bottom slowly
+		String scrollDownScript = "window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });";
+		jsExec.executeScript(scrollDownScript);
+
+		// Wait for the scroll to complete
+		Thread.sleep(3000); // Adjust the sleep time if needed
+
+		// Scroll up to the top slowly
+		String scrollUpScript = "window.scrollTo({ top: 0, behavior: 'smooth' });";
+		jsExec.executeScript(scrollUpScript);
+	}
+
+	public static boolean isDepartDuration(List<Double> durationList) {
+		if (durationList == null || durationList.size() <= 1) {
+			return true; // An empty list or a single-element list is trivially sorted
+		}
+
+		for (int i = 0; i < durationList.size() - 1; i++) {
+			if (durationList.get(i) > durationList.get(i + 1)) {
+				return false; // Found an element that is greater than the next element
+			}
+		}
+		return true; // No elements are out of order
+	}
+
+	public static boolean isDepartTime(List<Double> timeList) {
+		if (timeList == null || timeList.size() <= 1) {
+			return true; // An empty list or a single-element list is trivially sorted
+		}
+
+		for (int i = 0; i < timeList.size() - 1; i++) {
+			if (timeList.get(i) > timeList.get(i + 1)) {
+				return false; // Found an element that is greater than the next element
+			}
+		}
+		return true; // No elements are out of order
+	}
+
+	public static void handleStaleElement(WebElement element) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		boolean isElementClicked = false;
+		int attempts = 0;
+		while (!isElementClicked && attempts < 3) {
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(element));
+				element.click();
+				isElementClicked = true;
+			} catch (StaleElementReferenceException e) {
+				attempts++;
+			}
+		}
+	}
 }

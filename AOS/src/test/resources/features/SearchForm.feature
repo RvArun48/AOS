@@ -50,17 +50,23 @@ Feature: Flight Booking
      Then I enter the source
     Then I enter the destination
     Then I enter the departure date
-    Then I enter the segment two
     Then I click the add another city
-    #Then I enter the segment three
-    #Then I enter the segment four
-    #Then I enter the segment five
-    #Then I enter the segment six
+    Then I click the add another city
+    Then I click the add another city
+    Then I click the add another city
+   
+    
+    Then I enter the segment two
+    
+    Then I enter the segment three
+    Then I enter the segment four
+    Then I enter the segment five
+    Then I enter the segment six
     #Then I select the flight category
     #Then I add passengers
     #Then I add advance search options 
     #Then I enter the  preferred airlines 
-    #Then I click on the search button
+    Then I click on the search button
     
     
     @oneway_flight_listing
@@ -121,4 +127,47 @@ Feature: Flight Booking
     Then I click on the search button
     # Then I click on the edit search
      Then I need to validate flight listing
+     
+     
+     
+     @multi_city_flight_listing
+    Scenario: Book a flight with specified details
+  	Given I setup the test data with "multi_city_flight_listing"
+    Given I want to open the application
+     #Then I change the currency type
+     #Then I change the language
+     Then I select the trip type
+     Then I enter the source
+    Then I enter the destination
+    Then I enter the departure date
+    Then I click the add another city
+    Then I enter the segment two
+    Then I enter the segment three
+   Then I select the flight category
+    #Then I add passengers
+    #Then I add advance search options 
+    #Then I enter the  preferred airlines 
+    Then I click on the search button
+    Then I need to validate flight listing multi segment three
+    
+    
+     @multi_city_flight_listing_six
+    Scenario: Book a flight with specified details
+  	Given I setup the test data with "multi_city_flight_listing_six"
+    Given I want to open the application
+     #Then I change the currency type
+     #Then I change the language
+     Then I select the trip type
+     Then I enter the source
+    Then I enter the destination
+    Then I enter the departure date
+    Then I click the add another city
+    Then I enter the segment two
+    Then I enter the segment three
+   Then I select the flight category
+    #Then I add passengers
+    #Then I add advance search options 
+    #Then I enter the  preferred airlines 
+    Then I click on the search button
+    Then I need to validate flight listing multi segment six
     

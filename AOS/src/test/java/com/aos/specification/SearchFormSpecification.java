@@ -334,6 +334,26 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+	
+	@Then("I need to validate flight listing multi segment three")
+	public void I_need_to_validate_flight_listing_multi_segment_three() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_flight_listing_multi_segment_three();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I need to validate flight listing multi segment six")
+	public void I_need_to_validate_flight_listing_multi_segment_six() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_flight_listing_multi_segment_six();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
 
 	
 	@After

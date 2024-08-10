@@ -58,24 +58,24 @@
 		"date": "3",
 		
 		"from_two": "DXB",
-		"to_two": "LHR",
-		"date_two": "6",
+		"to_two": "RUH",
+		"date_two": "5",
 		
-		"from_three": "LHR",
+		"from_three": "RUH",
 		"to_three": "MUC",
 		"date_three": "7",
 		
 		"from_four": "MUC",
 		"to_four": "AUH",
-		"date_four": "8",
+		"date_four": "9",
 		
 		"from_five": "BOM",
 		"to_five": "DXB",
-		"date_five": "9",
+		"date_five": "11",
 		
 		"from_six": "DXB",
 		"to_six": "RUH",
-		"date_six": "10",
+		"date_six": "13",
 		
 		"passenger_class": "Economy",
 		"multi_city_count": "6",
@@ -94,8 +94,8 @@
 		"currency": "BHD",
 		"language": "Georgian",
 		"trip_select": "One Way",
-		"from": "DXB",
-		"to": "DOH",
+		"from": "CAI",
+		"to": "AUH",
 		"date": "3",
 		"return_date": "5",
 		"passenger_class": "Economy",
@@ -111,7 +111,7 @@
 		"relevant_keyword_preferred_airlines": "Flydubai",
 		"filter_airlines_select": "Flydubai",
 		"select_refundable": "Refundable",
-		"stop": "Non Stop",
+		"stop": "1 Stop",
 		"aircraft_types": "Airbus 320",
 		"deprture_stop": "Bahrain International Airport, Bahrain",
 		"departure_airport": "Dubai Bus Station, Dubai",
@@ -121,6 +121,47 @@
 		
 		
 		},
+		
+		"multi_city_flight_listing": {
+	    
+		"base_url": "https://ngtest.amadeusonlinesuite.com/flights",
+		"currency": "BHD",
+		"language": "Georgian",
+		"trip_select": "Multi City (3 Segment)",
+		
+		"from": "BOM",
+		"to": "DXB",
+		"date": "3",
+		
+		"from_two": "DXB",
+		"to_two": "RUH",
+		"date_two": "5",
+		
+		"from_three": "RUH",
+		"to_three": "LON",
+		"date_three": "7",
+		
+		"passenger_class": "Economy",
+		"multi_city_count": "6",
+		"adult_count": "2",
+		"child_count": "2",
+		"infant_count": "2",
+		"flexible_date": true,
+		"umrah_fare": true,
+		"baggage_only": true,
+		"is_refundable": true,
+		"is_direct_flight": true,
+		"preferred_airlines": "Flydubai",
+		"relevant_keyword_preferred_airlines": "Flydubai",
+		"filter_airlines_select": "Flydubai",
+		"select_refundable": "Refundable",
+		"stop": "1 Stop",
+		"aircraft_types": "Airbus 320",
+		"deprture_stop": "Dubai International Airport, Dubai",
+		"departure_airport": "Dubai Bus Station, Dubai",
+		"arrival_timing": ""
+		
+	},
 	"oneway_edit_flight_listing": {
 	    
 		"base_url": "",
@@ -144,16 +185,16 @@
 		},
 		
 		
-		"roundtrip_flight_listing": {
+		"roundtrip_flight_listingg": {
 	    
 		"base_url": "",
 		"currency": "BHD",
 		"language": "Georgian",
 		"trip_select": "One Way",
-		"from": "DXB",
-		"to": "DOH",
-		"date": "3",
-		"return_date": "5",
+		"from": "CIA",
+		"to": "AUH",
+		"date": "1",
+		"return_date": "1",
 		"passenger_class": "Economy",
 		"adult_count": "2",
 		"child_count": "2",
@@ -167,7 +208,7 @@
 		"relevant_keyword_preferred_airlines": "Flydubai",
 		"filter_airlines_select": "Flydubai",
 		"select_refundable": "Refundable",
-		"stop": "Non Stop",
+		"stop": "1 Stop",
 		"aircraft_types": "Airbus 332",
 		"deprture_stop": "Bahrain International Airport, Bahrain",
 		"departure_airport": "Dubai Bus Station, Dubai",
@@ -185,10 +226,49 @@
 		"language": "Georgian",
 		"trip_select": "Round Trip",
 		"from": "CAI",
-		"to": "DOH",
+		"to": "AUH",
 		"date": "3",
-		"return_date": "5",
+		"return_date": "4",
 		"passenger_class": "Economy",
+		"adult_count": "2",
+		"child_count": "2",
+		"infant_count": "2",
+		"flexible_date": true,
+		"umrah_fare": true,
+		"baggage_only": false,
+		"is_refundable": true,
+		"is_direct_flight": false,
+		"preferred_airlines": "Flydubai",
+		"relevant_keyword_preferred_airlines": "Flydubai",
+		"filter_airlines_select": "Flydubai",
+		"select_refundable": "Refundable",
+		"stop": "1 Stop",
+		"aircraft_types": "Airbus 333",
+		"deprture_stop": "Hamad International Airport, Doha",
+		"departure_airport": "",
+		"arrival_timing": ""		
+		},
+		"multi_city_flight_listing_six": {
+	    
+		"base_url": "https://ngtest.amadeusonlinesuite.com/flights",
+		"currency": "BHD",
+		"language": "Georgian",
+		"trip_select": "Multi City",
+		
+		"from": "BOM",
+		"to": "DXB",
+		"date": "10",
+		
+		"from_two": "DXB",
+		"to_two": "RUH",
+		"date_two": "15",
+		
+		"from_three": "RUH",
+		"to_three": "LON",
+		"date_three": "20",
+		
+		"passenger_class": "Economy",
+		"multi_city_count": "6",
 		"adult_count": "2",
 		"child_count": "2",
 		"infant_count": "2",
@@ -199,14 +279,15 @@
 		"is_direct_flight": true,
 		"preferred_airlines": "Flydubai",
 		"relevant_keyword_preferred_airlines": "Flydubai",
-		"filter_airlines_select": "Flydubai",
+		"filter_airlines_select": "Etihad Airways",
 		"select_refundable": "Refundable",
-		"stop": "Non Stop",
-		"aircraft_types": "Airbus 333",
-		"deprture_stop": "",
-		"departure_airport": "",
-		"arrival_timing": ""		
-		},
+		"stop": "1 Stop",
+		"aircraft_types": "Airbus 320",
+		"deprture_stop": "Abu Dhabi International Airport",
+		"departure_airport": "Chhatrapati Shivaji Maharaj International Airport",
+		"arrival_timing": ""
+		
+	},
 	
 	"dubai_to_doha": {
 		"base_url": "https://demo.amadeusonlinesuite.com/flights",
