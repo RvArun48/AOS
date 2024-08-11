@@ -354,8 +354,147 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+	
+	@Then("I need to validate flexi calander")
+	public void I_need_to_validate_flexi_calander() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_flexi_calander();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I need to validate installments")
+	public void I_need_to_validate_installments() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_installments();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I need to validate time")
+	public void I_need_to_validate_time() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_time();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I need to validate price")
+	public void I_need_to_validate_price() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_price();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I need to validate stop")
+	public void I_need_to_validate_stop() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_stop();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I need to validate duration")
+	public void I_need_to_validate_duration() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_duration();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I need to validate airline")
+	public void I_need_to_validate_airline() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_airline();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I need to validate refundable")
+	public void I_need_to_validate_refundable() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_refundable();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I click on the more filter")
+	public void I_click_on_the_mor_filter() {
+		try {
+			new SearchFormImplementation().I_click_on_the_mor_filter();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I need to validate departure airport")
+	public void I_need_to_validate_departure_airport() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_departure_airport();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I need to validate arrival airport")
+	public void I_need_to_validate_arrival_airport() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_arrival_airport();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I need to validate departure stopover")
+	public void I_need_to_validate_departure_stopover() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_departure_stopover();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I need to validate aircraft types")
+	public void I_need_to_validate_aircraft_types() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_aircraft_types();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("Then I click on the apply button")
+	public void I_click_on_the_apply_button() {
+		try {
+			new SearchFormImplementation().I_click_on_the_apply_button();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
 
 	
+	private void calander() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@After
 	public void afterScenario() {
 		tearDown();

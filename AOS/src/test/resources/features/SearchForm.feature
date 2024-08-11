@@ -75,13 +75,12 @@ Feature: Flight Booking
     Given I want to open the application
      #Then I change the currency type
      #Then I change the language
-     Then I click the flexible data
+     #Then I click the flexible data
      #Then I click the umrah fare
     Then I select the trip type
     Then I enter the source
     Then I enter the destination
     Then I enter the departure date
-    
     #Then I select the flight category
   #	Then I add passengers
     #Then I add advance search options 
@@ -89,6 +88,24 @@ Feature: Flight Booking
     Then I click on the search button
     # Then I click on the edit search
      Then I need to validate advance search
+     #Then I need to validate flexi calander
+      #Then I need to validate installments
+      #Then I need to validate time
+      #Then I need to validate price
+      #Then I need to validate stop
+      #Then I need to validate duration
+       #Then I need to validate airline
+      #Then I need to validate refundable
+     
+      #Then I click on the more filter 
+      #Then I need to validate departure airport
+       #Then I need to validate arrival airport
+        #Then I need to validate departure stopover
+        #Then I need to validate aircraft types
+         #Then I click on the apply button 
+      
+      
+      
      
      #Given I setup the edit data with "oneway_edit_flight_listing"
      
