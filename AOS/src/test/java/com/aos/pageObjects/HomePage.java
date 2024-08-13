@@ -444,6 +444,35 @@ public class HomePage {
 	@FindBy(xpath = "(//*[@class='empireFlight_amount'])[1]")
 	public WebElement currencyPriceValidationMultiThree;
 
+	@FindBy(xpath = "(//h4[contains(text(),'Flight details')])[1]")
+
+	public WebElement clickFlightDetails;
+
+	@FindBy(xpath = "(//*[@class='fareoption_rate'])[2]/p")
+
+	public WebElement clickFareOption;
+
+	@FindBy(xpath = "//*[@class='empireFlight_amountWrapper']/h2")
+	public WebElement currencyFareOption;
+	
+	
+	@FindBy(xpath = "//span[contains(text(),'Flight Itinerary')]")
+	public WebElement flightLtinerary;
+	
+	@FindBy(xpath = "//span[contains(text(),'Baggage')]")
+	public WebElement clickBaggage;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	public WebElement getElementByXpath(WebDriver driver, String locator, String data) throws InterruptedException {
 		return getElementByXpath(driver, locator, data, null);
 	}

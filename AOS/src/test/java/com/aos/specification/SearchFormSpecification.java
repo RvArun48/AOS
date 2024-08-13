@@ -478,7 +478,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	@Then("Then I click on the apply button")
+	@Then("I click on the apply button")
 	public void I_click_on_the_apply_button() {
 		try {
 			new SearchFormImplementation().I_click_on_the_apply_button();
@@ -487,6 +487,130 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+	
+	@Then("I need to validate fare option")
+	public void I_click_on_the_fare_option() {
+		try {
+			new SearchFormImplementation().I_click_on_the_fare_option();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I need to validate sortby filter")
+	public void I_click_on_the_sortby_filter() {
+		try {
+			new SearchFormImplementation().I_click_on_the_sortby_filter();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I need to validate more fligt option")
+	public void I_need_to_validate_more_fligt_option() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_more_fligt_option();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I need to validate flexi calander round trip")
+	public void I_need_to_validate_flexi_calander_round_trip() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_flexi_calander_round_trip();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	@Then("I need to validate more fligt option round trip")
+	public void I_need_to_validate_more_fligt_option_round_trip() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_more_fligt_option_round_trip();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I need to validate fare option three segment")
+	public void I_need_to_validate_fare_option_three_segment() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_fare_option_three_segment();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I click on the flight details")
+	public void I_click_on_the_flight_details () {
+		try {
+			new SearchFormImplementation().I_click_on_the_flight_details();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I need to validate flight details")
+	public void I_need_to_validate_flight_details () {
+		try {
+			new SearchFormImplementation().I_need_to_validate_flight_details();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I need to validate fare option card")
+	public void I_click_on_the_fare_option_card() {
+		try {
+			new SearchFormImplementation().I_click_on_the_fare_option_card();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I click on the flight ltinerary")
+	public void I_click_on_the_flight_ltinerary () {
+		try {
+			new SearchFormImplementation().I_click_on_the_flight_ltinerary();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	@Then("I need to validate flight ltinerary")
+	public void I_need_to_validate_flight_ltinerary() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_flight_ltinerary();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		}
+		
+		
+		@Then("I click on the baggage")
+		public void I_click_on_the_baggage() {
+			try {
+				new SearchFormImplementation().I_click_on_the_baggage();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+		}
+		@Then("I need to validate baggage")
+		public void I_need_to_validate_baggage() {
+			try {
+				new SearchFormImplementation().I_need_to_validate_baggage();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			}
+			
+
+	
 
 
 	

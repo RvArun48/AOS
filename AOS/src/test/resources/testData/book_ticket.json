@@ -96,7 +96,7 @@
 		"trip_select": "One Way",
 		"from": "BOM",
 		"to": "DOH",
-		"date": "3",
+		"date": "2",
 		"return_date": "5",
 		"passenger_class": "Economy",
 		"adult_count": "2",
@@ -115,7 +115,8 @@
 		"aircraft_types": "Airbus 320",
 		"deprture_stop": "Bahrain International Airport, Bahrain",
 		"departure_airport": "Dubai Bus Station, Dubai",
-		"arrival_timing": ""
+		"arrival_timing": "",
+		"fare_option": "YDELUXE"
 		
 		},
 		
@@ -150,7 +151,7 @@
 		"is_direct_flight": true,
 		"preferred_airlines": "Flydubai",
 		"relevant_keyword_preferred_airlines": "Flydubai",
-		"filter_airlines_select": "Flydubai",
+		"filter_airlines_select": "Qatar Airways",
 		"select_refundable": "Refundable",
 		"stop": "1 Stop",
 		"aircraft_types": "Airbus 320",

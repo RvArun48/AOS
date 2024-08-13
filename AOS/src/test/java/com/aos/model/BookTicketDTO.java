@@ -710,6 +710,19 @@ public class BookTicketDTO {
 			
 		}
 		
+		@SerializedName("fare_option")
+		@Expose
+		private String fareOption;
+
+		public String getFareOption() {
+			return fareOption;
+		}
+
+		public void setFareOption(String fareOption) {
+			this.date = fareOption;
+			
+		}
+		
 		
 		
 		

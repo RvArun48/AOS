@@ -96,14 +96,23 @@ Feature: Flight Booking
       #Then I need to validate duration
        #Then I need to validate airline
       #Then I need to validate refundable
-     
       #Then I click on the more filter 
       #Then I need to validate departure airport
        #Then I need to validate arrival airport
         #Then I need to validate departure stopover
         #Then I need to validate aircraft types
          #Then I click on the apply button 
-      
+       #Then I need to validate fare option
+       #Then I need to validate sortby filter
+       #Then I need to validate more fligt option
+        Then I click on the flight details 
+        #Then  I need to validate flight details 
+        #Then  I need to validate fare option card 
+         #Then I click on the flight ltinerary
+          #Then  I need to validate flight ltinerary
+            Then I click on the baggage
+             Then  I need to validate baggage
+       
       
       
      
@@ -143,7 +152,43 @@ Feature: Flight Booking
     #Then I enter the  preferred airlines 
     Then I click on the search button
     # Then I click on the edit search
-     Then I need to validate flight listing
+     #Then I need to validate flight listing
+    
+     #Then I need to validate flexi calander round trip
+      #Then I need to validate installments
+      #Then I need to validate time
+      #Then I need to validate price
+      #Then I need to validate stop
+      #Then I need to validate duration
+       #Then I need to validate airline
+      #Then I need to validate refundable
+      #Then I click on the more filter 
+      #Then I need to validate departure airport
+       #Then I need to validate arrival airport
+        #Then I need to validate departure stopover
+        #Then I need to validate aircraft types
+         #Then I click on the apply button 
+       #Then I need to validate fare option
+       #Then I need to validate sortby filter need to change code
+       #Then I need to validate more fligt option round trip
+      
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
      
      
      
@@ -166,6 +211,21 @@ Feature: Flight Booking
     #Then I enter the  preferred airlines 
     Then I click on the search button
     Then I need to validate flight listing multi segment three
+      Then I need to validate installments
+      Then I need to validate time
+      Then I need to validate price
+      Then I need to validate stop
+      Then I need to validate duration
+       Then I need to validate airline
+      Then I need to validate refundable
+      Then I click on the more filter 
+      #Then I need to validate departure airport
+       #Then I need to validate arrival airport
+        #Then I need to validate departure stopover
+        #Then I need to validate aircraft types
+         Then I click on the apply button 
+       Then I need to validate fare option three segment
+       Then I need to validate sortby filter 
     
     
      @multi_city_flight_listing_six
