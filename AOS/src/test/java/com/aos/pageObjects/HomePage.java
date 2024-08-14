@@ -463,6 +463,27 @@ public class HomePage {
 	public WebElement clickBaggage;
 	
 	
+	@FindBy(xpath = "(//*[@class='empireFlight_confirmBagTableData'])[1]")
+	public WebElement cabinBaggage;
+	
+
+	@FindBy(xpath = "//*[@class='empireFlight_confirmBagTableData ng-star-inserted']")
+	public WebElement checkedBaggage;
+	
+	
+	
+	@FindBy(xpath = "//span[contains(text(),'Fare Options')]")
+	public WebElement clickFareOptionVal;
+	
+	@FindBy(xpath = "//span[contains(text(),'Fare Breakup')]")
+	public WebElement clickFarebreakup;
+	
+	
+	@FindBy(xpath = "//*[@class='empireFlight_FOBtnWrapper ng-star-inserted']")
+	public WebElement clickReturnFareoption;
+
+	
+	
 	
 	
 	

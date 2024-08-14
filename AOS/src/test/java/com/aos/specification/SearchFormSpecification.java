@@ -608,6 +608,34 @@ public class SearchFormSpecification extends TestRunner {
 				// TODO: handle exception
 			}
 			}
+		
+		@Then("I click on the fare breakup")
+		public void I_click_on_the_fare_breakup() {
+			try {
+				new SearchFormImplementation().I_click_on_the_fare_breakup();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+		}
+		@Then("I need to validate fare breakup")
+		public void I_need_to_validate_fare_breakup() {
+			try {
+				new SearchFormImplementation().I_need_to_validate_fare_breakup();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			}
+		
+		@Then("I need to validate fare option card for round trip")
+		public void I_need_to_validate_fare_option_card_for_round_trip() {
+			try {
+				new SearchFormImplementation().I_need_to_validate_fare_option_card_for_round_trip();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			}
+			
 			
 
 	

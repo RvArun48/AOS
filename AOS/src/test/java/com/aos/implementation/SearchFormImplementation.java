@@ -2360,21 +2360,24 @@ public class SearchFormImplementation extends TestRunner {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='empireFlight_ItWrapper']")));
 
 			// Retrieve the panel load time
-			Long loadTime = (Long) executor
+			Long loadTime = ((Double) executor
 					.executeScript("const measures = window.performance.getEntriesByType('mark');"
 							+ "const start = measures.find(mark => mark.name === 'panelStart');"
 							+ "const end = measures.find(mark => mark.name === 'panelEnd');"
 							+ "console.log('Start Time:', start ? start.startTime : 'Not Found');"
 							+ "console.log('End Time:', end ? end.startTime : 'Not Found');"
-							+ "return end && start ? end.startTime - start.startTime : -1;");
+							+ "return end && start ? end.startTime - start.startTime : -1;"))
+					.longValue();
 
 			logger.info("Page Load Time is " + loadTime + " milliseconds.");
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO,
 					"Flight Details verification<b>(Page load time: " + loadTime + " ms)</b>", driver,
 					AosSpecification.scenarioName);
+
 			Thread.sleep(3000);
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.error("exception occur at I_click_on_the_flight_details" + e.toString());
+			System.out.println(e.getLocalizedMessage());
 		}
 	}
 
@@ -2384,116 +2387,109 @@ public class SearchFormImplementation extends TestRunner {
 			SoftAssertions softly = new SoftAssertions();
 
 			Thread.sleep(10000);
-			List<WebElement> mainFlightListContainer = driver
-					.findElements(By.xpath("//*[@class='empireFlight_fareOptCardsHead']"));
-			logger.info("mainFlightListContainer ->" + mainFlightListContainer.size());
+			WebElement mainFlightListContainer = driver
+					.findElement(By.xpath("(//div[@class='empireFlight_fareOptCardsHead'])[1]"));
 
-			int validationLimitCount = 0;
-
-			for (WebElement card : mainFlightListContainer) {
-
-				if (validationLimitCount > 0) {
-					break;
-				}
-
-				softly.assertThat(
-						CommonUtils.checkImageLoad(driver.findElement(By.cssSelector("img[alt='Airline Logo']"))))
-						.as("Checking the image is loaded - Airline Logo").isTrue();
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_FlightNames']")).getText().length())
+			softly.assertThat(CommonUtils.checkImageLoad(driver.findElement(By.cssSelector("img[alt='Airline Logo']"))))
+					.as("Checking the image is loaded - Airline Logo").isTrue();
+			softly.assertThat(mainFlightListContainer.findElement(By.xpath("//*[@class='empireFlight_FlightNames']"))
+					.getText().length()).isGreaterThan(0);
+			logger.info("Fight Name " + mainFlightListContainer
+					.findElement(By.xpath("//*[@class='empireFlight_FlightNames']")).getText());
+			try {
+				softly.assertThat(mainFlightListContainer
+						.findElement(By.xpath("//*[@class='LCC_Wrapper ng-star-inserted']")).getText().length())
 						.isGreaterThan(0);
-				logger.info(
-						"Fight Name " + card.findElement(By.xpath("//*[@class='empireFlight_FlightNames']")).getText());
-				try {
-					softly.assertThat(
-							card.findElement(By.xpath("//*[@class='LCC_Wrapper ng-star-inserted']")).getText().length())
-							.isGreaterThan(0);
-					logger.info("LCC "
-							+ card.findElement(By.xpath("//*[@class='LCC_Wrapper ng-star-inserted']")).getText());
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+				logger.info("LCC " + mainFlightListContainer
+						.findElement(By.xpath("//*[@class='LCC_Wrapper ng-star-inserted']")).getText());
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_FlightTime']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Flight Start Time "
-						+ card.findElement(By.xpath("//*[@class='empireFlight_FlightTime']")).getText());
+			softly.assertThat(mainFlightListContainer.findElement(By.xpath("//*[@class='empireFlight_FlightTime']"))
+					.getText().length()).isGreaterThan(0);
+			logger.info("Flight Start Time "
+					+ mainFlightListContainer.findElement(By.xpath("//*[@class='empireFlight_FlightTime']")).getText());
 
-				softly.assertThat(card.findElement(By.xpath("//*[@class='originName']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("From and To " + card.findElement(By.xpath("//*[@class='originName']")).getText());
+			softly.assertThat(
+					mainFlightListContainer.findElement(By.xpath("//*[@class='originName']")).getText().length())
+					.isGreaterThan(0);
+			logger.info("From and To "
+					+ mainFlightListContainer.findElement(By.xpath("//*[@class='originName']")).getText());
 
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_airline-date']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Date " + card.findElement(By.xpath("//*[@class='empireFlight_airline-date']")).getText());
+			softly.assertThat(mainFlightListContainer.findElement(By.xpath("//*[@class='empireFlight_airline-date']"))
+					.getText().length()).isGreaterThan(0);
+			logger.info("Date " + mainFlightListContainer
+					.findElement(By.xpath("//*[@class='empireFlight_airline-date']")).getText());
 
-				try {
-					softly.assertThat(card
-							.findElement(By
-									.xpath("//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted']"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Stop " + card
-							.findElement(By
-									.xpath("//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted']"))
-							.getText());
-				} catch (Exception e) {
-					softly.assertThat(card.findElement(By.xpath("//*[@class='empireFlight_stopvia ng-star-inserted']"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Stop " + card
-							.findElement(By.xpath("//*[@class='empireFlight_stopvia ng-star-inserted']")).getText());
-				}
+			try {
+				softly.assertThat(mainFlightListContainer
+						.findElement(
+								By.xpath("//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted']"))
+						.getText().length()).isGreaterThan(0);
+				logger.info("Stop " + mainFlightListContainer
+						.findElement(
+								By.xpath("//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted']"))
+						.getText());
+			} catch (Exception e) {
+				softly.assertThat(mainFlightListContainer
+						.findElement(By.xpath("//*[@class='empireFlight_stopvia ng-star-inserted']")).getText()
+						.length()).isGreaterThan(0);
+				logger.info("Stop " + mainFlightListContainer
+						.findElement(By.xpath("//*[@class='empireFlight_stopvia ng-star-inserted']")).getText());
+			}
 
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_FlightCode']")).getText().length())
-						.isGreaterThan(0);
+			softly.assertThat(mainFlightListContainer.findElement(By.xpath("//*[@class='empireFlight_FlightCode']"))
+					.getText().length()).isGreaterThan(0);
 
-				logger.info("Source: " + card.findElement(By.xpath("//*[@class='empireFlight_FlightCode']")).getText());
+			logger.info("Source: "
+					+ mainFlightListContainer.findElement(By.xpath("//*[@class='empireFlight_FlightCode']")).getText());
 
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_time include']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Time: " + card.findElement(By.xpath("//*[@class='empireFlight_time include']")).getText());
+			softly.assertThat(mainFlightListContainer.findElement(By.xpath("//*[@class='empireFlight_time include']"))
+					.getText().length()).isGreaterThan(0);
+			logger.info("Time: " + mainFlightListContainer
+					.findElement(By.xpath("//*[@class='empireFlight_time include']")).getText());
 
 //				softly.assertThat(card.findElement(By.xpath("//*[@class='empireFlight_time include ng-star-inserted']"))
 //						.getText().length()).isGreaterThan(0);
 //				logger.info("Baggage Details: " + card
 //						.findElement(By.xpath("//*[@class='empireFlight_time include ng-star-inserted']")).getText());
 
-				softly.assertThat(card.findElement(By.xpath("//*[@class='empireFlight_Rbd include ng-star-inserted']"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Passenger Class: " + card
-						.findElement(By.xpath("//*[@class='empireFlight_Rbd include ng-star-inserted']")).getText());
+			softly.assertThat(mainFlightListContainer
+					.findElement(By.xpath("//*[@class='empireFlight_Rbd include ng-star-inserted']")).getText()
+					.length()).isGreaterThan(0);
+			logger.info("Passenger Class: " + mainFlightListContainer
+					.findElement(By.xpath("//*[@class='empireFlight_Rbd include ng-star-inserted']")).getText());
 
-				softly.assertThat(card.findElement(By.xpath("//*[@class='empireF_installmentwrap ng-star-inserted']"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Installments: " + card
-						.findElement(By.xpath("//*[@class='empireF_installmentwrap ng-star-inserted']")).getText());
+			softly.assertThat(mainFlightListContainer
+					.findElement(By.xpath("//*[@class='empireF_installmentwrap ng-star-inserted']")).getText().length())
+					.isGreaterThan(0);
+			logger.info("Installments: " + mainFlightListContainer
+					.findElement(By.xpath("//*[@class='empireF_installmentwrap ng-star-inserted']")).getText());
 
-				softly.assertThat(card
-						.findElement(By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("End Time: " + card
-						.findElement(By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
-						.getText());
-				CommonDTO.getInstance().setFlightEndTime(StringUtils.extractTime(card
-						.findElement(By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
-						.getText()));
+			softly.assertThat(mainFlightListContainer
+					.findElement(By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
+					.getText().length()).isGreaterThan(0);
+			logger.info("End Time: " + mainFlightListContainer
+					.findElement(By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
+					.getText());
+			CommonDTO.getInstance()
+					.setFlightEndTime(StringUtils.extractTime(mainFlightListContainer
+							.findElement(
+									By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
+							.getText()));
 
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_FlightCode empireFlight_DepartCode']"))
-								.getText().length())
-						.isGreaterThan(0);
-				logger.info("Destinaton: "
-						+ card.findElement(By.xpath("//*[@class='empireFlight_FlightCode empireFlight_DepartCode']"))
-								.getText());
+			softly.assertThat(mainFlightListContainer
+					.findElement(By.xpath("//*[@class='empireFlight_FlightCode empireFlight_DepartCode']")).getText()
+					.length()).isGreaterThan(0);
+			logger.info("Destinaton: " + mainFlightListContainer
+					.findElement(By.xpath("//*[@class='empireFlight_FlightCode empireFlight_DepartCode']")).getText());
 
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='FareTypeBox ng-star-inserted']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Fare Option: "
-						+ card.findElement(By.xpath("//*[@class='FareTypeBox ng-star-inserted']")).getText());
+			softly.assertThat(mainFlightListContainer
+					.findElement(By.xpath("//*[@class='FareTypeBox ng-star-inserted']")).getText().length())
+					.isGreaterThan(0);
+			logger.info("Fare Option: " + mainFlightListContainer
+					.findElement(By.xpath("//*[@class='FareTypeBox ng-star-inserted']")).getText());
 //				try {
 //					softly.assertThat(
 //							card.findElement(By.xpath("//*[@class='empireFlight_refund-text ref']")).getText().length())
@@ -2504,11 +2500,8 @@ public class SearchFormImplementation extends TestRunner {
 //					// TODO: handle exception
 //				}
 
-			}
-			validationLimitCount++;
-
 		} catch (Exception e) {
-			logger.info("Exception occured at I_need_to_validate_advance_search()->" + e.getMessage());
+			logger.info("Exception occured at I_need_to_validate_flight_details()->" + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
 
@@ -2530,7 +2523,7 @@ public class SearchFormImplementation extends TestRunner {
 
 			for (WebElement card : mainFlightListContainer) {
 
-				if (validationLimitCount > 2) {
+				if (validationLimitCount > 3) {
 					break;
 				}
 
@@ -2576,16 +2569,27 @@ public class SearchFormImplementation extends TestRunner {
 				logger.info("Currency fare option -> " + homePage.currencyFareOption.getText());
 				softly.assertThat(homePage.clickFareOption.getText().trim())
 						.isEqualTo(homePage.currencyFareOption.getText().trim());
-				String cabinBaggage = "";
-				String checkedBaggage = "";
-						baggage click code
-				softly.assertThat(homePage.cabin.getText().trim())
-				.isEqualTo(cabinBaggage);	
-				softly.assertThat(homePage.checked.getText().trim())
-				.isEqualTo(checkedBaggage);
-						
+
+				String cabinBaggage = "//*[@class='cabinBaageFareoption ng-star-inserted']/p";
+				String checkedBaggage = "//span[@class='ng-star-inserted'][contains(text(), 'KG')]";
+
+				Thread.sleep(20000);
+				logger.info("click baggage");
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.clickBaggage));
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click baggage", driver,
+						getScenarioName());
+				homePage.clickBaggage.click();
+				Thread.sleep(3000);
+
+				softly.assertThat(homePage.cabinBaggage.getText().trim()).isEqualTo(cabinBaggage);
+				softly.assertThat(homePage.checkedBaggage.getText().trim()).isEqualTo(checkedBaggage);
 
 				Thread.sleep(1500);
+
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.clickFareOptionVal));
+
+				homePage.clickFareOptionVal.click();
+				Thread.sleep(3000);
 
 			} catch (Exception e) {
 				logger.info("I checking the fare option() -> " + e.getMessage());
@@ -2632,130 +2636,154 @@ public class SearchFormImplementation extends TestRunner {
 			SoftAssertions softly = new SoftAssertions();
 
 			Thread.sleep(10000);
-			List<WebElement> mainFlightListContainer = driver
-					.findElements(By.xpath("//*[@class='empireFlight_ItBody']"));
-			logger.info("mainFlightListContainer ->" + mainFlightListContainer.size());
+			List<WebElement> mainFlightPanelContainer = driver
+					.findElements(By.xpath("//*[@class='empireFlight_ItAllContent']"));
+			List<WebElement> mainFlightListContainer = null;
 
-			int validationLimitCount = 0;
+			logger.info("mainFlightPanelContainer size -> " + mainFlightPanelContainer.size());
+			int containerIndex = 1;
+			for (WebElement container : mainFlightPanelContainer) {
+				mainFlightListContainer = container.findElements(By.xpath("//*[@class='empireFlight_ItBody']"));
 
-			for (WebElement card : mainFlightListContainer) {
+				int cardIndex = 1;
+				for (WebElement card : mainFlightListContainer) {
 
-				if (validationLimitCount > 0) {
-					break;
-				}
+					softly.assertThat(CommonUtils.checkImageLoad(
+							driver.findElement(By.xpath("(//img[@alt='Airline Logo'])[" + cardIndex + "]"))))
+							.as("Checking the image is loaded - Airline Logo").isTrue();
 
-				softly.assertThat(
-						CommonUtils.checkImageLoad(driver.findElement(By.cssSelector("img[alt='Airline Logo']"))))
-						.as("Checking the image is loaded - Airline Logo").isTrue();
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_FlightNames']")).getText().length())
-						.isGreaterThan(0);
-				logger.info(
-						"Fight Name " + card.findElement(By.xpath("//*[@class='empireFlight_FlightNames']")).getText());
-				try {
 					softly.assertThat(
-							card.findElement(By.xpath("//*[@class='LCC_Wrapper ng-star-inserted']")).getText().length())
+							card.findElement(By.xpath("(//*[@class='empireFlight_FlightNames'])[" + cardIndex + "]"))
+									.getText().length())
 							.isGreaterThan(0);
-					logger.info("LCC "
-							+ card.findElement(By.xpath("//*[@class='LCC_Wrapper ng-star-inserted']")).getText());
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
 
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_FlightTime']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Flight Start Time "
-						+ card.findElement(By.xpath("//*[@class='empireFlight_FlightTime']")).getText());
+					logger.info("Fight Name "
+							+ card.findElement(By.xpath("(//*[@class='empireFlight_FlightNames'])[" + cardIndex + "]"))
+									.getText());
 
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireF_ItineraryTabTitle']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("From and To "
-						+ card.findElement(By.xpath("//*[@class='empireF_ItineraryTabTitle']")).getText());
-
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_airline-date']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Date " + card.findElement(By.xpath("//*[@class='empireFlight_airline-date']")).getText());
-
-				try {
-					softly.assertThat(card
-							.findElement(By
-									.xpath("//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted']"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Stop " + card
-							.findElement(By
-									.xpath("//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted']"))
-							.getText());
-				} catch (Exception e) {
-					softly.assertThat(card.findElement(By.xpath("//*[@class='empireFlight_stopvia ng-star-inserted']"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Stop " + card
-							.findElement(By.xpath("//*[@class='empireFlight_stopvia ng-star-inserted']")).getText());
-				}
-
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_FlightCode']")).getText().length())
-						.isGreaterThan(0);
-
-				logger.info("Source: " + card.findElement(By.xpath("//*[@class='empireFlight_FlightCode']")).getText());
-
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_time include']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Time: " + card.findElement(By.xpath("//*[@class='empireFlight_time include']")).getText());
-
-//				softly.assertThat(card.findElement(By.xpath("//*[@class='empireFlight_time include ng-star-inserted']"))
-//						.getText().length()).isGreaterThan(0);
-//				logger.info("Baggage Details: " + card
-//						.findElement(By.xpath("//*[@class='empireFlight_time include ng-star-inserted']")).getText());
-
-				softly.assertThat(card.findElement(By.xpath("//*[@class='empireFlight_Rbd include ng-star-inserted']"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Passenger Class: " + card
-						.findElement(By.xpath("//*[@class='empireFlight_Rbd include ng-star-inserted']")).getText());
-
-				softly.assertThat(card.findElement(By.xpath("//*[@class='empireF_installmentwrap ng-star-inserted']"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Installments: " + card
-						.findElement(By.xpath("//*[@class='empireF_installmentwrap ng-star-inserted']")).getText());
-
-				softly.assertThat(card
-						.findElement(By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("End Time: " + card
-						.findElement(By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
-						.getText());
-				CommonDTO.getInstance().setFlightEndTime(StringUtils.extractTime(card
-						.findElement(By.xpath("//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList']"))
-						.getText()));
-
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_FlightCode empireFlight_DepartCode']"))
-								.getText().length())
-						.isGreaterThan(0);
-				logger.info("Destinaton: "
-						+ card.findElement(By.xpath("//*[@class='empireFlight_FlightCode empireFlight_DepartCode']"))
+					try {
+						softly.assertThat(card
+								.findElement(
+										By.xpath("(//*[@class='LCC_Wrapper ng-star-inserted'])[" + cardIndex + "]"))
+								.getText().length()).isGreaterThan(0);
+						logger.info("LCC " + card
+								.findElement(
+										By.xpath("(//*[@class='LCC_Wrapper ng-star-inserted'])[" + cardIndex + "]"))
 								.getText());
+					} catch (Exception e) {
+						// Handle exception
+					}
 
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='FareTypeBox ng-star-inserted']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Fare Option: "
-						+ card.findElement(By.xpath("//*[@class='FareTypeBox ng-star-inserted']")).getText());
-//				try {
-//					softly.assertThat(
-//							card.findElement(By.xpath("//*[@class='empireFlight_refund-text ref']")).getText().length())
-//							.isGreaterThan(0);
-//					logger.info("Refundable: "
-//							+ card.findElement(By.xpath("//*[@class='empireFlight_refund-text ref']")).getText());
-//				} catch (Exception e) {
-//					// TODO: handle exception
-//				}
+					softly.assertThat(
+							card.findElement(By.xpath("(//*[@class='empireFlight_FlightTime'])[" + cardIndex + "]"))
+									.getText().length())
+							.isGreaterThan(0);
+					logger.info("Flight Start Time "
+							+ card.findElement(By.xpath("(//*[@class='empireFlight_FlightTime'])[" + cardIndex + "]"))
+									.getText());
 
+					softly.assertThat(
+							card.findElement(By.xpath("(//*[@class='empireF_ItineraryTabTitle'])[" + cardIndex + "]"))
+									.getText().length())
+							.isGreaterThan(0);
+					logger.info("From and To "
+							+ card.findElement(By.xpath("(//*[@class='empireF_ItineraryTabTitle'])[" + cardIndex + "]"))
+									.getText());
+
+					softly.assertThat(
+							card.findElement(By.xpath("(//*[@class='empireFlight_airline-date'])[" + cardIndex + "]"))
+									.getText().length())
+							.isGreaterThan(0);
+					logger.info("Date "
+							+ card.findElement(By.xpath("(//*[@class='empireFlight_airline-date'])[" + cardIndex + "]"))
+									.getText());
+
+					try {
+						softly.assertThat(card.findElement(
+								By.xpath("(//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted'])["
+										+ cardIndex + "]"))
+								.getText().length()).isGreaterThan(0);
+						logger.info("Stop " + card.findElement(
+								By.xpath("(//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted'])["
+										+ cardIndex + "]"))
+								.getText());
+					} catch (Exception e) {
+						softly.assertThat(card
+								.findElement(By.xpath(
+										"(//*[@class='empireFlight_stopvia ng-star-inserted'])[" + cardIndex + "]"))
+								.getText().length()).isGreaterThan(0);
+						logger.info("Stop " + card
+								.findElement(By.xpath(
+										"(//*[@class='empireFlight_stopvia ng-star-inserted'])[" + cardIndex + "]"))
+								.getText());
+					}
+
+					softly.assertThat(
+							card.findElement(By.xpath("(//*[@class='empireFlight_FlightCode'])[" + cardIndex + "]"))
+									.getText().length())
+							.isGreaterThan(0);
+					logger.info("Source: "
+							+ card.findElement(By.xpath("(//*[@class='empireFlight_FlightCode'])[" + cardIndex + "]"))
+									.getText());
+
+					softly.assertThat(
+							card.findElement(By.xpath("(//*[@class='empireFlight_time include'])[" + cardIndex + "]"))
+									.getText().length())
+							.isGreaterThan(0);
+					logger.info("Time: "
+							+ card.findElement(By.xpath("(//*[@class='empireFlight_time include'])[" + cardIndex + "]"))
+									.getText());
+
+					softly.assertThat(card
+							.findElement(By.xpath(
+									"(//*[@class='empireFlight_Rbd include ng-star-inserted'])[" + cardIndex + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Passenger Class: " + card
+							.findElement(By.xpath(
+									"(//*[@class='empireFlight_Rbd include ng-star-inserted'])[" + cardIndex + "]"))
+							.getText());
+
+					softly.assertThat(card
+							.findElement(By.xpath(
+									"(//*[@class='empireF_installmentwrap ng-star-inserted'])[" + cardIndex + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Installments: " + card
+							.findElement(By.xpath(
+									"(//*[@class='empireF_installmentwrap ng-star-inserted'])[" + cardIndex + "]"))
+							.getText());
+
+					softly.assertThat(card.findElement(
+							By.xpath("(//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList'])["
+									+ cardIndex + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("End Time: " + card.findElement(
+							By.xpath("(//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList'])["
+									+ cardIndex + "]"))
+							.getText());
+					CommonDTO.getInstance()
+							.setFlightEndTime(StringUtils.extractTime(card.findElement(
+									By.xpath("(//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList'])["
+											+ cardIndex + "]"))
+									.getText()));
+
+					softly.assertThat(card.findElement(By.xpath(
+							"(//*[@class='empireFlight_FlightCode empireFlight_DepartCode'])[" + cardIndex + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Destinaton: " + card.findElement(By.xpath(
+							"(//*[@class='empireFlight_FlightCode empireFlight_DepartCode'])[" + cardIndex + "]"))
+							.getText());
+
+					softly.assertThat(card
+							.findElement(By.xpath("(//*[@class='FareTypeBox ng-star-inserted'])[" + cardIndex + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Fare Option: " + card
+							.findElement(By.xpath("(//*[@class='FareTypeBox ng-star-inserted'])[" + cardIndex + "]"))
+							.getText());
+
+					cardIndex++;
+				}
+				containerIndex++;
 			}
-			validationLimitCount++;
 
 		} catch (Exception e) {
 			logger.info("Exception occured at I_need_to_validate_advance_search()->" + e.getMessage());
@@ -2793,7 +2821,7 @@ public class SearchFormImplementation extends TestRunner {
 
 			for (WebElement card : mainFlightListContainer) {
 
-				if (validationLimitCount > 0) {
+				if (validationLimitCount > 1) {
 					break;
 				}
 
@@ -2815,15 +2843,40 @@ public class SearchFormImplementation extends TestRunner {
 				logger.info("From and To card "
 						+ card.findElement(By.xpath("//*[@class='empireFlight_confirmBagSubTilte']")).getText());
 
-				softly.assertThat(card.findElement(By.xpath("//*[contains(text(),' Check in ')]")).getText().length())
+				softly.assertThat(card.findElement(By.xpath("//*[contains(text(),'Check in')]")).getText().length())
 						.isGreaterThan(0);
-				logger.info("checkin va" + card.findElement(By.xpath("//*[contains(text(),' Check in ')]")).getText());
+				logger.info("checkin" + card.findElement(By.xpath("//*[contains(text(),'Checkin ')]")).getText());
 
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='empireFlight_CheckCabWrapper']")).getText().length())
+				softly.assertThat(card.findElement(By.xpath("//*[contains(text(),'Cabin')]")).getText().length())
 						.isGreaterThan(0);
-				logger.info("Cabin va"
-						+ card.findElement(By.xpath("//*[@class='empireFlight_CheckCabWrapper']")).getText());
+				logger.info("Cabin va" + card.findElement(By.xpath("//*[contains(text(),'Cabin')]")).getText());
+				try {
+
+					softly.assertThat(card
+							.findElement(By.xpath(
+									"//*[@class='empireFlight_confirmBagTableData']/child::*[contains(text(), 'KG')]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("checkin " + card
+							.findElement(By.xpath(
+									"//*[@class='empireFlight_confirmBagTableData']/child::*[contains(text(), 'KG')]"))
+							.getText());
+
+				} catch (Exception e) {
+
+					softly.assertThat(card.findElement(By.xpath(
+							"//*[@class='empireFlight_confirmBagTableData']/child::*[contains(text(), 'Not Included')]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("checkin " + card.findElement(By.xpath(
+							"//*[@class='empireFlight_confirmBagTableData']/child::*[contains(text(), 'Not Included')]"))
+							.getText());
+
+				}
+				softly.assertThat(card.findElement(By.xpath(
+						"//*[@class='empireFlight_confirmBagTableData ng-star-inserted']/child::*[contains(text(), 'KG')]"))
+						.getText().length()).isGreaterThan(0);
+				logger.info("Cabin KG" + card.findElement(By.xpath(
+						"//*[@class='empireFlight_confirmBagTableData ng-star-inserted']/child::*[contains(text(), 'KG')]"))
+						.getText());
 
 			}
 			validationLimitCount++;
@@ -2835,4 +2888,382 @@ public class SearchFormImplementation extends TestRunner {
 
 	}
 
+	public void I_click_on_the_fare_breakup() {
+		try {
+
+			Thread.sleep(20000);
+			logger.info("click the fare breakup");
+			wait.until(ExpectedConditions.elementToBeClickable(homePage.clickFarebreakup));
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click the fare breakup", driver,
+					getScenarioName());
+			homePage.clickFarebreakup.click();
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
+	public void I_need_to_validate_fare_breakup() {
+		try {
+			BookTicketDTO bookTicketDTO = CommonDTO.getInstance().getBookTicketDTO();
+			SoftAssertions softly = new SoftAssertions();
+
+			Thread.sleep(10000);
+			List<WebElement> mainFlightListContainer = driver
+					.findElements(By.xpath("//*[@class='empireF_fareBreakGrid']"));
+			logger.info("mainFlightListContainer ->" + mainFlightListContainer.size());
+
+			int validationLimitCount = 0;
+
+			for (WebElement card : mainFlightListContainer) {
+
+				if (validationLimitCount > 0) {
+					break;
+				}
+
+				softly.assertThat(
+						card.findElement(By.xpath("//tr[@class='empireF_fareBreakHead']//th[1]")).getText().length())
+						.isGreaterThan(0);
+				logger.info("Summary: "
+						+ card.findElement(By.xpath("//tr[@class='empireF_fareBreakHead']//th[1]")).getText());
+
+				softly.assertThat(card.findElement(By.xpath("//h4[text()='Base Fare']")).getText().length())
+						.isGreaterThan(0);
+				logger.info("Base Fare: " + card.findElement(By.xpath("//h4[text()='Base Fare']")).getText());
+
+				softly.assertThat(card.findElement(By.xpath("//h4[text()='Fee & Tax']")).getText().length())
+						.isGreaterThan(0);
+				logger.info("Fee & Tax:" + card.findElement(By.xpath("//h4[text()='Fee & Tax']")).getText());
+
+				softly.assertThat(card.findElement(By.xpath("//h4[text()='VAT']")).getText().length()).isGreaterThan(0);
+				logger.info("VAT:" + card.findElement(By.xpath("//h4[text()='VAT']")).getText());
+
+				softly.assertThat(card.findElement(By.xpath("//h4[text()='No. Of Pax']")).getText().length())
+						.isGreaterThan(0);
+				logger.info("No. Of Pax:" + card.findElement(By.xpath("//h4[text()='No. Of Pax']")).getText());
+
+				softly.assertThat(card.findElement(By.xpath("//h4[text()='Total']")).getText().length())
+						.isGreaterThan(0);
+				logger.info("Total :" + card.findElement(By.xpath("//h4[text()='Total']")).getText());
+
+				softly.assertThat(card.findElement(By.xpath("//h4[text()='Total Per Pax']")).getText().length())
+						.isGreaterThan(0);
+				logger.info("Total Per Pax:" + card.findElement(By.xpath("//h4[text()='Total Per Pax']")).getText());
+
+				softly.assertThat(card.findElement(By.xpath("(//*[text()='Adult'])[2]")).getText().length())
+						.isGreaterThan(0);
+				logger.info("Adult: " + card.findElement(By.xpath("(//*[text()='Adult'])[2]")).getText());
+
+				softly.assertThat(card.findElement(By.xpath("(//h4[contains(text(),'AED')])[2]")).getText().length())
+						.isGreaterThan(0);
+				logger.info("Base Fare: " + card.findElement(By.xpath("(//h4[contains(text(),'AED')])[2]")).getText());
+
+				softly.assertThat(card.findElement(By.xpath("(//h4[contains(text(),'AED')])[3]")).getText().length())
+						.isGreaterThan(0);
+				logger.info("Fee & Tax:" + card.findElement(By.xpath("(//h4[contains(text(),'AED')])[3]")).getText());
+
+				softly.assertThat(card.findElement(By.xpath("(//h4[contains(text(),'AED')])[4]")).getText().length())
+						.isGreaterThan(0);
+				logger.info("VAT:" + card.findElement(By.xpath("(//h4[contains(text(),'AED')])[4]")).getText());
+
+				softly.assertThat(card.findElement(By.xpath("(//h4[text()='1'])[1]")).getText().length())
+						.isGreaterThan(0);
+				logger.info("No. Of Pax:" + card.findElement(By.xpath("(//h4[text()='1'])[1]")).getText());
+
+				softly.assertThat(card.findElement(By.xpath("(//h4[contains(text(),'AED')])[6]")).getText().length())
+						.isGreaterThan(0);
+				logger.info("Total :" + card.findElement(By.xpath("(//h4[contains(text(),'AED')])[6]")).getText());
+				softly.assertThat(card.findElement(By.xpath("(//h4[contains(text(),'AED')])[5]")).getText().length())
+						.isGreaterThan(0);
+				logger.info(
+						"Total Per Pax:" + card.findElement(By.xpath("(//h4[contains(text(),'AED')])[5]")).getText());
+
+			}
+			validationLimitCount++;
+
+		} catch (Exception e) {
+			logger.info("Exception occured at I_need_to_validate_baggage()->" + e.getMessage());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+		}
+
+	}
+
+	public void I_need_to_validate_fare_option_card_for_round_trip() {
+		try {
+			BookTicketDTO bookTicketDTO = CommonDTO.getInstance().getBookTicketDTO();
+			SoftAssertions softly = new SoftAssertions();
+
+			Thread.sleep(10000);
+			JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+
+			int validationLimitCount = 0;
+
+			List<WebElement> mainFlightListContainer = driver
+					.findElements(By.xpath("//*[@class='empireF_foCardWrapper']"));
+			logger.info("mainFlightListContainer ->" + mainFlightListContainer.size());
+
+			for (WebElement card : mainFlightListContainer) {
+
+				if (validationLimitCount > 3) {
+					break;
+				}
+
+				softly.assertThat(card.findElement(By.xpath("(//*[@class='temp3flightfareoptionheadingWrap']/p)[1]"))
+						.getText().length()).isGreaterThan(0);
+				logger.info("Fare option " + card
+						.findElement(By.xpath("(//*[@class='temp3flightfareoptionheadingWrap']/p)[1]")).getText());
+
+				softly.assertThat(card
+						.findElement(By.xpath("(//*[@class='fareoption_rate']/p)[" + (validationLimitCount + 1) + "]"))
+						.getText().length()).isGreaterThan(0);
+				logger.info("currency and price " + card
+						.findElement(By.xpath("(//*[@class='fareoption_rate']/p)[" + (validationLimitCount + 1) + "]"))
+						.getText());
+
+				softly.assertThat(card
+						.findElement(By.xpath("(//*[@class='fareoption_rate']/h4)[" + (validationLimitCount + 1) + "]"))
+						.getText().length()).isGreaterThan(0);
+				logger.info(
+						"Frae option type " + card.findElement(By.xpath("//*[@class='fareoption_rate']/h4")).getText());
+
+				softly.assertThat(
+						card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail']/h4")).getText().length())
+						.isGreaterThan(0);
+				logger.info(
+						"Baggege  " + card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail']/h4")).getText());
+				softly.assertThat(
+						card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail ng-star-inserted']/h4"))
+								.getText().length())
+						.isGreaterThan(0);
+				logger.info("Included  " + card
+						.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail ng-star-inserted']/h4")).getText());
+
+				validationLimitCount++;
+			}
+			try {
+
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.clickFareOption));
+				homePage.clickFareOption.click();
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click fare option", driver,
+						getScenarioName());
+				logger.info("Click fare option -> " + homePage.clickFareOption.getText());
+				logger.info("Currency fare option -> " + homePage.currencyFareOption.getText());
+				softly.assertThat(homePage.clickFareOption.getText().trim())
+						.isEqualTo(homePage.currencyFareOption.getText().trim());
+
+				String cabinBaggage = "//*[@class='cabinBaageFareoption ng-star-inserted']/p";
+				String checkedBaggage = "//span[@class='ng-star-inserted'][contains(text(), 'KG')]";
+
+				Thread.sleep(20000);
+				logger.info("click baggage");
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.clickBaggage));
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click baggage", driver,
+						getScenarioName());
+				homePage.clickBaggage.click();
+				Thread.sleep(3000);
+
+				softly.assertThat(homePage.cabinBaggage.getText().trim()).isEqualTo(cabinBaggage);
+				softly.assertThat(homePage.checkedBaggage.getText().trim()).isEqualTo(checkedBaggage);
+
+				Thread.sleep(1500);
+
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.clickFareOptionVal));
+
+				homePage.clickFareOptionVal.click();
+				Thread.sleep(3000);
+
+			} catch (Exception e) {
+				logger.info("I checking the fare option() -> " + e.getMessage());
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
+			}
+
+			try {
+
+				homePage.getElementByXpath(driver, "(//h4[contains(text(),'${token}')])[1]", bookTicketDTO.getFareOption());
+
+				Thread.sleep(2000);
+				
+				
+				
+				
+				
+				
+				
+
+			} catch (Exception e) {
+				logger.info("I checking the fare option() -> " + e.getMessage());
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
+			}
+			
+		} catch (Exception e) {
+			logger.info("Exception occured at I_need_to_validate_advance_search()->" + e.getMessage());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+		}
+
+
+		
+	
+			
+			try {
+
+				Thread.sleep(20000);
+				logger.info("click the Return");
+				wait.until(ExpectedConditions.elementToBeClickable(homePage.clickReturnFareoption));
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click the fare breakup", driver,
+						getScenarioName());
+				homePage.clickReturnFareoption.click();
+				Thread.sleep(3000);
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				BookTicketDTO bookTicketDTO = CommonDTO.getInstance().getBookTicketDTO();
+				SoftAssertions softly = new SoftAssertions();
+
+				Thread.sleep(10000);
+				JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+
+				int validationLimitCount = 0;
+
+				List<WebElement> mainFlightListContainer = driver
+						.findElements(By.xpath("//*[@class='empireF_foCardWrapper']"));
+				logger.info("mainFlightListContainer ->" + mainFlightListContainer.size());
+
+				for (WebElement card : mainFlightListContainer) {
+
+					if (validationLimitCount > 3) {
+						break;
+					}
+
+					softly.assertThat(card.findElement(By.xpath("(//*[@class='temp3flightfareoptionheadingWrap']/p)[1]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Fare option " + card
+							.findElement(By.xpath("(//*[@class='temp3flightfareoptionheadingWrap']/p)[1]")).getText());
+
+					softly.assertThat(card
+							.findElement(By.xpath("(//*[@class='fareoption_rate']/p)[" + (validationLimitCount + 1) + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("currency and price " + card
+							.findElement(By.xpath("(//*[@class='fareoption_rate']/p)[" + (validationLimitCount + 1) + "]"))
+							.getText());
+
+					softly.assertThat(card
+							.findElement(By.xpath("(//*[@class='fareoption_rate']/h4)[" + (validationLimitCount + 1) + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info(
+							"Frae option type " + card.findElement(By.xpath("//*[@class='fareoption_rate']/h4")).getText());
+
+					softly.assertThat(
+							card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail']/h4")).getText().length())
+							.isGreaterThan(0);
+					logger.info(
+							"Baggege  " + card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail']/h4")).getText());
+					softly.assertThat(
+							card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail ng-star-inserted']/h4"))
+									.getText().length())
+							.isGreaterThan(0);
+					logger.info("Included  " + card
+							.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail ng-star-inserted']/h4")).getText());
+
+					validationLimitCount++;
+				}
+				try {
+
+					wait.until(ExpectedConditions.elementToBeClickable(homePage.clickFareOption));
+					homePage.clickFareOption.click();
+					LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click fare option", driver,
+							getScenarioName());
+					logger.info("Click fare option -> " + homePage.clickFareOption.getText());
+					logger.info("Currency fare option -> " + homePage.currencyFareOption.getText());
+					softly.assertThat(homePage.clickFareOption.getText().trim())
+							.isEqualTo(homePage.currencyFareOption.getText().trim());
+
+					String cabinBaggage = "//*[@class='cabinBaageFareoption ng-star-inserted']/p";
+					String checkedBaggage = "//span[@class='ng-star-inserted'][contains(text(), 'KG')]";
+
+					Thread.sleep(20000);
+					logger.info("click baggage");
+					wait.until(ExpectedConditions.elementToBeClickable(homePage.clickBaggage));
+					LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click baggage", driver,
+							getScenarioName());
+					homePage.clickBaggage.click();
+					Thread.sleep(3000);
+
+					softly.assertThat(homePage.cabinBaggage.getText().trim()).isEqualTo(cabinBaggage);
+					softly.assertThat(homePage.checkedBaggage.getText().trim()).isEqualTo(checkedBaggage);
+
+					Thread.sleep(1500);
+
+					wait.until(ExpectedConditions.elementToBeClickable(homePage.clickFareOptionVal));
+
+					homePage.clickFareOptionVal.click();
+					Thread.sleep(3000);
+
+				} catch (Exception e) {
+					logger.info("I checking the fare option() -> " + e.getMessage());
+					LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
+				}
+
+				try {
+
+					homePage.getElementByXpath(driver, "(//h4[contains(text(),'${token}')])[1]", bookTicketDTO.getFareOption());
+
+					Thread.sleep(2000);
+					
+					
+					
+					
+					
+					
+					
+
+				} catch (Exception e) {
+					logger.info("I checking the fare option() -> " + e.getMessage());
+					LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
+				}
+				
+			} catch (Exception e) {
+				logger.info("Exception occured at I_need_to_validate_advance_search()->" + e.getMessage());
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+			}
+			
+			
+			
+			
+	}
 }
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+
+
