@@ -3021,6 +3021,9 @@ public class SearchFormImplementation extends TestRunner {
 				logger.info("mainFlightListContainer size->" + mainFlightListContainer.size());
 
 				for (WebElement card : mainFlightListContainer) {
+
+					logger.info("validating card - " + (i + 1));
+
 					softly.assertThat(
 							container.findElement(By.xpath("(//*[@class='temp3flightfareoptionheadingWrap']/p)[1]"))
 									.getText().length())
