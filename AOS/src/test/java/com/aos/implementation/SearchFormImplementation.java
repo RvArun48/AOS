@@ -3021,58 +3021,45 @@ public class SearchFormImplementation extends TestRunner {
 				logger.info("mainFlightListContainer size->" + mainFlightListContainer.size());
 
 				for (WebElement card : mainFlightListContainer) {
-					softly.assertThat(container.findElement(By.cssSelector(".temp3flightfareoptionheadingWrap > p"))
-							.getText().length()).isGreaterThan(0);
-
-					logger.info("Fare option "
-							+ card.findElement(By.cssSelector(".temp3flightfareoptionheadingWrap > p")).getText());
-
 					softly.assertThat(
-							card.findElement(By.cssSelector(".fareoption_rate > p:nth-of-type(" + (i + 1) + ")"))
+							container.findElement(By.xpath("(//*[@class='temp3flightfareoptionheadingWrap']/p)[1]"))
 									.getText().length())
 							.isGreaterThan(0);
+					logger.info("Fare option " + card
+							.findElement(By.xpath("(//*[@class='temp3flightfareoptionheadingWrap']/p)[1]")).getText());
 
-					logger.info("Currency and price "
-							+ card.findElement(By.cssSelector(".fareoption_rate > p:nth-of-type(" + (i + 1) + ")"))
-									.getText());
+					softly.assertThat(card.findElement(By.xpath("(//*[@class='fareoption_rate']/p)[" + (i + 1) + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("currency and price " + card
+							.findElement(By.xpath("(//*[@class='fareoption_rate']/p)[" + (i + 1) + "]")).getText());
 
 					wait.until(ExpectedConditions.elementToBeClickable(
-							driver.findElement(By.cssSelector(".fareoption_rate > p:nth-of-type(" + (i + 1) + ")"))));
-					driver.findElement(By.cssSelector(".fareoption_rate > p:nth-of-type(" + (i + 1) + ")")).click();
-
+							driver.findElement(By.xpath("(//*[@class='fareoption_rate'])[" + (i + 1) + "]/p"))));
+					driver.findElement(By.xpath("(//*[@class='fareoption_rate'])[" + (i + 1) + "]/p")).click();
 					LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click fare option", driver,
 							getScenarioName());
-
 					logger.info("Click fare option -> " + homePage.clickFareOption.getText());
 					logger.info("Currency fare option -> " + homePage.currencyFareOption.getText());
+					softly.assertThat(driver.findElement(By.xpath("(//*[@class='fareoption_rate'])[" + (i + 1) + "]/p"))
+							.getText().trim()).isEqualTo(homePage.currencyFareOption.getText().trim());
+
+					softly.assertThat(card.findElement(By.xpath("(//*[@class='fareoption_rate']/h4)[" + (i + 1) + "]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Fare option type " + card
+							.findElement(By.xpath("(//*[@class='fareoption_rate']/h4)[" + (i + 1) + "]")).getText());
 
 					softly.assertThat(
-							driver.findElement(By.cssSelector(".fareoption_rate > p:nth-of-type(" + (i + 1) + ")"))
-									.getText().trim())
-							.isEqualTo(homePage.currencyFareOption.getText().trim());
-
+							card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail']/h4")).getText().length())
+							.isGreaterThan(0);
+					logger.info("Baggage  "
+							+ card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail']/h4")).getText());
 					softly.assertThat(
-							card.findElement(By.cssSelector(".fareoption_rate > h4:nth-of-type(" + (i + 1) + ")"))
+							card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail ng-star-inserted']/h4"))
 									.getText().length())
 							.isGreaterThan(0);
-
-					logger.info("Fare option type "
-							+ card.findElement(By.cssSelector(".fareoption_rate > h4:nth-of-type(" + (i + 1) + ")"))
+					logger.info("Included  "
+							+ card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail ng-star-inserted']/h4"))
 									.getText());
-
-					softly.assertThat(
-							card.findElement(By.cssSelector(".Fareoption_Baggegdetail > h4")).getText().length())
-							.isGreaterThan(0);
-
-					logger.info(
-							"Baggage  " + card.findElement(By.cssSelector(".Fareoption_Baggegdetail > h4")).getText());
-
-					softly.assertThat(card.findElement(By.cssSelector(".Fareoption_Baggegdetail.ng-star-inserted > h4"))
-							.getText().length()).isGreaterThan(0);
-
-					logger.info("Included  " + card
-							.findElement(By.cssSelector(".Fareoption_Baggegdetail.ng-star-inserted > h4")).getText());
-
 					i++;
 				}
 
