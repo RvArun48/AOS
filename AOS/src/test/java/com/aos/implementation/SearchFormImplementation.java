@@ -3038,7 +3038,8 @@ public class SearchFormImplementation extends TestRunner {
 					driver.findElement(By.xpath("(//*[@class='fareoption_rate'])[" + (i + 1) + "]/p")).click();
 					LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click fare option", driver,
 							getScenarioName());
-					logger.info("Click fare option -> " + homePage.clickFareOption.getText());
+					logger.info("Click fare option -> " + driver
+							.findElement(By.xpath("(//*[@class='fareoption_rate'])[" + (i + 1) + "]/p")).getText());
 					logger.info("Currency fare option -> " + homePage.currencyFareOption.getText());
 					softly.assertThat(driver.findElement(By.xpath("(//*[@class='fareoption_rate'])[" + (i + 1) + "]/p"))
 							.getText().trim()).isEqualTo(homePage.currencyFareOption.getText().trim());
