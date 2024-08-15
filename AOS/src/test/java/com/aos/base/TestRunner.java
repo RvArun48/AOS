@@ -64,7 +64,10 @@ public class TestRunner {
 			options.addArguments("--window-size=1920,1080");
 			DesiredCapabilities capabilities = new DesiredCapabilities();
 			capabilities.merge(options);
-			driver = new ChromeDriver(options);
+			if (driver == null) {
+				driver = new ChromeDriver(options);
+			}
+
 			driver.manage().window().maximize();
 		}
 		return test;

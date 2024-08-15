@@ -2995,275 +2995,106 @@ public class SearchFormImplementation extends TestRunner {
 			SoftAssertions softly = new SoftAssertions();
 
 			Thread.sleep(10000);
-			JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
-			int validationLimitCount = 0;
+			// Find the round trip tabs using querySelectorAll
+			List<WebElement> roundTripTabs = (List<WebElement>) executor
+					.executeScript("return document.querySelectorAll('.empireFlight_tabwrapperText')");
 
-			List<WebElement> mainFlightListContainer = driver
-					.findElements(By.xpath("//*[@class='empireF_foCardWrapper']"));
-			logger.info("mainFlightListContainer ->" + mainFlightListContainer.size());
+			// Initialize variables
+			int tabCounter = 0;
 
-			for (WebElement card : mainFlightListContainer) {
+			List<WebElement> fareOptionsMainContainer = (List<WebElement>) executor
+					.executeScript("return document.querySelectorAll('.empireF_multifareWrapper')");
 
-				if (validationLimitCount > 3) {
-					break;
+			List<WebElement> mainFlightListContainer = null;
+
+			for (WebElement container : fareOptionsMainContainer) {
+				int i = 0;
+
+				// Click the round trip tab
+				executor.executeScript("arguments[0].click();", roundTripTabs.get(tabCounter));
+
+				// Find elements inside container using querySelectorAll
+				mainFlightListContainer = container
+						.findElements(By.cssSelector(".fareoptioncardnew:not([style*='display: none;'])"));
+
+				logger.info("mainFlightListContainer size->" + mainFlightListContainer.size());
+
+				for (WebElement card : mainFlightListContainer) {
+					softly.assertThat(container.findElement(By.cssSelector(".temp3flightfareoptionheadingWrap > p"))
+							.getText().length()).isGreaterThan(0);
+
+					logger.info("Fare option "
+							+ card.findElement(By.cssSelector(".temp3flightfareoptionheadingWrap > p")).getText());
+
+					softly.assertThat(
+							card.findElement(By.cssSelector(".fareoption_rate > p:nth-of-type(" + (i + 1) + ")"))
+									.getText().length())
+							.isGreaterThan(0);
+
+					logger.info("Currency and price "
+							+ card.findElement(By.cssSelector(".fareoption_rate > p:nth-of-type(" + (i + 1) + ")"))
+									.getText());
+
+					wait.until(ExpectedConditions.elementToBeClickable(
+							driver.findElement(By.cssSelector(".fareoption_rate > p:nth-of-type(" + (i + 1) + ")"))));
+					driver.findElement(By.cssSelector(".fareoption_rate > p:nth-of-type(" + (i + 1) + ")")).click();
+
+					LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click fare option", driver,
+							getScenarioName());
+
+					logger.info("Click fare option -> " + homePage.clickFareOption.getText());
+					logger.info("Currency fare option -> " + homePage.currencyFareOption.getText());
+
+					softly.assertThat(
+							driver.findElement(By.cssSelector(".fareoption_rate > p:nth-of-type(" + (i + 1) + ")"))
+									.getText().trim())
+							.isEqualTo(homePage.currencyFareOption.getText().trim());
+
+					softly.assertThat(
+							card.findElement(By.cssSelector(".fareoption_rate > h4:nth-of-type(" + (i + 1) + ")"))
+									.getText().length())
+							.isGreaterThan(0);
+
+					logger.info("Fare option type "
+							+ card.findElement(By.cssSelector(".fareoption_rate > h4:nth-of-type(" + (i + 1) + ")"))
+									.getText());
+
+					softly.assertThat(
+							card.findElement(By.cssSelector(".Fareoption_Baggegdetail > h4")).getText().length())
+							.isGreaterThan(0);
+
+					logger.info(
+							"Baggage  " + card.findElement(By.cssSelector(".Fareoption_Baggegdetail > h4")).getText());
+
+					softly.assertThat(card.findElement(By.cssSelector(".Fareoption_Baggegdetail.ng-star-inserted > h4"))
+							.getText().length()).isGreaterThan(0);
+
+					logger.info("Included  " + card
+							.findElement(By.cssSelector(".Fareoption_Baggegdetail.ng-star-inserted > h4")).getText());
+
+					i++;
 				}
 
-				softly.assertThat(card.findElement(By.xpath("(//*[@class='temp3flightfareoptionheadingWrap']/p)[1]"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Fare option " + card
-						.findElement(By.xpath("(//*[@class='temp3flightfareoptionheadingWrap']/p)[1]")).getText());
-
-				softly.assertThat(card
-						.findElement(By.xpath("(//*[@class='fareoption_rate']/p)[" + (validationLimitCount + 1) + "]"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("currency and price " + card
-						.findElement(By.xpath("(//*[@class='fareoption_rate']/p)[" + (validationLimitCount + 1) + "]"))
-						.getText());
-
-				softly.assertThat(card
-						.findElement(By.xpath("(//*[@class='fareoption_rate']/h4)[" + (validationLimitCount + 1) + "]"))
-						.getText().length()).isGreaterThan(0);
-				logger.info(
-						"Frae option type " + card.findElement(By.xpath("//*[@class='fareoption_rate']/h4")).getText());
-
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail']/h4")).getText().length())
-						.isGreaterThan(0);
-				logger.info(
-						"Baggege  " + card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail']/h4")).getText());
-				softly.assertThat(
-						card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail ng-star-inserted']/h4"))
-								.getText().length())
-						.isGreaterThan(0);
-				logger.info("Included  " + card
-						.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail ng-star-inserted']/h4")).getText());
-
-				validationLimitCount++;
+				tabCounter++;
 			}
-			try {
-
-				wait.until(ExpectedConditions.elementToBeClickable(homePage.clickFareOption));
-				homePage.clickFareOption.click();
-				LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click fare option", driver,
-						getScenarioName());
-				logger.info("Click fare option -> " + homePage.clickFareOption.getText());
-				logger.info("Currency fare option -> " + homePage.currencyFareOption.getText());
-				softly.assertThat(homePage.clickFareOption.getText().trim())
-						.isEqualTo(homePage.currencyFareOption.getText().trim());
-
-				String cabinBaggage = "//*[@class='cabinBaageFareoption ng-star-inserted']/p";
-				String checkedBaggage = "//span[@class='ng-star-inserted'][contains(text(), 'KG')]";
-
-				Thread.sleep(20000);
-				logger.info("click baggage");
-				wait.until(ExpectedConditions.elementToBeClickable(homePage.clickBaggage));
-				LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click baggage", driver,
-						getScenarioName());
-				homePage.clickBaggage.click();
-				Thread.sleep(3000);
-
-				softly.assertThat(homePage.cabinBaggage.getText().trim()).isEqualTo(cabinBaggage);
-				softly.assertThat(homePage.checkedBaggage.getText().trim()).isEqualTo(checkedBaggage);
-
-				Thread.sleep(1500);
-
-				wait.until(ExpectedConditions.elementToBeClickable(homePage.clickFareOptionVal));
-
-				homePage.clickFareOptionVal.click();
-				Thread.sleep(3000);
-
-			} catch (Exception e) {
-				logger.info("I checking the fare option() -> " + e.getMessage());
-				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
-			}
-
-			try {
-
-				homePage.getElementByXpath(driver, "(//h4[contains(text(),'${token}')])[1]", bookTicketDTO.getFareOption());
-
-				Thread.sleep(2000);
-				
-				
-				
-				
-				
-				
-				
-
-			} catch (Exception e) {
-				logger.info("I checking the fare option() -> " + e.getMessage());
-				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
-			}
-			
 		} catch (Exception e) {
 			logger.info("Exception occured at I_need_to_validate_advance_search()->" + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
 
+		try {
 
-		
-	
-			
-			try {
+			Thread.sleep(20000);
+			logger.info("click the Return");
+			wait.until(ExpectedConditions.elementToBeClickable(homePage.clickReturnFareoption));
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click the fare breakup", driver,
+					getScenarioName());
+			homePage.clickReturnFareoption.click();
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
-				Thread.sleep(20000);
-				logger.info("click the Return");
-				wait.until(ExpectedConditions.elementToBeClickable(homePage.clickReturnFareoption));
-				LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click the fare breakup", driver,
-						getScenarioName());
-				homePage.clickReturnFareoption.click();
-				Thread.sleep(3000);
-			}catch (Exception e) {
-				// TODO: handle exception
-			}
-			try {
-				BookTicketDTO bookTicketDTO = CommonDTO.getInstance().getBookTicketDTO();
-				SoftAssertions softly = new SoftAssertions();
-
-				Thread.sleep(10000);
-				JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-
-				int validationLimitCount = 0;
-
-				List<WebElement> mainFlightListContainer = driver
-						.findElements(By.xpath("//*[@class='empireF_foCardWrapper']"));
-				logger.info("mainFlightListContainer ->" + mainFlightListContainer.size());
-
-				for (WebElement card : mainFlightListContainer) {
-
-					if (validationLimitCount > 3) {
-						break;
-					}
-
-					softly.assertThat(card.findElement(By.xpath("(//*[@class='temp3flightfareoptionheadingWrap']/p)[1]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Fare option " + card
-							.findElement(By.xpath("(//*[@class='temp3flightfareoptionheadingWrap']/p)[1]")).getText());
-
-					softly.assertThat(card
-							.findElement(By.xpath("(//*[@class='fareoption_rate']/p)[" + (validationLimitCount + 1) + "]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("currency and price " + card
-							.findElement(By.xpath("(//*[@class='fareoption_rate']/p)[" + (validationLimitCount + 1) + "]"))
-							.getText());
-
-					softly.assertThat(card
-							.findElement(By.xpath("(//*[@class='fareoption_rate']/h4)[" + (validationLimitCount + 1) + "]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info(
-							"Frae option type " + card.findElement(By.xpath("//*[@class='fareoption_rate']/h4")).getText());
-
-					softly.assertThat(
-							card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail']/h4")).getText().length())
-							.isGreaterThan(0);
-					logger.info(
-							"Baggege  " + card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail']/h4")).getText());
-					softly.assertThat(
-							card.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail ng-star-inserted']/h4"))
-									.getText().length())
-							.isGreaterThan(0);
-					logger.info("Included  " + card
-							.findElement(By.xpath("//*[@class='Fareoption_Baggegdetail ng-star-inserted']/h4")).getText());
-
-					validationLimitCount++;
-				}
-				try {
-
-					wait.until(ExpectedConditions.elementToBeClickable(homePage.clickFareOption));
-					homePage.clickFareOption.click();
-					LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click fare option", driver,
-							getScenarioName());
-					logger.info("Click fare option -> " + homePage.clickFareOption.getText());
-					logger.info("Currency fare option -> " + homePage.currencyFareOption.getText());
-					softly.assertThat(homePage.clickFareOption.getText().trim())
-							.isEqualTo(homePage.currencyFareOption.getText().trim());
-
-					String cabinBaggage = "//*[@class='cabinBaageFareoption ng-star-inserted']/p";
-					String checkedBaggage = "//span[@class='ng-star-inserted'][contains(text(), 'KG')]";
-
-					Thread.sleep(20000);
-					logger.info("click baggage");
-					wait.until(ExpectedConditions.elementToBeClickable(homePage.clickBaggage));
-					LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click baggage", driver,
-							getScenarioName());
-					homePage.clickBaggage.click();
-					Thread.sleep(3000);
-
-					softly.assertThat(homePage.cabinBaggage.getText().trim()).isEqualTo(cabinBaggage);
-					softly.assertThat(homePage.checkedBaggage.getText().trim()).isEqualTo(checkedBaggage);
-
-					Thread.sleep(1500);
-
-					wait.until(ExpectedConditions.elementToBeClickable(homePage.clickFareOptionVal));
-
-					homePage.clickFareOptionVal.click();
-					Thread.sleep(3000);
-
-				} catch (Exception e) {
-					logger.info("I checking the fare option() -> " + e.getMessage());
-					LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
-				}
-
-				try {
-
-					homePage.getElementByXpath(driver, "(//h4[contains(text(),'${token}')])[1]", bookTicketDTO.getFareOption());
-
-					Thread.sleep(2000);
-					
-					
-					
-					
-					
-					
-					
-
-				} catch (Exception e) {
-					logger.info("I checking the fare option() -> " + e.getMessage());
-					LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
-				}
-				
-			} catch (Exception e) {
-				logger.info("Exception occured at I_need_to_validate_advance_search()->" + e.getMessage());
-				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
-			}
-			
-			
-			
-			
 	}
 }
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		
-
-
