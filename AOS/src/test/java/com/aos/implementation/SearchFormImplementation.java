@@ -3008,9 +3008,9 @@ public class SearchFormImplementation extends TestRunner {
 
 			List<WebElement> mainFlightListContainer = null;
 
-			for (WebElement container : fareOptionsMainContainer) {
+			for (int containerIndex = 0; containerIndex < fareOptionsMainContainer.size(); containerIndex++) {
 				int i = 0;
-
+				WebElement container = fareOptionsMainContainer.get(containerIndex);
 				// Click the round trip tab
 				executor.executeScript("arguments[0].click();", roundTripTabs.get(tabCounter));
 
@@ -3020,8 +3020,8 @@ public class SearchFormImplementation extends TestRunner {
 
 				logger.info("mainFlightListContainer size->" + mainFlightListContainer.size());
 
-				for (WebElement card : mainFlightListContainer) {
-
+				for (int cardIndex = 0; cardIndex < mainFlightListContainer.size(); cardIndex++) {
+					WebElement card = mainFlightListContainer.get(cardIndex);
 					logger.info("validating card - " + (i + 1));
 
 					softly.assertThat(
