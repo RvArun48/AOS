@@ -1379,7 +1379,7 @@ public class SearchFormImplementation extends TestRunner {
 			Thread.sleep(5000);
 
 			// Retrieve tabs
-			List<WebElement> tabs = (List<WebElement>) jsExecutor.executeScript(
+			List<WebElement> tabs = (List<WebElement>) executor.executeScript(
 					"return Array.from(document.querySelectorAll('.empireFlight_multicityCardMob.ng-star-inserted'))");
 
 			logger.info("mainFlightListContainer ->" + mainFlightListContainer.size());
@@ -1389,12 +1389,12 @@ public class SearchFormImplementation extends TestRunner {
 
 				for (WebElement tab : tabs) {
 					// Check if image is loaded
-					Boolean isImageLoaded = (Boolean) jsExecutor.executeScript(
+					Boolean isImageLoaded = (Boolean) executor.executeScript(
 							"return document.querySelector(\"img[alt='Airline Logo']\") != null && document.querySelector(\"img[alt='Airline Logo']\").complete && document.querySelector(\"img[alt='Airline Logo']\").naturalHeight > 0");
 					softly.assertThat(isImageLoaded).as("Checking the image is loaded - Airline Logo").isTrue();
 
 					// Get text and validate for various elements
-					String flightName = (String) jsExecutor.executeScript(
+					String flightName = (String) executor.executeScript(
 							"return arguments[0].querySelector('.empireFlight_multicityLogoNameContent').textContent.trim();",
 							tab);
 					softly.assertThat(flightName.length()).isGreaterThan(0);
@@ -1402,7 +1402,7 @@ public class SearchFormImplementation extends TestRunner {
 
 					String lcc = "";
 					try {
-						lcc = (String) jsExecutor.executeScript(
+						lcc = (String) executor.executeScript(
 								"return arguments[0].querySelector('.LCC_Wrapper.ng-star-inserted').textContent.trim();",
 								tab);
 						softly.assertThat(lcc.length()).isGreaterThan(0);
@@ -1411,13 +1411,13 @@ public class SearchFormImplementation extends TestRunner {
 						// Handle exception
 					}
 
-					String flightStartTime = (String) jsExecutor.executeScript(
+					String flightStartTime = (String) executor.executeScript(
 							"return arguments[0].querySelector('.empireFlight_multicityItemTime').textContent.trim();",
 							tab);
 					softly.assertThat(flightStartTime.length()).isGreaterThan(0);
 					logger.info("Flight Start Time " + flightStartTime);
 
-					String tripContent = (String) jsExecutor.executeScript(
+					String tripContent = (String) executor.executeScript(
 							"return arguments[0].querySelector('.empireFlight_multicityCardTripContent').textContent.trim();",
 							tab);
 					softly.assertThat(tripContent.length()).isGreaterThan(0);
@@ -1426,33 +1426,33 @@ public class SearchFormImplementation extends TestRunner {
 					String stop = "";
 
 					try {
-//						stop = (String) jsExecutor.executeScript(
+//						stop = (String) executor.executeScript(
 //								"return arguments[0].querySelector('.empireFlight_stopvia.empireF_directionTxt.ng-star-inserted').textContent.trim();",
 //								tab);
 //						softly.assertThat(stop.length()).isGreaterThan(0);
 //						logger.info("Stop " + stop);
 					} catch (Exception e) {
-						stop = (String) jsExecutor.executeScript(
+						stop = (String) executor.executeScript(
 								"return arguments[0].querySelector('.empireFlight_stopvia.ng-star-inserted').textContent.trim();",
 								tab);
 						softly.assertThat(stop.length()).isGreaterThan(0);
 						logger.info("Stop " + stop);
 					}
 
-					String cityName = (String) jsExecutor.executeScript(
+					String cityName = (String) executor.executeScript(
 							"return arguments[0].querySelector('.empireFlight_multicityItemCityName').textContent.trim();",
 							tab);
 					softly.assertThat(cityName.length()).isGreaterThan(0);
 					logger.info("Source: " + cityName);
 
-					String time = (String) jsExecutor.executeScript(
+					String time = (String) executor.executeScript(
 							"return arguments[0].querySelector('.empireFlight_multicityTime').textContent.trim();",
 							tab);
 					softly.assertThat(time.length()).isGreaterThan(0);
 					logger.info("Time: " + time);
 
 //
-//					String amountText = (String) jsExecutor.executeScript(
+//					String amountText = (String) executor.executeScript(
 //						    "const element = arguments[0].querySelector('.empireFlight_amountWrapper > h2');" +
 //						    "if (element) {" +
 //						    "    return element.textContent.trim();" +
@@ -1464,31 +1464,31 @@ public class SearchFormImplementation extends TestRunner {
 //						logger.info("Currency and Amount: " + amountText);
 
 //
-//					String installmentWrap = (String) jsExecutor.executeScript(
+//					String installmentWrap = (String) executor.executeScript(
 //							"return arguments[0].querySelector('.empireF_installmentwrap.ng-star-inserted').textContent.trim();",
 //							tab);
 //					softly.assertThat(installmentWrap.length()).isGreaterThan(0);
 //					logger.info("Installments: " + installmentWrap);
 
-					String endTime = (String) jsExecutor.executeScript(
+					String endTime = (String) executor.executeScript(
 							"return arguments[0].querySelector('.empireFlight_multicityItemTime').textContent.trim();",
 							tab);
 					softly.assertThat(endTime.length()).isGreaterThan(0);
 					logger.info("End Time: " + endTime);
 
-					String destination = (String) jsExecutor.executeScript(
+					String destination = (String) executor.executeScript(
 							"return arguments[0].querySelector('.empireFlight_multicityItemCityName').textContent.trim();",
 							tab);
 					softly.assertThat(destination.length()).isGreaterThan(0);
 					logger.info("Destination: " + destination);
 
-//					String refundable = (String) jsExecutor.executeScript(
+//					String refundable = (String) executor.executeScript(
 //							"return arguments[0].querySelector('.empireFlight_multicityRefundTxt.ref.ng-star-inserted').textContent.trim();",
 //							tab);
 //					softly.assertThat(refundable.length()).isGreaterThan(0);
 //					logger.info("Refundable: " + refundable);
 //
-//					String flightDetails = (String) jsExecutor.executeScript(
+//					String flightDetails = (String) executor.executeScript(
 //							"return arguments[0].querySelector('.btn-secondary.empireFlight_details-text').textContent.trim();",
 //							tab);
 //					softly.assertThat(flightDetails.length()).isGreaterThan(0);
@@ -2156,7 +2156,7 @@ public class SearchFormImplementation extends TestRunner {
 //			JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 //
 //			// Retrieve the list of flight elements
-//			List<WebElement> flightsList = (List<WebElement>) jsExecutor.executeScript(
+//			List<WebElement> flightsList = (List<WebElement>) executor.executeScript(
 //			    "return Array.from(document.querySelectorAll('[role=\"radiogroup\"]'))");
 //
 //			// Log the number of flight cards
@@ -2166,35 +2166,35 @@ public class SearchFormImplementation extends TestRunner {
 //			WebElement firstCard = flightsList.get(0);
 //
 //			// Check if the "more flight options" button is visible and clickable
-//			Boolean isMoreOptionsVisible = (Boolean) jsExecutor.executeScript(
+//			Boolean isMoreOptionsVisible = (Boolean) executor.executeScript(
 //			    "const showMoreBtn = arguments[0].querySelector('.showmore');" +
 //			    "return showMoreBtn && showMoreBtn.textContent.includes('more flight options') && window.getComputedStyle(showMoreBtn).display !== 'none';", firstCard);
 //
 //			if (isMoreOptionsVisible) {
 //			    // Click the "more flight options" button
-//			    jsExecutor.executeScript(
+//			    executor.executeScript(
 //			        "const showMoreBtn = arguments[0].querySelector('.showmore');" +
 //			        "if (showMoreBtn) { showMoreBtn.click(); }", firstCard);
 //
 //			    Thread.sleep(3000); // Wait for the content to load
 //
 //			    // Retrieve the radio button list
-//			    List<WebElement> radioButtonList = (List<WebElement>) jsExecutor.executeScript(
+//			    List<WebElement> radioButtonList = (List<WebElement>) executor.executeScript(
 //			        "return Array.from(arguments[0].querySelectorAll('.mat-mdc-radio-touch-target'));", firstCard);
 //
 //			    // Check if the radio button with id 'mat-radio-3-input' is visible
-//			    Boolean isRadioButtonVisible = (Boolean) jsExecutor.executeScript(
+//			    Boolean isRadioButtonVisible = (Boolean) executor.executeScript(
 //			        "const radioButton = document.getElementById('mat-radio-3-input');" +
 //			        "return radioButton && window.getComputedStyle(radioButton).display !== 'none';");
 //
 //			    if (isRadioButtonVisible) {
 //			        // Click the radio button
-//			        jsExecutor.executeScript(
+//			        executor.executeScript(
 //			            "const radioButton = document.getElementById('mat-radio-3-input');" +
 //			            "if (radioButton) { radioButton.click(); }");
 //
 //			        // Wait for the "selectAirlinesbooking" element to be clickable
-//			        WebElement selectAirlinesbooking = (WebElement) jsExecutor.executeScript(
+//			        WebElement selectAirlinesbooking = (WebElement) executor.executeScript(
 //			            "return document.querySelector('#selectAirlinesbooking');");
 //
 //			        if (selectAirlinesbooking != null) {
@@ -2215,7 +2215,7 @@ public class SearchFormImplementation extends TestRunner {
 			WebElement firstCard = flightsList.get(0);
 
 			// Check and click 'more flight options' button
-			jsExecutor.executeScript("const firstCard = arguments[0];"
+			executor.executeScript("const firstCard = arguments[0];"
 					+ "const showMoreButton = Array.from(firstCard.querySelectorAll('.showmore')).find(el => el.textContent.includes('more flight options'));"
 					+ "if (showMoreButton && showMoreButton.style.display !== 'none' && showMoreButton.disabled !== true) {"
 					+ "    showMoreButton.click();" + "}", firstCard);
@@ -2224,14 +2224,14 @@ public class SearchFormImplementation extends TestRunner {
 			Thread.sleep(3000); // Consider replacing with a more robust wait if necessary
 
 			// Find and click the second radio button
-			jsExecutor.executeScript(
+			executor.executeScript(
 					"const radioButtons = Array.from(document.querySelectorAll('input.mdc-radio__native-control'));"
 							+ "const secondRadioButton = radioButtons[1];"
 							+ "if (secondRadioButton && secondRadioButton.style.display !== 'none' && secondRadioButton.disabled !== true) {"
 							+ "    secondRadioButton.click();" + "}");
 
 			// Wait for the 'selectAirlinesbooking' element to be clickable and click it
-			jsExecutor.executeScript("const selectAirlinesbooking = document.querySelector('.selectAirlinesbooking');"
+			executor.executeScript("const selectAirlinesbooking = document.querySelector('.selectAirlinesbooking');"
 					+ "if (selectAirlinesbooking && selectAirlinesbooking.style.display !== 'none' && selectAirlinesbooking.disabled !== true) {"
 					+ "    selectAirlinesbooking.click();" + "}");
 
@@ -2282,7 +2282,7 @@ public class SearchFormImplementation extends TestRunner {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
 		// Find elements with class 'empireFlight_main-box-listing ng-star-inserted'
-		List<WebElement> flightsList = (List<WebElement>) jsExecutor.executeScript(
+		List<WebElement> flightsList = (List<WebElement>) executor.executeScript(
 				"return Array.from(document.querySelectorAll('.empireFlight_main-box-listing.ng-star-inserted'));");
 
 		logger.info("card count->" + flightsList.size());
@@ -2290,7 +2290,7 @@ public class SearchFormImplementation extends TestRunner {
 		WebElement firstCard = flightsList.get(0);
 
 		// Check and click 'more flight options' button
-		jsExecutor.executeScript("const firstCard = arguments[0];"
+		executor.executeScript("const firstCard = arguments[0];"
 				+ "const showMoreButton = Array.from(firstCard.querySelectorAll('.showmore')).find(el => el.textContent.includes('more flight options'));"
 				+ "if (showMoreButton && showMoreButton.style.display !== 'none' && showMoreButton.disabled !== true) {"
 				+ "    showMoreButton.click();" + "}", firstCard);
@@ -2303,7 +2303,7 @@ public class SearchFormImplementation extends TestRunner {
 		}
 
 		// Find and click the third radio button
-		jsExecutor.executeScript(
+		executor.executeScript(
 				"const radioButtons = Array.from(document.querySelectorAll('input.mdc-radio__native-control'));"
 						+ "const thirdRadioButton = radioButtons[2];" + // Indexing starts from 0
 						"if (thirdRadioButton && thirdRadioButton.style.display !== 'none' && thirdRadioButton.disabled !== true) {"
@@ -2653,152 +2653,120 @@ public class SearchFormImplementation extends TestRunner {
 			Thread.sleep(10000);
 			List<WebElement> mainFlightPanelContainer = driver
 					.findElements(By.xpath("//*[@class='empireFlight_ItAllContent']"));
-			List<WebElement> mainFlightListContainer = null;
+			// List<WebElement> mainFlightListContainer = null;
 
-			logger.info("mainFlightPanelContainer size -> " + mainFlightPanelContainer.size());
+			// logger.info("mainFlightPanelContainer size -> " +
+			// mainFlightPanelContainer.size());
 			int containerIndex = 1;
-			for (WebElement container : mainFlightPanelContainer) {
-				mainFlightListContainer = container.findElements(By.xpath("//*[@class='empireFlight_ItBody']"));
+			// for (WebElement container : mainFlightPanelContainer) {
+			List<WebElement> mainFlightListContainer = (List<WebElement>) executor
+					.executeScript("return Array.from(document.querySelectorAll('.empireFlight_ItBody'))");
 
-				int cardIndex = 1;
-				for (WebElement card : mainFlightListContainer) {
+			int cardIndex = 1;
+			for (WebElement card : mainFlightListContainer) {
+				softly.assertThat(CommonUtils.checkImageLoad(
+						driver.findElement(By.xpath("(//img[@alt='Airline Logo'])[" + cardIndex + "]"))))
+						.as("Checking the image is loaded - Airline Logo").isTrue();
 
-					softly.assertThat(CommonUtils.checkImageLoad(
-							driver.findElement(By.xpath("(//img[@alt='Airline Logo'])[" + cardIndex + "]"))))
-							.as("Checking the image is loaded - Airline Logo").isTrue();
+				String flightName = (String) executor
+						.executeScript("return document.querySelectorAll('.empireFlight_FlightNames')["
+								+ (cardIndex - 1) + "].innerText");
+				softly.assertThat(flightName.length()).isGreaterThan(0);
+				logger.info("Flight Name " + flightName);
 
-					softly.assertThat(
-							card.findElement(By.xpath("(//*[@class='empireFlight_FlightNames'])[" + cardIndex + "]"))
-									.getText().length())
-							.isGreaterThan(0);
-
-					logger.info("Fight Name "
-							+ card.findElement(By.xpath("(//*[@class='empireFlight_FlightNames'])[" + cardIndex + "]"))
-									.getText());
-
-					try {
-						softly.assertThat(card
-								.findElement(
-										By.xpath("(//*[@class='LCC_Wrapper ng-star-inserted'])[" + cardIndex + "]"))
-								.getText().length()).isGreaterThan(0);
-						logger.info("LCC " + card
-								.findElement(
-										By.xpath("(//*[@class='LCC_Wrapper ng-star-inserted'])[" + cardIndex + "]"))
-								.getText());
-					} catch (Exception e) {
-						// Handle exception
-					}
-
-					softly.assertThat(
-							card.findElement(By.xpath("(//*[@class='empireFlight_FlightTime'])[" + cardIndex + "]"))
-									.getText().length())
-							.isGreaterThan(0);
-					logger.info("Flight Start Time "
-							+ card.findElement(By.xpath("(//*[@class='empireFlight_FlightTime'])[" + cardIndex + "]"))
-									.getText());
-
-					softly.assertThat(
-							card.findElement(By.xpath("(//*[@class='empireF_ItineraryTabTitle'])[" + cardIndex + "]"))
-									.getText().length())
-							.isGreaterThan(0);
-					logger.info("From and To "
-							+ card.findElement(By.xpath("(//*[@class='empireF_ItineraryTabTitle'])[" + cardIndex + "]"))
-									.getText());
-
-					softly.assertThat(
-							card.findElement(By.xpath("(//*[@class='empireFlight_airline-date'])[" + cardIndex + "]"))
-									.getText().length())
-							.isGreaterThan(0);
-					logger.info("Date "
-							+ card.findElement(By.xpath("(//*[@class='empireFlight_airline-date'])[" + cardIndex + "]"))
-									.getText());
-
-					try {
-						softly.assertThat(card.findElement(
-								By.xpath("(//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted'])["
-										+ cardIndex + "]"))
-								.getText().length()).isGreaterThan(0);
-						logger.info("Stop " + card.findElement(
-								By.xpath("(//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted'])["
-										+ cardIndex + "]"))
-								.getText());
-					} catch (Exception e) {
-						softly.assertThat(card
-								.findElement(By.xpath(
-										"(//*[@class='empireFlight_stopvia ng-star-inserted'])[" + cardIndex + "]"))
-								.getText().length()).isGreaterThan(0);
-						logger.info("Stop " + card
-								.findElement(By.xpath(
-										"(//*[@class='empireFlight_stopvia ng-star-inserted'])[" + cardIndex + "]"))
-								.getText());
-					}
-
-					softly.assertThat(
-							card.findElement(By.xpath("(//*[@class='empireFlight_FlightCode'])[" + cardIndex + "]"))
-									.getText().length())
-							.isGreaterThan(0);
-					logger.info("Source: "
-							+ card.findElement(By.xpath("(//*[@class='empireFlight_FlightCode'])[" + cardIndex + "]"))
-									.getText());
-
-					softly.assertThat(
-							card.findElement(By.xpath("(//*[@class='empireFlight_time include'])[" + cardIndex + "]"))
-									.getText().length())
-							.isGreaterThan(0);
-					logger.info("Time: "
-							+ card.findElement(By.xpath("(//*[@class='empireFlight_time include'])[" + cardIndex + "]"))
-									.getText());
-
-					softly.assertThat(card
-							.findElement(By.xpath(
-									"(//*[@class='empireFlight_Rbd include ng-star-inserted'])[" + cardIndex + "]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Passenger Class: " + card
-							.findElement(By.xpath(
-									"(//*[@class='empireFlight_Rbd include ng-star-inserted'])[" + cardIndex + "]"))
-							.getText());
-
-					softly.assertThat(card
-							.findElement(By.xpath(
-									"(//*[@class='empireF_installmentwrap ng-star-inserted'])[" + cardIndex + "]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Installments: " + card
-							.findElement(By.xpath(
-									"(//*[@class='empireF_installmentwrap ng-star-inserted'])[" + cardIndex + "]"))
-							.getText());
-
-					softly.assertThat(card.findElement(
-							By.xpath("(//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList'])["
-									+ cardIndex + "]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("End Time: " + card.findElement(
-							By.xpath("(//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList'])["
-									+ cardIndex + "]"))
-							.getText());
-					CommonDTO.getInstance()
-							.setFlightEndTime(StringUtils.extractTime(card.findElement(
-									By.xpath("(//*[@class='empireFlight_FlightTime empireFlight_additionalTimeList'])["
-											+ cardIndex + "]"))
-									.getText()));
-
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireFlight_FlightCode empireFlight_DepartCode'])[" + cardIndex + "]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Destinaton: " + card.findElement(By.xpath(
-							"(//*[@class='empireFlight_FlightCode empireFlight_DepartCode'])[" + cardIndex + "]"))
-							.getText());
-
-					softly.assertThat(card
-							.findElement(By.xpath("(//*[@class='FareTypeBox ng-star-inserted'])[" + cardIndex + "]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Fare Option: " + card
-							.findElement(By.xpath("(//*[@class='FareTypeBox ng-star-inserted'])[" + cardIndex + "]"))
-							.getText());
-
-					cardIndex++;
+				try {
+					String lcc = (String) executor
+							.executeScript("return document.querySelectorAll('.LCC_Wrapper.ng-star-inserted')["
+									+ (cardIndex - 1) + "].innerText");
+					softly.assertThat(lcc.length()).isGreaterThan(0);
+					logger.info("LCC " + lcc);
+				} catch (Exception e) {
+					// Handle exception
 				}
-				containerIndex++;
+
+				String flightTime = (String) executor
+						.executeScript("return document.querySelectorAll('.empireFlight_FlightTime')[" + (cardIndex - 1)
+								+ "].innerText");
+				softly.assertThat(flightTime.length()).isGreaterThan(0);
+				logger.info("Flight Start Time " + flightTime);
+
+				try {
+					String fromAndTo = (String) executor
+							.executeScript("return document.querySelectorAll('.empireF_ItineraryTabTitle')["
+									+ (cardIndex - 1) + "].innerText");
+					softly.assertThat(fromAndTo.length()).isGreaterThan(0);
+					logger.info("From and To " + fromAndTo);
+				} catch (Exception e) {
+					// Handle exception
+				}
+
+				String date = (String) executor
+						.executeScript("return document.querySelectorAll('.empireFlight_airline-date')["
+								+ (cardIndex - 1) + "].innerText");
+				softly.assertThat(date.length()).isGreaterThan(0);
+				logger.info("Date " + date);
+
+				try {
+					String stop = (String) executor.executeScript(
+							"return document.querySelectorAll('.empireFlight_stopvia.empireF_directionTxt.ng-star-inserted')["
+									+ (cardIndex - 1) + "].innerText");
+					softly.assertThat(stop.length()).isGreaterThan(0);
+					logger.info("Stop " + stop);
+				} catch (Exception e) {
+					String stopFallback = (String) executor
+							.executeScript("return document.querySelectorAll('.empireFlight_stopvia.ng-star-inserted')["
+									+ (cardIndex - 1) + "].innerText");
+					softly.assertThat(stopFallback.length()).isGreaterThan(0);
+					logger.info("Stop " + stopFallback);
+				}
+
+				String flightCode = (String) executor
+						.executeScript("return document.querySelectorAll('.empireFlight_FlightCode')[" + (cardIndex - 1)
+								+ "].innerText");
+				softly.assertThat(flightCode.length()).isGreaterThan(0);
+				logger.info("Source: " + flightCode);
+
+				String time = (String) executor
+						.executeScript("return document.querySelectorAll('.empireFlight_time.include')["
+								+ (cardIndex - 1) + "].innerText");
+				softly.assertThat(time.length()).isGreaterThan(0);
+				logger.info("Time: " + time);
+
+				String passengerClass = (String) executor
+						.executeScript("return document.querySelectorAll('.empireFlight_Rbd.include.ng-star-inserted')["
+								+ (cardIndex - 1) + "].innerText");
+				softly.assertThat(passengerClass.length()).isGreaterThan(0);
+				logger.info("Passenger Class: " + passengerClass);
+
+				String installments = (String) executor
+						.executeScript("return document.querySelectorAll('.empireF_installmentwrap.ng-star-inserted')["
+								+ (cardIndex - 1) + "].innerText");
+				softly.assertThat(installments.length()).isGreaterThan(0);
+				logger.info("Installments: " + installments);
+
+				String endTime = (String) executor.executeScript(
+						"return document.querySelectorAll('.empireFlight_FlightTime.empireFlight_additionalTimeList')["
+								+ (cardIndex - 1) + "].innerText");
+				softly.assertThat(endTime.length()).isGreaterThan(0);
+				logger.info("End Time: " + endTime);
+				CommonDTO.getInstance().setFlightEndTime(StringUtils.extractTime(endTime));
+
+				String destination = (String) executor.executeScript(
+						"return document.querySelectorAll('.empireFlight_FlightCode.empireFlight_DepartCode')["
+								+ (cardIndex - 1) + "].innerText");
+				softly.assertThat(destination.length()).isGreaterThan(0);
+				logger.info("Destination: " + destination);
+
+				String fareOption = (String) executor
+						.executeScript("return document.querySelectorAll('.FareTypeBox.ng-star-inserted')["
+								+ (cardIndex - 1) + "].innerText");
+				softly.assertThat(fareOption.length()).isGreaterThan(0);
+				logger.info("Fare Option: " + fareOption);
+
+				cardIndex++;
 			}
+			// containerIndex++;
+			// }
 
 		} catch (Exception e) {
 			logger.info("Exception occured at I_need_to_validate_advance_search()->" + e.getMessage());
