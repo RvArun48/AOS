@@ -157,7 +157,8 @@
 		"aircraft_types": "Airbus 320",
 		"deprture_stop": "Dubai International Airport, Dubai",
 		"departure_airport": "Dubai Bus Station, Dubai",
-		"arrival_timing": ""
+		"arrival_timing": "",
+		"fare_option": "YCOMFORT"
 		
 	},
 	"oneway_edit_flight_listing": {
@@ -182,40 +183,7 @@
 		"relevant_keyword_preferred_airlines": "Emirates"
 		},
 		
-		
-		"roundtrip_flight_listingg": {
-	    
-		"base_url": "",
-		"currency": "BHD",
-		"language": "Georgian",
-		"trip_select": "One Way",
-		"from": "CIA",
-		"to": "AUH",
-		"date": "1",
-		"return_date": "1",
-		"passenger_class": "Economy",
-		"adult_count": "2",
-		"child_count": "2",
-		"infant_count": "2",
-		"flexible_date": true,
-		"umrah_fare": true,
-		"baggage_only": true,
-		"is_refundable": true,
-		"is_direct_flight": true,
-		"preferred_airlines": "Flydubai",
-		"relevant_keyword_preferred_airlines": "Flydubai",
-		"filter_airlines_select": "Flydubai",
-		"select_refundable": "Refundable",
-		"stop": "1 Stop",
-		"aircraft_types": "Airbus 332",
-		"deprture_stop": "Bahrain International Airport, Bahrain",
-		"departure_airport": "Dubai Bus Station, Dubai",
-		"arrival_timing": ""
-		
-		
-		
-		
-		},
+	
 		
 		"roundtrip_flight_listing": {
 	    
