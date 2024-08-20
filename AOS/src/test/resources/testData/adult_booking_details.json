@@ -15,6 +15,22 @@
 		"ped_day": "07",
 		"ped_month": "June",
 		"ped_year": "2030",
+		
+		"document_type": "National ID (Only for GCC Nationals)",
+		"nationality_id_gcc": "25321",
+		"issuing_country_gcc": "India",
+		"nationality_gcc": "India",
+		"nationality_expiry_date_gcc": "21",
+		"nationality_expiry_month_gcc": "04",
+		"nationality_expiry_year_gcc": "2028",
+		"iqama_id": "23121",
+		"nationality_srff": "India",
+		"iqama_expiry_date_srff": "06",
+		"iqama_expiry_month_srff": "08",
+		"iqama_expiry_year_srff": "2030",
+		"local_document_no": "542546",
+		
+		
 		"meal_preference": "Diabetic Meal",
 		"seat_preference": "Aisle",
 		"special_requst": "",

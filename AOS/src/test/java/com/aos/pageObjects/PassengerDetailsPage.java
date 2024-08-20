@@ -50,5 +50,18 @@ public class PassengerDetailsPage {
 	@FindBy(xpath = "//*[@id='submitBtn']")
 	public WebElement pay;
 	
+	@FindBy(xpath = "//label[text()='Passport Information']")
+	public WebElement passportInformation;
+	
+	@FindBy(xpath = "//label[text()='National ID (Only for GCC Nationals)']")
+	public WebElement nationalId;
+	
+
+	@FindBy(xpath = "(//input[@formcontrolname='DocumentNumber'])[1]")
+	public WebElement nationalIdField;
+	
+	
+	
+	
 	
 }

@@ -4,7 +4,7 @@ Feature: Book Ticket
   @Smoke
   Scenario: Book ticket for Abudhabi to London using Smoke
   Given I want to open the application
-  And book a flight ticket for "abudhabi_to_london"
+  And book a flight ticket for "dubai_to_doha"
   
   @Regression
   Scenario: Book ticket for Dubai to Doha using Regression

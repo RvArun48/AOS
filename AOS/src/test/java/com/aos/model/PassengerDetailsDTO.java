@@ -270,6 +270,172 @@ public class PassengerDetailsDTO {
 	}
 	
 
+	@SerializedName("document_type")
+	@Expose
+	private String documentType;
+
+	public String getDocumentType() {
+		return documentType;
+	}
+
+	public void setDocumentType(String documentType) {
+		this.documentType = documentType;
+		
+	}
+	
+	@SerializedName("nationality_id_gcc")
+	@Expose
+	private String nationalityIdGcc;
+
+	public String getNationalityIdGcc() {
+		return nationalityIdGcc;
+	}
+
+	public void setNationalityIdGcc(String nationalityIdGcc) {
+		this.nationalityIdGcc = nationalityIdGcc;
+		
+	}
+	
+	@SerializedName("issuing_country_gcc")
+	@Expose
+	private String issuingCountryGcc;
+
+	public String getIssuingCountryGcc() {
+		return issuingCountryGcc;
+	}
+
+	public void setIssuingCountryGcc(String issuingCountryGcc) {
+		this.issuingCountryGcc = issuingCountryGcc;
+		
+	}
+	
+	@SerializedName("nationality_gcc")
+	@Expose
+	private String nationalityGcc;
+
+	public String getNationalityGcc() {
+		return nationalityGcc;
+	}
+
+	public void setNationalityGcc(String nationalityGcc) {
+		this.nationalityGcc = nationalityGcc;
+		
+	}
+	@SerializedName("nationality_expiry_date_gcc")
+	@Expose
+	private String nationalityExpiryDateGcc;
+
+	public String getNationalityExpiryDateGcc() {
+		return nationalityExpiryDateGcc;
+	}
+
+	public void setNationalityExpiryDateGcc(String nationalityExpiryDateGcc) {
+		this.nationalityExpiryDateGcc = nationalityExpiryDateGcc;
+		
+	}
+	
+	@SerializedName("iqama_id")
+	@Expose
+	private String iqamaId;
+
+	public String getIqamaId() {
+		return iqamaId;
+	}
+
+	public void setIqamaId(String iqamaId) {
+		this.iqamaId = iqamaId;
+		
+	}
+	
+	@SerializedName("nationality_srff")
+	@Expose
+	private String nationalitySrff;
+
+	public String getNationalitySrff() {
+		return nationalitySrff;
+	}
+
+	public void setNationalitySrff(String nationalitySrff) {
+		this.nationalitySrff = nationalitySrff;
+		
+	}
+	
+	@SerializedName("iqama_expiry_date_srff")
+	@Expose
+	private String iqamaExpiryDateSrff;
+
+	public String getIqamaExpiryDateSrff() {
+		return iqamaExpiryDateSrff;
+	}
+
+	public void setIqamaExpiryDateSrff(String iqamaExpiryDateSrff) {
+		this.iqamaExpiryDateSrff = iqamaExpiryDateSrff;
+		
+	}
+	
+	@SerializedName("local_document_no")
+	@Expose
+	private String localDocumentNo;
+
+	public String getLocalDocumentNo() {
+		return localDocumentNo;
+	}
+
+	public void setLocalDocumentNo(String localDocumentNo) {
+		this.localDocumentNo = localDocumentNo;
+		
+	}
+	@SerializedName("iqama_expiry_month_srff")
+	@Expose
+	private String iqamaExpiryMonthSrff;
+
+	public String getiqamaExpiryMonthSrff() {
+		return iqamaExpiryMonthSrff;
+	}
+
+	public void setiqamaExpiryMonthSrff(String iqamaExpiryMonthSrff) {
+		this.iqamaExpiryMonthSrff = iqamaExpiryMonthSrff;
+		
+	}
+	
+	@SerializedName("iqama_expiry_year_srff")
+	@Expose
+	private String iqamaExpiryYearSrff;
+
+	public String getiqamaExpiryYearSrff() {
+		return iqamaExpiryYearSrff;
+	}
+
+	public void setiqamaExpiryYearSrff(String iqamaExpiryYearSrff) {
+		this.iqamaExpiryYearSrff = iqamaExpiryYearSrff;
+		
+	}
+	@SerializedName("nationality_expiry_month_gcc")
+	@Expose
+	private String nationalityExpiryMonthGcc;
+
+	public String getnationalityExpiryMonthGcc() {
+		return nationalityExpiryMonthGcc;
+	}
+
+	public void setnationalityExpiryMonthGcc(String nationalityExpiryMonthGcc) {
+		this.nationalityExpiryMonthGcc = nationalityExpiryMonthGcc;
+		
+	}
+	@SerializedName("nationality_expiry_year_gcc")
+	@Expose
+	private String nationalityExpiryYearGcc;
+
+	public String getnationalityExpiryYearGcc() {
+		return nationalityExpiryYearGcc;
+	}
+
+	public void setnationalityExpiryYearGcc(String nationalityExpiryYearGcc) {
+		this.nationalityExpiryYearGcc = nationalityExpiryYearGcc;
+		
+	}
+	
+
 
 	
 	

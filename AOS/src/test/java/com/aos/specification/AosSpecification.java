@@ -270,7 +270,7 @@ public class AosSpecification extends TestRunner {
 			Thread.sleep(10000);
 
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(homePage.continueBooking));
+				ExpectedConditions.elementToBeClickable(homePage.continueBooking);
 				homePage.continueBooking.click();
 				LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Pop up found", driver, scenarioName);
 			} catch (Exception e) {
@@ -282,10 +282,10 @@ public class AosSpecification extends TestRunner {
 			homePage.Booknow.click();
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Click the Booknow button", driver, scenarioName);
 
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			wait.until(ExpectedConditions
 					.visibilityOf(driver.findElement(By.xpath("//*[@class='empireF_TravelerFormPerDetail']"))));
-
+			Thread.sleep(5000);
 			List<WebElement> passengerDetailsContainer = driver
 					.findElements(By.xpath("//*[@formarrayname='clientDetails']"));
 			passengerDetailsPage = PageFactory.initElements(driver, PassengerDetailsPage.class);
