@@ -724,13 +724,7 @@ public class BookTicketDTO {
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
+
 		
 	}
 	

@@ -67,7 +67,10 @@ public class PassengerDetailsPage {
 	public WebElement iqamaId;
 	
 	
+	@FindBy(xpath = "//*[@class='btn OptPrefBtn' and contains(text(),' Optional Preference ')]")
+	public WebElement optionalPreference;
 	
 	
+
 	
 }

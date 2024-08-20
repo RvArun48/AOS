@@ -389,11 +389,11 @@ public class PassengerDetailsDTO {
 	@Expose
 	private String iqamaExpiryMonthSrff;
 
-	public String getiqamaExpiryMonthSrff() {
+	public String getIqamaExpiryMonthSrff() {
 		return iqamaExpiryMonthSrff;
 	}
 
-	public void setiqamaExpiryMonthSrff(String iqamaExpiryMonthSrff) {
+	public void setIqamaExpiryMonthSrff(String iqamaExpiryMonthSrff) {
 		this.iqamaExpiryMonthSrff = iqamaExpiryMonthSrff;
 		
 	}
@@ -402,11 +402,11 @@ public class PassengerDetailsDTO {
 	@Expose
 	private String iqamaExpiryYearSrff;
 
-	public String getiqamaExpiryYearSrff() {
+	public String getIqamaExpiryYearSrff() {
 		return iqamaExpiryYearSrff;
 	}
 
-	public void setiqamaExpiryYearSrff(String iqamaExpiryYearSrff) {
+	public void setIqamaExpiryYearSrff(String iqamaExpiryYearSrff) {
 		this.iqamaExpiryYearSrff = iqamaExpiryYearSrff;
 		
 	}
@@ -414,11 +414,11 @@ public class PassengerDetailsDTO {
 	@Expose
 	private String nationalityExpiryMonthGcc;
 
-	public String getnationalityExpiryMonthGcc() {
+	public String getNationalityExpiryMonthGcc() {
 		return nationalityExpiryMonthGcc;
 	}
 
-	public void setnationalityExpiryMonthGcc(String nationalityExpiryMonthGcc) {
+	public void setNationalityExpiryMonthGcc(String nationalityExpiryMonthGcc) {
 		this.nationalityExpiryMonthGcc = nationalityExpiryMonthGcc;
 		
 	}
@@ -426,17 +426,177 @@ public class PassengerDetailsDTO {
 	@Expose
 	private String nationalityExpiryYearGcc;
 
-	public String getnationalityExpiryYearGcc() {
+	public String getNationalityExpiryYearGcc() {
 		return nationalityExpiryYearGcc;
 	}
 
-	public void setnationalityExpiryYearGcc(String nationalityExpiryYearGcc) {
+	public void setNationalityExpiryYearGcc(String nationalityExpiryYearGcc) {
 		this.nationalityExpiryYearGcc = nationalityExpiryYearGcc;
 		
 	}
 	
+	@SerializedName("form_identity")
+	@Expose
+	private String formIdentity;
 
+	public String getFormIdentity() {
+		return formIdentity;
+	}
 
+	public void setFormIdentity(String formIdentity) {
+		this.formIdentity = formIdentity;
+		
+	}
+	
+	@SerializedName("visa_number")
+	@Expose
+	private String visaNumber;
+
+	public String getVisaNumber() {
+		return visaNumber;
+	}
+
+	public void setVisaNumber(String visaNumber) {
+		this.visaNumber = visaNumber;
+		
+	}
+	
+	@SerializedName("place_of_birth_city")
+	@Expose
+	private String placeOfBirthCity;
+
+	public String getPlaceOfBirthCity() {
+		return placeOfBirthCity;
+	}
+
+	public void setPlaceOfBirthCity(String placeOfBirthCity) {
+		this.placeOfBirthCity = placeOfBirthCity;
+		
+	}
+	@SerializedName("place_of_birth_country")
+	@Expose
+	private String placeOfBirthCountry;
+
+	public String getplaceOfBirthCountry() {
+		return placeOfBirthCountry;
+	}
+
+	public void setplaceOfBirthCountry(String placeOfBirthCountry) {
+		this.placeOfBirthCountry = placeOfBirthCountry;
+		
+	}
+
+	@SerializedName("visa_issued_city")
+	@Expose
+	private String visaIssuedCity;
+
+	public String getVisaIssuedCity() {
+		return visaIssuedCity;
+	}
+
+	public void setVisaIssuedCity(String visaIssuedCity) {
+		this.visaIssuedCity = visaIssuedCity;
+		
+	}
+	@SerializedName("issued_country")
+	@Expose
+	private String issuedCountry;
+
+	public String getIssuedCountry() {
+		return issuedCountry;
+	}
+
+	public void setIssuedCountry(String issuedCountry) {
+		this.issuedCountry = issuedCountry;
+		
+	}
+	@SerializedName("visa_issued_day")
+	@Expose
+	private String visaIssuedDay;
+
+	public String getVisaIssuedDay() {
+		return visaIssuedDay;
+	}
+
+	public void setVisaIssuedDay(String visaIssuedDay) {
+		this.visaIssuedDay = visaIssuedDay;
+		
+	}
+	@SerializedName("visa_issued_month")
+	@Expose
+	private String visaIssuedMonth;
+
+	public String getVisaIssuedMonth() {
+		return visaIssuedMonth;
+	}
+
+	public void setVisaIssuedMonth(String visaIssuedMonth) {
+		this.visaIssuedMonth = visaIssuedMonth;
+		
+	}
+	
+	@SerializedName("visa_issued_year")
+	@Expose
+	private String visaIssuedYear;
+
+	public String getVisaIssuedYear() {
+		return visaIssuedYear;
+	}
+
+	public void setVisaIssuedYear(String visaIssuedYear) {
+		this.visaIssuedYear = visaIssuedYear;
+		
+	}
+	@SerializedName("visa_expiry_day")
+	@Expose
+	private String visaExpiryDay;
+
+	public String getVisaExpiryDay() {
+		return visaExpiryDay;
+	}
+
+	public void setVisaExpiryDay(String visaExpiryDay) {
+		this.visaExpiryDay = visaExpiryDay;
+		
+	}
+	@SerializedName("visa_expiry_month")
+	@Expose
+	private String visaExpiryMonth;
+
+	public String getVisaExpiryMonth() {
+		return visaExpiryMonth;
+	}
+
+	public void setVisaExpiryMonth(String visaExpiryMonth) {
+		this.visaExpiryMonth = visaExpiryMonth;
+		
+	}
+	
+	@SerializedName("visa_expiry_year")
+	@Expose
+	private String visaExpiryYear;
+
+	public String getVisaExpiryYear() {
+		return visaExpiryYear;
+	}
+
+	public void setVisaExpiryYear(String visaExpiryYear) {
+		this.visaExpiryYear = visaExpiryYear;
+		
+	}
+	
+	@SerializedName("visa_required_country")
+	@Expose
+	private String visaRequiredCountry;
+
+	public String getVisaRequiredCountry() {
+		return visaRequiredCountry;
+	}
+
+	public void setVisaRequiredCountry(String visaRequiredCountry) {
+		this.visaRequiredCountry = visaRequiredCountry;
+		
+	}
 	
 	
 }
