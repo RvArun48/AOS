@@ -60,6 +60,12 @@ public class PassengerDetailsPage {
 	@FindBy(xpath = "(//input[@formcontrolname='DocumentNumber'])[1]")
 	public WebElement nationalIdField;
 	
+	@FindBy(xpath = "(//*[@class='mdc-form-field'])[4]")
+	public WebElement localId;
+	
+	@FindBy(xpath = "//label[text()='Iqama ID (Saudi Residence for Foreigners)']")
+	public WebElement iqamaId;
+	
 	
 	
 	

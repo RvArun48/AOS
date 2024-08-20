@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -18,6 +19,7 @@ import com.aos.model.BookTicketDTO;
 import com.aos.model.PassengerDetailsDTO;
 import com.aos.pageObjects.PassengerDetailsPage;
 import com.aos.specification.AosSpecification;
+import com.aos.utils.CommonUtils;
 import com.aos.utils.LogEvent;
 import com.aos.utils.ReadProperty;
 import com.aventstack.extentreports.ExtentReports;
@@ -129,16 +131,6 @@ public class AosImplementation extends AosSpecification {
 
 		pedYear = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']")).get((i));
 
-		issuingCountryGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssuingCountry']")).get((i));
-
-		nationalityGcc = driver.findElements(By.xpath("(//div[@class='ng-select-container ng-has-value'])[2]"))
-				.get((i));
-		nationalityExpiryDateGcc = driver
-				.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']//input[@type='text']")).get((i));
-		nationalityExpiryMonthGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']"))
-				.get((i));
-		nationalityExpiryYearGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']")).get((i));
-
 		actions.moveToElement(title).perform();
 
 		title.click();
@@ -187,20 +179,105 @@ public class AosImplementation extends AosSpecification {
 				passengerDetailsContainer.get(i)
 						.findElement(By.xpath("//*[@class='ng-option-label ng-star-inserted' and text()='"
 								+ passengerDTOList.get(dataIndex).getDobYear() + "']")));
+
+
+		
+		
+		if 	 (passengerDTOList.get(dataIndex).getDocumentType()
+				.equalsIgnoreCase("Local Id")) {
+		
+			
+			
+			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.localId));
+			passengerDetailsPage.localId.click();
+			
+			
+			logger.info("Click the local id : " + passengerDTOList.get(dataIndex).getLocalDocumentNo());
+			wait.until(ExpectedConditions.elementToBeClickable(driver
+					.findElements(By.xpath("//*[@formcontrolname='DocumentNumber']")).get(i)));
+
+			driver.findElements(By.xpath("//*[@formcontrolname='DocumentNumber']")).get(i)
+					.sendKeys(passengerDTOList.get(dataIndex).getLocalDocumentNo());
+			}
+		
+		if 	 (passengerDTOList.get(dataIndex).getDocumentType()
+				.equalsIgnoreCase("Iqama ID (Saudi Residence for Foreigners)")) {
+		
+			
+			
+			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.iqamaId));
+			passengerDetailsPage.iqamaId.click();
+			
+			
+			logger.info("Click the local id : " + passengerDTOList.get(dataIndex).getIqamaId());
+			wait.until(ExpectedConditions.elementToBeClickable(driver
+					.findElements(By.xpath("//*[@formcontrolname='DocumentNumber']")).get(i)));
+
+			driver.findElements(By.xpath("//*[@formcontrolname='DocumentNumber']")).get(i)
+					.sendKeys(passengerDTOList.get(dataIndex).getIqamaId());
+			}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 
-		if (passengerDTOList.get(dataIndex).getDocumentType()
+		if 	 (passengerDTOList.get(dataIndex).getDocumentType()
 				.equalsIgnoreCase("National ID (Only for GCC Nationals)")) {
+			
+
+			issuingCountryGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssuingCountry']")).get((i));
+
+			nationalityGcc = driver.findElements(By.xpath("//*[@formcontrolname='Nationality']"))
+					.get((i));
+			nationalityExpiryDateGcc = driver
+					.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']//input[@type='text']")).get((i));
+			nationalityExpiryMonthGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']"))
+					.get((i));
+			nationalityExpiryYearGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']")).get((i));
+
+			
+			
+//			if (bookTicketDTO.getBaggageOnly()) {
+//				logger.info("clicking on baggage only");
+//				homePage.baggageOnlyElementGroup.click();
+//			}
 
 			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.nationalId));
 			passengerDetailsPage.nationalId.click();
+			
+			
+			logger.info("Enter the Nationality : " + passengerDTOList.get(dataIndex).getNationalityIdGcc());
+			wait.until(ExpectedConditions.elementToBeClickable(driver
+					.findElements(By.xpath("//*[@formcontrolname='DocumentNumber']")).get(i)));
 
+			driver.findElements(By.xpath("//*[@formcontrolname='DocumentNumber']")).get(i)
+					.sendKeys(passengerDTOList.get(dataIndex).getNationalityIdGcc());
+
+
+			
 			logger.info("Selecting the Issuing Country Gcc: " + passengerDTOList.get(dataIndex).getIssuingCountryGcc());
 
-			Thread.sleep(5000);
+		
+			
 			wait.until(ExpectedConditions.elementToBeClickable(issuingCountryGcc));
+//			CommonUtils.handleStaleElement(issuingCountryGcc);
 			issuingCountryGcc.click();
-			Thread.sleep(5000);
+			
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Nationality Id details",
 					driver, scenarioName);
 			Thread.sleep(1000);
@@ -211,13 +288,7 @@ public class AosImplementation extends AosSpecification {
 			Thread.sleep(5000);
 			
 			
-			logger.info("Enter the Nationality : " + passengerDTOList.get(dataIndex).getNationalityIdGcc());
-			wait.until(ExpectedConditions.elementToBeClickable(driver
-					.findElements(By.xpath("//input[@class='ng-pristine ng-invalid error ng-touched']")).get(i)));
-
-			driver.findElements(By.xpath("//input[@class='ng-pristine ng-invalid error ng-touched']")).get(i)
-					.sendKeys(passengerDTOList.get(dataIndex).getNationalityIdGcc());
-
+			
 			logger.info("Selecting the Nationality: " + passengerDTOList.get(dataIndex).getNationalityGcc());
 
 			wait.until(ExpectedConditions.elementToBeClickable(nationalityGcc));
@@ -354,6 +425,8 @@ public class AosImplementation extends AosSpecification {
 		}
 
 	}
+	
+	
 
 	public static void verifyTicketBookingStatus(WebDriverWait wait) throws IOException {
 		try {
