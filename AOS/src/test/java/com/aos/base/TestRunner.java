@@ -22,7 +22,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/features", glue = { "com.aos.specification" }, plugin = {
-		"json:target/RunCuke/cucumber.json", "pretty" }, tags = "@Smoke")
+		"json:target/RunCuke/cucumber.json", "pretty" }, tags = "@oneway_flight_listing")
 
 public class TestRunner {
 

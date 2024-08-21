@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -354,10 +355,8 @@ public class AosImplementation extends AosSpecification {
 
 			logger.info("Selecting the Issuing Country Gcc: " + passengerDTOList.get(dataIndex).getIssuingCountryGcc());
 
-			wait.until(ExpectedConditions.elementToBeClickable(issuingCountryGcc));
-//			CommonUtils.handleStaleElement(issuingCountryGcc);
-			issuingCountryGcc.click();
-
+			//wait.until(ExpectedConditions.elementToBeClickable(issuingCountryGcc));
+    		new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Nationality Id details",
 					driver, scenarioName);
 			Thread.sleep(1000);

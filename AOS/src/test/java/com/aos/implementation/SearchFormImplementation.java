@@ -3098,7 +3098,7 @@ public class SearchFormImplementation extends TestRunner {
 
 	}
 
-	public void addPassengerDetails() {
+	public void I_need_to_add_the_traveller_details() {
 		try {
 
 			Type pd = new TypeToken<PassengerDetailsDTO>() {
@@ -3130,12 +3130,11 @@ public class SearchFormImplementation extends TestRunner {
 							(PassengerDetailsDTO) JsonToGson.convertToObjFromArray("infant_booking_details", i, pd));
 				}
 			}
-			
+
 			int adultPassengersCount = adultPassengerDTOList.size();
 			int childPassengersCount = childPassengerDTOList.size();
 			int infantPassengersCount = infantPassengerDTOList.size();
 
-			
 			int i = 0;
 			int dataIndex = 0;
 			List<WebElement> passengerDetailsContainer = driver
@@ -3166,7 +3165,6 @@ public class SearchFormImplementation extends TestRunner {
 				dataIndex++;
 			}
 
-
 		} catch (Exception e) {
 			logger.info("Exception occured at addPassengerDetails()->" + e.getMessage());
 		}
@@ -3176,15 +3174,11 @@ public class SearchFormImplementation extends TestRunner {
 		logger.info("Click the Booknow Button");
 		wait.until(ExpectedConditions.elementToBeClickable(homePage.Booknow));
 		homePage.Booknow.click();
-		LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Click the Booknow button", driver, getScenarioName());
+		LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Click the Booknow button", driver,
+				getScenarioName());
 
 		Thread.sleep(10000);
-		
-	}
 
-	public void I_need_to_add_the_traveller_details() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

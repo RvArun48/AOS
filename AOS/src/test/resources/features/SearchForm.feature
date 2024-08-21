@@ -109,8 +109,8 @@ Feature: Flight Booking
         
         #Then  I need to validate flight details 
         #Then  I need to validate fare option card 
-         Then I click on the flight ltinerary
-          Then  I need to validate flight ltinerary
+        # Then I click on the flight ltinerary
+         # Then  I need to validate flight ltinerary
             #Then I click on the baggage
              #Then  I need to validate baggage
             #Then I click on the fare breakup

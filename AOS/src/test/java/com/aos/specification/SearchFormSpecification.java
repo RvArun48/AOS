@@ -73,6 +73,7 @@ public class SearchFormSpecification extends TestRunner {
 
 		CommonDTO.getInstance().setBookTicketDTO(bookTicketDTO);
 	}
+
 	@Given("^I setup the edit data with \"(.*?)\"$")
 	public void testDataSetup1(String keyData) {
 		Type bt = new TypeToken<BookTicketDTO>() {
@@ -186,16 +187,17 @@ public class SearchFormSpecification extends TestRunner {
 	}
 
 	@Then("I enter the  preferred airlines")
-    public void i_enter_the_preferred_airlines() {
-    	try {
-    		new SearchFormImplementation().i_enter_the_preferred_airlines();}catch(
+	public void i_enter_the_preferred_airlines() {
+		try {
+			new SearchFormImplementation().i_enter_the_preferred_airlines();
+		} catch (
 
-	Exception e)
-	{
-		// TODO: handle exception
+		Exception e) {
+			// TODO: handle exception
+		}
+
 	}
 
-	}
 	@Then("I change the currency type")
 	public void I_change_the_currency_type() {
 		try {
@@ -205,6 +207,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I change the language")
 	public void I_change_the_language() {
 		try {
@@ -214,7 +217,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I enter the segment two")
 	public void I_enter_the_segment_two() {
 		try {
@@ -224,7 +227,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I enter the segment three")
 	public void I_enter_the_segment_three() {
 		try {
@@ -234,7 +237,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I enter the segment four")
 	public void I_enter_the_segment_four() {
 		try {
@@ -244,6 +247,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I enter the segment five")
 	public void I_enter_the_segment_five() {
 		try {
@@ -253,7 +257,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I enter the segment six")
 	public void I_enter_the_segment_six() {
 		try {
@@ -263,7 +267,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I click the add another city")
 	public void I_click_the_add_another_city() {
 		try {
@@ -273,8 +277,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
-	
+
 	@Then("I click the flexible data")
 	public void I_click_the_flexible_data() {
 		try {
@@ -284,7 +287,6 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
 
 	@Then("I click the umrah fare")
 	public void I_click_the_umrah_fare() {
@@ -295,6 +297,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I enter the return date")
 	public void I_enter_the_return_date() {
 		try {
@@ -304,7 +307,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I click on the edit search")
 	public void I_click_on_the_edit_search() {
 		try {
@@ -314,7 +317,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate advance search")
 	public void I_need_to_validate_advance_search() {
 		try {
@@ -324,7 +327,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate flight listing")
 	public void I_need_to_validate_flight_listing() {
 		try {
@@ -334,7 +337,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate flight listing multi segment three")
 	public void I_need_to_validate_flight_listing_multi_segment_three() {
 		try {
@@ -344,7 +347,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate flight listing multi segment six")
 	public void I_need_to_validate_flight_listing_multi_segment_six() {
 		try {
@@ -354,7 +357,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate flexi calander")
 	public void I_need_to_validate_flexi_calander() {
 		try {
@@ -364,7 +367,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate installments")
 	public void I_need_to_validate_installments() {
 		try {
@@ -374,6 +377,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I need to validate time")
 	public void I_need_to_validate_time() {
 		try {
@@ -383,6 +387,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I need to validate price")
 	public void I_need_to_validate_price() {
 		try {
@@ -392,6 +397,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I need to validate stop")
 	public void I_need_to_validate_stop() {
 		try {
@@ -401,7 +407,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate duration")
 	public void I_need_to_validate_duration() {
 		try {
@@ -411,7 +417,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate airline")
 	public void I_need_to_validate_airline() {
 		try {
@@ -421,6 +427,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I need to validate refundable")
 	public void I_need_to_validate_refundable() {
 		try {
@@ -430,7 +437,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I click on the more filter")
 	public void I_click_on_the_mor_filter() {
 		try {
@@ -440,7 +447,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate departure airport")
 	public void I_need_to_validate_departure_airport() {
 		try {
@@ -450,6 +457,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I need to validate arrival airport")
 	public void I_need_to_validate_arrival_airport() {
 		try {
@@ -459,6 +467,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I need to validate departure stopover")
 	public void I_need_to_validate_departure_stopover() {
 		try {
@@ -468,7 +477,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate aircraft types")
 	public void I_need_to_validate_aircraft_types() {
 		try {
@@ -478,6 +487,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I click on the apply button")
 	public void I_click_on_the_apply_button() {
 		try {
@@ -487,7 +497,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate fare option")
 	public void I_click_on_the_fare_option() {
 		try {
@@ -497,7 +507,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate sortby filter")
 	public void I_click_on_the_sortby_filter() {
 		try {
@@ -507,6 +517,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I need to validate more fligt option")
 	public void I_need_to_validate_more_fligt_option() {
 		try {
@@ -516,7 +527,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate flexi calander round trip")
 	public void I_need_to_validate_flexi_calander_round_trip() {
 		try {
@@ -526,7 +537,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
-	
+
 	@Then("I need to validate more fligt option round trip")
 	public void I_need_to_validate_more_fligt_option_round_trip() {
 		try {
@@ -536,6 +547,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I need to validate fare option three segment")
 	public void I_need_to_validate_fare_option_three_segment() {
 		try {
@@ -545,8 +557,9 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I click on the flight details")
-	public void I_click_on_the_flight_details () {
+	public void I_click_on_the_flight_details() {
 		try {
 			new SearchFormImplementation().I_click_on_the_flight_details();
 		} catch (Exception e) {
@@ -554,8 +567,9 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I need to validate flight details")
-	public void I_need_to_validate_flight_details () {
+	public void I_need_to_validate_flight_details() {
 		try {
 			new SearchFormImplementation().I_need_to_validate_flight_details();
 		} catch (Exception e) {
@@ -563,6 +577,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I need to validate fare option card")
 	public void I_click_on_the_fare_option_card() {
 		try {
@@ -572,8 +587,9 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I click on the flight ltinerary")
-	public void I_click_on_the_flight_ltinerary () {
+	public void I_click_on_the_flight_ltinerary() {
 		try {
 			new SearchFormImplementation().I_click_on_the_flight_ltinerary();
 		} catch (Exception e) {
@@ -581,6 +597,7 @@ public class SearchFormSpecification extends TestRunner {
 		}
 
 	}
+
 	@Then("I need to validate flight ltinerary")
 	public void I_need_to_validate_flight_ltinerary() {
 		try {
@@ -588,79 +605,76 @@ public class SearchFormSpecification extends TestRunner {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+
+	@Then("I click on the baggage")
+	public void I_click_on_the_baggage() {
+		try {
+			new SearchFormImplementation().I_click_on_the_baggage();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		
-		
-		@Then("I click on the baggage")
-		public void I_click_on_the_baggage() {
-			try {
-				new SearchFormImplementation().I_click_on_the_baggage();
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
 
+	}
+
+	@Then("I need to validate baggage")
+	public void I_need_to_validate_baggage() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_baggage();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		@Then("I need to validate baggage")
-		public void I_need_to_validate_baggage() {
-			try {
-				new SearchFormImplementation().I_need_to_validate_baggage();
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			}
-		
-		@Then("I click on the fare breakup")
-		public void I_click_on_the_fare_breakup() {
-			try {
-				new SearchFormImplementation().I_click_on_the_fare_breakup();
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+	}
 
+	@Then("I click on the fare breakup")
+	public void I_click_on_the_fare_breakup() {
+		try {
+			new SearchFormImplementation().I_click_on_the_fare_breakup();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		@Then("I need to validate fare breakup")
-		public void I_need_to_validate_fare_breakup() {
-			try {
-				new SearchFormImplementation().I_need_to_validate_fare_breakup();
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			}
-		
-		@Then("I need to validate fare option card for round trip")
-		public void I_need_to_validate_fare_option_card_for_round_trip() {
-			try {
-				new SearchFormImplementation().I_need_to_validate_fare_option_card_for_round_trip();
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			}
-			
-		@Then("I click on the booknow")
-		public void I_click_on_the_booknow() {
-			try {
-				new SearchFormImplementation().I_click_on_the_booknow();
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			}
-		
-		@Then("I need to add the traveller details")
-		public void I_need_to_add_the_traveller_details() {
-			try {
-				new SearchFormImplementation().I_need_to_add_the_traveller_details();
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			}
 
-	
+	}
 
+	@Then("I need to validate fare breakup")
+	public void I_need_to_validate_fare_breakup() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_fare_breakup();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 
-	
+	@Then("I need to validate fare option card for round trip")
+	public void I_need_to_validate_fare_option_card_for_round_trip() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_fare_option_card_for_round_trip();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	@Then("I click on the booknow")
+	public void I_click_on_the_booknow() {
+		try {
+			new SearchFormImplementation().I_click_on_the_booknow();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	@Then("I need to add the traveller details")
+	public void I_need_to_add_the_traveller_details() {
+		try {
+			new SearchFormImplementation().I_need_to_add_the_traveller_details();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
 	private void calander() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@After
@@ -668,5 +682,3 @@ public class SearchFormSpecification extends TestRunner {
 		tearDown();
 	}
 }
-
-
