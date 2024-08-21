@@ -16,7 +16,7 @@
 		"ped_month": "June",
 		"ped_year": "2030",
 		
-		"document_type": "Local Id",
+		"document_type": "National ID (Only for GCC Nationals)",
 		"nationality_id_gcc": "25321",
 		"issuing_country_gcc": "India",
 		"nationality_gcc": "India",
