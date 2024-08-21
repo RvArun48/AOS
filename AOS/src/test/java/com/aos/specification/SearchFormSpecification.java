@@ -636,7 +636,23 @@ public class SearchFormSpecification extends TestRunner {
 			}
 			}
 			
-			
+		@Then("I click on the booknow")
+		public void I_click_on_the_booknow() {
+			try {
+				new SearchFormImplementation().I_click_on_the_booknow();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			}
+		
+		@Then("I need to add the traveller details")
+		public void I_need_to_add_the_traveller_details() {
+			try {
+				new SearchFormImplementation().I_need_to_add_the_traveller_details();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			}
 
 	
 

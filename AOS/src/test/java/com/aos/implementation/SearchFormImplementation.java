@@ -3172,4 +3172,19 @@ public class SearchFormImplementation extends TestRunner {
 		}
 	}
 
+	public void I_click_on_the_booknow() throws InterruptedException {
+		logger.info("Click the Booknow Button");
+		wait.until(ExpectedConditions.elementToBeClickable(homePage.Booknow));
+		homePage.Booknow.click();
+		LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Click the Booknow button", driver, getScenarioName());
+
+		Thread.sleep(10000);
+		
+	}
+
+	public void I_need_to_add_the_traveller_details() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
