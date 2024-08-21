@@ -113,21 +113,24 @@ public class AosImplementation extends AosSpecification {
 		WebElement seatPreference;
 		WebElement specialRequst;
 		WebElement airline;
-		
+
 		WebElement visaRequiredCountry;
 		WebElement visaExpiryYear;
 		WebElement visaExpiryMonth;
-		
+
 		WebElement visaExpiryDay;
-		
+
 		WebElement visaIssuedYear;
-		
+
 		WebElement visaIssuedMonth;
-		
+
 		WebElement visaIssuedDay;
-		
+
 		WebElement issuedCountry;
 		WebElement placeOfBirthCountry;
+		WebElement destinationCountry;
+		WebElement residenceCountry;
+		
 
 		title = wait.until(
 				ExpectedConditions.visibilityOf(driver.findElements(By.xpath("//*[@formcontrolname='Title']")).get(i)));
@@ -176,10 +179,10 @@ public class AosImplementation extends AosSpecification {
 
 		specialRequst = driver.findElements(By.xpath("//*[@formcontrolname='SSR_SpecialRequest']")).get((i));
 		airline = driver.findElements(By.xpath("//*[@formcontrolname='Airline']")).get((i));
-		
+
 		placeOfBirthCountry = driver.findElements(By.xpath("//*[@formcontrolname='PlaceOfBirthCountry']")).get((i));
 		issuedCountry = driver.findElements(By.xpath("//*[@formcontrolname='VisaIssuedCountry']")).get((i));
-		
+
 		visaIssuedDay = driver.findElements(By.xpath("//*[@formcontrolname='VisaIssueDay']")).get((i));
 
 		visaIssuedMonth = driver.findElements(By.xpath("//*[@formcontrolname='VisaIssueMonth']")).get((i));
@@ -191,24 +194,18 @@ public class AosImplementation extends AosSpecification {
 		visaExpiryMonth = driver.findElements(By.xpath("//*[@formcontrolname='VisaExpiryMonth']")).get((i));
 
 		visaExpiryYear = driver.findElements(By.xpath("//*[@formcontrolname='VisaExpiryYear']")).get((i));
-		
+
 		visaRequiredCountry = driver.findElements(By.xpath("//*[@formcontrolname='VisaRequiringCountry']")).get((i));
 		
+		destinationCountry = driver.findElements(By.xpath("//*[@formcontrolname='DOCA_destination_Country']")).get((i));
+		
+		residenceCountry = driver.findElements(By.xpath("//*[@formcontrolname='DOCA_residence_Country']")).get((i));
 		
 		
 		
 		
 		
 		
-		
-		
-		
-
-//		WebElement ;
-
-//		
-
-
 
 		actions.moveToElement(title).perform();
 
@@ -512,16 +509,13 @@ public class AosImplementation extends AosSpecification {
 					.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='VisaNumber']")).get(i)));
 			driver.findElements(By.xpath("//*[@formcontrolname='VisaNumber']")).get(i)
 					.sendKeys(passengerDTOList.get(dataIndex).getVisaNumber());
-			
-			
 
 			logger.info("Enter the BIrth city : " + passengerDTOList.get(dataIndex).getPlaceOfBirthCity());
-			wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='PlaceOfBirthCity']")).get(i)));
+			wait.until(ExpectedConditions.elementToBeClickable(
+					driver.findElements(By.xpath("//*[@formcontrolname='PlaceOfBirthCity']")).get(i)));
 			driver.findElements(By.xpath("//*[@formcontrolname='PlaceOfBirthCity']")).get(i)
 					.sendKeys(passengerDTOList.get(dataIndex).getPlaceOfBirthCity());
-			
-			
+
 			logger.info("Selecting the place of birth : " + passengerDTOList.get(dataIndex).getplaceOfBirthCountry());
 			wait.until(ExpectedConditions.elementToBeClickable(placeOfBirthCountry));
 			placeOfBirthCountry.click();
@@ -529,14 +523,13 @@ public class AosImplementation extends AosSpecification {
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
 									+ passengerDTOList.get(dataIndex).getplaceOfBirthCountry() + "'])")));
-			
+
 			logger.info("Enter the Visa issue city : " + passengerDTOList.get(dataIndex).getVisaIssuedCity());
-			wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='VisaIssuedCity']")).get(i)));
+			wait.until(ExpectedConditions.elementToBeClickable(
+					driver.findElements(By.xpath("//*[@formcontrolname='VisaIssuedCity']")).get(i)));
 			driver.findElements(By.xpath("//*[@formcontrolname='VisaIssuedCity']")).get(i)
 					.sendKeys(passengerDTOList.get(dataIndex).getVisaIssuedCity());
-			
-			
+
 			logger.info("Selecting the Issue country : " + passengerDTOList.get(dataIndex).getIssuedCountry());
 			wait.until(ExpectedConditions.elementToBeClickable(issuedCountry));
 			issuedCountry.click();
@@ -544,7 +537,7 @@ public class AosImplementation extends AosSpecification {
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
 									+ passengerDTOList.get(dataIndex).getIssuedCountry() + "'])")));
-			
+
 			logger.info("Selecting the Visa Issue day : " + passengerDTOList.get(dataIndex).getVisaIssuedDay());
 			wait.until(ExpectedConditions.elementToBeClickable(visaIssuedDay));
 			visaIssuedDay.click();
@@ -552,8 +545,7 @@ public class AosImplementation extends AosSpecification {
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
 									+ passengerDTOList.get(dataIndex).getVisaIssuedDay() + "'])")));
-			
-			
+
 			logger.info("Selecting the Visa Issue month : " + passengerDTOList.get(dataIndex).getVisaIssuedMonth());
 			wait.until(ExpectedConditions.elementToBeClickable(visaIssuedMonth));
 			visaIssuedMonth.click();
@@ -561,8 +553,7 @@ public class AosImplementation extends AosSpecification {
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
 									+ passengerDTOList.get(dataIndex).getVisaIssuedMonth() + "'])")));
-			
-			
+
 			logger.info("Selecting the Visa Issue year : " + passengerDTOList.get(dataIndex).getVisaIssuedYear());
 			wait.until(ExpectedConditions.elementToBeClickable(visaIssuedYear));
 			visaIssuedYear.click();
@@ -570,7 +561,6 @@ public class AosImplementation extends AosSpecification {
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
 									+ passengerDTOList.get(dataIndex).getVisaIssuedYear() + "'])")));
-			
 
 			logger.info("Selecting the Visa Expiry Day  : " + passengerDTOList.get(dataIndex).getVisaExpiryDay());
 			wait.until(ExpectedConditions.elementToBeClickable(visaExpiryDay));
@@ -579,7 +569,7 @@ public class AosImplementation extends AosSpecification {
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
 									+ passengerDTOList.get(dataIndex).getVisaExpiryDay() + "'])")));
-			
+
 			logger.info("Selecting the Visa Expiry month : " + passengerDTOList.get(dataIndex).getVisaExpiryMonth());
 			wait.until(ExpectedConditions.elementToBeClickable(visaExpiryMonth));
 			visaExpiryMonth.click();
@@ -587,7 +577,7 @@ public class AosImplementation extends AosSpecification {
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
 									+ passengerDTOList.get(dataIndex).getVisaExpiryMonth() + "'])")));
-			
+
 			logger.info("Selecting the Visa Expiry year : " + passengerDTOList.get(dataIndex).getVisaExpiryYear());
 			wait.until(ExpectedConditions.elementToBeClickable(visaExpiryYear));
 			visaExpiryYear.click();
@@ -595,54 +585,124 @@ public class AosImplementation extends AosSpecification {
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
 									+ passengerDTOList.get(dataIndex).getVisaExpiryYear() + "'])")));
-			
-			logger.info("Selecting the Visa requireing country  : " + passengerDTOList.get(dataIndex).getVisaRequiredCountry());
+
+			logger.info("Selecting the Visa requireing country  : "
+					+ passengerDTOList.get(dataIndex).getVisaRequiredCountry());
 			wait.until(ExpectedConditions.elementToBeClickable(visaRequiredCountry));
 			visaRequiredCountry.click();
 			executor.executeScript("arguments[0].click();",
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
 									+ passengerDTOList.get(dataIndex).getVisaRequiredCountry() + "'])")));
-			
-			
 
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 		} catch (Exception e) {
 
+		}
+		
+	try {
+			
+		logger.info(
+				"Enter the Destination Address : " + passengerDTOList.get(dataIndex).getDestinationAddress());
+		wait.until(ExpectedConditions
+				.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='DOCA_destination_Address']")).get(i)));
+
+		driver.findElements(By.xpath("//*[@formcontrolname='DOCA_destination_Address']")).get(i)
+				.sendKeys(passengerDTOList.get(dataIndex).getDestinationAddress());
+		
+		
+		logger.info(
+				"Enter the Destination city : " + passengerDTOList.get(dataIndex).getDestinationCity());
+		wait.until(ExpectedConditions
+				.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='DOCA_destination_City']")).get(i)));
+
+		driver.findElements(By.xpath("//*[@formcontrolname='DOCA_destination_City']")).get(i)
+				.sendKeys(passengerDTOList.get(dataIndex).getDestinationCity());
+		
+		
+		logger.info("Selecting the country : " + passengerDTOList.get(dataIndex).getDestinationCountry());
+		wait.until(ExpectedConditions.elementToBeClickable(destinationCountry));
+		destinationCountry.click();
+		executor.executeScript("arguments[0].click();",
+				passengerDetailsContainer.get(i)
+						.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+								+ passengerDTOList.get(dataIndex).getDestinationCountry() + "'])")));
+		
+		
+		logger.info(
+				"Enter the Destination State : " + passengerDTOList.get(dataIndex).getDestinationState());
+		wait.until(ExpectedConditions
+				.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='DOCA_destination_State']")).get(i)));
+
+		driver.findElements(By.xpath("//*[@formcontrolname='DOCA_destination_State']")).get(i)
+				.sendKeys(passengerDTOList.get(dataIndex).getDestinationState());
+		
+		logger.info(
+				"Enter the Destination pin : " + passengerDTOList.get(dataIndex).getDestinationPin());
+		wait.until(ExpectedConditions
+				.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='DOCA_destination_Zip']")).get(i)));
+
+		driver.findElements(By.xpath("//*[@formcontrolname='DOCA_destination_Zip']")).get(i)
+				.sendKeys(passengerDTOList.get(dataIndex).getDestinationPin());
+		
+		
+		
+		
+		
+		
+		
+		logger.info(
+				"Enter the Destination Address : " + passengerDTOList.get(dataIndex).getResidenceAddress());
+		wait.until(ExpectedConditions
+				.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='DOCA_residence_Address']")).get(i)));
+
+		driver.findElements(By.xpath("//*[@formcontrolname='DOCA_residence_Address']")).get(i)
+				.sendKeys(passengerDTOList.get(dataIndex).getResidenceAddress());
+		
+		
+		logger.info(
+				"Enter the Destination city : " + passengerDTOList.get(dataIndex).getResidenceCity());
+		wait.until(ExpectedConditions
+				.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='DOCA_residence_City']")).get(i)));
+
+		driver.findElements(By.xpath("//*[@formcontrolname='DOCA_residence_City']")).get(i)
+				.sendKeys(passengerDTOList.get(dataIndex).getResidenceCity());
+		
+		
+		logger.info("Selecting the country : " + passengerDTOList.get(dataIndex).getResidenceCountry());
+		wait.until(ExpectedConditions.elementToBeClickable(residenceCountry));
+		residenceCountry.click();
+		executor.executeScript("arguments[0].click();",
+				passengerDetailsContainer.get(i)
+						.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+								+ passengerDTOList.get(dataIndex).getResidenceCountry() + "'])")));
+		
+		
+		logger.info(
+				"Enter the Destination state : " + passengerDTOList.get(dataIndex).getResidenceState());
+		wait.until(ExpectedConditions
+				.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='DOCA_residence_State']")).get(i)));
+
+		driver.findElements(By.xpath("//*[@formcontrolname='DOCA_residence_State']")).get(i)
+				.sendKeys(passengerDTOList.get(dataIndex).getResidenceState());
+		
+		
+		logger.info(
+				"Enter the Destination state : " + passengerDTOList.get(dataIndex).getResidencePin());
+		wait.until(ExpectedConditions
+				.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='DOCA_residence_Zip']")).get(i)));
+
+		driver.findElements(By.xpath("//*[@formcontrolname='DOCA_residence_Zip']")).get(i)
+				.sendKeys(passengerDTOList.get(dataIndex).getResidencePin());
+		
+		
+		
+		
+		
+			
+			
+			
+		}catch (Exception e) {
+			// TODO: handle exception
 		}
 
 		try {

@@ -597,6 +597,126 @@ public class PassengerDetailsDTO {
 		this.visaRequiredCountry = visaRequiredCountry;
 		
 	}
+	@SerializedName("destination_address")
+	@Expose
+	private String destinationAddress;
+
+	public String getDestinationAddress() {
+		return destinationAddress;
+	}
+
+	public void setDestinationAddress(String destinationAddress) {
+		this.destinationAddress = destinationAddress;
+		
+	}
+	@SerializedName("destination_city")
+	@Expose
+	private String destinationCity;
+
+	public String getDestinationCity() {
+		return destinationCity;
+	}
+
+	public void setDestinationCity(String destinationCity) {
+		this.destinationCity = destinationCity;
+		
+	}
 	
+	@SerializedName("destination_country")
+	@Expose
+	private String destinationCountry;
+
+	public String getDestinationCountry() {
+		return destinationCountry;
+	}
+
+	public void setDestinationCountry(String destinationCountry) {
+		this.destinationCountry = destinationCountry;
+		
+	}
+	@SerializedName("destination_state")
+	@Expose
+	private String destinationState;
+
+	public String getDestinationState() {
+		return destinationState;
+	}
+
+	public void setDestinationState(String destinationState) {
+		this.destinationState = destinationState;
+		
+	}
+	@SerializedName("destination_pin")
+	@Expose
+	private String destinationPin;
+
+	public String getDestinationPin() {
+		return destinationPin;
+	}
+
+	public void setDestinationPin(String destinationPin) {
+		this.destinationPin = destinationPin;
+		
+	}
+	@SerializedName("residence_address")
+	@Expose
+	private String residenceAddress;
+
+	public String getResidenceAddress() {
+		return residenceAddress;
+	}
+
+	public void setResidenceAddress(String residenceAddress) {
+		this.residenceAddress = residenceAddress;
+		
+	}
+	@SerializedName("residence_city")
+	@Expose
+	private String residenceCity;
+
+	public String getResidenceCity() {
+		return residenceCity;
+	}
+
+	public void setResidenceCity(String residenceCity) {
+		this.residenceCity = residenceCity;
+		
+	}
+	@SerializedName("residence_country")
+	@Expose
+	private String residenceCountry;
+
+	public String getResidenceCountry() {
+		return residenceCountry;
+	}
+
+	public void setResidenceCountry(String residenceCountry) {
+		this.residenceCountry = residenceCountry;
+		
+	}
+	@SerializedName("residence_state")
+	@Expose
+	private String residenceState;
+
+	public String getResidenceState() {
+		return residenceState;
+	}
+
+	public void setResidenceState(String residenceState) {
+		this.residenceState = residenceState;
+		
+	}
+	@SerializedName("residence_pin")
+	@Expose
+	private String residencePin;
+
+	public String getResidencePin() {
+		return residencePin;
+	}
+
+	public void setResidencePin(String residencePin) {
+		this.residencePin = residencePin;
+		
+	}
 	
 }

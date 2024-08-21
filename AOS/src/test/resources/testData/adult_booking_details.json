@@ -45,6 +45,18 @@
 		"visa_required_country": "India",
 		
 		
+		"destination_address": "ABC",
+		"destination_city": "ABC",
+		"destination_country": "India",
+		"destination_state": "91",
+		"destination_pin": "629163",
+		
+		"residence_address": "ABC",
+		"residence_city": "ABC",
+		"residence_country": "India",
+		"residence_state": "91",
+		"residence_pin": "629163",
+		
 		
 		
 		"meal_preference": "Diabetic Meal ",
