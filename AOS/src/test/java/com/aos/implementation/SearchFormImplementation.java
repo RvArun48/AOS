@@ -3197,11 +3197,9 @@ public class SearchFormImplementation extends TestRunner {
 			// for (WebElement container : mainFlightPanelContainer) {
 			List<WebElement> mainFlightListContainer = (List<WebElement>) executor
 					.executeScript("return Array.from(document.querySelectorAll('.empireF_BSCard'))");
-			logger.info("mainFlightPanelContainer->" +mainFlightPanelContainer.size());
+			logger.info("mainFlightPanelContainer->" + mainFlightPanelContainer.size());
 			int cardIndex = 1;
 			for (WebElement card : mainFlightPanelContainer) {
-				
-				
 
 				try {
 					String fromAndTo = (String) executor
@@ -3246,7 +3244,6 @@ public class SearchFormImplementation extends TestRunner {
 				softly.assertThat(flightTime.length()).isGreaterThan(0);
 				logger.info("Flight Start Time " + flightTime);
 
-
 				try {
 					String stop = (String) executor.executeScript(
 							"return document.querySelectorAll('.empireFlight_stopvia.empireF_directionTxt.ng-star-inserted')["
@@ -3280,17 +3277,16 @@ public class SearchFormImplementation extends TestRunner {
 					// TODO: handle exception
 				}
 
-
-				String endTime = (String) executor.executeScript(
-						"return document.querySelectorAll('.empireF_BSDepart > h2')["
-								+ (cardIndex - 1) + "].innerText");
+				String endTime = (String) executor
+						.executeScript("return document.querySelectorAll('.empireF_BSDepart > h2')[" + (cardIndex - 1)
+								+ "].innerText");
 				softly.assertThat(endTime.length()).isGreaterThan(0);
 				logger.info("End Time: " + endTime);
 				CommonDTO.getInstance().setFlightEndTime(StringUtils.extractTime(endTime));
 
-				String destination = (String) executor.executeScript(
-						"return document.querySelectorAll('.empireFlight_FlightCode')["
-								+ (cardIndex - 1) + "].innerText");
+				String destination = (String) executor
+						.executeScript("return document.querySelectorAll('.empireFlight_FlightCode')[" + (cardIndex - 1)
+								+ "].innerText");
 				softly.assertThat(destination.length()).isGreaterThan(0);
 				logger.info("Destination: " + destination);
 
@@ -3299,9 +3295,6 @@ public class SearchFormImplementation extends TestRunner {
 								+ (cardIndex - 1) + "].innerText");
 				softly.assertThat(fareOption.length()).isGreaterThan(0);
 				logger.info("Fare Option: " + fareOption);
-
-
-				
 
 				cardIndex++;
 			}
@@ -3312,22 +3305,21 @@ public class SearchFormImplementation extends TestRunner {
 			logger.info("Exception occured at I_need_to_validate_flight_Summary()->" + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
-		
-		
+
 		try {
 			SoftAssertions softly = new SoftAssertions();
 
 			logger.info("click flight details");
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.clickFlightDetails));
-			
+
 			homePage.clickFlightDetails.click();
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click flight details", driver,
 					getScenarioName());
 			softly.assertThat(homePage.valiFlightDetails.getAttribute("type")).isEqualTo("Total Duration");
-			
+
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.closeFlightDetails));
-		    homePage.closeFlightDetails.click();
-		}catch (Exception e) {
+			homePage.closeFlightDetails.click();
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		try {
@@ -3335,32 +3327,56 @@ public class SearchFormImplementation extends TestRunner {
 
 			logger.info("click fare option");
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.travellerClickFareOption));
-			
+
 			homePage.travellerClickFareOption.click();
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click fareoption", driver,
 					getScenarioName());
 			softly.assertThat(homePage.valiClickFareOption.getAttribute("type")).isEqualTo("Included");
-			
+
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.closeClickFareOption));
-		    homePage.closeClickFareOption.click();
-		}catch (Exception e) {
+			homePage.closeClickFareOption.click();
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
 		try {
 			SoftAssertions softly = new SoftAssertions();
 
 			logger.info("click fare rule");
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.valiClickFareRule));
-			
+
 			homePage.valiClickFareRule.click();
-			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click fare rule", driver,
-					getScenarioName());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click fare rule", driver, getScenarioName());
 			softly.assertThat(homePage.clickBaggage.getAttribute("type")).isEqualTo("Included");
-			
+
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.closeClickFareRule));
-		    homePage.closeClickFareRule.click();
-		}catch (Exception e) {
+			homePage.closeClickFareRule.click();
+
+			//////////////////////////////////////////////////////////////////////////////////
+
+			WebElement gatewayContainer = driver.findElement(By.xpath("//*[@class='empireFlight_PaymentBody']"));
+
+			gatewayContainer
+					.findElement(By.xpath(
+							"//*[@class='payment-tabSVGWrapper']//parent::button[contains(text(),'Payfort Test')]"))
+					.click();
+
+			gatewayContainer.findElement(By.partialLinkText("privacy policy")).click();
+
+			softly.assertThat(driver.findElement(By.xpath("//h2[text()='Privacy Policy']")).getText())
+					.isEqualTo("Privacy Policy");
+
+			driver.findElement(By.xpath("//*[@class='mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base']"))
+					.click();
+
+			softly.assertThat(StringUtils.ConvertStringToDouble(
+					driver.findElement(By.xpath("//*[@class='empireF_ProceedPrice']")).getText()))
+					.isEqualTo(StringUtils.ConvertStringToDouble(
+							driver.findElement(By.xpath("//*[@class='empireF_umrahwarp']")).getText()));
+
+			/////////////////////////////////////////////////////////////////////////////////
+
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
