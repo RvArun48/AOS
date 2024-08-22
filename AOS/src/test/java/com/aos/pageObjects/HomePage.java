@@ -444,7 +444,7 @@ public class HomePage {
 	@FindBy(xpath = "(//*[@class='empireFlight_amount'])[1]")
 	public WebElement currencyPriceValidationMultiThree;
 
-	@FindBy(xpath = "(//h4[contains(text(),'Flight details')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Flight details')])[1]")
 
 	public WebElement clickFlightDetails;
 
@@ -481,18 +481,31 @@ public class HomePage {
 	
 	@FindBy(xpath = "//*[@class='empireFlight_FOBtnWrapper ng-star-inserted']")
 	public WebElement clickReturnFareoption;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Total Duration: ')])[1]")
+	public WebElement valiFlightDetails;
 
+	@FindBy(xpath = "(//*[@class='material-icons'])[1]")
+	public WebElement closeFlightDetails;
+	
+	@FindBy(xpath = "(//*[@class='empireF_FFLinkWrapper'])[1]")
+	public WebElement travellerClickFareOption;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Included')])[2]")
+	public WebElement valiClickFareOption;
+	
+	@FindBy(xpath = "(//*[contains(text(),' close ')])[2]")
+	public WebElement closeClickFareOption;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Fare Rules')])[1]")
+	public WebElement valiClickFareRule;
+	
+	@FindBy(xpath = "(//*[contains(text(),' close ')])[1]")
+	public WebElement closeClickFareRule;
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+			
+			
 
 	public WebElement getElementByXpath(WebDriver driver, String locator, String data) throws InterruptedException {
 		return getElementByXpath(driver, locator, data, null);

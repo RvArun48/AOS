@@ -283,9 +283,7 @@ public class AosImplementation extends AosSpecification {
 			driver.findElements(By.xpath("//*[@formcontrolname='DocumentNumber']")).get(i)
 					.sendKeys(passengerDTOList.get(dataIndex).getIqamaId());
 
-			wait.until(ExpectedConditions.elementToBeClickable(nationalitySrff));
-////			CommonUtils.handleStaleElement(issuingCountryGcc);
-			nationalitySrff.click();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
 
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller details", driver,
 					scenarioName);
@@ -297,9 +295,8 @@ public class AosImplementation extends AosSpecification {
 			Thread.sleep(5000);
 
 			logger.info("Selecting the Iqama Expiry Day: " + passengerDTOList.get(dataIndex).getIqamaExpiryDateSrff());
-
-			wait.until(ExpectedConditions.elementToBeClickable(iqamaExpiryDateSrff));
-			iqamaExpiryDateSrff.click();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Iqama Expiry Day", driver,
 					scenarioName);
 			Thread.sleep(1000);
@@ -310,9 +307,8 @@ public class AosImplementation extends AosSpecification {
 
 			logger.info(
 					"Selecting the Iqama Expiry Month: " + passengerDTOList.get(dataIndex).getIqamaExpiryMonthSrff());
-
-			wait.until(ExpectedConditions.elementToBeClickable(iqamaExpiryMonthSrff));
-			iqamaExpiryMonthSrff.click();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Iqama Expiry Month", driver,
 					scenarioName);
 			Thread.sleep(1000);
@@ -322,9 +318,8 @@ public class AosImplementation extends AosSpecification {
 									+ passengerDTOList.get(dataIndex).getIqamaExpiryMonthSrff() + "']")));
 
 			logger.info("Selecting the Iqama Expiry Year: " + passengerDTOList.get(dataIndex).getIqamaExpiryYearSrff());
-
-			wait.until(ExpectedConditions.elementToBeClickable(iqamaExpiryYearSrff));
-			iqamaExpiryYearSrff.click();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Iqama Expiry Year", driver,
 					scenarioName);
 			Thread.sleep(1000);
@@ -357,19 +352,19 @@ public class AosImplementation extends AosSpecification {
 
 			//wait.until(ExpectedConditions.elementToBeClickable(issuingCountryGcc));
     		new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
-			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Nationality Id details",
+			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Issuing Country Gcc details",
 					driver, scenarioName);
 			Thread.sleep(1000);
 			executor.executeScript("arguments[0].click();",
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("//*[@class='ng-option ng-star-inserted']//child::*[text()='"
 									+ passengerDTOList.get(dataIndex).getIssuingCountryGcc() + "']")));
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 
 			logger.info("Selecting the Nationality: " + passengerDTOList.get(dataIndex).getNationalityGcc());
-
-			wait.until(ExpectedConditions.elementToBeClickable(nationalityGcc));
-			nationalityGcc.click();
+			Thread.sleep(3000);
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Nationality Id details",
 					driver, scenarioName);
 			Thread.sleep(1000);
@@ -381,8 +376,8 @@ public class AosImplementation extends AosSpecification {
 			logger.info("Selecting the Nationality Expiry Day: "
 					+ passengerDTOList.get(dataIndex).getNationalityExpiryDateGcc());
 
-			wait.until(ExpectedConditions.elementToBeClickable(nationalityExpiryDateGcc));
-			nationalityExpiryDateGcc.click();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Nationality Expiry Day",
 					driver, scenarioName);
 			Thread.sleep(1000);
@@ -394,8 +389,8 @@ public class AosImplementation extends AosSpecification {
 			logger.info("Selecting the Nationality Expiry Month: "
 					+ passengerDTOList.get(dataIndex).getNationalityExpiryMonthGcc());
 
-			wait.until(ExpectedConditions.elementToBeClickable(nationalityExpiryMonthGcc));
-			nationalityExpiryMonthGcc.click();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Nationality Expiry Month",
 					driver, scenarioName);
 			Thread.sleep(1000);
@@ -407,8 +402,8 @@ public class AosImplementation extends AosSpecification {
 			logger.info("Selecting the Nationality Expiry Year: "
 					+ passengerDTOList.get(dataIndex).getNationalityExpiryYearGcc());
 
-			wait.until(ExpectedConditions.elementToBeClickable(nationalityExpiryYearGcc));
-			nationalityExpiryYearGcc.click();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
+			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Nationality Expiry Year",
 					driver, scenarioName);
 			Thread.sleep(1000);
