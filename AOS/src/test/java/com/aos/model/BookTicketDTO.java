@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class BookTicketDTO {
 
+	public static final String getpaymentGateway = null;
 	@SerializedName("base_url")
 	@Expose
 	private String baseUrl;
@@ -720,6 +721,21 @@ public class BookTicketDTO {
 
 		public void setFareOption(String fareOption) {
 			this.date = fareOption;
+			
+		}
+		
+		
+
+		@SerializedName("payment_gateway")
+		@Expose
+		private String paymentGateway;
+
+		public String getPaymentGateway() {
+			return paymentGateway;
+		}
+
+		public void setPaymentGateway(String paymentGateway) {
+			this.date = paymentGateway;
 			
 		}
 		

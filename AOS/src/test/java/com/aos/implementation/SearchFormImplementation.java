@@ -3168,6 +3168,7 @@ public class SearchFormImplementation extends TestRunner {
 		} catch (Exception e) {
 			logger.info("Exception occured at addPassengerDetails()->" + e.getMessage());
 		}
+
 	}
 
 	public void I_click_on_the_booknow() throws InterruptedException {
@@ -3352,33 +3353,80 @@ public class SearchFormImplementation extends TestRunner {
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.closeClickFareRule));
 			homePage.closeClickFareRule.click();
 
-			//////////////////////////////////////////////////////////////////////////////////
-
-			WebElement gatewayContainer = driver.findElement(By.xpath("//*[@class='empireFlight_PaymentBody']"));
-
-			gatewayContainer
-					.findElement(By.xpath(
-							"//*[@class='payment-tabSVGWrapper']//parent::button[contains(text(),'Payfort Test')]"))
-					.click();
-
-			gatewayContainer.findElement(By.partialLinkText("privacy policy")).click();
-
-			softly.assertThat(driver.findElement(By.xpath("//h2[text()='Privacy Policy']")).getText())
-					.isEqualTo("Privacy Policy");
-
-			driver.findElement(By.xpath("//*[@class='mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base']"))
-					.click();
-
-			softly.assertThat(StringUtils.ConvertStringToDouble(
-					driver.findElement(By.xpath("//*[@class='empireF_ProceedPrice']")).getText()))
-					.isEqualTo(StringUtils.ConvertStringToDouble(
-							driver.findElement(By.xpath("//*[@class='empireF_umrahwarp']")).getText()));
-
-			/////////////////////////////////////////////////////////////////////////////////
-
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+
+	public void I_click_on_payment_continue() {
+
+		logger.info("Click the continue To Payment Button");
+		wait.until(ExpectedConditions.elementToBeClickable(homePage.continueToPayment));
+		LogEvent.logEventWithScreenshot(
+
+				getExtentTest(), Status.INFO, "Click to continue payment", driver, getScenarioName());
+		homePage.continueToPayment.click();
+
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(homePage.freeContinuePayment));
+			homePage.freeContinuePayment.click();
+
+			Thread.sleep(10000);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
+	public void I_need_to_add_the_traveller_common_details() {
+
+		BookTicketDTO bookTicketDTO = CommonDTO.getInstance().getBookTicketDTO();
+
+		logger.info("Enter the Email: " + bookTicketDTO.getEmail());
+		wait.until(ExpectedConditions.elementToBeClickable(homePage.email));
+		homePage.email.sendKeys(bookTicketDTO.getEmail());
+
+		logger.info("Selecting the Country Mobile: " + bookTicketDTO.getCountryMobile());
+		wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.countryMobile));
+		passengerDetailsPage.countryMobile.click();
+		executor.executeScript("arguments[0].click();",
+				driver.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+						+ bookTicketDTO.getCountryMobile() + "'])[1]//parent::div")));
+
+		logger.info("Enter the Mobile No: " + bookTicketDTO.getMobileNo());
+		wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.mobileNo));
+		passengerDetailsPage.mobileNo.sendKeys(bookTicketDTO.getMobileNo());
+
+	}
+
+	public void I_need_to_validate_payment_gateway() throws InterruptedException {
+		BookTicketDTO bookTicketDTO = CommonDTO.getInstance().getBookTicketDTO();
+		SoftAssertions softly = new SoftAssertions();
+		WebElement gatewayContainer = driver.findElement(By.xpath("//*[@class='empireFlight_PaymentBody']"));
+
+		homePage.getElementByXpath(driver,
+				"//*[@class='payment-tabSVGWrapper']//parent::button[contains(text(),'${token}')]",
+				bookTicketDTO.getPaymentGateway());
+
+		if (bookTicketDTO.getPaymentGateway().equalsIgnoreCase("TAP API LATEST")) {
+			
+			
+
+		}
+
+		gatewayContainer.findElement(By.partialLinkText("privacy policy")).click();
+
+		softly.assertThat(driver.findElement(By.xpath("//h2[text()='Privacy Policy']")).getText())
+				.isEqualTo("Privacy Policy");
+
+		driver.findElement(By.xpath("//*[@class='mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base']"))
+				.click();
+
+		softly.assertThat(StringUtils
+				.ConvertStringToDouble(driver.findElement(By.xpath("//*[@class='empireF_ProceedPrice']")).getText()))
+				.isEqualTo(StringUtils.ConvertStringToDouble(
+						driver.findElement(By.xpath("//*[@class='empireF_umrahwarp']")).getText()));
+
 	}
 
 }

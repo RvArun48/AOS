@@ -16,7 +16,7 @@
 		"ped_month": "June",
 		"ped_year": "2030",
 		
-		"document_type": "Iqama ID (Saudi Residence for Foreigners)",
+		"document_type": "Local Id",
 		"nationality_id_gcc": "25321",
 		"issuing_country_gcc": "India",
 		"nationality_gcc": "India",
@@ -28,7 +28,7 @@
 		"iqama_expiry_date_srff": "06",
 		"iqama_expiry_month_srff": "May",
 		"iqama_expiry_year_srff": "2030",
-		"local_document_no": "542546",
+		"local_document_no": "1234567899874",
 		"form_identity": "542546",
 		
 		"visa_number": "542546",
@@ -48,13 +48,13 @@
 		"destination_address": "ABC",
 		"destination_city": "ABC",
 		"destination_country": "India",
-		"destination_state": "91",
+		"destination_state": "SS",
 		"destination_pin": "629163",
 		
 		"residence_address": "ABC",
 		"residence_city": "ABC",
 		"residence_country": "India",
-		"residence_state": "91",
+		"residence_state": "SS",
 		"residence_pin": "629163",
 		
 		
@@ -63,7 +63,11 @@
 		"seat_preference": "Window ",
 		"special_requst": "Bassinet/Carry Cot",
 		"airline": "Finnair",
-		"frequent_flying_number": "542"
+		"frequent_flying_number": "542",
+		
+		"email": "shivam@amadeus.ae",
+		"country_mobile": "+91 India",
+		"mobile_no": "5765765767"
 	},
 	{
 		"title": "Mr",

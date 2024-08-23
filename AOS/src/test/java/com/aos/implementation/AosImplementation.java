@@ -495,6 +495,18 @@ public class AosImplementation extends AosSpecification {
 					.sendKeys(passengerDTOList.get(dataIndex).getPassportNo());
 
 		}
+		
+		try {
+
+			logger.info("Enter the Form identity : " + passengerDTOList.get(dataIndex).getFormIdentity());
+			wait.until(ExpectedConditions.elementToBeClickable(
+					driver.findElements(By.xpath("//*[@formcontrolname='FormofIdentityNumber']")).get(i)));
+
+			driver.findElements(By.xpath("//*[@formcontrolname='FormofIdentityNumber']")).get(i)
+					.sendKeys(passengerDTOList.get(dataIndex).getFormIdentity());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
 		try {
 
@@ -748,17 +760,7 @@ public class AosImplementation extends AosSpecification {
 			// TODO: handle exception
 		}
 
-		try {
-
-			logger.info("Enter the Form identity : " + passengerDTOList.get(dataIndex).getFormIdentity());
-			wait.until(ExpectedConditions.elementToBeClickable(
-					driver.findElements(By.xpath("//*[@formcontrolname='FormofIdentityNumber']")).get(i)));
-
-			driver.findElements(By.xpath("//*[@formcontrolname='FormofIdentityNumber']")).get(i)
-					.sendKeys(passengerDTOList.get(dataIndex).getFormIdentity());
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		
 
 	}
 

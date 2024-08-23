@@ -116,11 +116,14 @@ Feature: Flight Booking
             #Then I click on the fare breakup
              #Then  I need to validate fare breakup
              Then I click on the booknow
-             #Then I need to add the traveller details
-             Then  I need to validate flight Summary 
-      
-      
-     
+             Then I need to add the traveller details
+              Then I need to add the traveller common details
+             #Then  I need to validate flight Summary 
+             Then I click on payment continue 
+              Then I need to validate payment gateway
+              
+              
+              
      #Given I setup the edit data with "oneway_edit_flight_listing"
      
       #Then I change the currency type

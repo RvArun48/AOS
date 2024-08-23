@@ -99,9 +99,9 @@
 		"date": "1",
 		"return_date": "5",
 		"passenger_class": "Economy",
-		"adult_count": "2",
-		"child_count": "2",
-		"infant_count": "2",
+		"adult_count": "1",
+		"child_count": "1",
+		"infant_count": "1",
 		"flexible_date": true,
 		"umrah_fare": true,
 		"baggage_only": true,
@@ -116,7 +116,12 @@
 		"deprture_stop": "Bahrain International Airport, Bahrain",
 		"departure_airport": "Dubai Bus Station, Dubai",
 		"arrival_timing": "",
-		"fare_option": "YDELUXE"
+		"fare_option": "YDELUXE",
+		"email": "shivam@amadeus.ae",
+		"country_mobile": "+91 India",
+		"mobile_no": "5765765767",
+		"payment_gateway": "Nbe"
+	
 		
 		
 		},

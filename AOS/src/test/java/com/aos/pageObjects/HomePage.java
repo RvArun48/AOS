@@ -504,6 +504,12 @@ public class HomePage {
 	public WebElement closeClickFareRule;
 	
 	
+	@FindBy(xpath = "(//*[contains(text(),'Continue')])[4]")
+	public WebElement freeContinuePayment;
+	
+	
+	
+	
 			
 			
 

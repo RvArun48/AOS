@@ -681,8 +681,33 @@ public class SearchFormSpecification extends TestRunner {
 		}
 	}
 	
+	@Then("I click on payment continue")
+	public void I_click_on_payment_continue() {
+		try {
+			new SearchFormImplementation().I_click_on_payment_continue();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	@Then("I need to add the traveller common details")
+	public void I_need_to_add_the_traveller_common_details() {
+		try {
+			new SearchFormImplementation().I_need_to_add_the_traveller_common_details();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 	
 	
+	@Then("I need to validate payment gateway")
+	public void I_need_to_validate_payment_gateway() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_payment_gateway();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 
 	private void calander() {
 		// TODO Auto-generated method stub

@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.aos.base.TestRunner;
 import com.aos.implementation.AosImplementation;
 import com.aos.model.BookTicketDTO;
+import com.aos.model.CommonDTO;
 import com.aos.model.PassengerDetailsDTO;
 import com.aos.pageObjects.HomePage;
 import com.aos.pageObjects.PassengerDetailsPage;
@@ -323,25 +324,7 @@ public class AosSpecification extends TestRunner {
 				dataIndex++;
 			}
 
-			logger.info("Enter the Email: " + bookTicketDTO.getEmail());
-			wait.until(ExpectedConditions.elementToBeClickable(homePage.email));
-			homePage.email.sendKeys(bookTicketDTO.getEmail());
-
-			logger.info("Selecting the Country Mobile: " + bookTicketDTO.getCountryMobile());
-			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.countryMobile));
-			passengerDetailsPage.countryMobile.click();
-			executor.executeScript("arguments[0].click();",
-					driver.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-							+ bookTicketDTO.getCountryMobile() + "'])[1]//parent::div")));
-
-			logger.info("Enter the Mobile No: " + bookTicketDTO.getMobileNo());
-			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.mobileNo));
-			passengerDetailsPage.mobileNo.sendKeys(bookTicketDTO.getMobileNo());
-
-			logger.info("Click the continue To Payment Button");
-			wait.until(ExpectedConditions.elementToBeClickable(homePage.continueToPayment));
-			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Click to continue payment", driver, scenarioName);
-			homePage.continueToPayment.click();
+		
 			// Thread.sleep(10000);
 
 			logger.info("Click the process To Pay Button");
