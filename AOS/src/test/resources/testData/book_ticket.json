@@ -96,8 +96,8 @@
 		"trip_select": "One Way",
 		"from": "BOM",
 		"to": "DOH",
-		"date": "1",
-		"return_date": "5",
+		"date": "3",
+		
 		"passenger_class": "Economy",
 		"adult_count": "1",
 		"child_count": "1",
@@ -120,7 +120,22 @@
 		"email": "shivam@amadeus.ae",
 		"country_mobile": "+91 India",
 		"mobile_no": "5765765767",
-		"payment_gateway": "Nbe"
+		
+		
+		"payment_gateway": "TAP API LATEST",
+		"tapapi_cardnumber": "8888880000000001",
+		"tapapi_cardname": "Rupay",
+		"tapapi_exprimonth": "06",
+		"tapapi_expriyear": "2027",
+		"tapapi_cardcvv": "321",
+		"tapapi_address_one": "Pad",
+		"tapapi_address_two": "KKV",
+		"tapapi_country": "India",
+		"tapapi_state": "Tamilnadu",
+		"tapapi_pin": "629163",
+		"tapapi_city": "Marthandam"
+	
+		
 	
 		
 		

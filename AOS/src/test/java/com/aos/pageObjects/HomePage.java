@@ -507,6 +507,18 @@ public class HomePage {
 	@FindBy(xpath = "(//*[contains(text(),'Continue')])[4]")
 	public WebElement freeContinuePayment;
 	
+	@FindBy(xpath = "//*[@formcontrolname='exp_month']")
+	public WebElement tapapiExprimonth;
+	
+	@FindBy(xpath = "//*[@formcontrolname='exp_year']")
+	public WebElement tapapiExpriYear;
+	
+	
+	@FindBy(xpath = "//*[@formcontrolname='country']")
+	public WebElement tapapiCountry;
+	
+	@FindBy(xpath = "//div[@class='empireFlight-PaymentPrice']")
+	public WebElement processToPayment;
 	
 	
 	
