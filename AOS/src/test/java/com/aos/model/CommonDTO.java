@@ -1,6 +1,8 @@
 package com.aos.model;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommonDTO {
 
@@ -10,6 +12,10 @@ public class CommonDTO {
 	private BookTicketDTO bookTicketDTO;
 	private LocalTime flightStartTime;
 	private LocalTime flightEndTime;
+
+	private static List<String> fromAndToList = new ArrayList<>();
+	private static List<String> baggageCheckinList = new ArrayList<>();
+	private static List<String> baggageCabinList = new ArrayList<>();
 
 	// Private constructor to prevent instantiation
 	private CommonDTO() {
@@ -63,7 +69,7 @@ public class CommonDTO {
 	public LocalTime getFlightStartTime() {
 		return flightStartTime;
 	}
-	
+
 	public void setFlightEndTime(LocalTime time) {
 		this.flightEndTime = time;
 	}
@@ -71,5 +77,57 @@ public class CommonDTO {
 	public LocalTime getFlightEndTime() {
 		return flightEndTime;
 	}
+
+	public static void setFromAndTo(String fromAndTo) {
+		if (fromAndToList != null) {
+			fromAndToList.add(fromAndTo);
+		}
+
+	}
+
+	public static List<String> getFromAndTo() {
+		return fromAndToList;
+	}
+
+	public static void clearFromAndToList() {
+		if (fromAndToList != null) {
+			fromAndToList.clear();
+		}
+	}
+
+	public static void setCheckinBaggageData(String baggageData) {
+		if (baggageCheckinList != null) {
+			baggageCheckinList.add(baggageData);
+		}
+
+	}
+
+	public static List<String> getCheckinBaggageData() {
+		return baggageCheckinList;
+	}
+
+	public static void clearCheckinBaggageList() {
+		if (baggageCheckinList != null) {
+			baggageCheckinList.clear();
+		}
+	}
+
+	public static void setCabinBaggageData(String baggageData) {
+		if (baggageCabinList != null) {
+			baggageCabinList.add(baggageData);
+		}
+
+	}
+
+	public static List<String> getCabinBaggageData() {
+		return baggageCabinList;
+	}
+
+	public static void clearCabinBaggageList() {
+		if (baggageCabinList != null) {
+			baggageCabinList.clear();
+		}
+	}
+
 
 }

@@ -2714,6 +2714,8 @@ public class SearchFormImplementation extends TestRunner {
 									+ (cardIndex - 1) + "].innerText");
 					softly.assertThat(fromAndTo.length()).isGreaterThan(0);
 					logger.info("From and To " + fromAndTo);
+					CommonDTO.setFromAndTo(fromAndTo);
+
 				} catch (Exception e) {
 					// Handle exception
 				}
@@ -2862,6 +2864,11 @@ public class SearchFormImplementation extends TestRunner {
 									"//*[@class='empireFlight_confirmBagTableData']/child::*[contains(text(), 'KG')]"))
 							.getText());
 
+					CommonDTO.setCheckinBaggageData(card
+							.findElement(By.xpath(
+									"//*[@class='empireFlight_confirmBagTableData']/child::*[contains(text(), 'KG')]"))
+							.getText());
+
 				} catch (Exception e) {
 
 					softly.assertThat(card.findElement(By.xpath(
@@ -2870,12 +2877,18 @@ public class SearchFormImplementation extends TestRunner {
 					logger.info("checkin " + card.findElement(By.xpath(
 							"//*[@class='empireFlight_confirmBagTableData']/child::*[contains(text(), 'Not Included')]"))
 							.getText());
+					CommonDTO.setCheckinBaggageData(card.findElement(By.xpath(
+							"//*[@class='empireFlight_confirmBagTableData']/child::*[contains(text(), 'Not Included')]"))
+							.getText());
 
 				}
 				softly.assertThat(card.findElement(By.xpath(
 						"//*[@class='empireFlight_confirmBagTableData ng-star-inserted']/child::*[contains(text(), 'KG')]"))
 						.getText().length()).isGreaterThan(0);
 				logger.info("Cabin KG" + card.findElement(By.xpath(
+						"//*[@class='empireFlight_confirmBagTableData ng-star-inserted']/child::*[contains(text(), 'KG')]"))
+						.getText());
+				CommonDTO.setCabinBaggageData(card.findElement(By.xpath(
 						"//*[@class='empireFlight_confirmBagTableData ng-star-inserted']/child::*[contains(text(), 'KG')]"))
 						.getText());
 
@@ -3400,161 +3413,199 @@ public class SearchFormImplementation extends TestRunner {
 	}
 
 	public void I_need_to_validate_payment_gateway() throws InterruptedException {
-		BookTicketDTO bookTicketDTO = CommonDTO.getInstance().getBookTicketDTO();
-		SoftAssertions softly = new SoftAssertions();
+		try {
+			BookTicketDTO bookTicketDTO = CommonDTO.getInstance().getBookTicketDTO();
+			SoftAssertions softly = new SoftAssertions();
 
-		Thread.sleep(10000);
-		WebElement gatewayContainer = driver.findElement(By.xpath("//*[@class='empireFlight_PaymentBody']"));
+			Thread.sleep(10000);
+			WebElement gatewayContainer = driver.findElement(By.xpath("//*[@class='empireFlight_PaymentBody']"));
 
-		logger.info("Enter the Payment gateway: " + bookTicketDTO.getPaymentGateway());
-		homePage.getElementByXpath(driver,
-				"//*[@class='payment-tabSVGWrapper']//parent::button[contains(text(),'${token}')]",
-				bookTicketDTO.getPaymentGateway());
+			logger.info("Enter the Payment gateway: " + bookTicketDTO.getPaymentGateway());
+			homePage.getElementByXpath(driver,
+					"//*[@class='payment-tabSVGWrapper']//parent::button[contains(text(),'${token}')]",
+					bookTicketDTO.getPaymentGateway());
 
-		if (bookTicketDTO.getPaymentGateway().equalsIgnoreCase("TAP API LATEST")) {
+			if (bookTicketDTO.getPaymentGateway().equalsIgnoreCase("TAP API LATEST")) {
 
-			logger.info("Enter the Card Number: " + bookTicketDTO.getTapapiCardnumber());
-			wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='number']"))));
-			WebElement cardNumber = driver.findElement(By.xpath("//input[@formcontrolname='number']"));
-			cardNumber.sendKeys(bookTicketDTO.getTapapiCardnumber());
+				logger.info("Enter the Card Number: " + bookTicketDTO.getTapapiCardnumber());
+				wait.until(ExpectedConditions
+						.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='number']"))));
+				WebElement cardNumber = driver.findElement(By.xpath("//input[@formcontrolname='number']"));
+				cardNumber.sendKeys(bookTicketDTO.getTapapiCardnumber());
 
-			logger.info("Enter the Card Name: " + bookTicketDTO.getTapapiCardname());
+				logger.info("Enter the Card Name: " + bookTicketDTO.getTapapiCardname());
 
-			wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='name']"))));
+				wait.until(ExpectedConditions
+						.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='name']"))));
 
-			WebElement cardName = driver.findElement(By.xpath("//input[@formcontrolname='name']"));
-			cardName.sendKeys(bookTicketDTO.getTapapiCardname());
+				WebElement cardName = driver.findElement(By.xpath("//input[@formcontrolname='name']"));
+				cardName.sendKeys(bookTicketDTO.getTapapiCardname());
 
-			logger.info("Enter the exp month: " + bookTicketDTO.getTapapiExprimonth());
-//			
-//			wait.until(ExpectedConditions.elementToBeClickable(homePage.tapapiExprimonth));
-//			homePage.tapapiExprimonth.click();
-//			homePage.getElementByXpath(driver,
-//					"//*[@formcontrolname='exp_month']//following::span[@class='ng-option-label ng-star-inserted' and text()='${token}']",
-//					bookTicketDTO.getTapapiExprimonth());
-//			
-//			
-//			Thread.sleep(3000);
-//			logger.info("Enter the exp year: " + bookTicketDTO.getTapapiExpriyear());
-//			
-//			wait.until(ExpectedConditions.elementToBeClickable(homePage.tapapiExpriYear));
-//			homePage.tapapiExpriYear.click();
-//			homePage.getElementByXpath(driver,
-//					"//*[@formcontrolname='exp_year']//following::span[@class='ng-option-label ng-star-inserted' and text()='${token}']",
-//					bookTicketDTO.getTapapiExpriyear());
+				logger.info("Enter the exp month: " + bookTicketDTO.getTapapiExprimonth());
+//				
+//				wait.until(ExpectedConditions.elementToBeClickable(homePage.tapapiExprimonth));
+//				homePage.tapapiExprimonth.click();
+//				homePage.getElementByXpath(driver,
+//						"//*[@formcontrolname='exp_month']//following::span[@class='ng-option-label ng-star-inserted' and text()='${token}']",
+//						bookTicketDTO.getTapapiExprimonth());
+//				
+//				
+//				Thread.sleep(3000);
+//				logger.info("Enter the exp year: " + bookTicketDTO.getTapapiExpriyear());
+//				
+//				wait.until(ExpectedConditions.elementToBeClickable(homePage.tapapiExpriYear));
+//				homePage.tapapiExpriYear.click();
+//				homePage.getElementByXpath(driver,
+//						"//*[@formcontrolname='exp_year']//following::span[@class='ng-option-label ng-star-inserted' and text()='${token}']",
+//						bookTicketDTO.getTapapiExpriyear());
 
-			logger.info("Enter the Cvv: " + bookTicketDTO.getTapapiCardcvv());
-			wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='cvc']"))));
+				logger.info("Enter the Cvv: " + bookTicketDTO.getTapapiCardcvv());
+				wait.until(ExpectedConditions
+						.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='cvc']"))));
 
-			WebElement cvv = driver.findElement(By.xpath("//input[@formcontrolname='cvc']"));
-			cvv.sendKeys(bookTicketDTO.getTapapiCardcvv());
+				WebElement cvv = driver.findElement(By.xpath("//input[@formcontrolname='cvc']"));
+				cvv.sendKeys(bookTicketDTO.getTapapiCardcvv());
 
-			logger.info("Enter the Add1: " + bookTicketDTO.getTapapiAddressOne());
-			wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='line1']"))));
-			WebElement add = driver.findElement(By.xpath("//input[@formcontrolname='line1']"));
-			add.sendKeys(bookTicketDTO.getTapapiAddressOne());
+				logger.info("Enter the Add1: " + bookTicketDTO.getTapapiAddressOne());
+				wait.until(ExpectedConditions
+						.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='line1']"))));
+				WebElement add = driver.findElement(By.xpath("//input[@formcontrolname='line1']"));
+				add.sendKeys(bookTicketDTO.getTapapiAddressOne());
 
-			logger.info("Enter the Add2: " + bookTicketDTO.getTapapiAddressTwo());
-			wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='line2']"))));
-			WebElement addt = driver.findElement(By.xpath("//input[@formcontrolname='line2']"));
-			addt.sendKeys(bookTicketDTO.getTapapiAddressTwo());
+				logger.info("Enter the Add2: " + bookTicketDTO.getTapapiAddressTwo());
+				wait.until(ExpectedConditions
+						.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='line2']"))));
+				WebElement addt = driver.findElement(By.xpath("//input[@formcontrolname='line2']"));
+				addt.sendKeys(bookTicketDTO.getTapapiAddressTwo());
 
-//			logger.info("Enter the country: " + bookTicketDTO.getTapapiCountry());
-//			wait.until(ExpectedConditions.elementToBeClickable(homePage.tapapiCountry));
-//			homePage.tapapiCountry.click();
-//			homePage.getElementByXpath(driver,
-//					"//*[@formcontrolname='country']//following::span[@class='ng-option-label ng-star-inserted' and text()='${token}']",
-//					bookTicketDTO.getTapapiCountry());
+//				logger.info("Enter the country: " + bookTicketDTO.getTapapiCountry());
+//				wait.until(ExpectedConditions.elementToBeClickable(homePage.tapapiCountry));
+//				homePage.tapapiCountry.click();
+//				homePage.getElementByXpath(driver,
+//						"//*[@formcontrolname='country']//following::span[@class='ng-option-label ng-star-inserted' and text()='${token}']",
+//						bookTicketDTO.getTapapiCountry());
 
-			logger.info("Enter the State: " + bookTicketDTO.getTapapiState());
-			wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='state']"))));
-			WebElement state = driver.findElement(By.xpath("//input[@formcontrolname='state']"));
-			state.sendKeys(bookTicketDTO.getTapapiState());
+				logger.info("Enter the State: " + bookTicketDTO.getTapapiState());
+				wait.until(ExpectedConditions
+						.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='state']"))));
+				WebElement state = driver.findElement(By.xpath("//input[@formcontrolname='state']"));
+				state.sendKeys(bookTicketDTO.getTapapiState());
 
-			logger.info("Enter the City: " + bookTicketDTO.getTapapiCity());
-			wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='city']"))));
-			WebElement city = driver.findElement(By.xpath("//input[@formcontrolname='city']"));
-			city.sendKeys(bookTicketDTO.getTapapiCity());
+				logger.info("Enter the City: " + bookTicketDTO.getTapapiCity());
+				wait.until(ExpectedConditions
+						.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='city']"))));
+				WebElement city = driver.findElement(By.xpath("//input[@formcontrolname='city']"));
+				city.sendKeys(bookTicketDTO.getTapapiCity());
 
-			logger.info("Enter the Pin: " + bookTicketDTO.getTapapiCardname());
-			wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='zip_code']"))));
-			WebElement pin = driver.findElement(By.xpath("//input[@formcontrolname='zip_code']"));
-			pin.sendKeys(bookTicketDTO.getTapapiCardnumber());
+				logger.info("Enter the Pin: " + bookTicketDTO.getTapapiCardname());
+				wait.until(ExpectedConditions
+						.elementToBeClickable(driver.findElement(By.xpath("//input[@formcontrolname='zip_code']"))));
+				WebElement pin = driver.findElement(By.xpath("//input[@formcontrolname='zip_code']"));
+				pin.sendKeys(bookTicketDTO.getTapapiCardnumber());
 
-		}
+			}
 
-		gatewayContainer.findElement(By.partialLinkText("privacy policy")).click();
+//			gatewayContainer.findElement(By.partialLinkText("privacy policy")).click();
+			//
+//			softly.assertThat(driver.findElement(By.xpath("//h2[text()='Privacy Policy']")).getText())
+//					.isEqualTo("Privacy Policy");
+			//
+//			driver.findElement(By.xpath("//*[@class='mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base']"))
+//					.click();
 
-		softly.assertThat(driver.findElement(By.xpath("//h2[text()='Privacy Policy']")).getText())
-				.isEqualTo("Privacy Policy");
+			softly.assertThat(StringUtils.ConvertStringToDouble(
+					driver.findElement(By.xpath("//*[@class='empireF_ProceedPrice']")).getText()))
+					.isEqualTo(StringUtils.ConvertStringToDouble(
+							driver.findElement(By.xpath("//*[@class='empireF_umrahwarp']")).getText()));
 
-		driver.findElement(By.xpath("//*[@class='mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base']"))
-				.click();
-
-		softly.assertThat(StringUtils
-				.ConvertStringToDouble(driver.findElement(By.xpath("//*[@class='empireF_ProceedPrice']")).getText()))
-				.isEqualTo(StringUtils.ConvertStringToDouble(
-						driver.findElement(By.xpath("//*[@class='empireF_umrahwarp']")).getText()));
-
-		wait.until(ExpectedConditions.elementToBeClickable(homePage.processToPayment));
-		homePage.processToPayment.click();
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		// baggage table
-		List<WebElement> baggageContainer = driver.findElements(
-				By.xpath("//*[@class='empireFlight_confirmTripBaggageTripText empireF_baggageHead ng-star-inserted']"));
-
-		for (WebElement container : baggageContainer) {
-			softly.assertThat(container.findElement(By.tagName("h4")).getText())
-					.isEqualTo("---------------need to capture flight route----------------------------------");
-
-			softly.assertThat(
-					container.findElement(By.xpath("//*[@class='empireFlight_confirmBagTableData']")).getText().trim())
-					.isEqualTo("---------------need to capture baggage details----------------------------------");
-
-			softly.assertThat(
-					container.findElement(By.xpath("//*[@class='empireFlight_confirmBagTableData ng-star-inserted']"))
-							.getText().trim())
-					.isEqualTo("---------------need to capture cabin details----------------------------------");
-
-		}
-
-		// traveler detail
-		WebElement travellerTable = driver.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']"));
-
-		List<WebElement> passengersList = travellerTable.findElements(By.tagName("tr"));
-
-		for (WebElement passenger : passengersList) {
-
-			logger.info("Passenger Name with title->" + passenger.findElement(By.xpath("(//td)[1]")).getText());
-			softly.assertThat(passenger.findElement(By.xpath("(//td)[1]")).getText().trim()).isEqualTo(
-					"---------------need to capture concatenate title, first name and second name----------------------------------");
-
-			logger.info("sector->" + passenger.findElement(By.xpath("//*[@class='empireFlight_confirmTd']")).getText());
-			softly.assertThat(passenger.findElement(By.xpath("//*[@class='empireFlight_confirmTd']")).getText())
-					.isEqualTo("---------------need to capture sector----------------------------------");
-
-			logger.info("PNR No->" + passenger.findElement(By.xpath("(//td)[3]")).getText());
-			softly.assertThat(passenger.findElement(By.xpath("(//td)[3]")).getText().trim().length()).isGreaterThan(0);
+			wait.until(ExpectedConditions.elementToBeClickable(homePage.processToPayment));
 			
-			logger.info("Airline PNR->" + passenger.findElement(By.xpath("(//td)[4]")).getText());
-			softly.assertThat(passenger.findElement(By.xpath("(//td)[4]")).getText().trim().length()).isGreaterThan(0);
+			Thread.sleep(10000);
 			
-			logger.info("Ticket No->" + passenger.findElement(By.xpath("(//td)[5]")).getText());
-			softly.assertThat(passenger.findElement(By.xpath("(//td)[5]")).getText().trim().length()).isGreaterThan(0);
-			
-			logger.info("Ticket Status->" + passenger.findElement(By.xpath("(//td)[6]")).getText());
-			softly.assertThat(passenger.findElement(By.xpath("(//td)[6]")).getText().trim().length()).isGreaterThan(0);
-	
-		}
+			new Actions(driver).moveToElement(homePage.processToPayment).click().perform();
+			//executor.executeScript("arguments[0].click();", homePage.processToPayment);
 
+			Thread.sleep(15000);
+
+			logger.info("Enter the card No: " + bookTicketDTO.getCardNo());
+			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.cardNo));
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Card Detail Page", driver,
+					getScenarioName());
+			passengerDetailsPage.cardNo.sendKeys(bookTicketDTO.getCardNo());
+
+			logger.info("Enter card Expiry Date: " + bookTicketDTO.getExpDate());
+			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.expDate));
+			passengerDetailsPage.expDate.sendKeys(bookTicketDTO.getExpDate());
+
+			logger.info("Enter card Cvv: " + bookTicketDTO.getCvv());
+			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.cvv));
+			passengerDetailsPage.cvv.sendKeys(bookTicketDTO.getCvv());
+
+			logger.info("Enter card Holder Name: " + bookTicketDTO.getCardHolderName());
+			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.cardHolderName));
+			passengerDetailsPage.cardHolderName.sendKeys(bookTicketDTO.getCardHolderName());
+
+			logger.info("Click the Pay Button");
+			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.pay));
+			passengerDetailsPage.pay.click();
+
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			// baggage table
+			List<WebElement> baggageContainer = driver.findElements(By.xpath(
+					"//*[@class='empireFlight_confirmTripBaggageTripText empireF_baggageHead ng-star-inserted']"));
+			int i = 0;
+			for (WebElement container : baggageContainer) {
+				logger.info("From and To: " + container.findElement(By.tagName("h4")).getText().trim());
+				softly.assertThat(container.findElement(By.tagName("h4")).getText().trim())
+						.isEqualTo(CommonDTO.getFromAndTo().get(i));
+
+				softly.assertThat(container.findElement(By.xpath("//*[@class='empireFlight_confirmBagTableData']"))
+						.getText().trim()).isEqualTo(CommonDTO.getCheckinBaggageData().get(i));
+
+				softly.assertThat(container
+						.findElement(By.xpath("//*[@class='empireFlight_confirmBagTableData ng-star-inserted']"))
+						.getText().trim()).isEqualTo(CommonDTO.getCabinBaggageData().get(i));
+				i++;
+			}
+			CommonDTO.clearFromAndToList();
+
+			// traveler detail
+			WebElement travellerTable = driver.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']"));
+
+			List<WebElement> passengersList = travellerTable.findElements(By.tagName("tr"));
+
+			for (WebElement passenger : passengersList) {
+
+				logger.info("Passenger Name with title->" + passenger.findElement(By.xpath("(//td)[1]")).getText());
+				softly.assertThat(passenger.findElement(By.xpath("(//td)[1]")).getText().trim()).isEqualTo(
+						"---------------need to capture concatenate title, first name and second name----------------------------------");
+
+				logger.info(
+						"sector->" + passenger.findElement(By.xpath("//*[@class='empireFlight_confirmTd']")).getText());
+				softly.assertThat(passenger.findElement(By.xpath("//*[@class='empireFlight_confirmTd']")).getText())
+						.isEqualTo("---------------need to capture sector----------------------------------");
+
+				logger.info("PNR No->" + passenger.findElement(By.xpath("(//td)[3]")).getText());
+				softly.assertThat(passenger.findElement(By.xpath("(//td)[3]")).getText().trim().length())
+						.isGreaterThan(0);
+
+				logger.info("Airline PNR->" + passenger.findElement(By.xpath("(//td)[4]")).getText());
+				softly.assertThat(passenger.findElement(By.xpath("(//td)[4]")).getText().trim().length())
+						.isGreaterThan(0);
+
+				logger.info("Ticket No->" + passenger.findElement(By.xpath("(//td)[5]")).getText());
+				softly.assertThat(passenger.findElement(By.xpath("(//td)[5]")).getText().trim().length())
+						.isGreaterThan(0);
+
+				logger.info("Ticket Status->" + passenger.findElement(By.xpath("(//td)[6]")).getText());
+				softly.assertThat(passenger.findElement(By.xpath("(//td)[6]")).getText().trim().length())
+						.isGreaterThan(0);
+
+			}
+
+		} catch (Exception e) {
+			logger.info("Exception occured at I_need_to_validate_payment_gateway: " + e.toString());
+		}
 	}
 
 }

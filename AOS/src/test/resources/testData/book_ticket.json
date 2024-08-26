@@ -1,6 +1,5 @@
 {
 	"oneway_search_form": {
-	    
 		"base_url": "https://ngtest.amadeusonlinesuite.com/flights",
 		"currency": "BHD",
 		"language": "Georgian",
@@ -14,16 +13,12 @@
 		"infant_count": "2",
 		"flexible_date": false,
 		"umrah_fare": true,
-	
 		"baggage_only": true,
 		"is_refundable": false,
 		"is_direct_flight": true,
 		"preferred_airlines": ""
-		},
-		
-		
-		"roundtrip_search_form": {
-	    
+	},
+	"roundtrip_search_form": {
 		"base_url": "https://ngtest.amadeusonlinesuite.com/flights",
 		"currency": "BHD",
 		"language": "Georgian",
@@ -32,51 +27,40 @@
 		"to": "LHR",
 		"date": "3",
 		"return_date": "5",
-		
 		"passenger_class": "Economy",
 		"adult_count": "2",
 		"child_count": "2",
 		"infant_count": "2",
 		"flexible_date": false,
 		"umrah_fare": true,
-	
 		"baggage_only": true,
 		"is_refundable": false,
 		"is_direct_flight": true,
 		"preferred_airlines": ""
-		},
-		
+	},
 	"multi_city_search_form": {
-	    
 		"base_url": "https://ngtest.amadeusonlinesuite.com/flights",
 		"currency": "BHD",
 		"language": "Georgian",
 		"trip_select": "Multi City",
-		
 		"from": "CAI",
 		"to": "DXB",
 		"date": "3",
-		
 		"from_two": "DXB",
 		"to_two": "RUH",
 		"date_two": "5",
-		
 		"from_three": "RUH",
 		"to_three": "MUC",
 		"date_three": "7",
-		
 		"from_four": "MUC",
 		"to_four": "AUH",
 		"date_four": "9",
-		
 		"from_five": "BOM",
 		"to_five": "DXB",
 		"date_five": "11",
-		
 		"from_six": "DXB",
 		"to_six": "RUH",
 		"date_six": "13",
-		
 		"passenger_class": "Economy",
 		"multi_city_count": "6",
 		"adult_count": "2",
@@ -86,10 +70,8 @@
 		"is_refundable": false,
 		"is_direct_flight": true,
 		"preferred_airlines": "EK"
-		
 	},
 	"oneway_flight_listing": {
-	    
 		"base_url": "",
 		"currency": "BHD",
 		"language": "Georgian",
@@ -97,7 +79,6 @@
 		"from": "BOM",
 		"to": "DOH",
 		"date": "3",
-		
 		"passenger_class": "Economy",
 		"adult_count": "1",
 		"child_count": "1",
@@ -120,9 +101,7 @@
 		"email": "shivam@amadeus.ae",
 		"country_mobile": "+91 India",
 		"mobile_no": "5765765767",
-		
-		
-		"payment_gateway": "TAP API LATEST",
+		"payment_gateway": "Payfort Test",
 		"tapapi_cardnumber": "8888880000000001",
 		"tapapi_cardname": "Rupay",
 		"tapapi_exprimonth": "06",
@@ -133,33 +112,26 @@
 		"tapapi_country": "India",
 		"tapapi_state": "Tamilnadu",
 		"tapapi_pin": "629163",
-		"tapapi_city": "Marthandam"
-	
-		
-	
-		
-		
-		},
-		
-		"multi_city_flight_listing": {
-	    
+		"tapapi_city": "Marthandam",
+		"card_no": "4005550000000001",
+		"exp_Date": "05/25",
+		"cvv": "123",
+		"card_holder_name": "Test"
+	},
+	"multi_city_flight_listing": {
 		"base_url": "https://ngtest.amadeusonlinesuite.com/flights",
 		"currency": "BHD",
 		"language": "Georgian",
 		"trip_select": "Multi City (3 Segment)",
-		
 		"from": "BOM",
 		"to": "DXB",
 		"date": "3",
-		
 		"from_two": "DXB",
 		"to_two": "RUH",
 		"date_two": "5",
-		
 		"from_three": "RUH",
 		"to_three": "LON",
 		"date_three": "7",
-		
 		"passenger_class": "Economy",
 		"multi_city_count": "6",
 		"adult_count": "2",
@@ -180,10 +152,8 @@
 		"departure_airport": "Dubai Bus Station, Dubai",
 		"arrival_timing": "",
 		"fare_option": "YCOMFORT"
-		
 	},
 	"oneway_edit_flight_listing": {
-	    
 		"base_url": "",
 		"currency": "BHD",
 		"language": "Georgian",
@@ -202,12 +172,8 @@
 		"is_direct_flight": true,
 		"preferred_airlines": "Emirates",
 		"relevant_keyword_preferred_airlines": "Emirates"
-		},
-		
-	
-		
-		"roundtrip_flight_listing": {
-	    
+	},
+	"roundtrip_flight_listing": {
 		"base_url": "",
 		"currency": "BHD",
 		"language": "Georgian",
@@ -235,27 +201,21 @@
 		"departure_airport": "",
 		"arrival_timing": "",
 		"fare_option": "YCOMFORT"
-				
-		},
-		"multi_city_flight_listing_six": {
-	    
+	},
+	"multi_city_flight_listing_six": {
 		"base_url": "https://ngtest.amadeusonlinesuite.com/flights",
 		"currency": "BHD",
 		"language": "Georgian",
 		"trip_select": "Multi City",
-		
 		"from": "BOM",
 		"to": "DXB",
 		"date": "10",
-		
 		"from_two": "DXB",
 		"to_two": "RUH",
 		"date_two": "15",
-		
 		"from_three": "RUH",
 		"to_three": "LON",
 		"date_three": "20",
-		
 		"passenger_class": "Economy",
 		"multi_city_count": "6",
 		"adult_count": "2",
@@ -275,9 +235,7 @@
 		"deprture_stop": "Abu Dhabi International Airport",
 		"departure_airport": "Chhatrapati Shivaji Maharaj International Airport",
 		"arrival_timing": ""
-		
 	},
-	
 	"dubai_to_doha": {
 		"base_url": "https://demo.amadeusonlinesuite.com/flights",
 		"from": "CAI",
