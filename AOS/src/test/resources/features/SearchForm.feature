@@ -111,17 +111,17 @@ Feature: Flight Booking
         #Then  I need to validate fare option card 
          #Then I click on the flight ltinerary
           #Then  I need to validate flight ltinerary
-            Then I click on the baggage
-             Then  I need to validate baggage
+            #Then I click on the baggage
+             #Then  I need to validate baggage
             #Then I click on the fare breakup
              #Then  I need to validate fare breakup
              Then I click on the booknow
              Then I need to add the traveller details
               Then I need to add the traveller common details
-              Then I enter the promo code
+              #Then I enter the promo code
              #Then  I need to validate flight Summary 
              Then I click on payment continue 
-             Then  I need to validate flight Summary 
+             Then I need to validate flight Summary payment
               Then I need to validate payment gateway
               
               

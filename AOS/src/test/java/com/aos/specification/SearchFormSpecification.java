@@ -717,6 +717,15 @@ public class SearchFormSpecification extends TestRunner {
 			// TODO: handle exception
 		}
 	}
+	
+	@Then("I need to validate flight Summary payment")
+	public void I_need_to_validate_flight_Summary_payment() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_flight_Summary_payment();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 
 	private void calander() {
 		// TODO Auto-generated method stub
