@@ -870,7 +870,31 @@ public class BookTicketDTO {
 			this.tapapiCity = tapapiCity;
 			
 		}
+		@SerializedName("promo_code")
+		@Expose
+		private String promoCode;
+
+		public String getPromoCode() {
+		    return promoCode;
+		}
+
+		public void setPromoCode(String promoCode) {
+			this.promoCode = promoCode;
+			
+		}
 		
+		@SerializedName("optional_preferance")
+		@Expose
+		private String optionalPreferance;
+
+		public String getOptionalPreferance() {
+		    return optionalPreferance;
+		}
+
+		public void setOptionalPreferance(String optionalPreferance) {
+			this.optionalPreferance = optionalPreferance;
+			
+		}
 	}
 	
 

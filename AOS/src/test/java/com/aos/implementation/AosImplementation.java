@@ -715,49 +715,110 @@ public class AosImplementation extends AosSpecification {
 
 			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.optionalPreference));
 			passengerDetailsPage.optionalPreference.click();
+       
+//			  logger.info("Selecting the Meal pereferance : " + passengerDTOList.get(dataIndex).getMealPreference());
+//			wait.until(ExpectedConditions.elementToBeClickable(mealPreference));
+//			mealPreference.click();
+//			executor.executeScript("arguments[0].click();",
+//					passengerDetailsContainer.get(i)
+//							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+//									+ passengerDTOList.get(dataIndex).getMealPreference() + "'])")));
+//		
+//
+//			logger.info("Selecting the Special request: " + passengerDTOList.get(dataIndex).getSpecialRequst());
+//			wait.until(ExpectedConditions.elementToBeClickable(specialRequst));
+//			specialRequst.click();
+//			executor.executeScript("arguments[0].click();",
+//					passengerDetailsContainer.get(i)
+//							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+//									+ passengerDTOList.get(dataIndex).getSpecialRequst() + "'])")));
+//
+//			logger.info("Selecting the  Airline: " + passengerDTOList.get(dataIndex).getAirline());
+//			wait.until(ExpectedConditions.elementToBeClickable(airline));
+//			airline.click();
+//			executor.executeScript("arguments[0].click();",
+//					passengerDetailsContainer.get(i)
+//							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+//									+ passengerDTOList.get(dataIndex).getAirline() + "'])")));
+//
+//			logger.info("Selecting the Seat preferance: " + passengerDTOList.get(dataIndex).getSeatPreference());
+//			wait.until(ExpectedConditions.elementToBeClickable(seatPreference));
+//			seatPreference.click();
+//			executor.executeScript("arguments[0].click();",
+//					passengerDetailsContainer.get(i)
+//							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+//									+ passengerDTOList.get(dataIndex).getSeatPreference() + "'])")));
+//
+//			logger.info(
+//					"Enter the Frequent flyer number : " + passengerDTOList.get(dataIndex).getFrequentFlyingNumber());
+//			wait.until(ExpectedConditions
+//					.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='Number']")).get(i)));
+//
+//			driver.findElements(By.xpath("//*[@formcontrolname='Number']")).get(i)
+//					.sendKeys(passengerDTOList.get(dataIndex).getFrequentFlyingNumber());
+			
+			
+			// Check and select Meal Preference if it exists
+			String mealPreferenceValue = passengerDTOList.get(dataIndex).getMealPreference();
+			if (mealPreferenceValue != null && !mealPreferenceValue.isEmpty()) {
+			    logger.info("Selecting the Meal preference: " + mealPreferenceValue);
+			    wait.until(ExpectedConditions.elementToBeClickable(mealPreference));
+			    mealPreference.click();
+			    executor.executeScript("arguments[0].click();",
+			            passengerDetailsContainer.get(i)
+			                    .findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+			                            + mealPreferenceValue + "'])")));
+			}
 
-			logger.info("Selecting the Meal pereferance : " + passengerDTOList.get(dataIndex).getMealPreference());
-			wait.until(ExpectedConditions.elementToBeClickable(mealPreference));
-			mealPreference.click();
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-									+ passengerDTOList.get(dataIndex).getMealPreference() + "'])")));
+			// Check and select Special Request if it exists
+			String specialRequestValue = passengerDTOList.get(dataIndex).getSpecialRequst();
+			if (specialRequestValue != null && !specialRequestValue.isEmpty()) {
+			    logger.info("Selecting the Special request: " + specialRequestValue);
+			    wait.until(ExpectedConditions.elementToBeClickable(specialRequst));
+			    specialRequst.click();
+			    executor.executeScript("arguments[0].click();",
+			            passengerDetailsContainer.get(i)
+			                    .findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+			                            + specialRequestValue + "'])")));
+			} 
 
-			logger.info("Selecting the Special request: " + passengerDTOList.get(dataIndex).getSpecialRequst());
-			wait.until(ExpectedConditions.elementToBeClickable(specialRequst));
-			specialRequst.click();
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-									+ passengerDTOList.get(dataIndex).getSpecialRequst() + "'])")));
+			// Check and select Airline if it exists
+			String airlineValue = passengerDTOList.get(dataIndex).getAirline();
+			if (airlineValue != null && !airlineValue.isEmpty()) {
+			    logger.info("Selecting the Airline: " + airlineValue);
+			    wait.until(ExpectedConditions.elementToBeClickable(airline));
+			    airline.click();
+			    executor.executeScript("arguments[0].click();",
+			            passengerDetailsContainer.get(i)
+			                    .findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+			                            + airlineValue + "'])")));
+			} 
 
-			logger.info("Selecting the  Airline: " + passengerDTOList.get(dataIndex).getAirline());
-			wait.until(ExpectedConditions.elementToBeClickable(airline));
-			airline.click();
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-									+ passengerDTOList.get(dataIndex).getAirline() + "'])")));
+			// Check and select Seat Preference if it exists
+			String seatPreferenceValue = passengerDTOList.get(dataIndex).getSeatPreference();
+			if (seatPreferenceValue != null && !seatPreferenceValue.isEmpty()) {
+			    logger.info("Selecting the Seat preference: " + seatPreferenceValue);
+			    wait.until(ExpectedConditions.elementToBeClickable(seatPreference));
+			    seatPreference.click();
+			    executor.executeScript("arguments[0].click();",
+			            passengerDetailsContainer.get(i)
+			                    .findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+			                            + seatPreferenceValue + "'])")));
+			} 
+			// Check and enter Frequent Flyer Number if it exists
+			String frequentFlyerNumber = passengerDTOList.get(dataIndex).getFrequentFlyingNumber();
+			if (frequentFlyerNumber != null && !frequentFlyerNumber.isEmpty()) {
+			    logger.info("Enter the Frequent flyer number: " + frequentFlyerNumber);
+			    wait.until(ExpectedConditions
+			            .elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='Number']")).get(i)));
+			    driver.findElements(By.xpath("//*[@formcontrolname='Number']")).get(i)
+			            .sendKeys(frequentFlyerNumber);
+			} 
 
-			logger.info("Selecting the Seat preferance: " + passengerDTOList.get(dataIndex).getSeatPreference());
-			wait.until(ExpectedConditions.elementToBeClickable(seatPreference));
-			seatPreference.click();
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-									+ passengerDTOList.get(dataIndex).getSeatPreference() + "'])")));
-
-			logger.info(
-					"Enter the Frequent flyer number : " + passengerDTOList.get(dataIndex).getFrequentFlyingNumber());
-			wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='Number']")).get(i)));
-
-			driver.findElements(By.xpath("//*[@formcontrolname='Number']")).get(i)
-					.sendKeys(passengerDTOList.get(dataIndex).getFrequentFlyingNumber());
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("optional peferance() -> " + e.getMessage());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
 		}
 
 		

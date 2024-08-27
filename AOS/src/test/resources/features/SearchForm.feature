@@ -118,8 +118,10 @@ Feature: Flight Booking
              Then I click on the booknow
              Then I need to add the traveller details
               Then I need to add the traveller common details
+              Then I enter the promo code
              #Then  I need to validate flight Summary 
              Then I click on payment continue 
+             Then  I need to validate flight Summary 
               Then I need to validate payment gateway
               
               

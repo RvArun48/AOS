@@ -71,6 +71,7 @@ public class PassengerDetailsPage {
 	public WebElement optionalPreference;
 	
 	
-
+	@FindBy(xpath = "//*[text()='Apply']")
+	public WebElement clickApply;
 	
 }

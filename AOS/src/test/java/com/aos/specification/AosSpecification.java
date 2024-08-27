@@ -327,10 +327,6 @@ public class AosSpecification extends TestRunner {
 		
 			// Thread.sleep(10000);
 
-			logger.info("Click the process To Pay Button");
-			wait.until(ExpectedConditions.elementToBeClickable(homePage.processToPay));
-			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Click to Process to pay", driver, scenarioName);
-			homePage.processToPay.click();
 
 			// Thread.sleep(10000);
 

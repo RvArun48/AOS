@@ -3518,12 +3518,18 @@ public class SearchFormImplementation extends TestRunner {
 					.isEqualTo(StringUtils.ConvertStringToDouble(
 							driver.findElement(By.xpath("//*[@class='empireF_umrahwarp']")).getText()));
 
-			wait.until(ExpectedConditions.elementToBeClickable(homePage.processToPayment));
+//			wait.until(ExpectedConditions.elementToBeClickable(homePage.processToPayment));
+//			
+//			Thread.sleep(10000);
+//			
+//			new Actions(driver).moveToElement(homePage.processToPayment).click().perform();
+//			//executor.executeScript("arguments[0].click();", homePage.processToPayment);
 			
-			Thread.sleep(10000);
-			
-			new Actions(driver).moveToElement(homePage.processToPayment).click().perform();
-			//executor.executeScript("arguments[0].click();", homePage.processToPayment);
+
+			logger.info("Click the process To Pay Button");
+			wait.until(ExpectedConditions.elementToBeClickable(homePage.processToPay));
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Click to Process to pay", driver, getScenarioName());
+			homePage.processToPay.click();
 
 			Thread.sleep(15000);
 
@@ -3548,6 +3554,8 @@ public class SearchFormImplementation extends TestRunner {
 			logger.info("Click the Pay Button");
 			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.pay));
 			passengerDetailsPage.pay.click();
+			
+			Thread.sleep(150000);
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			// baggage table
@@ -3606,6 +3614,24 @@ public class SearchFormImplementation extends TestRunner {
 		} catch (Exception e) {
 			logger.info("Exception occured at I_need_to_validate_payment_gateway: " + e.toString());
 		}
+	}
+
+	public void I_enter_the_promo_code() {
+		try {
+			BookTicketDTO bookTicketDTO = CommonDTO.getInstance().getBookTicketDTO();
+			logger.info("Enter the promo code: " + bookTicketDTO.getPromoCode());
+			wait.until(ExpectedConditions
+					.elementToBeClickable(driver.findElement(By.xpath("//*[@class='empireF_promoInputForm']/input"))));
+			WebElement promoCode = driver.findElement(By.xpath("//*[@class='empireF_promoInputForm']/input"));
+			promoCode.sendKeys(bookTicketDTO.getPromoCode());
+			Thread.sleep(2000);
+			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.clickApply));
+			passengerDetailsPage.clickApply.click();
+			Thread.sleep(2000);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 
 }

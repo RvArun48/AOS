@@ -708,6 +708,15 @@ public class SearchFormSpecification extends TestRunner {
 			// TODO: handle exception
 		}
 	}
+	
+	@Then("I enter the promo code")
+	public void I_enter_the_promo_code() {
+		try {
+			new SearchFormImplementation().I_enter_the_promo_code();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 
 	private void calander() {
 		// TODO Auto-generated method stub
