@@ -828,7 +828,7 @@ public class AosImplementation extends AosSpecification {
 	public static void verifyTicketBookingStatus(WebDriverWait wait) throws IOException {
 		try {
 			// confirmed
-			logger.info("Your booking is Confirmed");
+			
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(
 					"(//*[@class='empireFlight_confirmBookingStatus' and contains(text(),'Your booking is Confirmed')])[1]")));
 			if (driver.findElement(By.xpath(
@@ -839,12 +839,13 @@ public class AosImplementation extends AosSpecification {
 								"(//*[@class='empireFlight_confirmBookingStatus' and contains(text(),'Your booking')])[1]"))
 								.getText() + "</u></b>",
 						driver, AosSpecification.scenarioName);
+				logger.info("Your booking is Confirmed");
 			}
 
 		} catch (Exception e) {
 			try {
 				// pending
-				logger.info("Your booking is Pending");
+				
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(
 						"(//*[@class='empireFlight_confirmBookingStatus' and contains(text(),'Your booking is Pending')])[1]")));
 				if (driver.findElement(By.xpath(
@@ -855,12 +856,13 @@ public class AosImplementation extends AosSpecification {
 									"(//*[@class='empireFlight_confirmBookingStatus' and contains(text(),'Your booking')])[1]"))
 									.getText() + "</u></b>",
 							driver, AosSpecification.scenarioName);
+					logger.info("Your booking is Pending");
 				}
 
 			} catch (Exception e1) {
 				try {
 					// on hold
-					logger.info("Your booking is On hold");
+					
 					wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(
 							"(//*[@class='empireFlight_confirmBookingStatus' and contains(text(),'Your booking is On hold')])[1]")));
 					if (driver.findElement(By.xpath(
@@ -871,6 +873,7 @@ public class AosImplementation extends AosSpecification {
 										"(//*[@class='empireFlight_confirmBookingStatus' and contains(text(),'Your booking')])[1]"))
 										.getText() + "</u></b>",
 								driver, AosSpecification.scenarioName);
+						logger.info("Your booking is On hold");
 					}
 
 				} catch (Exception e3) {

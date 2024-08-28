@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aos.implementation.SearchFormImplementation;
+import com.aos.model.CommonDTO;
 
 public class HomePage {
 	public static final Logger logger = LogManager.getLogger(HomePage.class);
@@ -324,7 +325,7 @@ public class HomePage {
 	@FindBy(xpath = "(//input[@id='umrahFare'])[1]")
 	public WebElement umrahFare;
 
-	@FindBy(xpath = "//*[@class='checkboxWrap checkboxDefault']/child::*[contains(text(),'Flexible dates ± 3 days')]")
+	@FindBy(xpath = "//*[@class='checkboxWrap checkboxDefault empireF_flexibleTxt']/child::*[contains(text(),'Flexible dates ± 3 days')]")
 	public WebElement flxiableDateElementGroup;
 
 	@FindBy(xpath = "(//h4[contains(text(),' Return ')])[1]")
@@ -561,4 +562,6 @@ public class HomePage {
 		}
 		return driver.findElement(By.xpath(locator));
 	}
+
+
 }

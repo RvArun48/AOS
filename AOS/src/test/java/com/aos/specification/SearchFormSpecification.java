@@ -726,6 +726,24 @@ public class SearchFormSpecification extends TestRunner {
 			// TODO: handle exception
 		}
 	}
+	
+	@Then("I enter the card details")
+	public void I_enter_the_card_details() {
+		try {
+			new SearchFormImplementation().I_enter_the_card_details();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	@Then("I need to validate confirmation page")
+	public void I_need_to_validate_confirmation_page() {
+		try {
+			new SearchFormImplementation().I_need_to_validate_confirmation_page();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 
 	private void calander() {
 		// TODO Auto-generated method stub
