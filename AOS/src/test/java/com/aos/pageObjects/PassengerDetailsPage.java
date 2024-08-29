@@ -60,7 +60,7 @@ public class PassengerDetailsPage {
 	@FindBy(xpath = "(//input[@formcontrolname='DocumentNumber'])[1]")
 	public WebElement nationalIdField;
 	
-	@FindBy(xpath = "(//*[@class='mdc-form-field'])[4]")
+	@FindBy(xpath = "//label[text()='Local Id']")
 	public WebElement localId;
 	
 	@FindBy(xpath = "//label[text()='Iqama ID (Saudi Residence for Foreigners)']")
@@ -73,5 +73,11 @@ public class PassengerDetailsPage {
 	
 	@FindBy(xpath = "//*[text()='Apply']")
 	public WebElement clickApply;
+	
+	@FindBy(xpath = "//*[@class='mdc-checkbox__native-control mdc-checkbox--selected']")
+	public WebElement clickAdultOneAddress;
+	
+	@FindBy(xpath = "//*[@class='mdc-checkbox__native-control mdc-checkbox--selected']")
+	public WebElement clickAdultTwoAddress;
 	
 }

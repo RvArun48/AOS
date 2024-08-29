@@ -16,7 +16,7 @@
 		"ped_month": "June",
 		"ped_year": "2030",
 		
-		"document_type": "Local Id",
+		"document_type": "Passport Information",
 		"nationality_id_gcc": "25321",
 		"issuing_country_gcc": "India",
 		"nationality_gcc": "India",
@@ -63,11 +63,9 @@
 		"seat_preference": " ",
 		"special_requst": "Bassinet/Carry Cot",
 		"airline": "Finnair",
-		"frequent_flying_number": "",
+		"frequent_flying_number": ""
 		
-		"email": "shivam@amadeus.ae",
-		"country_mobile": "+91 India",
-		"mobile_no": "5765765767"
+		
 	},
 	{
 		"title": "Mr",
@@ -85,9 +83,52 @@
 		"ped_day": "07",
 		"ped_month": "August",
 		"ped_year": "2032",
-		"meal_preference": "Muslim Meal",
-		"seat_preference": "Aisle",
-		"special_requst": "",
+		"document_type": "Iqama ID (Saudi Residence for Foreigners)",
+		"nationality_id_gcc": "25321",
+		"issuing_country_gcc": "India",
+		"nationality_gcc": "India",
+		"nationality_expiry_date_gcc": "21",
+		"nationality_expiry_month_gcc": "May",
+		"nationality_expiry_year_gcc": "2028",
+		"iqama_id": "2312155555",
+		"nationality_srff": "India",
+		"iqama_expiry_date_srff": "06",
+		"iqama_expiry_month_srff": "May",
+		"iqama_expiry_year_srff": "2030",
+		"local_document_no": "1234567899874",
+		"form_identity": "542546",
+		
+		"visa_number": "542546",
+		"place_of_birth_city": "Chennai",
+		"place_of_birth_country": "India",
+		"visa_issued_city": "India",
+		"issued_country": "India",
+		"visa_issued_day": "06",
+		"visa_issued_month": "May",
+		"visa_issued_year": "2019",
+		"visa_expiry_day": "05",
+		"visa_expiry_month": "May",
+		"visa_expiry_year": "2029",
+		"visa_required_country": "India",
+		
+		
+		"destination_address": "ABC",
+		"destination_city": "ABC",
+		"destination_country": "India",
+		"destination_state": "SS",
+		"destination_pin": "629163",
+		
+		"residence_address": "ABC",
+		"residence_city": "ABC",
+		"residence_country": "India",
+		"residence_state": "SS",
+		"residence_pin": "629163",
+		
+		
+		
+		"meal_preference": "Diabetic Meal ",
+		"seat_preference": " ",
+		"special_requst": "Bassinet/Carry Cot",
 		"airline": "",
 		"frequent_flying_number": ""
 	},
@@ -107,11 +148,55 @@
 		"ped_day": "08",
 		"ped_month": "Decemeber",
 		"ped_year": "2035",
-		"meal_preference": "Vegeterian Hindu Meal",
-		"seat_preference": "Aisle",
-		"special_requst": "",
+		"document_type": "Local Id",
+		"nationality_id_gcc": "25321",
+		"issuing_country_gcc": "India",
+		"nationality_gcc": "India",
+		"nationality_expiry_date_gcc": "21",
+		"nationality_expiry_month_gcc": "May",
+		"nationality_expiry_year_gcc": "2028",
+		"iqama_id": "23121",
+		"nationality_srff": "India",
+		"iqama_expiry_date_srff": "06",
+		"iqama_expiry_month_srff": "May",
+		"iqama_expiry_year_srff": "2030",
+		"local_document_no": "1234567899874",
+		"form_identity": "542546",
+		
+		"visa_number": "542546",
+		"place_of_birth_city": "Chennai",
+		"place_of_birth_country": "India",
+		"visa_issued_city": "India",
+		"issued_country": "India",
+		"visa_issued_day": "06",
+		"visa_issued_month": "May",
+		"visa_issued_year": "2019",
+		"visa_expiry_day": "05",
+		"visa_expiry_month": "May",
+		"visa_expiry_year": "2029",
+		"visa_required_country": "India",
+		
+		
+		"destination_address": "ABC",
+		"destination_city": "ABC",
+		"destination_country": "India",
+		"destination_state": "SS",
+		"destination_pin": "629163",
+		
+		"residence_address": "ABC",
+		"residence_city": "ABC",
+		"residence_country": "India",
+		"residence_state": "SS",
+		"residence_pin": "629163",
+		
+		
+		
+		"meal_preference": "Diabetic Meal ",
+		"seat_preference": " ",
+		"special_requst": "Bassinet/Carry Cot",
 		"airline": "",
 		"frequent_flying_number": ""
+		
 	},
 	{
 		"title": "Mrs",

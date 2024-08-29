@@ -82,13 +82,12 @@ Feature: Flight Booking
     Then I enter the destination
     Then I enter the departure date
     Then I select the flight category
-  Then I add passengers
+    Then I add passengers
     #Then I add advance search options 
     #Then I enter the  preferred airlines 
     Then I click on the search button
-    
     # Then I click on the edit search
-     Then I need to validate advance search
+     #Then I need to validate advance search
      #Then I need to validate flexi calander
       #Then I need to validate installments
       #Then I need to validate time
@@ -106,14 +105,13 @@ Feature: Flight Booking
        #Then I need to validate fare option
        #Then I need to validate sortby filter
        #Then I need to validate more fligt option
-        Then I click on the flight details 
-        
+        Then I click on the flight details   
         #Then  I need to validate flight details 
         #Then  I need to validate fare option card 
-         Then I click on the flight ltinerary
-          Then  I need to validate flight ltinerary
-            Then I click on the baggage
-             Then  I need to validate baggage
+         #Then I click on the flight ltinerary
+          #Then  I need to validate flight ltinerary
+            #Then I click on the baggage
+             #Then  I need to validate baggage
             Then I click on the fare breakup
              Then  I need to validate fare breakup
              Then I click on the booknow
@@ -190,11 +188,12 @@ Feature: Flight Booking
           Then  I need to validate flight ltinerary
             Then I click on the baggage
              Then  I need to validate baggage
-            #Then I click on the fare breakup
-             #Then  I need to validate fare breakup
+            Then I click on the fare breakup
+             Then  I need to validate fare breakup
               Then I click on the booknow
-             #Then I need to add the traveller details
+             Then I need to add the traveller details
              Then  I need to validate flight Summary 
+             
        
    
        

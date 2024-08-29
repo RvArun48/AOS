@@ -15,10 +15,56 @@
 		"ped_day":"07",
 		"ped_month":"September",
 		"ped_year":"2030",
-		"meal_preference":"Baby meal",
-		"seat_preference":"Aisle",
-		"special_requst":"Wheelchair",
-		"airline":"Azerbijan airlines",
-		"frequent_flying_number":"4"
+		
+		
+		"document_type": "Passport Information",
+		"nationality_id_gcc": "25321",
+		"issuing_country_gcc": "India",
+		"nationality_gcc": "India",
+		"nationality_expiry_date_gcc": "21",
+		"nationality_expiry_month_gcc": "May",
+		"nationality_expiry_year_gcc": "2028",
+		"iqama_id": "23121",
+		"nationality_srff": "India",
+		"iqama_expiry_date_srff": "06",
+		"iqama_expiry_month_srff": "May",
+		"iqama_expiry_year_srff": "2030",
+		"local_document_no": "1234567899874",
+		"form_identity": "542546",
+		
+		"visa_number": "542546",
+		"place_of_birth_city": "Chennai",
+		"place_of_birth_country": "India",
+		"visa_issued_city": "India",
+		"issued_country": "India",
+		"visa_issued_day": "06",
+		"visa_issued_month": "May",
+		"visa_issued_year": "2019",
+		"visa_expiry_day": "05",
+		"visa_expiry_month": "May",
+		"visa_expiry_year": "2029",
+		"visa_required_country": "India",
+		
+		
+		"destination_address": "ABC",
+		"destination_city": "ABC",
+		"destination_country": "India",
+		"destination_state": "SS",
+		"destination_pin": "629163",
+		
+		"residence_address": "ABC",
+		"residence_city": "ABC",
+		"residence_country": "India",
+		"residence_state": "SS",
+		"residence_pin": "629163",
+		
+		
+		
+		"meal_preference": "Diabetic Meal ",
+		"seat_preference": " ",
+		"special_requst": "Bassinet/Carry Cot",
+		"airline": "Finnair",
+		"frequent_flying_number": ""
+		
 	}
 ]

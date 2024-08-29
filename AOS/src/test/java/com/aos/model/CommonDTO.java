@@ -12,6 +12,7 @@ public class CommonDTO {
 	private BookTicketDTO bookTicketDTO;
 	private LocalTime flightStartTime;
 	private LocalTime flightEndTime;
+	private List<PassengerDetailsDTO> allPassengerDTOList;
 
 	private static List<String> fromAndToList = new ArrayList<>();
 	private static List<String> baggageCheckinList = new ArrayList<>();
@@ -129,5 +130,12 @@ public class CommonDTO {
 		}
 	}
 
+	public void setAllPassengerDTOList(List<PassengerDetailsDTO> allPassengerDTOList) {
+		this.allPassengerDTOList = allPassengerDTOList;
+	}
+
+	public List<PassengerDetailsDTO> getAllPassengerDTOList() {
+		return allPassengerDTOList;
+	}
 
 }

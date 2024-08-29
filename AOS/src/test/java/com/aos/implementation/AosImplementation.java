@@ -132,7 +132,8 @@ public class AosImplementation extends AosSpecification {
 		WebElement destinationCountry;
 		WebElement residenceCountry;
 		
-
+       
+       
 		title = wait.until(
 				ExpectedConditions.visibilityOf(driver.findElements(By.xpath("//*[@formcontrolname='Title']")).get(i)));
 
@@ -197,9 +198,21 @@ public class AosImplementation extends AosSpecification {
 		visaExpiryYear = driver.findElements(By.xpath("//*[@formcontrolname='VisaExpiryYear']")).get((i));
 
 		visaRequiredCountry = driver.findElements(By.xpath("//*[@formcontrolname='VisaRequiringCountry']")).get((i));
-		
+		 try {
+	        	ExpectedConditions.elementToBeClickable(passengerDetailsPage.clickAdultOneAddress);
+	     		passengerDetailsPage.clickAdultOneAddress.click();
+	     		
+	        }catch (Exception e) {
+				// TODO: handle exceptio
+			}
 		destinationCountry = driver.findElements(By.xpath("//*[@formcontrolname='DOCA_destination_Country']")).get((i));
-		
+		 try {
+	        	
+	     	ExpectedConditions.elementToBeClickable(passengerDetailsPage.clickAdultTwoAddress);
+	     		passengerDetailsPage.clickAdultTwoAddress.click();
+	        }catch (Exception e) {
+				// TODO: handle exceptio
+			}
 		residenceCountry = driver.findElements(By.xpath("//*[@formcontrolname='DOCA_residence_Country']")).get((i));
 		
 		
@@ -276,22 +289,31 @@ public class AosImplementation extends AosSpecification {
 			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.iqamaId));
 			passengerDetailsPage.iqamaId.click();
 
-			logger.info("Click the local id : " + passengerDTOList.get(dataIndex).getIqamaId());
+			logger.info("Click the Iqama ID : " + passengerDTOList.get(dataIndex).getIqamaId());
 			wait.until(ExpectedConditions.elementToBeClickable(
 					driver.findElements(By.xpath("//*[@formcontrolname='DocumentNumber']")).get(i)));
 
 			driver.findElements(By.xpath("//*[@formcontrolname='DocumentNumber']")).get(i)
 					.sendKeys(passengerDTOList.get(dataIndex).getIqamaId());
+			
+			
 
 			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
-
-			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller details", driver,
-					scenarioName);
-			Thread.sleep(1000);
+//			logger.info("Click the Iqama Nationality : " + passengerDTOList.get(dataIndex).getNationalitySrff());
+//
+//			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller details", driver,
+//					scenarioName);
+//			Thread.sleep(1000);
+//			executor.executeScript("arguments[0].click();",
+//					passengerDetailsContainer.get(i)
+//							.findElement(By.xpath("//*[@class='ng-option ng-star-inserted']//child::*[contains(text(),'"
+//									+ passengerDTOList.get(dataIndex).getNationalitySrff() + "']")));
+			
 			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("//*[@class='ng-option ng-star-inserted']//child::*[text()='"
-									+ passengerDTOList.get(dataIndex).getNationalitySrff() + "']")));
+				    passengerDetailsContainer.get(i)
+				        .findElement(By.xpath(String.format(
+				            "//*[contains(@class, 'ng-option') and contains(@class, 'ng-star-inserted')]//*[contains(text(), '%s')]",
+				            passengerDTOList.get(dataIndex).getNationalitySrff() ))));
 			Thread.sleep(5000);
 
 			logger.info("Selecting the Iqama Expiry Day: " + passengerDTOList.get(dataIndex).getIqamaExpiryDateSrff());
@@ -300,11 +322,12 @@ public class AosImplementation extends AosSpecification {
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Iqama Expiry Day", driver,
 					scenarioName);
 			Thread.sleep(1000);
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("//*[@class='ng-option ng-star-inserted']//child::*[text()='"
-									+ passengerDTOList.get(dataIndex).getIqamaExpiryDateSrff() + "']")));
 
+			executor.executeScript("arguments[0].click();",
+				    passengerDetailsContainer.get(i)
+				        .findElement(By.xpath(String.format(
+				            "//*[contains(@class, 'ng-option') and contains(@class, 'ng-star-inserted')]//*[contains(text(), '%s')]",
+				            passengerDTOList.get(dataIndex).getIqamaExpiryDateSrff() ))));
 			logger.info(
 					"Selecting the Iqama Expiry Month: " + passengerDTOList.get(dataIndex).getIqamaExpiryMonthSrff());
 			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
@@ -312,10 +335,12 @@ public class AosImplementation extends AosSpecification {
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Iqama Expiry Month", driver,
 					scenarioName);
 			Thread.sleep(1000);
+
 			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("//*[@class='ng-option ng-star-inserted']//child::*[text()='"
-									+ passengerDTOList.get(dataIndex).getIqamaExpiryMonthSrff() + "']")));
+				    passengerDetailsContainer.get(i)
+				        .findElement(By.xpath(String.format(
+				            "//*[contains(@class, 'ng-option') and contains(@class, 'ng-star-inserted')]//*[contains(text(), '%s')]",
+				            passengerDTOList.get(dataIndex).getIqamaExpiryMonthSrff() ))));
 
 			logger.info("Selecting the Iqama Expiry Year: " + passengerDTOList.get(dataIndex).getIqamaExpiryYearSrff());
 			new Actions(driver).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).build().perform();
@@ -323,11 +348,12 @@ public class AosImplementation extends AosSpecification {
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller Iqama Expiry Year", driver,
 					scenarioName);
 			Thread.sleep(1000);
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("//*[@class='ng-option ng-star-inserted']//child::*[text()='"
-									+ passengerDTOList.get(dataIndex).getIqamaExpiryYearSrff() + "']")));
 
+			executor.executeScript("arguments[0].click();",
+				    passengerDetailsContainer.get(i)
+				        .findElement(By.xpath(String.format(
+				            "//*[contains(@class, 'ng-option') and contains(@class, 'ng-star-inserted')]//*[contains(text(), '%s')]",
+				            passengerDTOList.get(dataIndex).getIqamaExpiryYearSrff() ))));
 		}
 
 		if (passengerDTOList.get(dataIndex).getDocumentType()
@@ -356,10 +382,10 @@ public class AosImplementation extends AosSpecification {
 					driver, scenarioName);
 			Thread.sleep(1000);
 			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("//*[@class='ng-option ng-star-inserted']//child::*[text()='"
-									+ passengerDTOList.get(dataIndex).getIssuingCountryGcc() + "']")));
-			Thread.sleep(3000);
+				    passengerDetailsContainer.get(i)
+				        .findElement(By.xpath(String.format(
+				            "//*[contains(@class, 'ng-option') and contains(@class, 'ng-star-inserted')]//*[contains(text(), '%s')]",
+				            passengerDTOList.get(dataIndex).getIssuingCountryGcc() ))));
 
 			logger.info("Selecting the Nationality: " + passengerDTOList.get(dataIndex).getNationalityGcc());
 			Thread.sleep(3000);
@@ -372,6 +398,8 @@ public class AosImplementation extends AosSpecification {
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("//*[@class='ng-option-label ng-star-inserted' and text()='"
 									+ passengerDTOList.get(dataIndex).getNationalityGcc() + "']")));
+			
+			
 
 			logger.info("Selecting the Nationality Expiry Day: "
 					+ passengerDTOList.get(dataIndex).getNationalityExpiryDateGcc());
@@ -385,6 +413,7 @@ public class AosImplementation extends AosSpecification {
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("//*[@class='ng-option-label ng-star-inserted' and text()='"
 									+ passengerDTOList.get(dataIndex).getNationalityExpiryDateGcc() + "']")));
+			
 
 			logger.info("Selecting the Nationality Expiry Month: "
 					+ passengerDTOList.get(dataIndex).getNationalityExpiryMonthGcc());
@@ -398,6 +427,7 @@ public class AosImplementation extends AosSpecification {
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("//*[@class='ng-option-label ng-star-inserted' and text()='"
 									+ passengerDTOList.get(dataIndex).getNationalityExpiryMonthGcc() + "']")));
+			
 
 			logger.info("Selecting the Nationality Expiry Year: "
 					+ passengerDTOList.get(dataIndex).getNationalityExpiryYearGcc());
@@ -411,6 +441,7 @@ public class AosImplementation extends AosSpecification {
 					passengerDetailsContainer.get(i)
 							.findElement(By.xpath("//*[@class='ng-option-label ng-star-inserted' and text()='"
 									+ passengerDTOList.get(dataIndex).getNationalityExpiryYearGcc() + "']")));
+			
 
 		}
 		if (passengerDTOList.get(dataIndex).getDocumentType().equalsIgnoreCase("Passport Information")) {
@@ -710,120 +741,82 @@ public class AosImplementation extends AosSpecification {
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
 
-		try {
-
-			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.optionalPreference));
-			passengerDetailsPage.optionalPreference.click();
+//		try {
+//
+//			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.optionalPreference));
+//			passengerDetailsPage.optionalPreference.click();
        
-//			  logger.info("Selecting the Meal pereferance : " + passengerDTOList.get(dataIndex).getMealPreference());
-//			wait.until(ExpectedConditions.elementToBeClickable(mealPreference));
-//			mealPreference.click();
-//			executor.executeScript("arguments[0].click();",
-//					passengerDetailsContainer.get(i)
-//							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-//									+ passengerDTOList.get(dataIndex).getMealPreference() + "'])")));
-//		
-//
-//			logger.info("Selecting the Special request: " + passengerDTOList.get(dataIndex).getSpecialRequst());
-//			wait.until(ExpectedConditions.elementToBeClickable(specialRequst));
-//			specialRequst.click();
-//			executor.executeScript("arguments[0].click();",
-//					passengerDetailsContainer.get(i)
-//							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-//									+ passengerDTOList.get(dataIndex).getSpecialRequst() + "'])")));
-//
-//			logger.info("Selecting the  Airline: " + passengerDTOList.get(dataIndex).getAirline());
-//			wait.until(ExpectedConditions.elementToBeClickable(airline));
-//			airline.click();
-//			executor.executeScript("arguments[0].click();",
-//					passengerDetailsContainer.get(i)
-//							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-//									+ passengerDTOList.get(dataIndex).getAirline() + "'])")));
-//
-//			logger.info("Selecting the Seat preferance: " + passengerDTOList.get(dataIndex).getSeatPreference());
-//			wait.until(ExpectedConditions.elementToBeClickable(seatPreference));
-//			seatPreference.click();
-//			executor.executeScript("arguments[0].click();",
-//					passengerDetailsContainer.get(i)
-//							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-//									+ passengerDTOList.get(dataIndex).getSeatPreference() + "'])")));
-//
-//			logger.info(
-//					"Enter the Frequent flyer number : " + passengerDTOList.get(dataIndex).getFrequentFlyingNumber());
-//			wait.until(ExpectedConditions
-//					.elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='Number']")).get(i)));
-//
-//			driver.findElements(By.xpath("//*[@formcontrolname='Number']")).get(i)
-//					.sendKeys(passengerDTOList.get(dataIndex).getFrequentFlyingNumber());
+
 			
 			
 			// Check and select Meal Preference if it exists
-			String mealPreferenceValue = passengerDTOList.get(dataIndex).getMealPreference();
-			if (mealPreferenceValue != null && !mealPreferenceValue.isEmpty()) {
-			    logger.info("Selecting the Meal preference: " + mealPreferenceValue);
-			    wait.until(ExpectedConditions.elementToBeClickable(mealPreference));
-			    mealPreference.click();
-			    executor.executeScript("arguments[0].click();",
-			            passengerDetailsContainer.get(i)
-			                    .findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-			                            + mealPreferenceValue + "'])")));
-			}
-
-			// Check and select Special Request if it exists
-			String specialRequestValue = passengerDTOList.get(dataIndex).getSpecialRequst();
-			if (specialRequestValue != null && !specialRequestValue.isEmpty()) {
-			    logger.info("Selecting the Special request: " + specialRequestValue);
-			    wait.until(ExpectedConditions.elementToBeClickable(specialRequst));
-			    specialRequst.click();
-			    executor.executeScript("arguments[0].click();",
-			            passengerDetailsContainer.get(i)
-			                    .findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-			                            + specialRequestValue + "'])")));
-			} 
+//			String mealPreferenceValue = passengerDTOList.get(dataIndex).getMealPreference();
+//			if (mealPreferenceValue != null && !mealPreferenceValue.isEmpty()) {
+//			    logger.info("Selecting the Meal preference: " + mealPreferenceValue);
+//			    wait.until(ExpectedConditions.elementToBeClickable(mealPreference));
+//			    mealPreference.click();
+//			    executor.executeScript("arguments[0].click();",
+//			            passengerDetailsContainer.get(i)
+//			                    .findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+//			                            + mealPreferenceValue + "'])")));
+//			}
+//
+//			// Check and select Special Request if it exists
+//			String specialRequestValue = passengerDTOList.get(dataIndex).getSpecialRequst();
+//			if (specialRequestValue != null && !specialRequestValue.isEmpty()) {
+//			    logger.info("Selecting the Special request: " + specialRequestValue);
+//			    wait.until(ExpectedConditions.elementToBeClickable(specialRequst));
+//			    specialRequst.click();
+//			    executor.executeScript("arguments[0].click();",
+//			            passengerDetailsContainer.get(i)
+//			                    .findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+//			                            + specialRequestValue + "'])")));
+//			} 
 
 			// Check and select Airline if it exists
-			String airlineValue = passengerDTOList.get(dataIndex).getAirline();
-			if (airlineValue != null && !airlineValue.isEmpty()) {
-			    logger.info("Selecting the Airline: " + airlineValue);
-			    wait.until(ExpectedConditions.elementToBeClickable(airline));
-			    airline.click();
-			    executor.executeScript("arguments[0].click();",
-			            passengerDetailsContainer.get(i)
-			                    .findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-			                            + airlineValue + "'])")));
-			} 
+//			String airlineValue = passengerDTOList.get(dataIndex).getAirline();
+//			if (airlineValue != null && !airlineValue.isEmpty()) {
+//			    logger.info("Selecting the Airline: " + airlineValue);
+//			    wait.until(ExpectedConditions.elementToBeClickable(airline));
+//			    airline.click();
+//			    executor.executeScript("arguments[0].click();",
+//			            passengerDetailsContainer.get(i)
+//			                    .findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+//			                            + airlineValue + "'])")));
+//			} 
 
 			// Check and select Seat Preference if it exists
-			String seatPreferenceValue = passengerDTOList.get(dataIndex).getSeatPreference();
-			if (seatPreferenceValue != null && !seatPreferenceValue.isEmpty()) {
-			    logger.info("Selecting the Seat preference: " + seatPreferenceValue);
-			    wait.until(ExpectedConditions.elementToBeClickable(seatPreference));
-			    seatPreference.click();
-			    executor.executeScript("arguments[0].click();",
-			            passengerDetailsContainer.get(i)
-			                    .findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-			                            + seatPreferenceValue + "'])")));
-			} 
-			// Check and enter Frequent Flyer Number if it exists
-			String frequentFlyerNumber = passengerDTOList.get(dataIndex).getFrequentFlyingNumber();
-			if (frequentFlyerNumber != null && !frequentFlyerNumber.isEmpty()) {
-			    logger.info("Enter the Frequent flyer number: " + frequentFlyerNumber);
-			    wait.until(ExpectedConditions
-			            .elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='Number']")).get(i)));
-			    driver.findElements(By.xpath("//*[@formcontrolname='Number']")).get(i)
-			            .sendKeys(frequentFlyerNumber);
-			} 
-
-
-		} catch (Exception e) {
-			logger.info("optional peferance() -> " + e.getMessage());
-			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
-		}
-
-		
-
-	}
+//			String seatPreferenceValue = passengerDTOList.get(dataIndex).getSeatPreference();
+//			if (seatPreferenceValue != null && !seatPreferenceValue.isEmpty()) {
+//			    logger.info("Selecting the Seat preference: " + seatPreferenceValue);
+//			    wait.until(ExpectedConditions.elementToBeClickable(seatPreference));
+//			    seatPreference.click();
+//			    executor.executeScript("arguments[0].click();",
+//			            passengerDetailsContainer.get(i)
+//			                    .findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+//			                            + seatPreferenceValue + "'])")));
+//			} 
+//			// Check and enter Frequent Flyer Number if it exists
+//			String frequentFlyerNumber = passengerDTOList.get(dataIndex).getFrequentFlyingNumber();
+//			if (frequentFlyerNumber != null && !frequentFlyerNumber.isEmpty()) {
+//			    logger.info("Enter the Frequent flyer number: " + frequentFlyerNumber);
+//			    wait.until(ExpectedConditions
+//			            .elementToBeClickable(driver.findElements(By.xpath("//*[@formcontrolname='Number']")).get(i)));
+//			    driver.findElements(By.xpath("//*[@formcontrolname='Number']")).get(i)
+//			            .sendKeys(frequentFlyerNumber);
+//			} 
+//
+//
+//		} catch (Exception e) {
+//			logger.info("optional peferance() -> " + e.getMessage());
+//			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
+//		}
+//
+//		
+//
+//	}
 
 	public static void verifyTicketBookingStatus(WebDriverWait wait) throws IOException {
 		try {
