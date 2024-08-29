@@ -198,6 +198,15 @@ public class AosImplementation extends AosSpecification {
 		visaExpiryYear = driver.findElements(By.xpath("//*[@formcontrolname='VisaExpiryYear']")).get((i));
 
 		visaRequiredCountry = driver.findElements(By.xpath("//*[@formcontrolname='VisaRequiringCountry']")).get((i));
+		
+		WebElement localId = driver.findElements(By.xpath("//label[text()='Local Id']")).get((i));
+		
+		WebElement iqamaId = driver.findElements(By.xpath("//label[text()='Iqama ID (Saudi Residence for Foreigners)']")).get((i));
+		
+		WebElement nationalId = driver.findElements(By.xpath("//label[text()='National ID (Only for GCC Nationals)']")).get((i));
+		
+		WebElement passportInformation = driver.findElements(By.xpath("//label[text()='Passport Information']")).get((i));
+		
 		 try {
 	        	ExpectedConditions.elementToBeClickable(passengerDetailsPage.clickAdultOneAddress);
 	     		passengerDetailsPage.clickAdultOneAddress.click();
@@ -272,8 +281,8 @@ public class AosImplementation extends AosSpecification {
 
 		if (passengerDTOList.get(dataIndex).getDocumentType().equalsIgnoreCase("Local Id")) {
 
-			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.localId));
-			passengerDetailsPage.localId.click();
+			wait.until(ExpectedConditions.elementToBeClickable(localId));
+			localId.click();
 
 			logger.info("Click the local id : " + passengerDTOList.get(dataIndex).getLocalDocumentNo());
 			wait.until(ExpectedConditions.elementToBeClickable(
@@ -286,8 +295,8 @@ public class AosImplementation extends AosSpecification {
 		if (passengerDTOList.get(dataIndex).getDocumentType()
 				.equalsIgnoreCase("Iqama ID (Saudi Residence for Foreigners)")) {
 
-			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.iqamaId));
-			passengerDetailsPage.iqamaId.click();
+			wait.until(ExpectedConditions.elementToBeClickable(iqamaId));
+			iqamaId.click();
 
 			logger.info("Click the Iqama ID : " + passengerDTOList.get(dataIndex).getIqamaId());
 			wait.until(ExpectedConditions.elementToBeClickable(
@@ -359,13 +368,8 @@ public class AosImplementation extends AosSpecification {
 		if (passengerDTOList.get(dataIndex).getDocumentType()
 				.equalsIgnoreCase("National ID (Only for GCC Nationals)")) {
 
-//			if (bookTicketDTO.getBaggageOnly()) {
-//				logger.info("clicking on baggage only");
-//				homePage.baggageOnlyElementGroup.click();
-//			}
-
-			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.nationalId));
-			passengerDetailsPage.nationalId.click();
+			wait.until(ExpectedConditions.elementToBeClickable(nationalId));
+			nationalId.click();
 
 			logger.info("Enter the Nationality : " + passengerDTOList.get(dataIndex).getNationalityIdGcc());
 			wait.until(ExpectedConditions.elementToBeClickable(
@@ -446,8 +450,8 @@ public class AosImplementation extends AosSpecification {
 		}
 		if (passengerDTOList.get(dataIndex).getDocumentType().equalsIgnoreCase("Passport Information")) {
 
-			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.passportInformation));
-			passengerDetailsPage.passportInformation.click();
+			wait.until(ExpectedConditions.elementToBeClickable(passportInformation));
+			passportInformation.click();
 
 			logger.info("Selecting the Issuing Country: " + passengerDTOList.get(dataIndex).getIssuingCountry());
 
