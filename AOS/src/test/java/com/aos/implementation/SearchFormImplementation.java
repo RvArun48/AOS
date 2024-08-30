@@ -229,11 +229,11 @@ public class SearchFormImplementation extends TestRunner {
 						driver.findElement(By.xpath("(//*[@class='empireF_travelerCountCard']//child::button)[6]")));
 				count++;
 			}
-			
-			wait.until(ExpectedConditions.elementToBeClickable(
-					driver.findElement(By.xpath("//button[contains(text(),'Apply')]"))));
+
+			wait.until(ExpectedConditions
+					.elementToBeClickable(driver.findElement(By.xpath("//button[contains(text(),'Apply')]"))));
 			driver.findElement(By.xpath("//button[contains(text(),'Apply')]"));
-			
+
 		} catch (Exception e) {
 			logger.info("Exception occurred at I_add_passengers() -> " + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
@@ -2965,276 +2965,137 @@ public class SearchFormImplementation extends TestRunner {
 			SoftAssertions softly = new SoftAssertions();
 
 			Thread.sleep(10000);
-			List<WebElement> mainFlightListContainer = driver
-					.findElements(By.xpath("//*[@class='empireF_fareBreakGrid']"));
-			logger.info("mainFlightListContainer ->" + mainFlightListContainer.size());
+			WebElement mainFlightListContainer = driver.findElement(By.xpath("//*[@class='empireF_fareBreakGrid']"));
 
 			int validationLimitCount = 0;
+			int totalPassengerCount = 0;
 
-			for (WebElement card : mainFlightListContainer) {
+			if (bookTicketDTO.getAdultCount() > 0) {
+				totalPassengerCount += bookTicketDTO.getAdultCount();
+			}
+			if (bookTicketDTO.getChildCount() > 0) {
+				totalPassengerCount += bookTicketDTO.getChildCount();
+			}
+			if (bookTicketDTO.getInfantCount() > 0) {
+				totalPassengerCount += bookTicketDTO.getChildCount();
+			}
 
-				if (validationLimitCount > 3) {
-					break;
-				}
+			softly.assertThat(mainFlightListContainer
+					.findElement(By.xpath("//tr[@class='empireF_fareBreakHead']//th[1]")).getText().length())
+					.isGreaterThan(0);
+			logger.info("Summary: " + mainFlightListContainer
+					.findElement(By.xpath("//tr[@class='empireF_fareBreakHead']//th[1]")).getText());
 
-				softly.assertThat(
-						card.findElement(By.xpath("//tr[@class='empireF_fareBreakHead']//th[1]")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Summary: "
-						+ card.findElement(By.xpath("//tr[@class='empireF_fareBreakHead']//th[1]")).getText());
+			softly.assertThat(
+					mainFlightListContainer.findElement(By.xpath("//h4[text()='Base Fare']")).getText().length())
+					.isGreaterThan(0);
+			logger.info("Base Fare: "
+					+ mainFlightListContainer.findElement(By.xpath("//h4[text()='Base Fare']")).getText());
 
-				softly.assertThat(card.findElement(By.xpath("//h4[text()='Base Fare']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Base Fare: " + card.findElement(By.xpath("//h4[text()='Base Fare']")).getText());
+			softly.assertThat(
+					mainFlightListContainer.findElement(By.xpath("//h4[text()='Fee & Tax']")).getText().length())
+					.isGreaterThan(0);
+			logger.info(
+					"Fee & Tax:" + mainFlightListContainer.findElement(By.xpath("//h4[text()='Fee & Tax']")).getText());
 
-				softly.assertThat(card.findElement(By.xpath("//h4[text()='Fee & Tax']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Fee & Tax:" + card.findElement(By.xpath("//h4[text()='Fee & Tax']")).getText());
+			softly.assertThat(mainFlightListContainer.findElement(By.xpath("//h4[text()='VAT']")).getText().length())
+					.isGreaterThan(0);
+			logger.info("VAT:" + mainFlightListContainer.findElement(By.xpath("//h4[text()='VAT']")).getText());
 
-				softly.assertThat(card.findElement(By.xpath("//h4[text()='VAT']")).getText().length()).isGreaterThan(0);
-				logger.info("VAT:" + card.findElement(By.xpath("//h4[text()='VAT']")).getText());
+			softly.assertThat(
+					mainFlightListContainer.findElement(By.xpath("//h4[text()='No. Of Pax']")).getText().length())
+					.isGreaterThan(0);
+			logger.info("No. Of Pax:"
+					+ mainFlightListContainer.findElement(By.xpath("//h4[text()='No. Of Pax']")).getText());
 
-				softly.assertThat(card.findElement(By.xpath("//h4[text()='No. Of Pax']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("No. Of Pax:" + card.findElement(By.xpath("//h4[text()='No. Of Pax']")).getText());
+			softly.assertThat(
+					mainFlightListContainer.findElement(By.xpath("//h4[text()='Total Fare']")).getText().length())
+					.isGreaterThan(0);
+			logger.info(
+					"Total :" + mainFlightListContainer.findElement(By.xpath("//h4[text()='Total Fare']")).getText());
 
-				softly.assertThat(card.findElement(By.xpath("//h4[text()='Total Fare']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Total :" + card.findElement(By.xpath("//h4[text()='Total Fare']")).getText());
+			softly.assertThat(
+					mainFlightListContainer.findElement(By.xpath("//h4[text()='Total Per Pax']")).getText().length())
+					.isGreaterThan(0);
+			logger.info("Total Per Pax:"
+					+ mainFlightListContainer.findElement(By.xpath("//h4[text()='Total Per Pax']")).getText());
 
-				softly.assertThat(card.findElement(By.xpath("//h4[text()='Total Per Pax']")).getText().length())
-						.isGreaterThan(0);
-				logger.info("Total Per Pax:" + card.findElement(By.xpath("//h4[text()='Total Per Pax']")).getText());
+			int i = 1;
+			String passengerType = "Adult";
+			boolean childFlag = true;
+			boolean infantFlag = bookTicketDTO.getChildCount() == 0 && bookTicketDTO.getInfantCount() > 0;
+			for (WebElement card : mainFlightListContainer
+					.findElements(By.xpath("//tr[contains(@class,'empireF_fareBreakUPBodys')]"))) {
 
-				softly.assertThat(card
-						.findElement(
-								By.xpath("//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'Adult')]"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Traveller: " + card
-						.findElement(
-								By.xpath("//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'Adult')]"))
-						.getText());
+				if (card.findElements(By.xpath("//tr[contains(@class,'empireF_fareBreakUPBodys')]"))
+						.size() == totalPassengerCount) {
+					if (i > 1 && bookTicketDTO.getChildCount() > 0 && childFlag) {
+						passengerType = "Child";
+						childFlag = false;
+						// infantFlag = true;
+					}
+					if (i > 1 && bookTicketDTO.getInfantCount() > 0 && infantFlag) {
+						passengerType = "Infant";
+					}
 
-				softly.assertThat(card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[1]"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Base Fare: " + card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[1]"))
-						.getText());
+					i++;
+					softly.assertThat(
+							card.findElement(By.xpath("//*[text()=='" + passengerType + "']")).getText().length())
+							.isGreaterThan(0);
+					logger.info("Traveller: "
+							+ card.findElement(By.xpath("//*[text()=='" + passengerType + "']")).getText());
 
-				softly.assertThat(card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[2]"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Fee & Tax:" + card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[2]"))
-						.getText());
+					softly.assertThat(card.findElement(By.xpath("//td[1]")).getText().length()).isGreaterThan(0);
+					logger.info("Base Fare: " + card.findElement(By.xpath("//td[1]")).getText());
 
-				softly.assertThat(card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[3]"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("VAT:" + card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[3]"))
-						.getText());
+					softly.assertThat(card.findElement(By.xpath("//td[2]")).getText().length()).isGreaterThan(0);
+					logger.info("Fee & Tax:" + card.findElement(By.xpath("//td[2]")).getText());
+
+					softly.assertThat(card.findElement(By.xpath("//td[3]")).getText().length()).isGreaterThan(0);
+					logger.info("VAT:" + card.findElement(By.xpath("//td[3]")).getText());
 
 //				softly.assertThat(card.findElement(By.xpath("(//h4[text()='2'])[1]")).getText().length())
 //						.isGreaterThan(0);
 //				logger.info("No. Of Pax:" + card.findElement(By.xpath("(//h4[text()='2'])[1]")).getText());
 
-				softly.assertThat(card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[5]"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Vat :" + card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[5]"))
-						.getText());
-				softly.assertThat(card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[4]"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Discount:" + card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[4]"))
-						.getText());
-
-				softly.assertThat(card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[6]"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Total per pax:" + card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[6]"))
-						.getText());
-				softly.assertThat(card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[7]"))
-						.getText().length()).isGreaterThan(0);
-				logger.info("Total fare:" + card
-						.findElement(By
-								.xpath("(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[7]"))
-						.getText());
-
-				try {
-
-					softly.assertThat(card.findElement(By.xpath(
-							"//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'Child')]"))
+					softly.assertThat(card
+							.findElement(By.xpath(
+									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[5]"))
 							.getText().length()).isGreaterThan(0);
-					logger.info("Traveller: " + card.findElement(By.xpath(
-							"//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'Child')]"))
+					logger.info("Vat :" + card
+							.findElement(By.xpath(
+									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[5]"))
+							.getText());
+					softly.assertThat(card
+							.findElement(By.xpath(
+									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[4]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Discount:" + card
+							.findElement(By.xpath(
+									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[4]"))
 							.getText());
 
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[1]"))
+					softly.assertThat(card
+							.findElement(By.xpath(
+									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[6]"))
 							.getText().length()).isGreaterThan(0);
-					logger.info("Base Fare: " + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[1]"))
+					logger.info("Total per pax:" + card
+							.findElement(By.xpath(
+									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[6]"))
+							.getText());
+					softly.assertThat(card
+							.findElement(By.xpath(
+									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[7]"))
+							.getText().length()).isGreaterThan(0);
+					logger.info("Total fare:" + card
+							.findElement(By.xpath(
+									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[7]"))
 							.getText());
 
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[2]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Fee & Tax:" + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[2]"))
-							.getText());
-
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[3]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("VAT:" + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[3]"))
-							.getText());
-
-//		softly.assertThat(card.findElement(By.xpath("(//h4[text()='1'])[1]")).getText().length())
-//				.isGreaterThan(0);
-//		logger.info("No. Of Pax:" + card.findElement(By.xpath("(//h4[text()='1'])[1]")).getText());
-
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[5]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Total :" + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[5]"))
-							.getText());
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[4]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Total Per Pax:" + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[4]"))
-							.getText());
-
-				} catch (Exception e) {
+				} else {
+					softly.assertThat(card.findElements(By.tagName("td")).size()).isEqualTo(totalPassengerCount);
 				}
-
-				try {
-					softly.assertThat(card.findElement(By.xpath(
-							"//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][2]//child::*[contains(text(),' Infant ')]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Traveller: " + card.findElement(By.xpath(
-							"//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][2]//child::*[contains(text(),' Infant ')]"))
-							.getText());
-				} catch (NoSuchElementException e) {
-					softly.assertThat(card.findElement(By.xpath(
-							"//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),' Infant ')]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Traveller: " + card.findElement(By.xpath(
-							"//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),' Infant ')]"))
-							.getText());
-				}
-
-				try {
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][2]//child::*[contains(text(),'AED')])[1]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Base Fare: " + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][2]//child::*[contains(text(),'AED')])[1]"))
-							.getText());
-				} catch (NoSuchElementException e) {
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[1]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Base Fare: " + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[1]"))
-							.getText());
-				}
-
-				try {
-
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][2]//child::*[contains(text(),'AED')])[2]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Fee & Tax:" + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][2]//child::*[contains(text(),'AED')])[2]"))
-							.getText());
-				} catch (NoSuchElementException e) {
-
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[2]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Fee & Tax:" + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[2]"))
-							.getText());
-				}
-
-				try {
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][2]//child::*[contains(text(),'AED')])[3]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("VAT:" + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][2]//child::*[contains(text(),'AED')])[3]"))
-							.getText());
-
-				} catch (NoSuchElementException e) {
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[3]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("VAT:" + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[3]"))
-							.getText());
-
-				}
-
-//	softly.assertThat(card.findElement(By.xpath("(//h4[text()='[2]'])[[2]]")).getText().length())
-//			.isGreaterThan(0);
-//	logger.info("No. Of Pax:" + card.findElement(By.xpath("(//h4[text()='[2]'])[[2]]")).getText());
-
-				try {
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][2]//child::*[contains(text(),'AED')])[5]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Total :" + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][2]//child::*[contains(text(),'AED')])[5]"))
-							.getText());
-				} catch (NoSuchElementException e) {
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[5]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Total :" + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[5]"))
-							.getText());
-				}
-				try {
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][2]//child::*[contains(text(),'AED')])[4]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Total Per Pax:" + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][2]//child::*[contains(text(),'AED')])[4]"))
-							.getText());
-				} catch (NoSuchElementException e) {
-					softly.assertThat(card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[4]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Total Per Pax:" + card.findElement(By.xpath(
-							"(//*[@class='empireF_fareBreakUPBodys ng-star-inserted'][1]//child::*[contains(text(),'AED')])[4]"))
-							.getText());
-				}
-
 			}
-
 		} catch (Exception e) {
 			logger.info("Exception occured at I_need_to_validate_fare()->" + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
