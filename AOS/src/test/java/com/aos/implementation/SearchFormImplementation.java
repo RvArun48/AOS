@@ -2968,16 +2968,16 @@ public class SearchFormImplementation extends TestRunner {
 			WebElement mainFlightListContainer = driver.findElement(By.xpath("//*[@class='empireF_fareBreakGrid']"));
 
 			int validationLimitCount = 0;
-			int totalPassengerCount = 0;
+			int totalPassengerCategoryCount = 0;
 
 			if (bookTicketDTO.getAdultCount() > 0) {
-				totalPassengerCount += bookTicketDTO.getAdultCount();
+				totalPassengerCategoryCount += 1;
 			}
 			if (bookTicketDTO.getChildCount() > 0) {
-				totalPassengerCount += bookTicketDTO.getChildCount();
+				totalPassengerCategoryCount += 1;
 			}
 			if (bookTicketDTO.getInfantCount() > 0) {
-				totalPassengerCount += bookTicketDTO.getChildCount();
+				totalPassengerCategoryCount += 1;
 			}
 
 			softly.assertThat(mainFlightListContainer
@@ -3023,16 +3023,16 @@ public class SearchFormImplementation extends TestRunner {
 			int i = 1;
 			String passengerType = "Adult";
 			boolean childFlag = true;
-			boolean infantFlag = bookTicketDTO.getChildCount() == 0 && bookTicketDTO.getInfantCount() > 0;
+			boolean infantFlag = bookTicketDTO.getInfantCount() > 0;
 			for (WebElement card : mainFlightListContainer
 					.findElements(By.xpath("//tr[contains(@class,'empireF_fareBreakUPBodys')]"))) {
 
 				if (card.findElements(By.xpath("//tr[contains(@class,'empireF_fareBreakUPBodys')]"))
-						.size() == totalPassengerCount) {
+						.size() == totalPassengerCategoryCount) {
 					if (i > 1 && bookTicketDTO.getChildCount() > 0 && childFlag) {
 						passengerType = "Child";
 						childFlag = false;
-						// infantFlag = true;
+						
 					}
 					if (i > 1 && bookTicketDTO.getInfantCount() > 0 && infantFlag) {
 						passengerType = "Infant";
@@ -3040,10 +3040,10 @@ public class SearchFormImplementation extends TestRunner {
 
 					i++;
 					softly.assertThat(
-							card.findElement(By.xpath("//*[text()=='" + passengerType + "']")).getText().length())
+							card.findElement(By.xpath("//*[text()='" + passengerType + "']")).getText().length())
 							.isGreaterThan(0);
 					logger.info("Traveller: "
-							+ card.findElement(By.xpath("//*[text()=='" + passengerType + "']")).getText());
+							+ card.findElement(By.xpath("//*[text(='" + passengerType + "']")).getText());
 
 					softly.assertThat(card.findElement(By.xpath("//td[1]")).getText().length()).isGreaterThan(0);
 					logger.info("Base Fare: " + card.findElement(By.xpath("//td[1]")).getText());
@@ -3052,48 +3052,24 @@ public class SearchFormImplementation extends TestRunner {
 					logger.info("Fee & Tax:" + card.findElement(By.xpath("//td[2]")).getText());
 
 					softly.assertThat(card.findElement(By.xpath("//td[3]")).getText().length()).isGreaterThan(0);
-					logger.info("VAT:" + card.findElement(By.xpath("//td[3]")).getText());
+					logger.info("Transaction Fee:" + card.findElement(By.xpath("//td[3]")).getText());
 
-//				softly.assertThat(card.findElement(By.xpath("(//h4[text()='2'])[1]")).getText().length())
-//						.isGreaterThan(0);
-//				logger.info("No. Of Pax:" + card.findElement(By.xpath("(//h4[text()='2'])[1]")).getText());
+					softly.assertThat(card.findElement(By.xpath("//td[4]")).getText().length()).isGreaterThan(0);
+					logger.info("Discount (-) :" + card.findElement(By.xpath("//td[4]")).getText());
 
-					softly.assertThat(card
-							.findElement(By.xpath(
-									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[5]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Vat :" + card
-							.findElement(By.xpath(
-									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[5]"))
-							.getText());
-					softly.assertThat(card
-							.findElement(By.xpath(
-									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[4]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Discount:" + card
-							.findElement(By.xpath(
-									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[4]"))
-							.getText());
+					softly.assertThat(card.findElement(By.xpath("//td[5]")).getText().length()).isGreaterThan(0);
+					logger.info("Vat:" + card.findElement(By.xpath("//td[5]")).getText());
 
-					softly.assertThat(card
-							.findElement(By.xpath(
-									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[6]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Total per pax:" + card
-							.findElement(By.xpath(
-									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[6]"))
-							.getText());
-					softly.assertThat(card
-							.findElement(By.xpath(
-									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[7]"))
-							.getText().length()).isGreaterThan(0);
-					logger.info("Total fare:" + card
-							.findElement(By.xpath(
-									"(//*[@class='empireF_fareBreakUPBodys']//child::*[contains(text(),'AED')])[7]"))
-							.getText());
+					softly.assertThat(card.findElement(By.xpath("//td[6]")).getText().length()).isGreaterThan(0);
+					logger.info("No. Of Pax:" + card.findElement(By.xpath("//td[6]")).getText());
+
+					softly.assertThat(card.findElement(By.xpath("//td[7]")).getText().length()).isGreaterThan(0);
+					logger.info("Total per pax:" + card.findElement(By.xpath("//td[7]")).getText());
+					softly.assertThat(card.findElement(By.xpath("//td[8]")).getText().length()).isGreaterThan(0);
+					logger.info("Total fare:" + card.findElement(By.xpath("//td[8]")).getText());
 
 				} else {
-					softly.assertThat(card.findElements(By.tagName("td")).size()).isEqualTo(totalPassengerCount);
+					softly.assertThat(card.findElements(By.tagName("td")).size()).isEqualTo(totalPassengerCategoryCount);
 				}
 			}
 		} catch (Exception e) {
