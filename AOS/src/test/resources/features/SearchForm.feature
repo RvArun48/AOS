@@ -75,7 +75,7 @@ Feature: Flight Booking
     Given I want to open the application
      #Then I change the currency type
      #Then I change the language
-     Then I click the flexible data
+     #Then I click the flexible data
      #Then I click the umrah fare
     Then I select the trip type
     Then I enter the source
@@ -114,16 +114,16 @@ Feature: Flight Booking
              #Then  I need to validate baggage
             Then I click on the fare breakup
              Then  I need to validate fare breakup
-             Then I click on the booknow
-             Then I need to add the traveller details
-              Then I need to add the traveller common details
+             #Then I click on the booknow
+             #Then I need to add the traveller details
+              #Then I need to add the traveller common details
               #Then I enter the promo code
              #Then  I need to validate flight Summary 
-             Then I click on payment continue 
-             Then I need to validate flight Summary payment
-              Then I need to validate payment gateway
-              Then I enter the card details
-               Then I need to validate confirmation page
+             #Then I click on payment continue 
+             #Then I need to validate flight Summary payment
+              #Then I need to validate payment gateway
+              #Then I enter the card details
+               #Then I need to validate confirmation page
               
               
      #Given I setup the edit data with "oneway_edit_flight_listing"

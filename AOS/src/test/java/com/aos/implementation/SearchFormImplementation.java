@@ -3024,10 +3024,10 @@ public class SearchFormImplementation extends TestRunner {
 			String passengerType = "Adult";
 			boolean childFlag = true;
 			boolean infantFlag = bookTicketDTO.getInfantCount() > 0;
-			for (WebElement card : mainFlightListContainer
-					.findElements(By.xpath("//tr[contains(@class,'empireF_fareBreakUPBodys')]"))) {
+			List<WebElement> cards = (List<WebElement>) executor.executeScript("return document.querySelectorAll('.empireF_fareBreakUPBodys');");
+			for (WebElement card : cards) {
 
-				if (card.findElements(By.xpath("//tr[contains(@class,'empireF_fareBreakUPBodys')]"))
+				if (card.findElements(By.xpath("//*[contains(@class,'empireF_fareBreakUPBodys')]"))
 						.size() == totalPassengerCategoryCount) {
 					if (i > 1 && bookTicketDTO.getChildCount() > 0 && childFlag) {
 						passengerType = "Child";
@@ -3039,35 +3039,50 @@ public class SearchFormImplementation extends TestRunner {
 					}
 
 					i++;
+					
+				 
+			       
 					softly.assertThat(
 							card.findElement(By.xpath("//*[text()='" + passengerType + "']")).getText().length())
 							.isGreaterThan(0);
 					logger.info("Traveller: "
-							+ card.findElement(By.xpath("//*[text(='" + passengerType + "']")).getText());
+							+ card.findElement(By.xpath("//*[text()='" + passengerType + "']")).getText());					
+					
 
-					softly.assertThat(card.findElement(By.xpath("//td[1]")).getText().length()).isGreaterThan(0);
-					logger.info("Base Fare: " + card.findElement(By.xpath("//td[1]")).getText());
+					// Safely extract and log text content for each field
+					String baseFareText = getTextContent(card, ".empireF_fareBreakGrid td:nth-child(1)");
+					softly.assertThat(baseFareText.length()).isGreaterThan(0);
+					logger.info("Base Fare: " + baseFareText);
 
-					softly.assertThat(card.findElement(By.xpath("//td[2]")).getText().length()).isGreaterThan(0);
-					logger.info("Fee & Tax:" + card.findElement(By.xpath("//td[2]")).getText());
+					String feeAndTaxText = getTextContent(card, ".empireF_fareBreakGrid td:nth-child(2)");
+					softly.assertThat(feeAndTaxText.length()).isGreaterThan(0);
+					logger.info("Fee & Tax: " + feeAndTaxText);
 
-					softly.assertThat(card.findElement(By.xpath("//td[3]")).getText().length()).isGreaterThan(0);
-					logger.info("Transaction Fee:" + card.findElement(By.xpath("//td[3]")).getText());
+					String transactionFeeText = getTextContent(card, ".empireF_fareBreakGrid td:nth-child(3)");
+					softly.assertThat(transactionFeeText.length()).isGreaterThan(0);
+					logger.info("Transaction Fee: " + transactionFeeText);
 
-					softly.assertThat(card.findElement(By.xpath("//td[4]")).getText().length()).isGreaterThan(0);
-					logger.info("Discount (-) :" + card.findElement(By.xpath("//td[4]")).getText());
+					String discountText = getTextContent(card, ".empireF_fareBreakGrid td:nth-child(4)");
+					softly.assertThat(discountText.length()).isGreaterThan(0);
+					logger.info("Discount (-): " + discountText);
 
-					softly.assertThat(card.findElement(By.xpath("//td[5]")).getText().length()).isGreaterThan(0);
-					logger.info("Vat:" + card.findElement(By.xpath("//td[5]")).getText());
+					String vatText = getTextContent(card, ".empireF_fareBreakGrid td:nth-child(5)");
+					softly.assertThat(vatText.length()).isGreaterThan(0);
+					logger.info("Vat: " + vatText);
 
-					softly.assertThat(card.findElement(By.xpath("//td[6]")).getText().length()).isGreaterThan(0);
-					logger.info("No. Of Pax:" + card.findElement(By.xpath("//td[6]")).getText());
+					String numberOfPaxText = getTextContent(card, ".empireF_fareBreakGrid td:nth-child(6)");
+					softly.assertThat(numberOfPaxText.length()).isGreaterThan(0);
+					logger.info("No. Of Pax: " + numberOfPaxText);
 
-					softly.assertThat(card.findElement(By.xpath("//td[7]")).getText().length()).isGreaterThan(0);
-					logger.info("Total per pax:" + card.findElement(By.xpath("//td[7]")).getText());
-					softly.assertThat(card.findElement(By.xpath("//td[8]")).getText().length()).isGreaterThan(0);
-					logger.info("Total fare:" + card.findElement(By.xpath("//td[8]")).getText());
+					String totalPerPaxText = getTextContent(card, ".empireF_fareBreakGrid td:nth-child(7)");
+					softly.assertThat(totalPerPaxText.length()).isGreaterThan(0);
+					logger.info("Total per pax: " + totalPerPaxText);
 
+					String totalFareText = getTextContent(card, ".empireF_fareBreakGrid td:nth-child(8)");
+					softly.assertThat(totalFareText.length()).isGreaterThan(0);
+					logger.info("Total fare: " + totalFareText);
+					
+				   
 				} else {
 					softly.assertThat(card.findElements(By.tagName("td")).size()).isEqualTo(totalPassengerCategoryCount);
 				}
@@ -3077,6 +3092,12 @@ public class SearchFormImplementation extends TestRunner {
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
 
+	}
+	String getTextContent(WebElement element, String selector) {
+	    return (String) executor.executeScript(
+	        "let el = arguments[0].querySelector(arguments[1]); return el ? el.textContent.trim() : '';", 
+	        element, selector
+	    );
 	}
 
 	public void I_need_to_validate_fare_option_card_for_round_trip() {

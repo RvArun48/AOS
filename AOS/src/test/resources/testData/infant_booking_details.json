@@ -16,7 +16,7 @@
 		"ped_month":"August",
 		"ped_year":"2030",
 		
-        "document_type": "Passport Information",
+        "document_type": "Local Id",
 		"nationality_id_gcc": "25321",
 		"issuing_country_gcc": "India",
 		"nationality_gcc": "India",
