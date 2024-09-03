@@ -132,6 +132,33 @@ public class AosImplementation extends AosSpecification {
 		WebElement destinationCountry;
 		WebElement residenceCountry;
 		WebElement localId;
+		
+		
+		if (passengerDTOList.get(dataIndex).getDocumentType()
+				.equalsIgnoreCase("Iqama ID (Saudi Residence for Foreigners)")) {
+			
+			nationalitySrff = driver.findElements(By.xpath("//*[@bindlabel='country_name']")).get((i));
+			
+			iqamaExpiryDateSrff = driver
+					.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']//input[@type='text']")).get((i));
+			iqamaExpiryMonthSrff = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']")).get((i));
+			iqamaExpiryYearSrff = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']")).get((i));
+			
+		}
+		if (passengerDTOList.get(dataIndex).getDocumentType()
+				.equalsIgnoreCase("National ID (Only for GCC Nationals)")) {
+			issuingCountryGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssuingCountry']")).get((i));
+
+			nationalityGcc = driver.findElements(By.xpath("//*[@formcontrolname='Nationality']")).get((i));
+			nationalityExpiryDateGcc = driver
+					.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']//input[@type='text']")).get((i));
+			nationalityExpiryMonthGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']"))
+					.get((i));
+			nationalityExpiryYearGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']")).get((i));
+
+		}
+		
+		
 
 		title = wait.until(
 				ExpectedConditions.visibilityOf(driver.findElements(By.xpath("//*[@formcontrolname='Title']")).get(i)));
@@ -143,37 +170,10 @@ public class AosImplementation extends AosSpecification {
 		dobMonth = driver.findElements(By.xpath("//*[@formcontrolname='BirthMonth']")).get((i));
 
 		dobYear = driver.findElements(By.xpath("//*[@formcontrolname='BirthYear']")).get((i));
+       
+		
 
-		issuingCountry = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssuingCountry']")).get((i));
-
-		nationality = driver.findElements(By.xpath("//*[@formcontrolname='Nationality']")).get((i));
-
-		pidDay = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssueDay']")).get((i));
-
-		pidMonth = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssueMonth']")).get((i));
-
-		pidYear = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssueYear']")).get((i));
-
-		pedDay = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']")).get((i));
-
-		pedMonth = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']")).get((i));
-
-		pedYear = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']")).get((i));
-
-		nationalitySrff = driver.findElements(By.xpath("//*[@bindlabel='country_name']")).get((i));
-		issuingCountryGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssuingCountry']")).get((i));
-
-		nationalityGcc = driver.findElements(By.xpath("//*[@formcontrolname='Nationality']")).get((i));
-		nationalityExpiryDateGcc = driver
-				.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']//input[@type='text']")).get((i));
-		nationalityExpiryMonthGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']"))
-				.get((i));
-		nationalityExpiryYearGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']")).get((i));
-
-		iqamaExpiryDateSrff = driver
-				.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']//input[@type='text']")).get((i));
-		iqamaExpiryMonthSrff = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']")).get((i));
-		iqamaExpiryYearSrff = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']")).get((i));
+	
 
 		mealPreference = driver.findElements(By.xpath("//*[@formcontrolname='SSR_Meal']")).get((i));
 		seatPreference = driver.findElements(By.xpath("//*[@formcontrolname='SSR_Seat']")).get((i));
@@ -455,6 +455,27 @@ public class AosImplementation extends AosSpecification {
 
 			wait.until(ExpectedConditions.elementToBeClickable(passportInformation));
 			passportInformation.click();
+			
+
+			issuingCountry = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssuingCountry']")).get((i));
+
+			nationality = driver.findElements(By.xpath("//*[@formcontrolname='Nationality']")).get((i));
+
+			pidDay = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssueDay']")).get((i));
+
+			pidMonth = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssueMonth']")).get((i));
+
+			pidYear = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssueYear']")).get((i));
+
+			pedDay = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']")).get((i));
+
+			pedMonth = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']")).get((i));
+
+			pedYear = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']")).get((i));
+			
+			
+			
+			
 
 			logger.info("Selecting the Issuing Country: " + passengerDTOList.get(dataIndex).getIssuingCountry());
 

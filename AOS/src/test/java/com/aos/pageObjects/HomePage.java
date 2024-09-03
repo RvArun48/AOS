@@ -148,7 +148,7 @@ public class HomePage {
 	@FindBy(xpath = "//*[@class='btn btn-primary'][contains(text(),'Sign in')]")
 	public WebElement SigninElementGroup;
 
-	@FindBy(xpath = "//li[contains(text(),'round-trip')]")
+	@FindBy(xpath = "//*[@id='one-way']")
 	public WebElement roundTripElementGroup;
 
 	@FindBy(xpath = "//li[contains(text(),'One Way')]")
