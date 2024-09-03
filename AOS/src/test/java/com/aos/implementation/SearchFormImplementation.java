@@ -3869,7 +3869,7 @@ try {
 		wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.pay));
 		passengerDetailsPage.pay.click();
 
-		Thread.sleep(150000);
+		Thread.sleep(100000);
 	}
 
 	public void I_need_to_validate_confirmation_page() {
@@ -3881,9 +3881,9 @@ try {
 	
 		
 		logger.info(
-				"Trip Id->" + findElement(By.xpath("//*[@class='empireFlight_confirmPaytxt ng-star-inserted']//child::*[contains(text(),'Trip Id: ')]/span")).getText());
+				"Trip Id->" + getDriver().findElement(By.xpath("//*[@class='empireFlight_confirmPaytxt ng-star-inserted']//child::*[contains(text(),'Trip Id: ')]/span")).getText());
 		softly.assertThat(
-				findElement(By.xpath("//*[@class='empireFlight_confirmPaytxt ng-star-inserted']//child::*[contains(text(),'Trip Id: ')]/span")).getText().trim().length())
+				getDriver().findElement(By.xpath("//*[@class='empireFlight_confirmPaytxt ng-star-inserted']//child::*[contains(text(),'Trip Id: ')]/span")).getText().trim().length())
 				.isGreaterThan(0);
 		
 		List<WebElement> baggageContainer = driver.findElements(
@@ -3917,11 +3917,10 @@ try {
 
 		List<WebElement> passengersList = travellerTable.findElements(By.tagName("tr"));
 
-		int passengerIndex = 1;
+		int passengerIndex = 0;
 		for (WebElement passenger : passengersList) {
 
-//			logger.info("Passenger Name with title->"
-//					+ passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[1]")).getText());
+//			
 			softly.assertThat(
 					passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[1]")).getText().trim())
 					.isEqualTo(CommonDTO.getInstance().getAllPassengerDTOList().get(passengerIndex).getTitle() + " "
@@ -3964,7 +3963,7 @@ try {
 					+ passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[6]")).getText());
 			softly.assertThat(passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[6]")).getText()
 					.trim().length()).isGreaterThan(0);
-			i++;
+			passengerIndex++;
 		}
 
 	

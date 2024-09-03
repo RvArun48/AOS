@@ -741,8 +741,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_confirmation_page();
 		} catch (Exception e) {
-			// TODO: handle exception
-		}
+			logger.info("Exception occured at I_need_to_validate_confirmation_page: " + e.toString());		}
 	}
 
 	private void calander() {
