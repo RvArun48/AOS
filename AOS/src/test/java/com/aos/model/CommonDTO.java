@@ -17,6 +17,7 @@ public class CommonDTO {
 	private static List<String> fromAndToList = new ArrayList<>();
 	private static List<String> baggageCheckinList = new ArrayList<>();
 	private static List<String> baggageCabinList = new ArrayList<>();
+	private static List<String> commonBaggageList = new ArrayList<>();
 
 	// Private constructor to prevent instantiation
 	private CommonDTO() {
@@ -110,6 +111,24 @@ public class CommonDTO {
 	public static void clearCheckinBaggageList() {
 		if (baggageCheckinList != null) {
 			baggageCheckinList.clear();
+		}
+	}
+	
+	
+	public static void setCommonBaggageData(String commonBaggageData) {
+		if (commonBaggageData != null) {
+			commonBaggageList.add(commonBaggageData);
+		}
+
+	}
+
+	public static List<String> getCommonBaggageData() {
+		return commonBaggageList;
+	}
+
+	public static void clearCommonBaggageData() {
+		if (commonBaggageList != null) {
+			commonBaggageList.clear();
 		}
 	}
 

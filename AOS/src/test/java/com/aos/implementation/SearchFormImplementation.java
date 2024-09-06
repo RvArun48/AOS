@@ -2662,7 +2662,7 @@ public class SearchFormImplementation extends TestRunner {
 				Thread.sleep(2000);
 
 			} catch (Exception e) {
-				
+
 			}
 
 		} catch (Exception e) {
@@ -2744,18 +2744,18 @@ public class SearchFormImplementation extends TestRunner {
 				} catch (Exception e) {
 					// Handle exception
 				}
-				
-try {
-	String date = (String) executor
-			.executeScript("return document.querySelectorAll('.empireFlight_ItDate empire_dateSpace')["
-					+ (cardIndex - 1) + "].innerText");
-	softly.assertThat(date.length()).isGreaterThan(0);
-	logger.info("Date " + date);
 
-}catch (Exception e) {
-	// TODO: handle exception
-}
-				
+				try {
+					String date = (String) executor
+							.executeScript("return document.querySelectorAll('.empireFlight_ItDate empire_dateSpace')["
+									+ (cardIndex - 1) + "].innerText");
+					softly.assertThat(date.length()).isGreaterThan(0);
+					logger.info("Date " + date);
+
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
 				try {
 					String stop = (String) executor.executeScript(
 							"return document.querySelectorAll('.empireFlight_stopvia.empireF_directionTxt.ng-star-inserted')["
@@ -2787,17 +2787,17 @@ try {
 								+ (cardIndex - 1) + "].innerText");
 				softly.assertThat(passengerClass.length()).isGreaterThan(0);
 				logger.info("Passenger Class: " + passengerClass);
-try {
+				try {
 
-	String installments = (String) executor
-			.executeScript("return document.querySelectorAll('.empireF_installmentwrap.ng-star-inserted')["
-					+ (cardIndex - 1) + "].innerText");
-	softly.assertThat(installments.length()).isGreaterThan(0);
-	logger.info("Installments: " + installments);
-	
-}catch (Exception e) {
-	// TODO: handle exception
-}
+					String installments = (String) executor.executeScript(
+							"return document.querySelectorAll('.empireF_installmentwrap.ng-star-inserted')["
+									+ (cardIndex - 1) + "].innerText");
+					softly.assertThat(installments.length()).isGreaterThan(0);
+					logger.info("Installments: " + installments);
+
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 
 				String endTime = (String) executor.executeScript(
 						"return document.querySelectorAll('.empireFlight_FlightTime.empireFlight_additionalTimeList')["
@@ -2846,8 +2846,7 @@ try {
 			for (WebElement tab : tabList) {
 				logger.info("Selecting tab " + tabIndex + " " + tab.getText());
 				tab.click();
-				
-				
+
 				List<WebElement> cardsInCurrentTab = multiCardContainerList.get(cardContainerIndex)
 						.findElements(By.cssSelector(".fareoptioncardnew:not([style*='display: none;'])"));
 				logger.info("cardsInCurrentTab->" + cardsInCurrentTab.size());
@@ -2856,21 +2855,33 @@ try {
 
 				cardsInCurrentTab.get(cardToSelect).click();
 
-				logger.info("Printing price for test->" + cardsInCurrentTab.get(cardToSelect)
-						.findElement(By.xpath("//*[@class='fareOptionPrice']")).getText());
+				String text = cardsInCurrentTab.get(cardToSelect)
+						.findElement(By.cssSelector(".Fareoption_Baggegdetail")).getText();
+				
+				logger.info("text->"+text);
+
+				// Split the text into lines using the newline character
+				String[] lines = text.split("\n");
+
+				// Extract the second and third lines, trimming any extra whitespace
+				CommonDTO.setCommonBaggageData(lines[1].trim() + " - " + lines[2].trim());
+
+				logger.info("Baggage Detail -> " + cardsInCurrentTab.get(cardToSelect)
+						.findElement(By.cssSelector(".Fareoption_Baggegdetail")).getText());
 
 				tabIndex++;
 				cardContainerIndex++;
-			Thread.sleep(20000);
-			
+				Thread.sleep(2000);
+
+			}
+			logger.info(CommonDTO.getCommonBaggageData());
 			logger.info("click baggage");
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.clickBaggage));
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click baggage", driver, getScenarioName());
 			homePage.clickBaggage.click();
 			Thread.sleep(3000);
-			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occurred at I_click_on_the_baggage()->", e.getLocalizedMessage());
 		}
 	}
 
@@ -3062,7 +3073,8 @@ try {
 			String passengerType = "Adult";
 			boolean childFlag = true;
 			boolean infantFlag = bookTicketDTO.getInfantCount() > 0;
-			List<WebElement> cards = (List<WebElement>) executor.executeScript("return document.querySelectorAll('.empireF_fareBreakUPBodys');");
+			List<WebElement> cards = (List<WebElement>) executor
+					.executeScript("return document.querySelectorAll('.empireF_fareBreakUPBodys');");
 			for (WebElement card : cards) {
 
 				if (card.findElements(By.xpath("//*[contains(@class,'empireF_fareBreakUPBodys')]"))
@@ -3070,22 +3082,19 @@ try {
 					if (i > 1 && bookTicketDTO.getChildCount() > 0 && childFlag) {
 						passengerType = "Child";
 						childFlag = false;
-						
+
 					}
 					if (i > 1 && bookTicketDTO.getInfantCount() > 0 && infantFlag) {
 						passengerType = "Infant";
 					}
 
 					i++;
-					
-				 
-			       
+
 					softly.assertThat(
 							card.findElement(By.xpath("//*[text()='" + passengerType + "']")).getText().length())
 							.isGreaterThan(0);
 					logger.info("Traveller: "
-							+ card.findElement(By.xpath("//*[text()='" + passengerType + "']")).getText());					
-					
+							+ card.findElement(By.xpath("//*[text()='" + passengerType + "']")).getText());
 
 					// Safely extract and log text content for each field
 					String baseFareText = getTextContent(card, ".empireF_fareBreakGrid td:nth-child(1)");
@@ -3119,10 +3128,10 @@ try {
 					String totalFareText = getTextContent(card, ".empireF_fareBreakGrid td:nth-child(8)");
 					softly.assertThat(totalFareText.length()).isGreaterThan(0);
 					logger.info("Total fare: " + totalFareText);
-					
-				   
+
 				} else {
-					softly.assertThat(card.findElements(By.tagName("td")).size()).isEqualTo(totalPassengerCategoryCount);
+					softly.assertThat(card.findElements(By.tagName("td")).size())
+							.isEqualTo(totalPassengerCategoryCount);
 				}
 			}
 		} catch (Exception e) {
@@ -3131,11 +3140,11 @@ try {
 		}
 
 	}
+
 	String getTextContent(WebElement element, String selector) {
-	    return (String) executor.executeScript(
-	        "let el = arguments[0].querySelector(arguments[1]); return el ? el.textContent.trim() : '';", 
-	        element, selector
-	    );
+		return (String) executor.executeScript(
+				"let el = arguments[0].querySelector(arguments[1]); return el ? el.textContent.trim() : '';", element,
+				selector);
 	}
 
 	public void I_need_to_validate_fare_option_card_for_round_trip() {
@@ -3907,29 +3916,24 @@ try {
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	
-		
-		logger.info(
-				"Trip Id->" + getDriver().findElement(By.xpath("//*[@class='empireFlight_confirmPaytxt ng-star-inserted']//child::*[contains(text(),'Trip Id: ')]/span")).getText());
-		softly.assertThat(
-				getDriver().findElement(By.xpath("//*[@class='empireFlight_confirmPaytxt ng-star-inserted']//child::*[contains(text(),'Trip Id: ')]/span")).getText().trim().length())
-				.isGreaterThan(0);
-		
+		logger.info("Trip Id->" + getDriver().findElement(By.xpath(
+				"//*[@class='empireFlight_confirmPaytxt ng-star-inserted']//child::*[contains(text(),'Trip Id: ')]/span"))
+				.getText());
+		softly.assertThat(getDriver().findElement(By.xpath(
+				"//*[@class='empireFlight_confirmPaytxt ng-star-inserted']//child::*[contains(text(),'Trip Id: ')]/span"))
+				.getText().trim().length()).isGreaterThan(0);
+
 		List<WebElement> baggageContainer = driver.findElements(
 				By.xpath("//*[@class='empireFlight_confirmTripBaggageTripText empireF_baggageHead ng-star-inserted']"));
 		int i = 0;
 		for (WebElement container : baggageContainer)
-		
-		
+
 		{
-			
-			
 
 			logger.info("From and To: " + container.findElement(By.tagName("h4")).getText().trim());
 			// softly.assertThat(container.findElement(By.tagName("h4")).getText().trim())
 			// .isEqualTo(CommonDTO.getFromAndTo().get(i));
-			
-			
+
 			softly.assertThat(
 					container.findElement(By.xpath("//*[@class='empireFlight_confirmBagTableData']")).getText().trim())
 					.isEqualTo(CommonDTO.getCheckinBaggageData().get(i));
@@ -3950,8 +3954,10 @@ try {
 		for (WebElement passenger : passengersList) {
 
 //			
-			softly.assertThat(
-					passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[1]")).getText().trim())
+			softly.assertThat(passenger
+					.findElement(By
+							.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[1]"))
+					.getText().trim())
 					.isEqualTo(CommonDTO.getInstance().getAllPassengerDTOList().get(passengerIndex).getTitle() + " "
 							+ CommonDTO.getInstance().getAllPassengerDTOList().get(passengerIndex).getFirstName() + " "
 							+ CommonDTO.getInstance().getAllPassengerDTOList().get(passengerIndex).getLastName());
@@ -3961,41 +3967,53 @@ try {
 					+ CommonDTO.getInstance().getAllPassengerDTOList().get(passengerIndex).getFirstName() + " "
 					+ CommonDTO.getInstance().getAllPassengerDTOList().get(passengerIndex).getLastName());
 
-			logger.info(
-					"Sector->" + passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[2]")).getText());
-			softly.assertThat(
-					passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[2]")).getText().trim().length())
-					.isGreaterThan(0);
-			
-			logger.info(
-					"PNR No->" + passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[3]")).getText());
-			softly.assertThat(
-					passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[3]")).getText().trim().length())
-					.isGreaterThan(0);
-			
-			
-			
+			logger.info("Sector->" + passenger
+					.findElement(By
+							.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[2]"))
+					.getText());
+			softly.assertThat(passenger
+					.findElement(By
+							.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[2]"))
+					.getText().trim().length()).isGreaterThan(0);
 
-			logger.info("Airline PNR->"
-					+ passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[4]")).getText());
-			softly.assertThat(
-					passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[4]")).getText().trim().length())
-					.isGreaterThan(0);
+			logger.info("PNR No->" + passenger
+					.findElement(By
+							.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[3]"))
+					.getText());
+			softly.assertThat(passenger
+					.findElement(By
+							.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[3]"))
+					.getText().trim().length()).isGreaterThan(0);
 
-			logger.info("Ticket No->"
-					+ passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[5]")).getText());
-			softly.assertThat(
-					passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[5]")).getText().trim().length())
-					.isGreaterThan(0);
+			logger.info("Airline PNR->" + passenger
+					.findElement(By
+							.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[4]"))
+					.getText());
+			softly.assertThat(passenger
+					.findElement(By
+							.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[4]"))
+					.getText().trim().length()).isGreaterThan(0);
 
-			logger.info("Ticket Status->"
-					+ passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[6]")).getText());
-			softly.assertThat(passenger.findElement(By.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[6]")).getText()
-					.trim().length()).isGreaterThan(0);
+			logger.info("Ticket No->" + passenger
+					.findElement(By
+							.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[5]"))
+					.getText());
+			softly.assertThat(passenger
+					.findElement(By
+							.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[5]"))
+					.getText().trim().length()).isGreaterThan(0);
+
+			logger.info("Ticket Status->" + passenger
+					.findElement(By
+							.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[6]"))
+					.getText());
+			softly.assertThat(passenger
+					.findElement(By
+							.xpath("//*[@class='empireFlight_confirmPnrDetail']//tr[@class='ng-star-inserted']/td[6]"))
+					.getText().trim().length()).isGreaterThan(0);
 			passengerIndex++;
 		}
 
-	
 		try {
 			// confirmed
 
