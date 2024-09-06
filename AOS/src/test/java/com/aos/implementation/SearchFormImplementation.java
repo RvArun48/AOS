@@ -2833,13 +2833,42 @@ try {
 	public void I_click_on_the_baggage() {
 
 		try {
+			wait.until(ExpectedConditions
+					.elementToBeClickable(driver.findElement(By.xpath("//*[@class='empireFlight_tabwrapper']"))));
+			WebElement tabsContainer = driver.findElement(By.xpath("//*[@class='empireFlight_tabwrapper']"));
+			List<WebElement> tabList = tabsContainer
+					.findElements(By.xpath("//*[contains(@class,'empireFlight_FOBtnWrapper')]"));
+			List<WebElement> multiCardContainerList = tabsContainer
+					.findElements(By.xpath("//*[@class='empireF_multiCardGrid']"));
+			logger.info("tabList->" + tabList.size());
+			int tabIndex = 1;
+			int cardContainerIndex = 0;
+			for (WebElement tab : tabList) {
+				logger.info("Selecting tab " + tabIndex + " " + tab.getText());
+				tab.click();
+				
+				
+				List<WebElement> cardsInCurrentTab = multiCardContainerList.get(cardContainerIndex)
+						.findElements(By.cssSelector(".fareoptioncardnew:not([style*='display: none;'])"));
+				logger.info("cardsInCurrentTab->" + cardsInCurrentTab.size());
 
+				int cardToSelect = CommonUtils.generateRandomNumber(0, cardsInCurrentTab.size() - 1);
+
+				cardsInCurrentTab.get(cardToSelect).click();
+
+				logger.info("Printing price for test->" + cardsInCurrentTab.get(cardToSelect)
+						.findElement(By.xpath("//*[@class='fareOptionPrice']")).getText());
+
+				tabIndex++;
+				cardContainerIndex++;
 			Thread.sleep(20000);
+			
 			logger.info("click baggage");
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.clickBaggage));
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "click baggage", driver, getScenarioName());
 			homePage.clickBaggage.click();
 			Thread.sleep(3000);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

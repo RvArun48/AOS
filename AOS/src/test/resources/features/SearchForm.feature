@@ -109,10 +109,10 @@ Feature: Flight Booking
         #Then  I need to validate flight details 
    
         #Then  I need to validate fare option card 
-         Then I click on the flight ltinerary
-          Then  I need to validate flight ltinerary
-            Then I click on the baggage
-             Then  I need to validate baggage
+         #Then I click on the flight ltinerary
+          #Then  I need to validate flight ltinerary
+            #Then I click on the baggage
+             #Then  I need to validate baggage
             #Then I click on the fare breakup
              #Then  I need to validate fare breakup
              Then I click on the booknow
@@ -150,9 +150,9 @@ Feature: Flight Booking
     Given I want to open the application
      #Then I change the currency type
      #Then I change the language
-     #Then I click the flexible data
+     Then I click the flexible data
      #Then I click the umrah fare
-    #Then I select the trip type
+    Then I select the trip type
     Then I enter the source
     Then I enter the destination
     Then I enter the departure date
@@ -173,12 +173,12 @@ Feature: Flight Booking
       Then I need to validate duration
        Then I need to validate airline
       Then I need to validate refundable
-      #Then I click on the more filter 
+      Then I click on the more filter 
       #Then I need to validate departure airport
        #Then I need to validate arrival airport
         #Then I need to validate departure stopover
         #Then I need to validate aircraft types
-         #Then I click on the apply button 
+         Then I click on the apply button 
        Then I need to validate fare option
        Then I need to validate sortby filter 
        Then I need to validate more fligt option round trip

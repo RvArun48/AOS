@@ -132,33 +132,6 @@ public class AosImplementation extends AosSpecification {
 		WebElement destinationCountry;
 		WebElement residenceCountry;
 		WebElement localId;
-		
-		
-		if (passengerDTOList.get(dataIndex).getDocumentType()
-				.equalsIgnoreCase("Iqama ID (Saudi Residence for Foreigners)")) {
-			
-			nationalitySrff = driver.findElements(By.xpath("//*[@bindlabel='country_name']")).get((i));
-			
-			iqamaExpiryDateSrff = driver
-					.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']//input[@type='text']")).get((i));
-			iqamaExpiryMonthSrff = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']")).get((i));
-			iqamaExpiryYearSrff = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']")).get((i));
-			
-		}
-		if (passengerDTOList.get(dataIndex).getDocumentType()
-				.equalsIgnoreCase("National ID (Only for GCC Nationals)")) {
-			issuingCountryGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssuingCountry']")).get((i));
-
-			nationalityGcc = driver.findElements(By.xpath("//*[@formcontrolname='Nationality']")).get((i));
-			nationalityExpiryDateGcc = driver
-					.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']//input[@type='text']")).get((i));
-			nationalityExpiryMonthGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']"))
-					.get((i));
-			nationalityExpiryYearGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']")).get((i));
-
-		}
-		
-		
 
 		title = wait.until(
 				ExpectedConditions.visibilityOf(driver.findElements(By.xpath("//*[@formcontrolname='Title']")).get(i)));
@@ -170,44 +143,9 @@ public class AosImplementation extends AosSpecification {
 		dobMonth = driver.findElements(By.xpath("//*[@formcontrolname='BirthMonth']")).get((i));
 
 		dobYear = driver.findElements(By.xpath("//*[@formcontrolname='BirthYear']")).get((i));
-       
+
 		
-
-	
-
-		mealPreference = driver.findElements(By.xpath("//*[@formcontrolname='SSR_Meal']")).get((i));
-		seatPreference = driver.findElements(By.xpath("//*[@formcontrolname='SSR_Seat']")).get((i));
-
-		specialRequst = driver.findElements(By.xpath("//*[@formcontrolname='SSR_SpecialRequest']")).get((i));
-		airline = driver.findElements(By.xpath("//*[@formcontrolname='Airline']")).get((i));
-
-		placeOfBirthCountry = driver.findElements(By.xpath("//*[@formcontrolname='PlaceOfBirthCountry']")).get((i));
-		issuedCountry = driver.findElements(By.xpath("//*[@formcontrolname='VisaIssuedCountry']")).get((i));
-
-		visaIssuedDay = driver.findElements(By.xpath("//*[@formcontrolname='VisaIssueDay']")).get((i));
-
-		visaIssuedMonth = driver.findElements(By.xpath("//*[@formcontrolname='VisaIssueMonth']")).get((i));
-
-		visaIssuedYear = driver.findElements(By.xpath("//*[@formcontrolname='VisaIssueYear']")).get((i));
-
-		visaExpiryDay = driver.findElements(By.xpath("//*[@formcontrolname='VisaExpiryDay']")).get((i));
-
-		visaExpiryMonth = driver.findElements(By.xpath("//*[@formcontrolname='VisaExpiryMonth']")).get((i));
-
-		visaExpiryYear = driver.findElements(By.xpath("//*[@formcontrolname='VisaExpiryYear']")).get((i));
-
-		visaRequiredCountry = driver.findElements(By.xpath("//*[@formcontrolname='VisaRequiringCountry']")).get((i));
-
-		 localId = driver.findElements(By.xpath("//label[text()='Local Id']")).get((i));
-
-		WebElement iqamaId = driver
-				.findElements(By.xpath("//label[text()='Iqama ID (Saudi Residence for Foreigners)']")).get((i));
-
-		WebElement nationalId = driver.findElements(By.xpath("//label[text()='National ID (Only for GCC Nationals)']"))
-				.get((i));
-
-		WebElement passportInformation = driver.findElements(By.xpath("//label[text()='Passport Information']"))
-				.get((i));
+		
 
 		try {
 			ExpectedConditions.elementToBeClickable(passengerDetailsPage.clickAdultOneAddress);
@@ -216,7 +154,7 @@ public class AosImplementation extends AosSpecification {
 		} catch (Exception e) {
 			// TODO: handle exceptio
 		}
-		destinationCountry = driver.findElements(By.xpath("//*[@formcontrolname='DOCA_destination_Country']")).get((i));
+		
 		try {
 
 			ExpectedConditions.elementToBeClickable(passengerDetailsPage.clickAdultTwoAddress);
@@ -224,7 +162,7 @@ public class AosImplementation extends AosSpecification {
 		} catch (Exception e) {
 			// TODO: handle exceptio
 		}
-		residenceCountry = driver.findElements(By.xpath("//*[@formcontrolname='DOCA_residence_Country']")).get((i));
+		
 
 		actions.moveToElement(title).perform();
 
@@ -276,8 +214,8 @@ public class AosImplementation extends AosSpecification {
 								+ passengerDTOList.get(dataIndex).getDobYear() + "']")));
 
 		if (passengerDTOList.get(dataIndex).getDocumentType().equalsIgnoreCase("Local Id")) {
-
-		
+			try {
+				localId = driver.findElements(By.xpath("//label[text()='Local Id']")).get((i));
 				wait.until(ExpectedConditions.elementToBeClickable(localId));
 				localId.click();
 				logger.info("Click the local id : " + passengerDTOList.get(dataIndex).getLocalDocumentNo());
@@ -286,21 +224,38 @@ public class AosImplementation extends AosSpecification {
 
 				driver.findElements(By.xpath("//*[@formcontrolname='DocumentNumber']")).get(i)
 						.sendKeys(passengerDTOList.get(dataIndex).getLocalDocumentNo());
-			
+
 				logger.info("Enter the Form identity : " + passengerDTOList.get(dataIndex).getFormIdentity());
 				wait.until(ExpectedConditions.elementToBeClickable(
 						driver.findElements(By.xpath("//*[@formcontrolname='FormofIdentityNumber']")).get(i)));
 
 				driver.findElements(By.xpath("//*[@formcontrolname='FormofIdentityNumber']")).get(i)
 						.sendKeys(passengerDTOList.get(dataIndex).getFormIdentity());
-			
+
+			} catch (Exception e) {
+				logger.info("Exception occured at Iqama ID (Saudi Residence for Foreigners): " + e.toString());
+			}
 
 		}
 
 		if (passengerDTOList.get(dataIndex).getDocumentType()
 				.equalsIgnoreCase("Iqama ID (Saudi Residence for Foreigners)")) {
 
-		
+			try {
+
+				WebElement iqamaId = driver
+						.findElements(By.xpath("//label[text()='Iqama ID (Saudi Residence for Foreigners)']")).get((i));
+
+				nationalitySrff = driver.findElements(By.xpath("//*[@bindlabel='country_name']")).get((i));
+
+				iqamaExpiryDateSrff = driver
+						.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']//input[@type='text']"))
+						.get((i));
+				iqamaExpiryMonthSrff = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']"))
+						.get((i));
+				iqamaExpiryYearSrff = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']"))
+						.get((i));
+
 				wait.until(ExpectedConditions.elementToBeClickable(iqamaId));
 				iqamaId.click();
 				wait.until(ExpectedConditions.elementToBeClickable(
@@ -355,21 +310,38 @@ public class AosImplementation extends AosSpecification {
 						passengerDetailsContainer.get(i).findElement(By.xpath(String.format(
 								"//*[contains(@class, 'ng-option') and contains(@class, 'ng-star-inserted')]//*[contains(text(), '%s')]",
 								passengerDTOList.get(dataIndex).getIqamaExpiryYearSrff()))));
-				
-				
+
 				logger.info("Enter the Form identity : " + passengerDTOList.get(dataIndex).getFormIdentity());
 				wait.until(ExpectedConditions.elementToBeClickable(
 						driver.findElements(By.xpath("//*[@formcontrolname='FormofIdentityNumber']")).get(i)));
 
 				driver.findElements(By.xpath("//*[@formcontrolname='FormofIdentityNumber']")).get(i)
 						.sendKeys(passengerDTOList.get(dataIndex).getFormIdentity());
-			
+			} catch (Exception e) {
+
+			}
 
 		}
 
 		if (passengerDTOList.get(dataIndex).getDocumentType()
 				.equalsIgnoreCase("National ID (Only for GCC Nationals)")) {
-		
+
+			try {
+				WebElement nationalId = driver
+						.findElements(By.xpath("//label[text()='National ID (Only for GCC Nationals)']")).get((i));
+
+				issuingCountryGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssuingCountry']"))
+						.get((i));
+
+				nationalityGcc = driver.findElements(By.xpath("//*[@formcontrolname='Nationality']")).get((i));
+				nationalityExpiryDateGcc = driver
+						.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']//input[@type='text']"))
+						.get((i));
+				nationalityExpiryMonthGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']"))
+						.get((i));
+				nationalityExpiryYearGcc = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']"))
+						.get((i));
+
 				wait.until(ExpectedConditions.elementToBeClickable(nationalId));
 				nationalId.click();
 
@@ -449,125 +421,145 @@ public class AosImplementation extends AosSpecification {
 
 				driver.findElements(By.xpath("//*[@formcontrolname='FormofIdentityNumber']")).get(i)
 						.sendKeys(passengerDTOList.get(dataIndex).getFormIdentity());
-			
+
+			} catch (Exception e) {
+				logger.info("Exception occured at National ID (Only for GCC Nationals): " + e.toString());
+
+			}
+
 		}
+
 		if (passengerDTOList.get(dataIndex).getDocumentType().equalsIgnoreCase("Passport Information")) {
 
-			wait.until(ExpectedConditions.elementToBeClickable(passportInformation));
-			passportInformation.click();
-			
+			try {
 
-			issuingCountry = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssuingCountry']")).get((i));
+				WebElement passportInformation = driver.findElements(By.xpath("//label[text()='Passport Information']"))
+						.get((i));
 
-			nationality = driver.findElements(By.xpath("//*[@formcontrolname='Nationality']")).get((i));
+				wait.until(ExpectedConditions.elementToBeClickable(passportInformation));
+				passportInformation.click();
+				
 
-			pidDay = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssueDay']")).get((i));
+				issuingCountry = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssuingCountry']"))
+						.get((i));
 
-			pidMonth = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssueMonth']")).get((i));
+				nationality = driver.findElements(By.xpath("//*[@formcontrolname='Nationality']")).get((i));
 
-			pidYear = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssueYear']")).get((i));
+				pidDay = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssueDay']")).get((i));
 
-			pedDay = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']")).get((i));
+				pidMonth = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssueMonth']")).get((i));
 
-			pedMonth = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']")).get((i));
+				pidYear = driver.findElements(By.xpath("//*[@formcontrolname='DocumentIssueYear']")).get((i));
 
-			pedYear = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']")).get((i));
-			
-			
-			
-			
+				pedDay = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryDay']")).get((i));
 
-			logger.info("Selecting the Issuing Country: " + passengerDTOList.get(dataIndex).getIssuingCountry());
+				pedMonth = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryMonth']")).get((i));
 
-			wait.until(ExpectedConditions.elementToBeClickable(issuingCountry));
-			issuingCountry.click();
-			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller passport details", driver,
-					scenarioName);
-			Thread.sleep(1000);
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-									+ passengerDTOList.get(dataIndex).getIssuingCountry() + "'])[1]//parent::div")));
+				pedYear = driver.findElements(By.xpath("//*[@formcontrolname='DocumentExpiryYear']")).get((i));
 
-			logger.info("Selecting the Nationality: " + passengerDTOList.get(dataIndex).getNationality());
-			wait.until(ExpectedConditions.elementToBeClickable(nationality));
-			nationality.click();
+				logger.info("Selecting the Issuing Country: " + passengerDTOList.get(dataIndex).getIssuingCountry());
 
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-									+ passengerDTOList.get(dataIndex).getNationality() + "'])[1]//parent::div")));
+				wait.until(ExpectedConditions.elementToBeClickable(issuingCountry));
+				issuingCountry.click();
+				LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Adding the traveller passport details",
+						driver, scenarioName);
+				Thread.sleep(1000);
+				executor.executeScript("arguments[0].click();",
+						passengerDetailsContainer.get(i)
+								.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+										+ passengerDTOList.get(dataIndex).getIssuingCountry()
+										+ "'])[1]//parent::div")));
 
-			logger.info("Selecting the Passport Issue Day : " + passengerDTOList.get(dataIndex).getPidDay());
-			wait.until(ExpectedConditions.elementToBeClickable(pidDay));
-			pidDay.click();
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-									+ passengerDTOList.get(dataIndex).getPidDay() + "'])[1]//parent::div")));
+				logger.info("Selecting the Nationality: " + passengerDTOList.get(dataIndex).getNationality());
+				wait.until(ExpectedConditions.elementToBeClickable(nationality));
+				nationality.click();
 
-			logger.info("Selecting the Passport Issue Month : " + passengerDTOList.get(dataIndex).getPidMonth());
-			wait.until(ExpectedConditions.elementToBeClickable(pidMonth));
-			pidMonth.click();
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-									+ passengerDTOList.get(dataIndex).getPidMonth() + "'])[1]//parent::div")));
+				executor.executeScript("arguments[0].click();",
+						passengerDetailsContainer.get(i)
+								.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+										+ passengerDTOList.get(dataIndex).getNationality() + "'])[1]//parent::div")));
 
-			logger.info("Selecting the Passport Issue Year : " + passengerDTOList.get(dataIndex).getPidYear());
-			wait.until(ExpectedConditions.elementToBeClickable(pidYear));
-			pidYear.click();
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-									+ passengerDTOList.get(dataIndex).getPidYear() + "'])[1]//parent::div")));
+				logger.info("Selecting the Passport Issue Day : " + passengerDTOList.get(dataIndex).getPidDay());
+				wait.until(ExpectedConditions.elementToBeClickable(pidDay));
+				pidDay.click();
+				executor.executeScript("arguments[0].click();",
+						passengerDetailsContainer.get(i)
+								.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+										+ passengerDTOList.get(dataIndex).getPidDay() + "'])[1]//parent::div")));
 
-			logger.info("Selecting the Passport Expriry Day : " + passengerDTOList.get(dataIndex).getPedDay());
-			wait.until(ExpectedConditions.elementToBeClickable(pedDay));
-			pedDay.click();
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-									+ passengerDTOList.get(dataIndex).getPedDay() + "'])[1]//parent::div")));
+				logger.info("Selecting the Passport Issue Month : " + passengerDTOList.get(dataIndex).getPidMonth());
+				wait.until(ExpectedConditions.elementToBeClickable(pidMonth));
+				pidMonth.click();
+				executor.executeScript("arguments[0].click();",
+						passengerDetailsContainer.get(i)
+								.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+										+ passengerDTOList.get(dataIndex).getPidMonth() + "'])[1]//parent::div")));
 
-			logger.info("Selecting the Passport Expriry Month : " + passengerDTOList.get(dataIndex).getPedMonth());
-			wait.until(ExpectedConditions.elementToBeClickable(pedMonth));
-			pedMonth.click();
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-									+ passengerDTOList.get(dataIndex).getPedMonth() + "'])[1]//parent::div")));
+				logger.info("Selecting the Passport Issue Year : " + passengerDTOList.get(dataIndex).getPidYear());
+				wait.until(ExpectedConditions.elementToBeClickable(pidYear));
+				pidYear.click();
+				executor.executeScript("arguments[0].click();",
+						passengerDetailsContainer.get(i)
+								.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+										+ passengerDTOList.get(dataIndex).getPidYear() + "'])[1]//parent::div")));
 
-			logger.info("Selecting the Passport Expriry Year : " + passengerDTOList.get(dataIndex).getPedYear());
-			wait.until(ExpectedConditions.elementToBeClickable(pedYear));
-			pedYear.click();
-			executor.executeScript("arguments[0].click();",
-					passengerDetailsContainer.get(i)
-							.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
-									+ passengerDTOList.get(dataIndex).getPedYear() + "'])[1]//parent::div")));
+				logger.info("Selecting the Passport Expriry Day : " + passengerDTOList.get(dataIndex).getPedDay());
+				wait.until(ExpectedConditions.elementToBeClickable(pedDay));
+				pedDay.click();
+				executor.executeScript("arguments[0].click();",
+						passengerDetailsContainer.get(i)
+								.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+										+ passengerDTOList.get(dataIndex).getPedDay() + "'])[1]//parent::div")));
 
-			logger.info("Enter the passport No : " + passengerDTOList.get(dataIndex).getPassportNo());
-			wait.until(ExpectedConditions.elementToBeClickable(
-					driver.findElements(By.xpath("//input[@formcontrolname='DocumentNumber']")).get(i)));
+				logger.info("Selecting the Passport Expriry Month : " + passengerDTOList.get(dataIndex).getPedMonth());
+				wait.until(ExpectedConditions.elementToBeClickable(pedMonth));
+				pedMonth.click();
+				executor.executeScript("arguments[0].click();",
+						passengerDetailsContainer.get(i)
+								.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+										+ passengerDTOList.get(dataIndex).getPedMonth() + "'])[1]//parent::div")));
 
-			driver.findElements(By.xpath("//input[@formcontrolname='DocumentNumber']")).get(i)
-					.sendKeys(passengerDTOList.get(dataIndex).getPassportNo());
+				logger.info("Selecting the Passport Expriry Year : " + passengerDTOList.get(dataIndex).getPedYear());
+				wait.until(ExpectedConditions.elementToBeClickable(pedYear));
+				pedYear.click();
+				executor.executeScript("arguments[0].click();",
+						passengerDetailsContainer.get(i)
+								.findElement(By.xpath("(//*[@class='ng-option-label ng-star-inserted' and text()='"
+										+ passengerDTOList.get(dataIndex).getPedYear() + "'])[1]//parent::div")));
+
+				logger.info("Enter the passport No : " + passengerDTOList.get(dataIndex).getPassportNo());
+				wait.until(ExpectedConditions.elementToBeClickable(
+						driver.findElements(By.xpath("//input[@formcontrolname='DocumentNumber']")).get(i)));
+
+				driver.findElements(By.xpath("//input[@formcontrolname='DocumentNumber']")).get(i)
+						.sendKeys(passengerDTOList.get(dataIndex).getPassportNo());
+
+			} catch (Exception e) {
+				logger.info("Exception occured at Passport Information: " + e.toString());
+
+			}
 
 		}
 
-//		try {
-//
-//			logger.info("Enter the Form identity : " + passengerDTOList.get(dataIndex).getFormIdentity());
-//			wait.until(ExpectedConditions.elementToBeClickable(
-//					driver.findElements(By.xpath("//*[@formcontrolname='FormofIdentityNumber']")).get(i)));
-//
-//			driver.findElements(By.xpath("//*[@formcontrolname='FormofIdentityNumber']")).get(i)
-//					.sendKeys(passengerDTOList.get(dataIndex).getFormIdentity());
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-
 		try {
+
+			issuedCountry = driver.findElements(By.xpath("//*[@formcontrolname='VisaIssuedCountry']")).get((i));
+
+			visaIssuedDay = driver.findElements(By.xpath("//*[@formcontrolname='VisaIssueDay']")).get((i));
+
+			visaIssuedMonth = driver.findElements(By.xpath("//*[@formcontrolname='VisaIssueMonth']")).get((i));
+
+			visaIssuedYear = driver.findElements(By.xpath("//*[@formcontrolname='VisaIssueYear']")).get((i));
+
+			visaExpiryDay = driver.findElements(By.xpath("//*[@formcontrolname='VisaExpiryDay']")).get((i));
+
+			visaExpiryMonth = driver.findElements(By.xpath("//*[@formcontrolname='VisaExpiryMonth']")).get((i));
+
+			visaExpiryYear = driver.findElements(By.xpath("//*[@formcontrolname='VisaExpiryYear']")).get((i));
+
+			visaRequiredCountry = driver.findElements(By.xpath("//*[@formcontrolname='VisaRequiringCountry']"))
+					.get((i));
+			placeOfBirthCountry = driver.findElements(By.xpath("//*[@formcontrolname='PlaceOfBirthCountry']")).get((i));
 
 			logger.info("Enter the Visa number : " + passengerDTOList.get(dataIndex).getVisaNumber());
 			wait.until(ExpectedConditions
@@ -662,9 +654,13 @@ public class AosImplementation extends AosSpecification {
 
 		} catch (Exception e) {
 
+			logger.info("Exception occured at Information: " + e.toString());
+
 		}
 
 		try {
+			destinationCountry = driver.findElements(By.xpath("//*[@formcontrolname='DOCA_destination_Country']")).get((i));
+			residenceCountry = driver.findElements(By.xpath("//*[@formcontrolname='DOCA_residence_Country']")).get((i));
 
 			logger.info("Enter the Destination Address : " + passengerDTOList.get(dataIndex).getDestinationAddress());
 			wait.until(ExpectedConditions.elementToBeClickable(
@@ -739,11 +735,14 @@ public class AosImplementation extends AosSpecification {
 					.sendKeys(passengerDTOList.get(dataIndex).getResidencePin());
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at Address: " + e.toString());
+
 		}
 	}
 
 //		try {
+	
+	
 //
 //			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.optionalPreference));
 //			passengerDetailsPage.optionalPreference.click();

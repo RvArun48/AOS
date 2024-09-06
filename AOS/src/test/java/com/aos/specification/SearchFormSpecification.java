@@ -94,7 +94,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new AosSpecification().openWebsite();
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 
 	}
@@ -104,7 +104,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().i_enter_the_source_as();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at i_enter_the_source_as: " + e.toString());
 		}
 
 	}
@@ -114,7 +114,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().i_enter_the_destination_as();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at i_enter_the_destination_as: " + e.toString());
 		}
 
 	}
@@ -124,7 +124,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().i_enter_the_departure_date_as();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at i_enter_the_departure_date_as: " + e.toString());
 		}
 
 	}
@@ -134,7 +134,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().i_select_the_flight_category_as();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at i_select_the_flight_category_as: " + e.toString());
 		}
 
 	}
@@ -144,7 +144,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_add_passengers();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_add_passengers: " + e.toString());
 		}
 
 	}
@@ -154,7 +154,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().i_click_on_the_search_button();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at i_click_on_the_search_button: " + e.toString());
 		}
 	}
 
@@ -163,7 +163,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().i_add_advance_search_options();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at i_add_advance_search_options: " + e.toString());
 		}
 
 	}
@@ -181,7 +181,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_select_the_trip_as();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_select_the_trip_as: " + e.toString());
 		}
 
 	}
@@ -193,7 +193,7 @@ public class SearchFormSpecification extends TestRunner {
 		} catch (
 
 		Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at i_enter_the_preferred_airlines: " + e.toString());
 		}
 
 	}
@@ -203,7 +203,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_change_the_currency_type();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_change_the_currency_type: " + e.toString());
 		}
 
 	}
@@ -213,7 +213,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_change_the_language();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_change_the_language: " + e.toString());
 		}
 
 	}
@@ -223,7 +223,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_enter_the_segment_two();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_enter_the_segment_two: " + e.toString());
 		}
 
 	}
@@ -233,7 +233,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_enter_the_segment_three();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_enter_the_segment_three: " + e.toString());
 		}
 
 	}
@@ -243,7 +243,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_enter_the_segment_four();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_enter_the_segment_four: " + e.toString());
 		}
 
 	}
@@ -253,7 +253,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_enter_the_segment_five();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_enter_the_segment_five: " + e.toString());
 		}
 
 	}
@@ -263,7 +263,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_enter_the_segment_six();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_enter_the_segment_six: " + e.toString());
 		}
 
 	}
@@ -273,7 +273,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_the_add_another_city();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_the_add_another_city: " + e.toString());
 		}
 
 	}
@@ -283,7 +283,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_the_flexible_data();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_the_flexible_data: " + e.toString());
 		}
 
 	}
@@ -293,7 +293,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_the_umrah_fare();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_the_umrah_fare: " + e.toString());
 		}
 
 	}
@@ -303,7 +303,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_enter_the_return_date();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_enter_the_return_date: " + e.toString());
 		}
 
 	}
@@ -313,7 +313,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_on_the_edit_search();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_on_the_edit_search: " + e.toString());
 		}
 
 	}
@@ -323,7 +323,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_advance_search();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_advance_search: " + e.toString());
 		}
 
 	}
@@ -333,7 +333,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_flight_listing();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_flight_listing: " + e.toString());
 		}
 
 	}
@@ -343,7 +343,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_flight_listing_multi_segment_three();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_flight_listing_multi_segment_three: " + e.toString());
 		}
 
 	}
@@ -353,7 +353,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_flight_listing_multi_segment_six();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_flight_listing_multi_segment_six: " + e.toString());
 		}
 
 	}
@@ -363,7 +363,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_flexi_calander();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_flexi_calander: " + e.toString());
 		}
 
 	}
@@ -373,7 +373,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_installments();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_installments: " + e.toString());
 		}
 
 	}
@@ -383,7 +383,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_time();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_time: " + e.toString());
 		}
 
 	}
@@ -393,7 +393,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_price();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_price: " + e.toString());
 		}
 
 	}
@@ -403,7 +403,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_stop();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_price: " + e.toString());
 		}
 
 	}
@@ -413,7 +413,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_duration();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_duration: " + e.toString());
 		}
 
 	}
@@ -423,7 +423,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_airline();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_airline: " + e.toString());
 		}
 
 	}
@@ -433,7 +433,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_refundable();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_refundable: " + e.toString());
 		}
 
 	}
@@ -443,7 +443,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_on_the_mor_filter();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_on_the_mor_filter: " + e.toString());
 		}
 
 	}
@@ -453,7 +453,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_departure_airport();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_departure_airport: " + e.toString());
 		}
 
 	}
@@ -463,7 +463,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_arrival_airport();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_arrival_airport: " + e.toString());
 		}
 
 	}
@@ -473,7 +473,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_departure_stopover();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_departure_stopover: " + e.toString());
 		}
 
 	}
@@ -483,7 +483,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_aircraft_types();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_aircraft_types: " + e.toString());
 		}
 
 	}
@@ -493,7 +493,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_on_the_apply_button();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_on_the_apply_button: " + e.toString());
 		}
 
 	}
@@ -503,7 +503,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_on_the_fare_option();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_on_the_fare_option: " + e.toString());
 		}
 
 	}
@@ -513,7 +513,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_on_the_sortby_filter();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_on_the_sortby_filter: " + e.toString());
 		}
 
 	}
@@ -523,7 +523,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_more_fligt_option();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_more_fligt_option: " + e.toString());
 		}
 
 	}
@@ -533,7 +533,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_flexi_calander_round_trip();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_flexi_calander_round_trip: " + e.toString());
 		}
 
 	}
@@ -543,7 +543,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_more_fligt_option_round_trip();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_more_fligt_option_round_trip: " + e.toString());
 		}
 
 	}
@@ -553,7 +553,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_fare_option_three_segment();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_fare_option_three_segment: " + e.toString());
 		}
 
 	}
@@ -563,7 +563,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_on_the_flight_details();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_on_the_flight_details: " + e.toString());
 		}
 
 	}
@@ -573,7 +573,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_flight_details();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_flight_details: " + e.toString());
 		}
 
 	}
@@ -583,7 +583,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_on_the_fare_option_card();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_on_the_fare_option_card: " + e.toString());
 		}
 
 	}
@@ -593,7 +593,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_on_the_flight_ltinerary();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_on_the_flight_ltinerary: " + e.toString());
 		}
 
 	}
@@ -603,7 +603,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_flight_ltinerary();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_flight_ltinerary: " + e.toString());
 		}
 	}
 
@@ -612,7 +612,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_on_the_baggage();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_on_the_baggage: " + e.toString());
 		}
 
 	}
@@ -622,7 +622,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_baggage();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_baggage: " + e.toString());
 		}
 	}
 
@@ -631,7 +631,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_on_the_fare_breakup();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_on_the_fare_breakup: " + e.toString());
 		}
 
 	}
@@ -641,7 +641,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_fare_breakup();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_fare_breakup: " + e.toString());
 		}
 	}
 
@@ -650,7 +650,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_fare_option_card_for_round_trip();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_fare_option_card_for_round_trip: " + e.toString());
 		}
 	}
 
@@ -659,7 +659,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_on_the_booknow();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_on_the_booknow: " + e.toString());
 		}
 	}
 
@@ -668,7 +668,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_add_the_traveller_details();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_add_the_traveller_details: " + e.toString());
 		}
 	}
 	
@@ -677,7 +677,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_flight_Summary();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_flight_Summary: " + e.toString());
 		}
 	}
 	
@@ -686,7 +686,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_click_on_payment_continue();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_click_on_payment_continue: " + e.toString());
 		}
 	}
 	
@@ -695,7 +695,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_add_the_traveller_common_details();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_add_the_traveller_common_details: " + e.toString());
 		}
 	}
 	
@@ -705,7 +705,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_payment_gateway();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_payment_gateway: " + e.toString());
 		}
 	}
 	
@@ -714,8 +714,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_enter_the_promo_code();
 		} catch (Exception e) {
-			// TODO: handle exception
-		}
+			logger.info("Exception occured at I_enter_the_promo_code: " + e.toString());}
 	}
 	
 	@Then("I need to validate flight Summary payment")
@@ -723,7 +722,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_need_to_validate_flight_Summary_payment();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_need_to_validate_flight_Summary_payment: " + e.toString());
 		}
 	}
 	
@@ -732,7 +731,7 @@ public class SearchFormSpecification extends TestRunner {
 		try {
 			new SearchFormImplementation().I_enter_the_card_details();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info("Exception occured at I_enter_the_card_details: " + e.toString());	
 		}
 	}
 	
