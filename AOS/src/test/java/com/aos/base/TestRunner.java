@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import com.aos.model.CommonDTO;
 import com.aos.utils.CommonUtils;
 import com.aos.utils.ReadProperty;
 import com.aos.utils.ZipUtil;
@@ -22,7 +23,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/features", glue = { "com.aos.specification" }, plugin = {
-		"json:target/RunCuke/cucumber.json", "pretty" }, tags = "@multi_city_flight_listing")
+		"json:target/RunCuke/cucumber.json", "pretty" }, tags = "@oneway_flight_listing")
 
 public class TestRunner {
 
@@ -50,6 +51,7 @@ public class TestRunner {
 	public ExtentReports setUp(Scenario scenario) {
 		// ExtentManager.createInstance("extent-report-" + scenarioName + ".html");
 		test = ExtentManager.getInstance();
+		CommonDTO.getInstance().setScenarioTagNames(scenario.getSourceTagNames());
 		if (ReadProperty.getPropValues("BROWSER", "config").equalsIgnoreCase("Chrome")) {
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();

@@ -2,7 +2,9 @@ package com.aos.model;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CommonDTO {
 
@@ -13,11 +15,12 @@ public class CommonDTO {
 	private LocalTime flightStartTime;
 	private LocalTime flightEndTime;
 	private List<PassengerDetailsDTO> allPassengerDTOList;
+	private List<String> sourceTagNames;
 
 	private static List<String> fromAndToList = new ArrayList<>();
 	private static List<String> baggageCheckinList = new ArrayList<>();
 	private static List<String> baggageCabinList = new ArrayList<>();
-
+	private static List<String> commonBaggageList = new ArrayList<>();
 	// Private constructor to prevent instantiation
 	private CommonDTO() {
 	}
@@ -137,5 +140,29 @@ public class CommonDTO {
 	public List<PassengerDetailsDTO> getAllPassengerDTOList() {
 		return allPassengerDTOList;
 	}
+	public static void setCommonBaggageData(String commonBaggageData) {
+		if (commonBaggageData != null) {
+			commonBaggageList.add(commonBaggageData);
+		}
 
+	}
+
+	public static List<String> getCommonBaggageData() {
+		return commonBaggageList;
+	}
+
+	public static void clearCommonBaggageData() {
+		if (commonBaggageList != null) {
+			commonBaggageList.clear();
+		}
+	}
+	
+	
+	public void setScenarioTagNames(Collection<String> collection) {
+		this.sourceTagNames = collection.stream().collect(Collectors.toList());
+	}
+	
+	public List<String> getScenarioTagNames() {
+		return sourceTagNames;
+	}
 }
