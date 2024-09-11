@@ -80,4 +80,13 @@ public class PassengerDetailsPage {
 	@FindBy(xpath = "//*[@class='mdc-checkbox__native-control mdc-checkbox--selected']")
 	public WebElement clickAdultTwoAddress;
 	
+	@FindBy(xpath = "//*[@formcontrolname='userId']")
+	public WebElement userNameb2b;
+	
+	@FindBy(xpath = "//*[@formcontrolname='password']")
+	public WebElement passwordb2b;
+	
+	@FindBy(xpath = "//span[contains(text(),'Sign in')]")
+	public WebElement signInb2b;
+	
 }

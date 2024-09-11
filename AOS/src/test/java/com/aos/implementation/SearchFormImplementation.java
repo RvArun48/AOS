@@ -25,6 +25,7 @@ import com.aos.base.TestRunner;
 import com.aos.model.BookTicketDTO;
 import com.aos.model.CardDetailsDTO;
 import com.aos.model.CommonDTO;
+import com.aos.model.LoginDTO;
 import com.aos.model.PassengerDetailsDTO;
 import com.aos.pageObjects.HomePage;
 import com.aos.pageObjects.PassengerDetailsPage;
@@ -1887,26 +1888,34 @@ public class SearchFormImplementation extends TestRunner {
 
 			homePage.getElementByXpath(driver, "(//*[@class='mdc-label' and contains(text(),'${token}')])[1]",
 					bookTicketDTO.getStop());
-////		
-//			if (CommonDTO.getInstance().getBookTicketDTO().getStop().equalsIgnoreCase("")) {
-//
-//				if (card.findElement(By.xpath("(//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted'])[1]"))
-//						.getText().trim().contains("Direct")) {
-//					logger.info("Verified that the Stop details are in Direct");
-//				} else if (card
-//						.findElement(By.xpath("(//*[@class='empireFlight_stopvia ng-star-inserted']/span)[1]"))
-//						.getText().trim().contains("1")) {
-//					logger.info("Verified that the Stop details are in 1stop");
-//
-//				}else if (card
-//						.findElement(By.xpath("(//*[@class='empireFlight_stopvia ng-star-inserted']/span)[1]"))
-//						.getText().trim().contains("2")) {
-//					logger.info("Verified that the Stop details are in 2stop");
-//
-//				}
-//				
-////				
-//			}
+			Thread.sleep(1000);
+
+			List<WebElement> cards = driver.findElements(By.xpath("//*[@class='empireFlight_cardbox']"));
+
+			if (bookTicketDTO.getStop().equalsIgnoreCase("Non Stop")) {
+				for (WebElement card : cards) {
+					softly.assertThat(driver
+							.findElement(By
+									.xpath("//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted']"))
+							.getText().trim().equals("Direct")).isEqualTo(true).as("Validation for Direct flight");
+				}
+			}
+
+			if (bookTicketDTO.getStop().equalsIgnoreCase("1 Stop")) {
+				for (WebElement card : cards) {
+					boolean flag = driver.findElement(By.xpath("//*[@class='empireFlight_stopvia ng-star-inserted']"))
+							.getText().trim().contains("1 Stop via");
+					softly.assertThat(flag).isEqualTo(true).as("Validation for Onestop flight");
+					if(flag) {
+						
+					} else {
+						logger.info("Test case failed-> Validation for Onestop flight");
+						LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, "Test case failed-> Validation for Onestop flight", driver, getScenarioName());
+					}
+				}
+			}
+
+			softly.assertAll();
 
 		} catch (Exception e) {
 			logger.info("Exception occured at I_need_to_validate_stop()->" + e.getMessage());
@@ -2859,8 +2868,8 @@ public class SearchFormImplementation extends TestRunner {
 
 		cardsInCurrentTab.get(cardToSelect).click();
 
-		String text = cardsInCurrentTab.get(cardToSelect)
-				.findElement(By.cssSelector(".Fareoption_Baggegdetail")).getText();
+		String text = cardsInCurrentTab.get(cardToSelect).findElement(By.cssSelector(".Fareoption_Baggegdetail"))
+				.getText();
 
 		logger.info("text->" + text);
 
@@ -2910,12 +2919,10 @@ public class SearchFormImplementation extends TestRunner {
 								softly.assertThat(
 										tableRows.get(i).findElements(By.tagName("th")).get(0).getText().trim())
 										.isEqualTo("Adult");
-								softly.assertThat(CommonDTO.getCommonBaggageData().get(0).split("-")[1].trim()
-										.contains(tableRows.get(i).findElements(By.tagName("td")).get(0).getText()
-												.trim()));
-								softly.assertThat(CommonDTO.getCommonBaggageData().get(0).split("-")[0].trim()
-										.contains(tableRows.get(i).findElements(By.tagName("td")).get(1).getText()
-												.trim()));
+								softly.assertThat(CommonDTO.getCommonBaggageData().get(0).split("-")[1].trim().contains(
+										tableRows.get(i).findElements(By.tagName("td")).get(0).getText().trim()));
+								softly.assertThat(CommonDTO.getCommonBaggageData().get(0).split("-")[0].trim().contains(
+										tableRows.get(i).findElements(By.tagName("td")).get(1).getText().trim()));
 								logger.info("Adult Checkpoint");
 							}
 							if (i == 2 && tableRows.get(i).findElements(By.tagName("th")).get(0).getText().trim()
@@ -2923,12 +2930,10 @@ public class SearchFormImplementation extends TestRunner {
 								softly.assertThat(
 										tableRows.get(i).findElements(By.tagName("th")).get(0).getText().trim())
 										.isEqualTo("Child");
-								softly.assertThat(CommonDTO.getCommonBaggageData().get(0).split("-")[1].trim()
-										.contains(tableRows.get(i).findElements(By.tagName("td")).get(0).getText()
-												.trim()));
-								softly.assertThat(CommonDTO.getCommonBaggageData().get(0).split("-")[0].trim()
-										.contains(tableRows.get(i).findElements(By.tagName("td")).get(1).getText()
-												.trim()));
+								softly.assertThat(CommonDTO.getCommonBaggageData().get(0).split("-")[1].trim().contains(
+										tableRows.get(i).findElements(By.tagName("td")).get(0).getText().trim()));
+								softly.assertThat(CommonDTO.getCommonBaggageData().get(0).split("-")[0].trim().contains(
+										tableRows.get(i).findElements(By.tagName("td")).get(1).getText().trim()));
 								logger.info("Child Checkpoint");
 							}
 							if (i == 3 && tableRows.get(i).findElements(By.tagName("th")).get(0).getText().trim()
@@ -2936,12 +2941,10 @@ public class SearchFormImplementation extends TestRunner {
 								softly.assertThat(
 										tableRows.get(i).findElements(By.tagName("th")).get(0).getText().trim())
 										.isEqualTo("Infant");
-								softly.assertThat(CommonDTO.getCommonBaggageData().get(0).split("-")[1].trim()
-										.contains(tableRows.get(i).findElements(By.tagName("td")).get(0).getText()
-												.trim()));
-								softly.assertThat(CommonDTO.getCommonBaggageData().get(0).split("-")[0].trim()
-										.contains(tableRows.get(i).findElements(By.tagName("td")).get(1).getText()
-												.trim()));
+								softly.assertThat(CommonDTO.getCommonBaggageData().get(0).split("-")[1].trim().contains(
+										tableRows.get(i).findElements(By.tagName("td")).get(0).getText().trim()));
+								softly.assertThat(CommonDTO.getCommonBaggageData().get(0).split("-")[0].trim().contains(
+										tableRows.get(i).findElements(By.tagName("td")).get(1).getText().trim()));
 								logger.info("Infant Checkpoint");
 							}
 
@@ -3630,7 +3633,6 @@ public class SearchFormImplementation extends TestRunner {
 		try {
 			BookTicketDTO bookTicketDTO = CommonDTO.getInstance().getBookTicketDTO();
 			SoftAssertions softly = new SoftAssertions();
-			
 
 			Thread.sleep(10000);
 			WebElement gatewayContainer = driver.findElement(By.xpath("//*[@class='empireFlight_PaymentBody']"));
@@ -3644,7 +3646,8 @@ public class SearchFormImplementation extends TestRunner {
 				Type cd = new TypeToken<CardDetailsDTO>() {
 					private static final long serialVersionUID = 1L;
 				}.getType();
-				CardDetailsDTO cardDetailsDTO = (CardDetailsDTO) JsonToGson.convertToObj("card_details", "tap_api_latest", cd);
+				CardDetailsDTO cardDetailsDTO = (CardDetailsDTO) JsonToGson.convertToObj("card_details",
+						"tap_api_latest", cd);
 				Type pd = new TypeToken<PassengerDetailsDTO>() {
 					private static final long serialVersionUID = -7767108171943612798L;
 
@@ -3961,21 +3964,22 @@ public class SearchFormImplementation extends TestRunner {
 
 		BookTicketDTO bookTicketDTO = CommonDTO.getInstance().getBookTicketDTO();
 		SoftAssertions softly = new SoftAssertions();
-		if(bookTicketDTO.getPaymentGateway().equalsIgnoreCase("Payfort Test")) {
-			
+		if (bookTicketDTO.getPaymentGateway().equalsIgnoreCase("Payfort Test")) {
+
 			Type cd = new TypeToken<CardDetailsDTO>() {
 				private static final long serialVersionUID = 1L;
 			}.getType();
-			CardDetailsDTO cardDetailsDTO = (CardDetailsDTO) JsonToGson.convertToObj("card_details", "payfort_test", cd);
+			CardDetailsDTO cardDetailsDTO = (CardDetailsDTO) JsonToGson.convertToObj("card_details", "payfort_test",
+					cd);
 			Type pd = new TypeToken<PassengerDetailsDTO>() {
 				private static final long serialVersionUID = -7767108171943612798L;
 
 			}.getType();
 
-			
 			logger.info("Enter the card No: " + cardDetailsDTO.getCardNo());
 			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.cardNo));
-			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Card Detail Page", driver, getScenarioName());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Card Detail Page", driver,
+					getScenarioName());
 			passengerDetailsPage.cardNo.sendKeys(cardDetailsDTO.getCardNo());
 
 			logger.info("Enter card Expiry Date: " + cardDetailsDTO.getExpDate());
@@ -3997,7 +4001,7 @@ public class SearchFormImplementation extends TestRunner {
 					getScenarioName());
 
 		}
-				Thread.sleep(80000);
+		Thread.sleep(80000);
 	}
 
 	public void I_need_to_validate_confirmation_page() {
@@ -4175,4 +4179,54 @@ public class SearchFormImplementation extends TestRunner {
 		// TODO Auto-generated method stub
 		return null;
 	}
-}
+
+
+		
+
+	public void I_need_to_click_the_sign_in() {
+		logger.info("Click the Sign In");
+		wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.signInb2b));
+		passengerDetailsPage.signInb2b.click();
+		
+		
+	}
+
+	public void I_need_to_enter_the_username_and_password(String keyData) {
+		Type bt = new TypeToken<LoginDTO>() {
+			private static final long serialVersionUID = 1L;
+		}.getType();
+		
+		LoginDTO loginDTO = (LoginDTO) JsonToGson.convertToObj("signin_details", keyData, bt);
+		try {
+
+			SoftAssertions softly = new SoftAssertions();
+			logger.info("login DTO->" + loginDTO);
+//			
+//			
+			if (keyData.equals("user_b2b")) {
+
+
+			logger.info("Enter the username: " + loginDTO.getSigninEmail());
+			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.userNameb2b));
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Login Page Details", driver,
+					getScenarioName());
+			passengerDetailsPage.userNameb2b.sendKeys(loginDTO.getSigninEmail());
+			
+			logger.info("Enter the Password: " + loginDTO.getSigninPassword());
+			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.passwordb2b));
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Login Page Details", driver,
+					getScenarioName());
+			passengerDetailsPage.passwordb2b.sendKeys(loginDTO.getSigninPassword());
+			
+			}
+			
+
+		
+		}catch (Exception e) {
+			
+		}
+	}
+
+		
+	}
+

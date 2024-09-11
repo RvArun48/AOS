@@ -9,7 +9,7 @@
 	
 	
 	"tap_api_latest": {
-		"payment_gateway": "Payfort Test",
+		"payment_gateway": "",
 		"tapapi_cardnumber": "8888880000000001",
 		"tapapi_cardname": "Rupay",
 		"tapapi_exprimonth": "06",
@@ -21,6 +21,79 @@
 		"tapapi_state": "Tamilnadu",
 		"tapapi_pin": "629163",
 		"tapapi_city": "Marthandam"
+	},
+	"flutter_wave": {
+		"payment_gateway": "",
+		"flutter_wave_card_no": "5531886652142950",
+		"flutter_wave_exp_Date": "09/32",
+		"flutter_wave_cvv": "564",
+		"flutter_wave_card_holder_name": "Test",
+		"flutter_wave_pin": "3310",
+		"flutter_wave_otp": "12345"
+	},
+	"cmi": {
+		"payment_gateway": "",
+		"cmi_pan": "5210623185122789",
+		"cmi_month": "12/32",
+		"cmi_year": "564",
+		"cmi_cvs": "000",
+		"cmi_auth_code": "123"
+		
+	},
+	"cc_avenue_uae": {
+		"payment_gateway": "",
+		"cc_avenue_uae_card_no": "5577810000000004",
+		"cc_avenue_uae_exp_Date": "09/32",
+		"cc_avenue_uae_cvv": "564",
+		"cc_avenue_uae_card_holder_name": "Test",
+		"cc_avenue_uae_pin": "3310",
+		"cc_avenue_uae_otp": "12345"
+	},
+	"dibsy": {
+		"dibsy_payment_gateway": "",
+		"dibsy_card_no": "4005550000000001",
+		"dibsy_exp_Date": "05/25",
+		"dibsy_cvv": "123",
+		"dibsy_card_holder_name": "Test"
+	},
+	"no_qoody": {
+		"no_qoody_payment_gateway": "",
+		"no_qoody_card_no": "4005550000000001",
+		"no_qoody_exp_Date": "05/25",
+		"no_qoody_cvv": "123",
+		"no_qoody_card_holder_name": "Test"
+	},
+	"hyper_pay": {
+		"hyper_pay_payment_gateway": "",
+		"hyper_pay_card_no": "4005550000000001",
+		"hyper_pay_exp_Date": "05/25",
+		"hyper_pay_cvv": "123",
+		"hyper_pay_card_holder_name": "Test"
+	},
+	"tabby": {
+		"tabby_payment_gateway": "",
+		"tabby_card_no": "4005550000000001",
+		"tabby_exp_Date": "05/25",
+		"tabby_cvv": "123",
+		"tabby_otp": "123",
+		"tabby_phone": "123",
+		"tabby_email": "123",
+		"tabby_card_holder_name": "Test"
+	},
+	"pay_tabs": {
+		"pay_tabs_payment_gateway": "",
+		"pay_tabs_card_no": "4005550000000001",
+		"pay_tabs_exp_Date": "05/25",
+		"pay_tabs_cvv": "123",
+		"pay_tabs_email": "123",
+		"pay_tabs_card_holder_name": "Test"
+	},
+	"hbl_pay": {
+		"hbl_pay_payment_gateway": "",
+		"hbl_pay_card_no": "4005550000000001",
+		"hbl_pay_exp_Date": "05/25",
+		"hbl_pay_cvv": "123",
+		"hbl_pay_card_holder_name": "Test"
 	}
 }
 
