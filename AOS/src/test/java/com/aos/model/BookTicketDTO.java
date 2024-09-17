@@ -895,6 +895,20 @@ public class BookTicketDTO {
 			this.optionalPreferance = optionalPreferance;
 			
 		}
+		
+		@SerializedName("payment_gateway_b2b")
+		@Expose
+		private String paymentGatewayB2b;
+
+		public String getPaymentGatewayB2b() {
+			return paymentGatewayB2b;
+		}
+
+		public void setPaymentGatewayB2b(String paymentGatewayB2b) {
+			this.date = paymentGatewayB2b;
+			
+		}
+	
 	}
 	
 

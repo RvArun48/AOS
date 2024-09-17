@@ -19,6 +19,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aos.base.TestRunner;
 import com.aos.implementation.AosImplementation;
+import com.aos.implementation.LoginImplementation;
+import com.aos.implementation.SearchFormImplementation;
 import com.aos.model.BookTicketDTO;
 import com.aos.model.CommonDTO;
 import com.aos.model.PassengerDetailsDTO;
@@ -39,6 +41,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 
 public class AosSpecification extends TestRunner {
 
@@ -50,6 +53,7 @@ public class AosSpecification extends TestRunner {
 	PassengerDetailsPage passengerDetailsPage = null;
 	public static final Logger logger = LogManager.getLogger(AosSpecification.class);
 	JavascriptExecutor executor = (JavascriptExecutor) driver;
+	private String urlKey;
 
 	@Before
 	public void setup(Scenario scenario) {
@@ -58,9 +62,22 @@ public class AosSpecification extends TestRunner {
 		report = super.setUp(scenario);
 	}
 
+	@Given("I open the login url")
+
 	@Given("I want to open the application")
+	public void openLoginUrl() {
+		this.urlKey = "LOGIN_URL";
+		openWebsite();
+	}
+
 	public void openWebsite() {
-		String baseUrl = ReadProperty.getPropValues("BASE_URL", "config");
+		String baseUrl = "";
+		if (urlKey == null || urlKey.isBlank() || urlKey.isEmpty()) {
+			baseUrl = ReadProperty.getPropValues("BASE_URL", "config");
+		} else {
+			baseUrl = ReadProperty.getPropValues(urlKey, "config");
+		}
+
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
 
@@ -69,17 +86,17 @@ public class AosSpecification extends TestRunner {
 			setScenarioName(scenarioName);
 			logger.info("Opening application url:" + baseUrl);
 			driver.get(baseUrl);
-			
-			
-	        long loadEventEnd = (Long) js.executeScript("return window.performance.timing.loadEventEnd;");
-	        long navigationStart = (Long) js.executeScript("return window.performance.timing.navigationStart;");
+			baseUrl = "";
+			long loadEventEnd = (Long) js.executeScript("return window.performance.timing.loadEventEnd;");
+			long navigationStart = (Long) js.executeScript("return window.performance.timing.navigationStart;");
 
-	        long loadTime = loadEventEnd - navigationStart;
-	        logger.info("Page Load Time is " + loadTime + " milliseconds.");
-			
+			long loadTime = loadEventEnd - navigationStart;
+			logger.info("Page Load Time is " + loadTime + " milliseconds.");
+
 			driver.get(baseUrl);
 			Thread.sleep(2000);
-			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Home Page verification<b>(App load time: "+loadTime+ " ms)</b>", driver,
+			LogEvent.logEventWithScreenshot(extentTest, Status.INFO,
+					"Home Page verification<b>(App load time: " + loadTime + " ms)</b>", driver,
 					AosSpecification.scenarioName);
 
 		} catch (Exception e) {
@@ -87,6 +104,43 @@ public class AosSpecification extends TestRunner {
 		}
 
 	}
+	
+	
+	
+	
+	
+	@Then("^I need to enter the username and password \"(.+)\"$")
+	public void login(String keyData) {
+
+		try {
+
+			new SearchFormImplementation().I_need_to_enter_the_username_and_password(keyData);
+
+		} catch (Exception e) {
+			logger.info("Exception occured at I_need_to_enter_the_username_and_password()->" + e.getMessage());
+		}
+
+	}
+	@Then("I need to click the sign in")
+	public void I_need_to_click_the_sign_in() {
+		try {
+			new SearchFormImplementation().I_need_to_click_the_sign_in();
+		} catch (Exception e) {
+			logger.info("Exception occured at I_need_to_click_the_sign_in: " + e.toString());
+		}
+
+	}
+	
+	@Then("I need to select payment gateway")
+	public void I_need_to_select_payment_gateway() {
+		try {
+			new SearchFormImplementation().I_need_to_select_payment_gateway();
+		} catch (Exception e) {
+			logger.info("Exception occured at I_need_to_select_payment_gateway: " + e.toString());
+		}
+
+	}
+
 
 	@And("^book a flight ticket for \"(.+)\"$")
 	public void bookTicket(String data) throws IOException {
@@ -113,19 +167,15 @@ public class AosSpecification extends TestRunner {
 			logger.info("Waiting for one way tab to be clickable");
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.oneWayTab));
 			homePage.oneWayTab.click();
-			
-			
 
 			logger.info("Enter the origin input: " + bookTicketDTO.getFrom());
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.from));
 			homePage.from.click();
-			
+
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.fromInput));
 			homePage.fromInput.sendKeys(bookTicketDTO.getFrom());
 			homePage.getElementByXpath(driver, "(//*[@class='fs_menuBadge' and contains(text(),'${token}')])[1]",
 					bookTicketDTO.getFrom());
-			
-			
 
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.to));
 			homePage.to.click();
@@ -153,7 +203,7 @@ public class AosSpecification extends TestRunner {
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Choosing travel date", driver, scenarioName);
 			logger.info("Selecting the Departure date: "
 					+ DateAndTimeUtil.addDaysToCurrentDate(Integer.parseInt(bookTicketDTO.getDate()), "dd MMM yyyy"));
-			
+
 			homePage.getElementByXpath(driver,
 					"(//span[@draggable='false' and not(contains(@class, 'disabled'))]/span[text()='${token}'])[1]",
 					DateAndTimeUtil.addDaysToCurrentDate(Integer.parseInt(bookTicketDTO.getDate()), "d"));
@@ -172,8 +222,7 @@ public class AosSpecification extends TestRunner {
 			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Select the departure date", driver, scenarioName);
 
 			logger.info("Selecting the class: " + bookTicketDTO.getPassengerClass());
-			
-			
+
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.passengerClass_FirstClass));
 			homePage.passengerClass_FirstClass.click();
 
@@ -324,41 +373,7 @@ public class AosSpecification extends TestRunner {
 				dataIndex++;
 			}
 
-		
-			// Thread.sleep(10000);
-
-
-			// Thread.sleep(10000);
-
-//			Set<String> windowHandles = driver.getWindowHandles();
-//	        List<String> tabs = new ArrayList<>(windowHandles);
-//
-//	        // Switch to the new tab
-//	        driver.switchTo().window(tabs.get(1));
-
-			logger.info("Enter the card No: " + bookTicketDTO.getCardNo());
-			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.cardNo));
-			LogEvent.logEventWithScreenshot(extentTest, Status.INFO, "Card Detail Page", driver, scenarioName);
-			passengerDetailsPage.cardNo.sendKeys(bookTicketDTO.getCardNo());
-
-			logger.info("Enter card Expiry Date: " + bookTicketDTO.getExpDate());
-			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.expDate));
-			passengerDetailsPage.expDate.sendKeys(bookTicketDTO.getExpDate());
-
-			logger.info("Enter card Cvv: " + bookTicketDTO.getCvv());
-			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.cvv));
-			passengerDetailsPage.cvv.sendKeys(bookTicketDTO.getCvv());
-
-			logger.info("Enter card Holder Name: " + bookTicketDTO.getCardHolderName());
-			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.cardHolderName));
-			passengerDetailsPage.cardHolderName.sendKeys(bookTicketDTO.getCardHolderName());
-
-			logger.info("Click the Pay Button");
-			wait.until(ExpectedConditions.elementToBeClickable(passengerDetailsPage.pay));
-			passengerDetailsPage.pay.click();
-
-			// AosImplementation.verifyTicketBookingStatus(wait);
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			LogEvent.logEventWithScreenshot(extentTest, Status.FAIL,

@@ -2404,6 +2404,18 @@ public class SearchFormImplementation extends TestRunner {
 	}
 
 	public void I_click_on_the_flight_details() throws InterruptedException {
+		
+		
+		
+		
+
+		try {
+			ExpectedConditions.elementToBeClickable(homePage.continueBooking);
+			homePage.continueBooking.click();
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Pop up found", driver, getScenarioName());
+		} catch (Exception e) {
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "No pop up found", driver, getScenarioName());
+		}
 
 		try {
 
@@ -4227,6 +4239,49 @@ public class SearchFormImplementation extends TestRunner {
 		}
 	}
 
+	public void I_checking_the_origin_and_Destination_as_per_search() {
+		
+		BookTicketDTO bookTicketDTO = CommonDTO.getInstance().getBookTicketDTO();
+		logger.info("Checking the origin and Destination as per search");
+		if (!searchResultsPage.sourceDestinationResultTitle.getText()
+				.contains(bookTicketDTO.getRelevantKeywordFrom())
+				|| !searchResultsPage.sourceDestinationResultTitle.getText()
+						.contains(bookTicketDTO.getRelevantKeywordTo())) {
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL,
+					"Search result data is not relevant to the search term", driver, getScenarioName());
+			Assert.assertTrue("Search result data is not relevant to the search term: ", false);
+		} else {
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.PASS,
+					"Checkpoint -1: Search result data is relevant to the search term", driver, getScenarioName());
+		}
 		
 	}
+
+	public void I_need_to_select_payment_gateway() throws InterruptedException {
+		BookTicketDTO bookTicketDTO = CommonDTO.getInstance().getBookTicketDTO();
+		
+		logger.info("Enter the Payment gateway: " + bookTicketDTO.getPaymentGatewayB2b());
+		homePage.getElementByXpath(driver,
+				"//*[@class='payment-tabSVGWrapper']//parent::button[contains(text(),'${token}')]",
+				bookTicketDTO.getPaymentGatewayB2b());
+		
+		if (bookTicketDTO.getPaymentGateway().equalsIgnoreCase("Available Limit")) {
+			logger.info("Click the Use Available Balance");
+			wait.until(ExpectedConditions.elementToBeClickable(homePage.useAvilBala));
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Click to Use Available Balance", driver,
+					getScenarioName());
+			homePage.useAvilBala.click();
+		}
+		
+		if (bookTicketDTO.getPaymentGateway().equalsIgnoreCase("Pay at Agency")) {
+		logger.info("Click the process To Pay Button");
+		wait.until(ExpectedConditions.elementToBeClickable(homePage.processToPay));
+		LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Click to Process to pay", driver,
+				getScenarioName());
+		homePage.processToPay.click();
+		}
+		}
+		
+}
+
 

@@ -102,7 +102,8 @@
 		"country_mobile": "+91 India",
 		"mobile_no": "5765765767",
 		"promo_code": "AUG2024",
-		"payment_gateway": "Payfort Test"
+		"payment_gateway": "Payfort Test",
+		"payment_gateway_b2b": "Available Limit"
 		
 	},
 	"multi_city_flight_listing": {

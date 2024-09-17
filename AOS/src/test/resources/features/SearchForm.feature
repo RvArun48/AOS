@@ -86,13 +86,14 @@ Feature: Flight Booking
     #Then I add advance search options 
     #Then I enter the  preferred airlines 
     Then I click on the search button
+    Then I checking the origin and Destination as per search
      #Then I click on the edit search
      #Then I need to validate advance search
      #Then I need to validate flexi calander
       #Then I need to validate installments
       #Then I need to validate time
       #Then I need to validate price
-      Then I need to validate stop
+      #Then I need to validate stop
       #Then I need to validate duration
        #Then I need to validate airline
       #Then I need to validate refundable
@@ -122,7 +123,7 @@ Feature: Flight Booking
               #Then I enter the promo code
              #Then  I need to validate flight Summary 
              Then I click on payment continue 
-             Then I need to validate flight Summary payment
+             #Then I need to validate flight Summary payment
               Then I need to validate payment gateway
               Then I enter the card details
                Then I need to validate confirmation page

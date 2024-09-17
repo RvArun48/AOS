@@ -742,6 +742,14 @@ public class SearchFormSpecification extends TestRunner {
 		} catch (Exception e) {
 			logger.info("Exception occured at I_need_to_validate_confirmation_page: " + e.toString());		}
 	}
+	
+	@Then("I checking the origin and Destination as per search")
+	public void I_checking_the_origin_and_Destination_as_per_search() {
+		try {
+			new SearchFormImplementation().I_checking_the_origin_and_Destination_as_per_search();
+		} catch (Exception e) {
+			logger.info("Exception occured at I_checking_the_origin_and_Destination_as_per_search: " + e.toString());		}
+	}
 
 	private void calander() {
 		// TODO Auto-generated method stub

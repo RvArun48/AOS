@@ -4,8 +4,8 @@ Feature: Home Page Validation
   @HomePage1
   Scenario: I validate all the elements in the header of the home page
   Given I want to open the application
-  #Then I verify header elements present in the home page
-  #And I verify the functionality of the header elements
+  Then I verify header elements present in the home page
+  And I verify the functionality of the header elements
   Then I verify whatsapp link functionality
   
  

@@ -59,7 +59,7 @@ Feature: Flight Booking
              Then I click on payment continue 
              Then I need to validate flight Summary payment
               Then I need to validate payment gateway
-              Then I enter the card details
+             Then I need to select payment gateway
                Then I need to validate confirmation page
               
               

@@ -521,9 +521,12 @@ public class HomePage {
 	@FindBy(xpath = "//div[@class='empireFlight-PaymentPrice']")
 	public WebElement processToPayment;
 	
+	@FindBy(xpath = "//div[contains(text(),' Use Available Balance ')]")
+	public WebElement useAvilBala;
 	
 	
-			
+	
+	
 			
 
 	public WebElement getElementByXpath(WebDriver driver, String locator, String data) throws InterruptedException {
