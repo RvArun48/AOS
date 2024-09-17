@@ -63,13 +63,12 @@ public class AosSpecification extends TestRunner {
 	}
 
 	@Given("I open the login url")
-
-	@Given("I want to open the application")
 	public void openLoginUrl() {
 		this.urlKey = "LOGIN_URL";
 		openWebsite();
 	}
-
+	
+	@Given("I want to open the application")
 	public void openWebsite() {
 		String baseUrl = "";
 		if (urlKey == null || urlKey.isBlank() || urlKey.isEmpty()) {
