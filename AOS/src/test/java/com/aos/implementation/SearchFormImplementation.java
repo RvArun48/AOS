@@ -1819,7 +1819,7 @@ public class SearchFormImplementation extends TestRunner {
 			int sliderRange = maxValue - minValue;
 
 			// Calculate the offset for the minimum pointer
-			// Calculate the offset for the minimum pointer
+//			// Calculate the offset for the minimum pointer
 			int minOffset = (desiredMinValue - minValue) * sliderWidth / sliderRange;
 
 			// Move the minimum pointer
@@ -1836,27 +1836,71 @@ public class SearchFormImplementation extends TestRunner {
 			int maxMoveOffset = maxOffset - (currentMaxPosition - currentMinPosition);
 
 			Thread.sleep(1500);
-			// Move the maximum pointer
+//			// Move the maximum pointer
 			actions.clickAndHold(maxPointer).moveByOffset(maxMoveOffset, 0).release().perform();
 			Thread.sleep(1000);
-			LocalTime sliderMinTime = LocalTime.parse(driver
-					.findElement(
-							By.xpath("(//*[@class='ngx-slider-span ngx-slider-bubble ngx-slider-model-value'])[1]"))
-					.getText());
-
-			LocalTime sliderMaxTime = LocalTime.parse(driver
-					.findElement(By.xpath("(//*[@class='ngx-slider-span ngx-slider-bubble ngx-slider-model-high'])[1]"))
-					.getText());
-
-			logger.info("sliderMinTime->" + sliderMinTime);
-			logger.info("sliderMaxTime->" + sliderMaxTime);
-
-			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Click on the time", driver,
-					getScenarioName());
-			softly.assertThat(DateAndTimeUtil.compareTimes(CommonDTO.getInstance().getFlightStartTime(), sliderMinTime,
-					CommonDTO.getInstance().getFlightEndTime(), sliderMaxTime));
+			
+			
+		
+//			LocalTime sliderMinTime = LocalTime.parse(driver
+//					.findElement(
+//							By.xpath("(//*[@class='ngx-slider-span ngx-slider-bubble ngx-slider-model-value'])[1]"))
+//					.getText());
+//
+//			LocalTime sliderMaxTime = LocalTime.parse(driver
+//					.findElement(By.xpath("(//*[@class='ngx-slider-span ngx-slider-bubble ngx-slider-model-high'])[1]"))
+//					.getText());
+//
+//			logger.info("sliderMinTime->" + sliderMinTime);
+//			logger.info("sliderMaxTime->" + sliderMaxTime);
+//
+//			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Click on the time", driver,
+//					getScenarioName());
+//			softly.assertThat(DateAndTimeUtil.compareTimes(CommonDTO.getInstance().getFlightStartTime(), sliderMinTime,
+//					CommonDTO.getInstance().getFlightEndTime(), sliderMaxTime));
 
 		} catch (Exception e) {
+			logger.info("Exception occured at I_need_to_validate_time()->" + e.getMessage());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+		}
+		try {
+			Actions actions = new Actions(driver);
+			WebElement slider = driver.findElement(
+					By.xpath("(//*[@class='ngx-slider-span ngx-slider-bar-wrapper ngx-slider-full-bar'])[2]"));
+
+			WebElement minPointer = driver.findElement(
+					By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'])[2]"));
+			WebElement maxPointer = driver.findElement(
+					By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-max'])[2]"));
+			int sliderWidth = slider.getSize().getWidth();
+			// Define the desired minimum and maximum values
+			int desiredMinValue = 60000; // Example minimum value
+			int desiredMaxValue = 70000; // Example maximum value
+			int minValue = 55800; // Minimum possible value of the slider
+			int maxValue = 83400; // Maximum possible value of the slider
+			int sliderRange = maxValue - minValue;
+			// Calculate the offset for the minimum pointer
+//			// Calculate the offset for the minimum pointer
+			int minOffset = (desiredMinValue - minValue) * sliderWidth / sliderRange;
+
+			// Move the minimum pointer
+			// Actions actions = new Actions(driver);
+			actions.clickAndHold(minPointer).moveByOffset(minOffset, 0).release().perform();
+
+			// Recalculate the width of the slider after moving the minimum pointer
+			sliderWidth = slider.getSize().getWidth();
+
+			// Calculate the offset for the maximum pointer relative to its current position
+			int maxOffset = (desiredMaxValue - minValue) * sliderWidth / sliderRange;
+			int currentMaxPosition = maxPointer.getLocation().getX();
+			int currentMinPosition = minPointer.getLocation().getX();
+			int maxMoveOffset = maxOffset - (currentMaxPosition - currentMinPosition);
+
+			Thread.sleep(1500);
+//			// Move the maximum pointer
+//			actions.clickAndHold(maxPointer).moveByOffset(maxMoveOffset, 0).release().perform();
+//			Thread.sleep(1000);
+		}catch (Exception e) {
 			logger.info("Exception occured at I_need_to_validate_time()->" + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
@@ -1869,7 +1913,88 @@ public class SearchFormImplementation extends TestRunner {
 
 			homePage.priceFunctionality.click();
 			Thread.sleep(1000);
+			try {
+				WebElement slider = driver.findElement(
+						By.xpath("(//*[@class='ngx-slider-span ngx-slider-bar-wrapper ngx-slider-full-bar'])[2]"));
 
+				WebElement minPointer = driver.findElement(
+						By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'])[2]"));
+				WebElement maxPointer = driver.findElement(
+						By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-max'])[2]"));
+				int sliderWidth = slider.getSize().getWidth();
+				int desiredMinValue = 3500; // Example minimum value
+				int desiredMaxValue = 10000; // Example maximum value
+				int minValue = 1957; // Minimum possible value of the slider
+				int maxValue = 21344; // Maximum possible value of the slider
+				int sliderRange = maxValue - minValue;
+
+				// Calculate the offset for the minimum pointer
+//				// Calculate the offset for the minimum pointer
+				int minOffset = (desiredMinValue - minValue) * sliderWidth / sliderRange;
+
+				// Move the minimum pointer
+				// Actions actions = new Actions(driver);
+				actions.clickAndHold(minPointer).moveByOffset(minOffset, 0).release().perform();
+
+				// Recalculate the width of the slider after moving the minimum pointer
+				sliderWidth = slider.getSize().getWidth();
+
+				// Calculate the offset for the maximum pointer relative to its current position
+				int maxOffset = (desiredMaxValue - minValue) * sliderWidth / sliderRange;
+				int currentMaxPosition = maxPointer.getLocation().getX();
+				int currentMinPosition = minPointer.getLocation().getX();
+				int maxMoveOffset = maxOffset - (currentMaxPosition - currentMinPosition);
+
+				Thread.sleep(1500);
+//				// Move the maximum pointer
+				actions.clickAndHold(maxPointer).moveByOffset(maxMoveOffset, 0).release().perform();
+				Thread.sleep(1000);
+
+			}catch (Exception e) {
+				WebElement slider = driver.findElement(
+						By.xpath("(//*[@class='ngx-slider-span ngx-slider-bar-wrapper ngx-slider-full-bar'])[3]"));
+
+				WebElement minPointer = driver.findElement(
+						By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'])[3]"));
+				WebElement maxPointer = driver.findElement(
+						By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-max'])[3]"));
+				int sliderWidth = slider.getSize().getWidth();
+				int desiredMinValue = 3500; // Example minimum value
+				int desiredMaxValue = 10000; // Example maximum value
+				int minValue = 1957; // Minimum possible value of the slider
+				int maxValue = 21344; // Maximum possible value of the slider
+				int sliderRange = maxValue - minValue;
+
+				// Calculate the offset for the minimum pointer
+//				// Calculate the offset for the minimum pointer
+				int minOffset = (desiredMinValue - minValue) * sliderWidth / sliderRange;
+
+				// Move the minimum pointer
+				// Actions actions = new Actions(driver);
+				actions.clickAndHold(minPointer).moveByOffset(minOffset, 0).release().perform();
+
+				// Recalculate the width of the slider after moving the minimum pointer
+				sliderWidth = slider.getSize().getWidth();
+
+				// Calculate the offset for the maximum pointer relative to its current position
+				int maxOffset = (desiredMaxValue - minValue) * sliderWidth / sliderRange;
+				int currentMaxPosition = maxPointer.getLocation().getX();
+				int currentMinPosition = minPointer.getLocation().getX();
+				int maxMoveOffset = maxOffset - (currentMaxPosition - currentMinPosition);
+
+				Thread.sleep(1500);
+//				// Move the maximum pointer
+				actions.clickAndHold(maxPointer).moveByOffset(maxMoveOffset, 0).release().perform();
+				Thread.sleep(1000);
+
+
+			}
+		
+			// Determine the width of the slider
+			
+
+			// Define the desired minimum and maximum values
+			
 		} catch (Exception e) {
 			logger.info("Exception occured at I_need_to_validate_price()->" + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
@@ -1898,6 +2023,7 @@ public class SearchFormImplementation extends TestRunner {
 							.findElement(By
 									.xpath("//*[@class='empireFlight_stopvia empireF_directionTxt ng-star-inserted']"))
 							.getText().trim().equals("Direct")).isEqualTo(true).as("Validation for Direct flight");
+					LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, "Test case failed-> Validation for Onestop flight", driver, getScenarioName());
 				}
 			}
 
@@ -1910,6 +2036,16 @@ public class SearchFormImplementation extends TestRunner {
 						
 					} else {
 						logger.info("Test case failed-> Validation for Onestop flight");
+						LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, "Test case failed-> Validation for Onestop flight", driver, getScenarioName());
+					}
+				}
+				
+				if (bookTicketDTO.getStop().equalsIgnoreCase("2 Stop")) {
+					for (WebElement card : cards) {
+						softly.assertThat(driver
+								.findElement(By
+										.xpath("//*[@class='empireFlight_stopvia ng-star-inserted']"))
+								.getText().trim().equals("2 Stop via")).isEqualTo(true).as("Validation for Twostop flight");
 						LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, "Test case failed-> Validation for Onestop flight", driver, getScenarioName());
 					}
 				}
@@ -1933,6 +2069,126 @@ public class SearchFormImplementation extends TestRunner {
 			Thread.sleep(1000);
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "Click on the Duration", driver,
 					getScenarioName());
+			try {
+				
+		
+			WebElement slider = driver.findElement(
+					By.xpath("(//*[@class='ngx-slider-span ngx-slider-bar-wrapper ngx-slider-full-bar'])[3]"));
+
+			WebElement minPointer = driver.findElement(
+					By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'])[3]"));
+			WebElement maxPointer = driver.findElement(
+					By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-max'])[3]"));
+			int sliderWidth = slider.getSize().getWidth();
+			// Define the desired minimum and maximum values
+			int desiredMinValue = 70000; // Example minimum value
+			int desiredMaxValue = 100000; // Example maximum value
+			int minValue = 52200; // Minimum possible value of the slider
+			int maxValue = 151200; // Maximum possible value of the slider
+			int sliderRange = maxValue - minValue;
+
+			// Calculate the offset for the minimum pointer
+//			// Calculate the offset for the minimum pointer
+			int minOffset = (desiredMinValue - minValue) * sliderWidth / sliderRange;
+
+			// Move the minimum pointer
+			// Actions actions = new Actions(driver);
+			actions.clickAndHold(minPointer).moveByOffset(minOffset, 0).release().perform();
+
+			// Recalculate the width of the slider after moving the minimum pointer
+			sliderWidth = slider.getSize().getWidth();
+
+			// Calculate the offset for the maximum pointer relative to its current position
+			int maxOffset = (desiredMaxValue - minValue) * sliderWidth / sliderRange;
+			int currentMaxPosition = maxPointer.getLocation().getX();
+			int currentMinPosition = minPointer.getLocation().getX();
+			int maxMoveOffset = maxOffset - (currentMaxPosition - currentMinPosition);
+
+			Thread.sleep(1500);
+//			// Move the maximum pointer
+			actions.clickAndHold(maxPointer).moveByOffset(maxMoveOffset, 0).release().perform();
+			Thread.sleep(1000);
+		
+			}catch (Exception e) {
+				WebElement slider = driver.findElement(
+						By.xpath("(//*[@class='ngx-slider-span ngx-slider-bar-wrapper ngx-slider-full-bar'])[4]"));
+
+				WebElement minPointer = driver.findElement(
+						By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'])[4]"));
+				WebElement maxPointer = driver.findElement(
+						By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-max'])[4]"));
+				int sliderWidth = slider.getSize().getWidth();
+				// Define the desired minimum and maximum values
+				int desiredMinValue = 70000; // Example minimum value
+				int desiredMaxValue = 100000; // Example maximum value
+				int minValue = 52200; // Minimum possible value of the slider
+				int maxValue = 151200; // Maximum possible value of the slider
+				int sliderRange = maxValue - minValue;
+
+				// Calculate the offset for the minimum pointer
+//				// Calculate the offset for the minimum pointer
+				int minOffset = (desiredMinValue - minValue) * sliderWidth / sliderRange;
+
+				// Move the minimum pointer
+				// Actions actions = new Actions(driver);
+				actions.clickAndHold(minPointer).moveByOffset(minOffset, 0).release().perform();
+
+				// Recalculate the width of the slider after moving the minimum pointer
+				sliderWidth = slider.getSize().getWidth();
+
+				// Calculate the offset for the maximum pointer relative to its current position
+				int maxOffset = (desiredMaxValue - minValue) * sliderWidth / sliderRange;
+				int currentMaxPosition = maxPointer.getLocation().getX();
+				int currentMinPosition = minPointer.getLocation().getX();
+				int maxMoveOffset = maxOffset - (currentMaxPosition - currentMinPosition);
+
+				Thread.sleep(1500);
+//				// Move the maximum pointer
+				actions.clickAndHold(maxPointer).moveByOffset(maxMoveOffset, 0).release().perform();
+				Thread.sleep(1000);
+			}
+			try {
+				WebElement slider = driver.findElement(
+						By.xpath("(//*[@class='ngx-slider-span ngx-slider-bar-wrapper ngx-slider-full-bar'])[5]"));
+
+				WebElement minPointer = driver.findElement(
+						By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'])[5]"));
+				WebElement maxPointer = driver.findElement(
+						By.xpath("(//*[@class='ngx-slider-span ngx-slider-pointer ngx-slider-pointer-max'])[5]"));
+				int sliderWidth = slider.getSize().getWidth();
+				// Define the desired minimum and maximum values
+				int desiredMinValue = 70000; // Example minimum value
+				int desiredMaxValue = 80000; // Example maximum value
+				int minValue = 52200; // Minimum possible value of the slider
+				int maxValue = 151200; // Maximum possible value of the slider
+				int sliderRange = maxValue - minValue;
+
+				// Calculate the offset for the minimum pointer
+//				// Calculate the offset for the minimum pointer
+				int minOffset = (desiredMinValue - minValue) * sliderWidth / sliderRange;
+
+				// Move the minimum pointer
+				// Actions actions = new Actions(driver);
+				actions.clickAndHold(minPointer).moveByOffset(minOffset, 0).release().perform();
+
+				// Recalculate the width of the slider after moving the minimum pointer
+				sliderWidth = slider.getSize().getWidth();
+
+				// Calculate the offset for the maximum pointer relative to its current position
+				int maxOffset = (desiredMaxValue - minValue) * sliderWidth / sliderRange;
+				int currentMaxPosition = maxPointer.getLocation().getX();
+				int currentMinPosition = minPointer.getLocation().getX();
+				int maxMoveOffset = maxOffset - (currentMaxPosition - currentMinPosition);
+
+				Thread.sleep(1500);
+//				// Move the maximum pointer
+//				actions.clickAndHold(maxPointer).moveByOffset(maxMoveOffset, 0).release().perform();
+//				Thread.sleep(1000);
+			}catch (Exception e) {
+				logger.info("Exception occured at I_need_to_validate_duration()->" + e.getMessage());
+				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+			}
+		
 		} catch (Exception e) {
 			logger.info("Exception occured at I_need_to_validate_duration()->" + e.getMessage());
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
@@ -1974,6 +2230,27 @@ public class SearchFormImplementation extends TestRunner {
 
 			homePage.getElementByXpath(driver, "(//*[@class='mdc-label' and contains(text(),'${token}')])[1]",
 					bookTicketDTO.getSelectRefundable());
+			
+			List<WebElement> cards = driver.findElements(By.xpath("//*[@role='radiogroup']"));
+			
+			if (bookTicketDTO.getStop().equalsIgnoreCase("Refundable")) {
+				for (WebElement card : cards) {
+					softly.assertThat(driver
+							.findElement(By
+									.xpath("//*[@class='empireFlight_refund-text ref']"))
+							.getText().trim().equals("Refundable")).isEqualTo(true).as("Validation for Refundable flight");
+					LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, "Test case failed-> Validation for Refundable flight", driver, getScenarioName());
+				}
+			}
+			if (bookTicketDTO.getStop().equalsIgnoreCase("Non Refundable")) {
+				for (WebElement card : cards) {
+					softly.assertThat(driver
+							.findElement(By
+									.xpath("//*[@class='empireFlight_refund-text no_ref']"))
+							.getText().trim().equals("Non Refundable")).isEqualTo(true).as("Validation for Non Refundable flight");
+					LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, "Test case failed-> Validation for Non Refundable flight", driver, getScenarioName());
+				}
+			}
 
 		} catch (Exception e) {
 			logger.info("I_need_to_validate_refundable() -> " + e.getMessage());

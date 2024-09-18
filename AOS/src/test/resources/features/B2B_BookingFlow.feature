@@ -80,7 +80,7 @@ Feature: Flight Booking
     #Then I click on the search button
     #Then I need to validate advance search
     
-     @roundtrip_flight_listing
+     @roundtrip_flight_listing_b2b
    Scenario: Book a flight with specified details
   	Given I setup the test data with "roundtrip_flight_listing"
     Given I want to open the application
