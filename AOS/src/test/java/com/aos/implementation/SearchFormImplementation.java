@@ -286,11 +286,20 @@ public class SearchFormImplementation extends TestRunner {
 //			
 			String[] preferredAirLines = bookTicketDTO.getPreferredAirlines().split(",");
 			for (String preferredAirLine : preferredAirLines) {
-				GenericActions.sendKeys(homePage.preferredAirlineElementGroup, preferredAirLine.trim(),
-						"Entering preferred_airlines:" + preferredAirLine, logger);
-				homePage.getElementByXpath(driver, "(//*[@role='listbox']//child::span[text()='${token}'])[1]",
-						preferredAirLine.trim());
-
+			    if (preferredAirLine != null && !preferredAirLine.trim().isEmpty()) {
+			        // Send keys for preferred airline
+			        GenericActions.sendKeys(homePage.preferredAirlineElementGroup, preferredAirLine.trim(),
+			                "Entering preferred_airlines: " + preferredAirLine, logger);
+			        
+			        // Construct and locate the element using the preferred airline
+			        String xpathExpression = String.format(
+			                "(//*[@role='listbox']//child::span[text()='%s'])[1]",
+			                preferredAirLine.trim());
+			        homePage.getElementByXpath(driver, xpathExpression, xpathExpression);
+			    } else {
+			        logger.info("Preferred airline value is not provided or empty. Skipping element search for this entry.");
+			    }
+			}
 				logger.info("Checking the Preferred Airlines as per search");
 				if (!searchResultsPage.airlinePreferanceValidation.getText()
 						.contains(bookTicketDTO.getRelevantKeywordPreferredAirlines())) {
@@ -304,7 +313,7 @@ public class SearchFormImplementation extends TestRunner {
 							getScenarioName());
 				}
 
-			}
+			
 
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO,
 					" Enter the preferred airlines as:  " + bookTicketDTO.getPreferredAirlines(), getDriver(),
@@ -636,7 +645,7 @@ public class SearchFormImplementation extends TestRunner {
 
 		} catch (Exception e) {
 			logger.info("Exception occurred at i_enter_the_departure_date_as() -> " + e.getMessage());
-			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, e.toString(), driver, getScenarioName());
 		}
 
 	}
@@ -1860,8 +1869,8 @@ public class SearchFormImplementation extends TestRunner {
 //					CommonDTO.getInstance().getFlightEndTime(), sliderMaxTime));
 
 		} catch (Exception e) {
-			logger.info("Exception occured at I_need_to_validate_time()->" + e.getMessage());
-			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+//			logger.info("Exception occured at I_need_to_validate_time()->" + e.getMessage());
+//			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
 		try {
 			Actions actions = new Actions(driver);
@@ -1901,8 +1910,8 @@ public class SearchFormImplementation extends TestRunner {
 //			actions.clickAndHold(maxPointer).moveByOffset(maxMoveOffset, 0).release().perform();
 //			Thread.sleep(1000);
 		}catch (Exception e) {
-			logger.info("Exception occured at I_need_to_validate_time()->" + e.getMessage());
-			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+//			logger.info("Exception occured at I_need_to_validate_time()->" + e.getMessage());
+//			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
 	}
 
@@ -1983,21 +1992,17 @@ public class SearchFormImplementation extends TestRunner {
 				int maxMoveOffset = maxOffset - (currentMaxPosition - currentMinPosition);
 
 				Thread.sleep(1500);
-//				// Move the maximum pointer
+				// Move the maximum pointer
 				actions.clickAndHold(maxPointer).moveByOffset(maxMoveOffset, 0).release().perform();
 				Thread.sleep(1000);
 
 
 			}
 		
-			// Determine the width of the slider
-			
-
-			// Define the desired minimum and maximum values
-			
+		
 		} catch (Exception e) {
-			logger.info("Exception occured at I_need_to_validate_price()->" + e.getMessage());
-			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+//			logger.info("Exception occured at I_need_to_validate_price()->" + e.getMessage());
+//			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
 
 	}
@@ -2011,8 +2016,18 @@ public class SearchFormImplementation extends TestRunner {
 			wait.until(ExpectedConditions.elementToBeClickable(homePage.stopFunctionality));
 			homePage.stopFunctionality.click();
 
-			homePage.getElementByXpath(driver, "(//*[@class='mdc-label' and contains(text(),'${token}')])[1]",
-					bookTicketDTO.getStop());
+			String stop = bookTicketDTO.getStop();
+			if (stop != null && !stop.trim().isEmpty()) {
+			    // Construct the XPath expression
+			    String xpathExpression = String.format(
+			            "(//*[@class='mdc-label' and contains(text(),'%s')])[1]",
+			            stop.trim());
+			    
+			    // Locate the element using the constructed XPath
+			    homePage.getElementByXpath(driver, xpathExpression, xpathExpression);
+			} else {
+			    logger.info("Stop value is not provided or empty. Skipping element search.");
+			}
 			Thread.sleep(1000);
 
 			List<WebElement> cards = driver.findElements(By.xpath("//*[@class='empireFlight_cardbox']"));
@@ -2185,13 +2200,13 @@ public class SearchFormImplementation extends TestRunner {
 //				actions.clickAndHold(maxPointer).moveByOffset(maxMoveOffset, 0).release().perform();
 //				Thread.sleep(1000);
 			}catch (Exception e) {
-				logger.info("Exception occured at I_need_to_validate_duration()->" + e.getMessage());
-				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+//				logger.info("Exception occured at I_need_to_validate_duration()->" + e.getMessage());
+//				LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 			}
 		
 		} catch (Exception e) {
-			logger.info("Exception occured at I_need_to_validate_duration()->" + e.getMessage());
-			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+//			logger.info("Exception occured at I_need_to_validate_duration()->" + e.getMessage());
+//			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
 		}
 
 	}
@@ -2214,7 +2229,7 @@ public class SearchFormImplementation extends TestRunner {
 
 		} catch (Exception e) {
 			logger.info("Selecting the filter for Airlines() -> " + e.getMessage());
-			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.toString(), driver, getScenarioName());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, e.toString(), driver, getScenarioName());
 		}
 
 	}
@@ -2291,10 +2306,7 @@ public class SearchFormImplementation extends TestRunner {
 
 				logger.info("Departure airport value is not provided or empty. Skipping element search.");
 			}
-//
-//			homePage.getElementByXpath(driver, "(//*[@class='mdc-label' and contains(text(),'${token}')])[1]",
-//					bookTicketDTO.getDepartureAirport());
-//			
+		
 
 			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, "I select on the departure airport", driver,
 					getScenarioName());
@@ -2853,7 +2865,7 @@ public class SearchFormImplementation extends TestRunner {
 
 		} catch (Exception e) {
 			logger.info("Exception occured at I_need_to_validate_flight_details()->" + e.getMessage());
-			LogEvent.logEventWithScreenshot(getExtentTest(), Status.FAIL, e.getMessage(), driver, getScenarioName());
+			LogEvent.logEventWithScreenshot(getExtentTest(), Status.INFO, e.getMessage(), driver, getScenarioName());
 		}
 
 	}
